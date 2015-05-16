@@ -1,0 +1,64 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>Test</Name>
+    <UniqueId>ccf1787d-a526-4376-1291-29b523a20529</UniqueId>
+    <Map>Felucca</Map>
+    <X>5699</X>
+    <Y>391</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		<!--plate/name/goo/ATTACH/&lt;xmluse/successaction/@#CONDITION,GETONTRIGMOB,name="Blackthorna"$;orc $; ogre ; skeleton&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+		<!--plate/hue/100/ATTACH/&lt;xmluse/condition/@GETONTRIGMOB,name="Blackthorna"@successaction/@orc:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+		<!--plate/name/goo/ATTACH/&lt;xmluse/successaction/@orc/ATTACH/&lt;xmluse/successaction/$@ogre&gt;@condition/@GETONTRIGMOB,name="Blackthorna"&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+			<!-- NESTED ESCAPING-YOU NEED AN EXTRA $ FOR EACH NESTING LEVEL! -->
+		<!--plate/name/goo/ATTACH/&lt;xmluse/successaction/@orc/ATTACH/&lt;xmluse/successaction/$@ogre/ATTACH/&lt;xmluse/successaction/$$@SETONTHIS/MSG/true&gt;&gt;@condition/@GETONTRIGMOB,name="Blackthorna"&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+		
+			<!-- below works ok, b/c the condition >-1 is FIRST -->
+		<!--static,3804/hue/38/name/Put out the Galven Fire Signup Stone/ATTACH/&lt;xmluse/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,PutOutFire,value]$&gt;-1@failureaction/@SETONTRIGMOB/SENDMSG/You are already signed up as a Galven water-dispenser!@successaction/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,PutOutFire,0&gt; ; SETONTHIS/MSG/Welcome to the water-dispensary division, ${GETONTRIGMOB,name$}!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+			<!-- you can actually do several ATTACHes with conditions that include the conditional operators > and <, but you need to do an extra $ for each < > (just the outside set, not nested sets) that comes before it!... as in this example, the <broadsword> and <xmdeathaction> precede the <xmldeathaction> that contains the condition with the ">-1" string, so three $'s are needed to properly escape that conditional ">" character.-->
+		<!--lavalizard/bodyvalue/718/name/a hatchling/guardimmune/true/ADD/&lt;broadsword/name/hah/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/MSG/kaboom!&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,dragkills,value/INC,1&gt;/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,dragkills,value]$$$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,dragkills,0&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+			<!--It can get really hairy when you start nesting stuff... 5 $'s are needed in this example: 3 for there being 2 sets of outer <> before reaching that point, then another 2 because when that action is executed, IT has 1 preceding outer <> (from the xmlvalue,dragkills,0)..
+			As you can see it gets complicated.. until I have a chance to rewrite the parser (which may be never), I think the best thing to do is use the new [printatt command... e.g. here I would do "[printatt xmldeath action" on the spawned hatchling mob and inspect whether the correct number of $'s is in there.  Then, after killing the mob, I would do "[printatt xmluse condition" and/or "[printatt xmluse successaction" on myself to see if it applied it correctly-->
+		<!--lavalizard/bodyvalue/718/name/a hatchling/guardimmune/true/ADD/&lt;broadsword/name/hah/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/MSG/kaboom!&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,dragkills,value/INC,1&gt;/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,dragkills,value]$$$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,dragkills,0&gt;/ATTACH/&lt;xmluse/condition/$$@GETONTRIGMOB,hits$$$$$&gt;50$$@successaction/$$@SETONTRIGMOB/MSG/Dead!&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+		<!-- I made it so {} does works within the condition -->
+		<!--:OBJ=plate/ATTACH/&lt;xmluse/successaction/@#CONDITION,GETONTRIGMOB,hits$&gt;${RND,1,200$}$;SETONTRIGMOB/MSG/success$;SETONTRIGMOB/MSG/failure&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1 -->
+		
+		<!-- super cool example of conditions within a single successaction (which consists of sequential actions) -->
+		<!--:OBJ=plate/ATTACH/&lt;xmluse/condition/@GETONTRIGMOB,skills.magery.value$&gt;${RND,1,200$}@successaction/@SETONTRIGMOB/MSG/success ; TAKEBYTYPE,1,100/log ; #CONDITION,${GETONTAKEN,amount$}=100$;ettin$;ogre@failureaction/@SETONTRIGMOB/MSG/failure&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1-->
+		
+		<!-- Many actions within a #CONDITION statement? -->
+		:OBJ=plate/ATTACH/&lt;xmluse/successaction/@#CONDITION,GETONTRIGMOB,hits$&gt;50$;ogre$$;troll$;orc&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

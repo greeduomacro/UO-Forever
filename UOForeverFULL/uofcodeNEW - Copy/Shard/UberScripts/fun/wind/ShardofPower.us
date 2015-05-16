@@ -1,0 +1,213 @@
+onCreate
+{
+	xmlstrings.controller = null
+    	xmlints.MINAX = 0
+    	xmlints.TRUE_BRITANNIANS = 0
+    	xmlints.COUNCIL_OF_MAGES = 0
+    	xmlints.SHADOWLORDS = 0
+	xmlints.MinaxMulti = 1
+	xmlints.BritMulti = 1
+	xmlints.ComMulti = 1
+	xmlints.SLMulti = 1
+    	xmlints.MatchLengthMinutes = 60
+    	xmlints.CurrTopScore = 0
+	xmlints.Active = 0
+    	xmlstrings.winner = null
+    	THIS().itemid = 8738
+    	THIS().hue = 2498
+    	THIS().name = "the Crystal of Power" 
+    	xmlobjs.carrier = null
+    	xmlints.FiveSecondCount = 0
+    	THIS().Movable = false
+	if (xmlobjs.Gate == null)
+	{
+		xmlobjs.Gate = UberScriptItem
+		xmlobjs.Gate.Hue = 1266
+		xmlobjs.Gate.Movable = false
+		xmlobjs.Gate.DoesNotDecay = true
+		xmlobjs.Gate.ItemID = 3948
+		xmlobjs.Gate.Name = "a dimensional gateway"
+        	ADDSCRIPT(xmlobjs.Gate, "fun\\wind\\portal.us", "disportalyo")
+		MOVETOWORLD(xmlobjs.Gate, POINT3D(5452, 1081, 0))
+	}
+}
+
+onNearbyMove 
+{
+	if (xmlints.crystalMessage == null && IS(TRIGMOB(),playermobile))
+    	{
+        	xmlints.crystalMessage = 1
+        	xmlints.crystalMessage.expiration = TIMESPANMINUTES(30.0)
+        	MSG(THIS(), "The crystal emits an audible hum and discharges a bolt of energy.", 1287) 
+		BOLTEFFECT(TRIGMOB(), 2049)
+		TRIGMOB().Hits -= 25
+
+    	} 
+}
+
+onUse
+{
+	if (TRIGMOB().FactionName != null && xmlobjs.carrier == null && THIS().xmlints.Active == 1)
+    	{ 
+    		xmlstrings.controller = TRIGMOB().FactionName
+        	SUBSCRIBETIMER(FiveSeconds)
+        	xmlobjs.carrier = TRIGMOB()
+        	ADDSCRIPT(TRIGMOB(), "fun\\wind\\carrier.us", "windbreaker")
+        	ADDTOCONTAINER(TRIGMOB().Backpack, THIS())
+		REMOVEQUESTARROW(TRIGMOB())
+        	TRIGMOB().xmlobjs.crystal = THIS()
+		objs.online = ONLINEMOBS()
+		foreach (objs.player ; objs.online)
+		{
+			if (IS(objs.player,playermobile))
+			{
+				if (objs.player.FactionName != null)
+				{ 
+					if (xmlobjs.carrier.FactionName == "LORD BRITISH")
+					{
+						SENDMSG(objs.player, "The True Britannians have taken control of the Crystal of Power.", 0x38)
+					}
+					elif (xmlobjs.carrier.FactionName == "MINAX")
+					{
+						SENDMSG(objs.player, "Minax has taken control of the Crystal of Power.", 0x38)
+					}
+					elif (xmlobjs.carrier.FactionName == "COUNCIL OF MAGES")
+					{
+						SENDMSG(objs.player, "The Council of Mages has taken control of the Crystal of Power.", 0x38)
+					}
+					elif (xmlobjs.carrier.FactionName == "SHADOWLORDS")
+					{
+						SENDMSG(objs.player, "The Shadowlords have taken control of the Crystal of Power.", 0x38)
+					}
+				}
+			}
+		}
+		INDIVIDUALFLASHEFFECT(TRIGMOB())
+    	}
+	if (xmlobjs.carrier == null && THIS().xmlints.Active == 0)
+	{
+		MSG(THIS(), "The Crystal of Power is currently being used to power the dimensional gateway.", 2049) 
+	}
+}
+onDelete
+{
+	GLOBALDELATTACHMENTS(XmlScript, "windbreaker")
+	if (xmlobjs.carrier != null)
+    	{
+        	xmlobjs.carrier.xmlobjs.crystal = null
+    	}
+	if (xmlobjs.Gate != null && xmlobjs.Gate.deleted == false)
+	{
+		DELETE(xmlobjs.Gate)
+	}
+}
+
+
+onFiveSeconds
+{    
+    	if (xmlstrings.controller == "MINAX")
+    	{
+        	xmlints.MINAX += xmlints.MinaxMulti
+		MSG(xmlobjs.carrier, xmlints.MINAX, 2049)
+        	if (xmlints.MINAX > xmlints.CurrTopScore)
+		{
+			xmlints.CurrTopScore = xmlints.MINAX
+		}
+    	}
+    	elif (xmlstrings.controller == "LORD BRITISH")
+    	{
+        	xmlints.TRUE_BRITANNIANS += xmlints.BritMulti
+		MSG(xmlobjs.carrier, xmlints.TRUE_BRITANNIANS, 2049)
+        	if (xmlints.TRUE_BRITANNIANS > xmlints.CurrTopScore)
+		{
+            		xmlints.CurrTopScore = xmlints.TRUE_BRITANNIANS
+    		}
+    	}
+    	elif (xmlstrings.controller == "COUNCIL OF MAGES")
+    	{
+        	xmlints.COUNCIL_OF_MAGES += xmlints.ComMulti
+		MSG(xmlobjs.carrier, xmlints.COUNCIL_OF_MAGES, 2049)
+        	if (xmlints.COUNCIL_OF_MAGES> xmlints.CurrTopScore)
+		{
+            		xmlints.CurrTopScore = xmlints.COUNCIL_OF_MAGES
+		}
+    	}
+    	elif (xmlstrings.controller == "SHADOWLORDS")
+    	{
+        	xmlints.SHADOWLORDS += xmlints.SLMulti
+		MSG(xmlobjs.carrier, xmlints.SHADOWLORDS, 2049)
+        	if (xmlints.SHADOWLORDS > xmlints.CurrTopScore)
+		{
+            		xmlints.CurrTopScore = xmlints.SHADOWLORDS
+		}
+    	}
+
+	xmlints.FiveSecondCount += 1
+	if (xmlints.CurrTopScore >= 100 || xmlints.FiveSecondCount > xmlints.MatchLengthMinutes * 12)
+	{
+		xmlints.Active = 0
+		objs.online = ONLINEMOBS()
+		if (xmlints.MINAX == xmlints.CurrTopScore)
+		{
+			xmlstrings.winner = "Minax"
+    			THIS().name = "the corrupted Crystal of Power"
+			THIS().Hue = 1645 
+			MOVETOWORLD(THIS(), POINT3D(1140, 2595, 5))
+			MOVETOWORLD(xmlobjs.Gate, POINT3D(1129, 2596, 23))
+			xmlobjs.Gate.xmlstrings.winner = "MINAX"
+		}
+		elif (xmlints.TRUE_BRITANNIANS == xmlints.CurrTopScore)
+		{		
+			xmlstrings.winner = "The True Britannians"
+			THIS().Hue = 1254
+    			THIS().name = "the purified Crystal of Power" 
+			MOVETOWORLD(THIS(), POINT3D(1372, 1666, 35))
+			MOVETOWORLD(xmlobjs.Gate, POINT3D(1365, 1666, 35))
+			xmlobjs.Gate.xmlstrings.winner = "LORD BRITISH"
+		}		
+		elif (xmlints.COUNCIL_OF_MAGES == xmlints.CurrTopScore)
+		{
+			xmlstrings.winner = "The Council of Mages"
+			THIS().Hue = 1325
+    			THIS().name = "the purified Crystal of Power" 
+			MOVETOWORLD(THIS(), POINT3D(4467, 1545, 30))
+			MOVETOWORLD(xmlobjs.Gate, POINT3D(4469, 1534, 112))
+			xmlobjs.Gate.xmlstrings.winner = "COUNCIL OF MAGES"
+		}		
+		elif (xmlints.SHADOWLORDS == xmlints.CurrTopScore)
+		{	
+			xmlstrings.winner = "The Shadow Lords"
+			THIS().Hue = 1109
+    			THIS().name = "the corrupted Crystal of Power" 
+			MOVETOWORLD(THIS(), POINT3D(957, 701, 7))
+			MOVETOWORLD(xmlobjs.Gate, POINT3D(955, 709, 70))
+			xmlobjs.Gate.xmlstrings.winner = "SHADOWLORDS"
+		}		
+		UNSUBSCRIBETIMER(OneSecond)
+		UNSUBSCRIBETIMER(FiveSeconds)
+    		xmlints.MINAX = 0
+    		xmlints.TRUE_BRITANNIANS = 0
+    		xmlints.COUNCIL_OF_MAGES = 0
+    		xmlints.SHADOWLORDS = 0
+   		xmlints.CurrTopScore = 0
+		if (xmlobjs.carrier != null)
+		{
+			xmlobjs.carrier.SolidHueOverride = -1
+		}
+		xmlobjs.carrier.xmlobjs.crystal = null
+		xmlobjs.carrier = null
+		xmlstrings.controller = null
+		foreach (objs.player ; objs.online)
+		{
+			if (IS(objs.player,playermobile))
+			{
+				if (objs.player.FactionName != null)
+				{ 
+					SENDMSG(objs.player, xmlstrings.winner + " have won the battle for the Crystal of Power!", 0x38)
+					REMOVEQUESTARROW(objs.player)
+				}
+			}
+		}
+	}
+
+}

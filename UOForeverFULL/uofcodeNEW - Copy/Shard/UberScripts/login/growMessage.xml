@@ -1,0 +1,3 @@
+<Gump closable="false" disposable="true" dragable="false" resizable="false">
+	<VBox x="THIS().xmlints.stopX" y="THIS().xmlints.stopY" padding="0" backgroundID="3600" FitToContents="false" width="THIS().xmlints.growwidth" height="THIS().xmlints.growheight"/>
+</Gump>

@@ -1,0 +1,53 @@
+onCreate
+{
+	THIS().name = "a crumbling scroll - double click to read, but BE WARNED - after it is read, the scroll will be lost"
+	ints.draw = RANDOM(9) + 1
+	if (ints.draw == 1)
+	{
+		xmlstrings.message = "The scroll reads thusly: The first step in obtaining the cure is to have the right items to work with! You will need a mortar and pestle and an empty bowl. Those are all the tools you really need to succeed... but make sure to follow the recipe precisely, or else it could blow up in your face!"
+	}
+	else if (ints.draw == 2)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 2: One thing that must be added to the cure is a spider's carapace. This must be ground carefully into powder using a mortar and pestle. The spiders that infest the abandoned keep will probably be your best source."
+	}
+	else if (ints.draw == 3)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 3: Another ingredient required in order to create the cure is as vial of vitriol. Mix this in with the mortar and pestle as well! You can sometimes find enough vitriol from the abominations roaming this land."
+	}
+	else if (ints.draw == 4)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 4: The magic found in fey wings will be required in order to bring life back to the undead. The wings must be ground up also in order to release their power. The fey creatures from which these wings are plucked are fearsome, so be careful!"
+	}
+	else if (ints.draw == 5)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 5: Place the three ground up ingredients from the mortar into a bowl and cook it on a fire. Make sure to have all three ground up ingredients (and nothing else) before cooking!"
+	}
+	else if (ints.draw == 6)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 6: A chunk of undying flesh is required in the mixture-a sort of inoculation, as it were... be sure to chop it up with a blade so that it mixes well with the cooked mixture in the bowl!  If you are fortunate, you may find some such flesh on the corpse of one of the poor infected souls."
+	}
+	else if (ints.draw == 7)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 7: Vile tentacles are also required.  They need to be chopped up with a blade so that they mix well with the cooked mixture in the bowl!"
+	}
+	else if (ints.draw == 8)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 8: Place a whole daemon claw into the bowl mixture and cook it again!"
+	}
+	else if (ints.draw == 9)
+	{
+		xmlstrings.message = "The scroll reads thusly: Step 9, Only one ingredient remains now! After you have prepared everything as directed, place a whole seed of renewal in with the mixture. The cure is then complete!"
+	}
+}
+onUse
+{
+	if (TRIGMOB() == THIS().rootparententity)
+	{
+		SENDMSG(TRIGMOB(), xmlstrings.message)
+		DELETE(THIS())
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That must be in your backpack to use it.")
+	}
+}

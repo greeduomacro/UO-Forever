@@ -1,0 +1,59 @@
+onSpeech
+{
+	objs.awardMob = GETCHAMPREWARDMOB(THIS().champspawn)
+	LOG("champtest", STRING(objs.awardMob) )
+}
+onCreate
+{
+	BardImmuneCustom = true
+	SUBSCRIBETIMER(OneSecond)
+}
+onOneSecond
+{
+	if (xmlints.pause != null) { return }
+	objs.type = TYPE(playermobile)
+	if (THIS().frozen) { return }
+	if (RANDOMDOUBLE() > 0.93)
+	{
+		xmlints.pause = 1
+		xmlints.pause.expiration = 0:0:5
+		if (THIS().combatant != null && IS(THIS().combatant, objs.type) && DISTANCE(THIS(), THIS().combatant) < 13 && THIS().combatant.alive)
+		{
+			EFFECT(0x3728,13, THIS())
+			EFFECT(0x3728,13, THIS().combatant)
+			SOUND(THIS(),0x1FE)
+			THIS().location = THIS().combatant.location
+		}
+		else
+		{
+			// get the nearest playermobile
+			ints.MinDistance = 100
+			objs.nearbyMobs = GETNEARBYMOBS(THIS(), 13)
+			foreach (objs.mob ; objs.nearbyMobs)
+			{
+				if (IS(objs.mob, objs.type) && CANSEE(THIS(), objs.mob) && objs.mob.alive)
+				{
+					ints.distance = DISTANCE(THIS(), objs.mob)
+					if (ints.distance < ints.MinDistance)
+					{
+						objs.target = objs.mob
+						ints.MinDistance = ints.distance
+					}
+				}
+			}
+			if (objs.target != null)
+			{
+				EFFECT(0x3728,13, THIS())
+				EFFECT(0x3728,13, objs.target)
+				THIS().location = objs.target.location
+				THIS().combatant = objs.target
+				SOUND(THIS(),0x1FE)
+			}
+		}
+	}
+}
+onBeforeDeath
+{
+	objs.awardMob = GETCHAMPREWARDMOB(THIS().champspawn)
+	LOG("champtest", STRING(objs.awardMob) + " WINNER" )
+}

@@ -1,0 +1,8 @@
+onCreate
+{
+	objs.spawnLocations = [RECTANGLE2D(POINT2D(6519,112), POINT2D(6527,134)), RECTANGLE2D(POINT2D(6539,113), POINT2D(6541,128)), RECTANGLE2D(POINT2D(6500,112), POINT2D(6508,133))]
+    MOVETOSPAWNLOCATION(THIS(), MAP(Portals), objs.spawnLocations)
+	
+	ADDSCRIPT(THIS(), "crystal\\crystal.us", "crystal")
+	DELETE(SCRIPT())
+}

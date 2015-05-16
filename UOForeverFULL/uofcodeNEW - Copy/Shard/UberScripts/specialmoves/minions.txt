@@ -1,0 +1,78 @@
+function summon() // expecting objs.loc to be set to the location point and objs.map set to the map
+{
+	objs.shadow = plate
+	{
+		hue = 1
+		map = objs.map
+		location = objs.loc
+		movable = false
+	}
+	objs.startingLoc = POINT3D(objs.loc.X, objs.loc.Y, 100)
+	MEFFECT(13920,1,objs.startingLoc, objs.loc)
+	MEFFECT(14360,30,objs.startingLoc, objs.loc)
+	pause 1500
+	objs.target = objs.loc; EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x, objs.loc.y, objs.loc.z + 4); EFFECT(14000,25,objs.target);
+	objs.target = POINT3D(objs.loc.x, objs.loc.y, objs.loc.z + 4); EFFECT(14089,30,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	pause 250
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	pause 250
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	
+	balron
+	{
+		map = objs.map
+		location = objs.loc
+	}
+	DELETE(objs.shadow)
+}
+
+onSay
+{
+	if (SAID("come forth, minions of the night") == false) { return }
+	if (xmlints.SummonsLeft == null) { xmlints.SummonsLeft = 12 } 
+	
+	if (xmlints.SummonsLeft <= 0) 
+	{
+		SENDMSG(TRIGMOB(), "You are all out of energy to summon more minions!", 38)
+		return override
+	}
+	if (xmlints.specialMoveDelay == null)
+	{
+		xmlints.specialMoveDelay = 1
+		xmlints.specialMoveDelay.Expiration = 0:0:5
+		
+		ANIMATE(TRIGMOB(), 6, 0, 1, true, false, 0);
+		pause 500
+		ANIMATE(TRIGMOB(), 6, 0, 1, true, false, 0);
+		pause 500
+		objs.map = TRIGMOB().map
+		
+		objs.loc = POINT3D(TRIGMOB().x + RANDOMMINMAX(-10,10), TRIGMOB().y + RANDOMMINMAX(-10,10), GETAVERAGEZ(TRIGMOB()))
+		summon()
+		objs.loc = POINT3D(TRIGMOB().x + RANDOMMINMAX(-10,10), TRIGMOB().y + RANDOMMINMAX(-10,10), GETAVERAGEZ(TRIGMOB()))
+		summon()
+		objs.loc = POINT3D(TRIGMOB().x + RANDOMMINMAX(-10,10), TRIGMOB().y + RANDOMMINMAX(-10,10), GETAVERAGEZ(TRIGMOB()))
+		summon()
+		xmlints.SummonsLeft -= 1
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You aren't ready to use another special move!", 38)
+		return override
+	}
+}

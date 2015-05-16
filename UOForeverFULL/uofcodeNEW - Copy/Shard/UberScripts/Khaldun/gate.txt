@@ -1,0 +1,41 @@
+onSpeech
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 5)
+	{
+		if (STRINGCONTAINSIGNORECASE(SPEECH(),"fallax veramocor malum"))
+		{
+			SAY(THIS(),"The way has been opened for you, foolish mortal!")
+			if (GETITEM(KhaldunGate,TYPE(xmlspawner)) != null)
+			{
+				GETITEM(KhaldunGate,TYPE(xmlspawner)).running = true
+			}
+			if (GETITEM(KhaldunGate2,TYPE(xmlspawner)) != null)
+			{
+				GETITEM(KhaldunGate2,TYPE(xmlspawner)).running = true 
+			}
+			if (THIS().xmlstrings.KhaldunGate == null)
+			{
+				THIS().xmlstrings.KhaldunGate = TRIGMOB().name
+			}
+		}
+		elif (STRINGCONTAINSIGNORECASE(SPEECH(),"fallax") || STRINGCONTAINSIGNORECASE(SPEECH(),"veramocor") || STRINGCONTAINSIGNORECASE(SPEECH(),"malum"))
+		{
+			SAY(THIS(),"It seems you have discovered part of the incantation... but it must be complete and pronounced in the correct order!")
+		}
+		elif (STRINGCONTAINSIGNORECASE(SPEECH(),"hello") || STRINGCONTAINSIGNORECASE(SPEECH(),"hi") || STRINGCONTAINSIGNORECASE(SPEECH(),"hey"))
+		{
+			SAY(THIS(),"Greetings, mortal. Pronounce the incantation to enter Khaldun.")
+		}
+		else
+		{
+			if (RANDOMBOOL())
+			{
+				SAY(THIS(),"None shall pass without pronouncing the correct incantation!")
+			}
+			else
+			{
+				SAY(THIS(),"Begone, fool! Don't waste my time with anything but the incantation to enter.")
+			}
+		}
+	}
+}

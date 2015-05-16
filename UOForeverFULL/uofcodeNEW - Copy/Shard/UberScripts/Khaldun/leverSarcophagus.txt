@@ -1,0 +1,12 @@
+onUse
+{
+	if (GETITEM("Khaldun Left Lever").leverstate == 0 && GETITEM("Khaldun Middle Lever").leverstate == 1 && GETITEM("Khaldun Right Lever").leverstate == 0 && THIS().burning == False)
+	{
+		objs.spawner = GETITEM(KhaldunSarcophagus)
+		if (THIS().xmlstrings.KhaldunLeverPuzzle == null)
+		{
+			THIS().xmlstrings.KhaldunLeverPuzzle = TRIGMOB().name
+		}
+		objs.spawner.running = True
+	}
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DemergoAlch_Start</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-3fa523a10520</UniqueId>
+    <Map>Felucca</Map>
+    <X>5817</X>
+    <Y>381</Y>
+    <Width>1</Width>
+    <Height>1</Height>
+    <CentreX>5817</CentreX>
+    <CentreY>381</CentreY>
+    <CentreZ>22</CentreZ>
+    <Range>5</Range>
+    <MaxCount>20</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>500</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>100</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>static,1679/x/5816/y/387/z/25:MX=1:SB=1:RT=0:TO=0:KL=0
+	:OBJ=static,1681/x/5816/y/388/z/25:MX=1:SB=2:RT=0:TO=0:KL=0
+	:OBJ=#XY,5815,387,22 ; *ophidianmage/rangehome/10000/frozen/true/blessed/true/name/an ophidian alchemist/direction/east/hue/100/innocentdefault/true/hitsmaxseed/400/hits/400/ATTACH/&lt;xmlvalue,noxcrystals,0&gt;:MX=1:SB=5:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_waypoints.xml/loadconfig/true:MX=1:SB=6:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_jailer.xml/loadconfig/true:MX=1:SB=7:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,1/ATTACH/&lt;XmlDialog,DemergoPrisonDoor/configfile/demergo_door/loadconfig/true&gt;:MX=1:SB=8:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_blow_up_door.xml/loadconfig/true:MX=1:SB=9:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_summoning.xml/loadconfig/true/running/false:MX=1:SB=9:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse1.xml/loadconfig/true:MX=1:SB=10:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse2.xml/loadconfig/true:MX=1:SB=11:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse3.xml/loadconfig/true:MX=1:SB=12:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse4.xml/loadconfig/true:MX=1:SB=13:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse5.xml/loadconfig/true:MX=1:SB=14:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse6.xml/loadconfig/true:MX=1:SB=15:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse7.xml/loadconfig/true:MX=1:SB=16:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse8.xml/loadconfig/true:MX=1:SB=17:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse9.xml/loadconfig/true:MX=1:SB=18:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse10.xml/loadconfig/true:MX=1:SB=19:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse11.xml/loadconfig/true:MX=1:SB=20:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse12.xml/loadconfig/true:MX=1:SB=21:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse13.xml/loadconfig/true:MX=1:SB=22:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse14.xml/loadconfig/true:MX=1:SB=23:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse15.xml/loadconfig/true:MX=1:SB=24:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse16.xml/loadconfig/true:MX=1:SB=25:RT=0:TO=0:KL=0
+	:OBJ=xmlspawner/configfile/spawns\demergo\demergo_rottingcorpse17.xml/loadconfig/true:MX=1:SB=26:RT=0:TO=0:KL=0
+	:OBJ=SETONTHIS/running/false:MX=1:SB=99:RT=0:TO=0:KL=0
+	</Objects2>
+  </Points>
+</Spawns>
+<!-- 
+:OBJ=:MX=1:SB=6:RT=0:TO=0:KL=0
+-->

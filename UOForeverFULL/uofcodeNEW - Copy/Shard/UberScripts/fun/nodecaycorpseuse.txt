@@ -1,0 +1,14 @@
+onUse
+{
+	if (xmlobjs.specialitem == null)
+	{
+		LOCALMSG(TRIGMOB(), "You find nothing of interest on that corpse.")
+		return override
+	}
+	LOCALMSG(TRIGMOB(), "You find something of interest as you search the corpse!")
+	MOVETOWORLD(xmlobjs.specialitem, THIS().location, THIS().map)
+	xmlobjs.specialitem.z += 30
+	xmlobjs.specialitem.movable = false
+	xmlobjs.specialitem = null
+	return override
+}

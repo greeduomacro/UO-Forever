@@ -1,0 +1,152 @@
+function effect() // expecting objs.loc
+{
+	MEFFECT(RANDOMMINMAX(0x483B, 0x4883), 1, objs.loc, POINT3D(objs.loc.X, objs.loc.Y, 100), true, false)
+	EFFECT(14089, 30, objs.loc)
+}
+onCreate
+{
+	xmlobjs.names = ["Og'Nuk", "Sed'rog", "Xugagug", "Vlek", "Muzgash", "Azog", "Azog'", "Kurg'Grat", "Mul'Grat", "Rel'Tak", "Nok'Tor", "Atuk", "Wirg", "Pa'Okie", "Rugorim", "Grish'nlock", "Groshnak", "Lugdush", "Burz'Ro", "Tak'Wug", "Lug'Dug", "Gnoth", "Zkah'Zull", "Gnarlug", "Mur'gugl", "Yog'Ktar", "Grob", "T'sogg", "Vretk", "OrGug", "Lugrat", "Tip'Sur", "Sed'rog", "Wubd'jub", "Sek'Morag", "Aya'Stigi", "Gr'Kig", "Muguk", "Vargug", "Thurg", "Qig'dak", "Loathgar", "Nuglunt", "Grundak", "Blud'nuut", "Pru'Zig", "Krugg'Blaat", "Dak'Gorim", "Guban", "Tuggug", "Bramos", "Cubub", "NugNug", "Har'drak", "Vak'Lor", "Azock", "Hag'Gash", "Tak'Wug", "Tragash", "Krak'Gagh", "Kegi'goth", "Kro'gump", "Shagol", "Sudo'ooog", "Zarfu", "Nog'rog", "Wargha", "Dub'jub", "Gr'Ubsnak", "Nagrub", "Skug'gump", "Orlok", "Eek", "Kult'greenblud", "Warg'Buu", "Buuku", "Skurm'greenblud", "Gr'Gubbug", "BurzRo", "Bugd'jub", "Zim'Ro", "Drulozudirkh'Ro", "Glabbur", "Shluurg", "Wurg", "Khargol", "Zel'Tak", "Yukha", "Maubag", "Xothug", "Krath'Mog", "Guk", "Dushum'Bagurz", "Xha'Ktar", "Korr'guk", "Rug'gund", "Courthurg", "Nagduf", "Viguka", "Nagduf", "Vrak'Tup", "Og'Mog", "Agwa'oug", "Ku'Flag", "Ferlu", "Og'Ktar", "Kuz'or", "Var'chokka", "Glug'Ug", "Kuurk'Bal", "Wah'ya", "Gu'Stigi", "Bash'a", "Shagluk", "Ga'woa", "Mazuru", "Snak'Olig", "Ghak'Tar", "Yug'Rak", "Orakh", "Gnarg'Lat", "Ignis Ax", "Xruul", "Xothkug", "Xere'ka", "Var'guk", "Trok'blud", "Yub'Yub"]
+	
+	ItemID = 12289
+}
+onUse
+{	
+	if (IS(TRIGMOB(), PlayerMobile) == false)
+	{
+		SENDMSG(TRIGMOB(), "You can't use that.")
+		return
+	}
+	if (TRIGMOB().xmlints.joiningOrc != null)
+	{
+		SENDMSG(TRIGMOB(), "You are already using it!")
+		return
+	}
+	if (LISTCONTAINS(xmlobjs.names, TRIGMOB().RawName))
+	{
+		objs.now = NOW()
+		if (GETDAY(objs.now) != 11 || GETHOUR(objs.now) < 15)
+		{
+			SENDMSG(TRIGMOB(), "You are a registered orc and you will be able to use this AFTER 3pm EST. Say [servertime to see the current time EST.", 0x38)
+			return
+		}
+		if (TRIGMOB().xmlobjs.orc != null && TRIGMOB().xmlobjs.orc.NetState != null)
+		{
+			SENDMSG(TRIGMOB(), "Your body is already possessed!")
+			return
+		}
+		
+		TRIGMOB().xmlints.joiningOrc = 1
+		TRIGMOB().xmlints.joiningOrc.Expiration = TIMESPANSECONDS(30.0)
+		LOCALMSG(TRIGMOB(), "Your soul is being transferred to your true body...", 0x38)
+		TRIGMOB().CantWalk = true
+		objs.loc = POINT3D(0,0,0)
+		objs.center = TRIGMOB().Location
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y + 8; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 5; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 6; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 6; objs.loc.Y = objs.center.Y -5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 5; objs.loc.Y = objs.center.Y -6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y -5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -5; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -5; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		TRIGMOB().CantWalk = false
+		INDIVIDUALFLASHEFFECT(TRIGMOB(), 3)
+		if (global_objs.riftLocation == null) { global_objs.riftLocation = POINT3D(2582, 1118, 0) }
+		// NEED TO MAKE THE ORC GuardImmuneCustom!
+		if (TRIGMOB().xmlobjs.orc == null)
+		{
+			objs.spawn = BloodRockOrc
+			ADDSCRIPT(objs.spawn, "fun\\invasion\\orc.us", orc)
+			TRIGMOB().xmlobjs.orc = objs.spawn
+			objs.spawn.hidden = true
+			objs.spawn.cantwalk = true
+			objs.spawn.frozen = true
+			objs.spawn.blessed = true
+			objs.spawn.squelched = true
+			objs.spawn.Name = TRIGMOB().RawName
+		}
+		else
+		{
+			objs.spawn = TRIGMOB().xmlobjs.orc
+		}
+		MOVETOWORLD(objs.spawn, global_objs.riftLocation, MAP(Felucca))
+		pause 1800
+		POSSESS(TRIGMOB(), objs.spawn)
+		// have to update their logout location b/c after 5 minutes
+		// when they officially log out, since their map is internal
+		// their logoutlocation isn't changed
+		TRIGMOB().logoutlocation = TRIGMOB().location
+		TRIGMOB().map = MAP(internal)
+		TRIGMOB().logoutmap = MAP(felucca)
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You weren't in the list of registered orc participants! Sorry!", 0x38)
+	}
+}

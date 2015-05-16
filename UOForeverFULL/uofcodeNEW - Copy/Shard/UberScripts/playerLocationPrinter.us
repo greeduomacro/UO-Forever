@@ -1,0 +1,9 @@
+onUse
+{
+	objs.mobs = ONLINEMOBS()
+	foreach (objs.mob ; objs.mobs)
+	{
+		LOG("playerlocations", STRING(objs.mob.Location))
+	}
+	DELETE(THIS())
+}

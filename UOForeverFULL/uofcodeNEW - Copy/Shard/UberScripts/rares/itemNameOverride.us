@@ -1,0 +1,8 @@
+onSingleClick
+{
+	if (xmlstrings.nameoverride != null)
+	{
+		ITEMCLICKMSG(TRIGMOB(), THIS(), xmlstrings.nameoverride)
+		return override
+	}
+}

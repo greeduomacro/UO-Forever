@@ -1,0 +1,132 @@
+onCreate
+{
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		INDIVIDUALFLASHEFFECT(TRIGMOB())
+		objs.nearby = GETNEARBYMOBS(TRIGMOB().Location, 4)
+
+		if (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "MINAX")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(1134, 2596, 0), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(1134, 2596, 0), Felucca)
+		}
+		elif (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "LORD BRITISH")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(1369, 1674, 30), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(1369, 1674, 30), Felucca)
+		}
+		elif (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "SHADOWLORDS")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(954, 717, 40), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(954, 717, 40), Felucca)
+		}
+		elif (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "COUNCIL OF MAGES")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(4467, 1547, 21), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(4467, 1547, 21), Felucca)
+		}
+		elif (TRIGMOB().FactionName == null)
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(1499, 1785, -2), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(1499, 1785, -2), Felucca)
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is too far away.")
+	}
+}
+onMoveOver
+{
+	pause 2000
+	objs.nearby = GETNEARBYMOBS(TRIGMOB().Location, 4)
+	INDIVIDUALFLASHEFFECT(TRIGMOB())
+		if (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "MINAX")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(1134, 2596, 0), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(1134, 2596, 0), Felucca)
+		}
+		elif (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "LORD BRITISH")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(1369, 1674, 30), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(1369, 1674, 30), Felucca)
+		}
+		elif (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "SHADOWLORDS")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(954, 717, 40), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(954, 717, 40), Felucca)
+		}
+		elif (TRIGMOB().FactionName != null && TRIGMOB().FactionName == "COUNCIL OF MAGES")
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(4467, 1547, 21), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(4467, 1547, 21), Felucca)
+		}
+		elif (TRIGMOB().FactionName == null)
+		{
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+				{
+					MOVETOWORLD(objs.mob, POINT3D(1499, 1785, -2), Felucca)
+				}
+			}
+			MOVETOWORLD(TRIGMOB(), POINT3D(1499, 1785, -2), Felucca)
+		}
+}

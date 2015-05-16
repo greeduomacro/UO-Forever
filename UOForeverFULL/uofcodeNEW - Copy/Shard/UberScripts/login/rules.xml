@@ -1,0 +1,29 @@
+<Gump closable="false" disposable="true" dragable="false" resizable="false">
+	<VBox x="THIS().xmlints.stopX" y="THIS().xmlints.stopX" padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"YOU MUST AGREE TO THE RULES TO CONTINUE!"</Label>
+		<Label hue="1153">"Be sure to SCROLL DOWN to read all the rules!"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="380" height="280">
+			<basefont color="#000000">Welcome to UOForever! Just so there can be no misunderstanding, you must agree to UOForever's rules to continue! There are some actions that we have ZERO tolerance for!
+
+By playing UOForever, you agree to NEVER gather resources AFK (except fishing), to NEVER use unapproved 3rd party programs or anything that enables faster movement (i.e. speedhack), and to NEVER use more than 2 accounts or share access to your accounts with others.
+
+You understand that:
+AFK resource gathering (except fishing) will result in an instant permanent ban WITHOUT EXCEPTION. If you are not technically AFK but you are macroing resource gathering "in the background", be aware that if you do not respond to a staff member within a short amount of time (30 seconds) then you WILL be permanently banned! If you are away from the computer, turn off your macro!  Using any 3rd party programs except Razor or AssistUO will result in an instant permanent ban WITHOUT EXCEPTION.
+
+Speedhacking of any kind at ANY time will result in an instant permanent ban WITHOUT EXCEPTION.
+
+Players found to be using more than 2 accounts will have extra accounts removed at staff discretion and may be subject to be banned! If you accidentally create a 3rd account, just don't create a character and it's not a problem.
+
+We do not allow sharing accounts!
+
+For all rules please see <a href="http://uoforever.com/rules.php">Click Here</a>
+			</basefont>
+		</HTML>
+		
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="accepted"/>
+			<Label hue ="1553">I promise to abide by the rules.</Label>
+		</HBox>
+		<HBox width="10" height="10" FitToContents="false"/>
+	</VBox>
+</Gump>

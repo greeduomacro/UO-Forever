@@ -1,0 +1,161 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>UOSkillStones</Name>
+    <!--<UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>0</X>
+    <Y>0</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=*static,3804/OFFSET,0,3/name/Strength Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,rawstr$&lt;91&amp;GETONTRIGMOB,rawstattotal$&lt;230@successaction/@SETONTRIGMOB/rawstr/INC,10/hitsmaxseed/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots and less than 100 of that attribute!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,4963/OFFSET,0,3,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,0,4/name/Intelligence Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,rawint$&lt;91&amp;GETONTRIGMOB,rawstattotal$&lt;230@successaction/@SETONTRIGMOB/rawint/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots and less than 100 of that attribute!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,7408/OFFSET,0,4,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,0,5/name/Dexterity Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,rawdex$&lt;91&amp;GETONTRIGMOB,rawstattotal$&lt;230@successaction/@SETONTRIGMOB/rawdex/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots and less than 100 of that attribute!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*boots/OFFSET,0,5,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		
+		:OBJ=*static,3804/OFFSET,0,0/name/Magery Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.magery.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.magery.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*spellbook/OFFSET,0,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,1,0/name/Evaluating Intelligence Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.evalint.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.evalint.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*spyglass/OFFSET,1,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,2,0/name/Meditiation Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.meditation.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.meditation.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*hood/OFFSET,2,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,3,0/name/Resist Spells Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.magicresist.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.magicresist.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*resilientbracer/OFFSET,3,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,4,0/name/Inscription Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.inscribe.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.inscribe.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*blankscroll/OFFSET,4,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,5,0/name/Alchemy Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.alchemy.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.alchemy.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*mortarpestle/OFFSET,5,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,6,0/name/Spirit Speak Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.spiritspeak.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.spiritspeak.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*candleskull/OFFSET,6,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		
+		:OBJ=*static,3804/OFFSET,9,0/name/Anatomy Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.anatomy.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.anatomy.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*torso/OFFSET,9,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,10,0/name/Healing Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.healing.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.healing.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*bandage,2/OFFSET,10,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		
+		:OBJ=*static,3804/OFFSET,13,0/name/Tactics Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.tactics.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.tactics.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*bluebook/OFFSET,13,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,14,0/name/Swords Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.swords.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.swords.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1\
+		:OBJ=*vikingsword/OFFSET,14,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,15,0/name/Fencing Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.fencing.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.fencing.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*kryss/OFFSET,15,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,16,0/name/Mace Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.macing.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.macing.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*mace/OFFSET,16,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,17,0/name/Archery Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.archery.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.archery.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*bow/OFFSET,17,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,18,0/name/Wrestling Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.wrestling.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.wrestling.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*leathergloves/OFFSET,18,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,19,0/name/Parrying Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.parry.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.parry.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*chaosshield/OFFSET,19,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		
+		:OBJ=*static,3804/OFFSET,22,0/name/Stealing Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.stealing.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.stealing.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*gold,6/OFFSET,22,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,23,0/name/Snooping Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.snooping.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.snooping.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*backpack/OFFSET,23,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,24,0/name/Poisoning Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.poisoning.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.poisoning.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3850/OFFSET,24,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,25,0/name/Arms Lore Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.armslore.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.armslore.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*redbook/OFFSET,25,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		<!--
+		:OBJ=*static,3804/OFFSET,0,0/name/Hiding Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.hiding.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.hiding.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,0,0/name/Detecting Hidden Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.detecthidden.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.detecthidden.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,0,0/name/Stealth Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.stealth.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.stealth.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		-->
+		:OBJ=*static,3804/OFFSET,28,0/name/Carpentry Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.carpentry.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.carpentry.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*stool/OFFSET,28,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,29,0/name/Blacksmith Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.blacksmith.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.blacksmith.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*platechest/OFFSET,29,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,30,0/name/Tinkering Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.tinkering.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.tinkering.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*tinkertools/OFFSET,30,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*static,3804/OFFSET,31,0/name/Cooking Training/ATTACH/&lt;xmluse/condition/@AMOUNTCARRIED,ironingot$&gt;9&amp;GETONTRIGMOB,skills.cooking.base$&lt;91&amp;GETONTRIGMOB,skillstotal$&lt;8500@successaction/@SETONTRIGMOB/skills.cooking.base/INC,10;TAKEBYTYPE,1,10/ironingot@failureaction/@SETONTRIGMOB/SENDMSG/You could not train further. To train, you must have 10 ingots, less than 100 of that skill, and less than 850 real skill points!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=*cake/OFFSET,31,0,13/movable/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+  <!-- 
+:OBJ=:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+<KillReset>1</KillReset>
+Don't forget to update the unique ID!
+<Map></Map>
+<TODStart></TODStart>  parsedfromminutes
+<TODEnd></TODEnd>  parsed from minutes
+<TODMode></TODEnd>  0=Realtime,1=Gametime
+<KillReset></KillReset>  Killcount reset on a given spawn level if this number of ticks have gone by without a kill
+NOTE: DelayInSec applies only to MinDelay and MaxDelay, not refractory, etc.
+<ProximityTriggerMessage></ProximityTriggerMessage>
+<ItemTriggerName></ItemTriggerName>  = TRIGONCARRIED, attachmentexample: ATTACHMENT,demergo,xmlvalue
+<NoItemTriggerName></NoItemTriggerName> = NOTRIGONCARRIED
+<SpeechTrigger></SpeechTrigger>
+<SkillTrigger></SkillTrigger> skillname[+/-][,min][,max]  magery+,70,100 = magery must be b/w 70-100 and must have succeeded a skillcheck
+<MobTriggerName></MobTriggerName> The name of the mob that mobpropertyname will check-will randomly pick one if there are many
+<MobPropertyName></MobPropertyName> conditional (e.g. hits>10), can do & and | for multiple properties, ~ ! = > <
+<PlayerPropertyName></PlayerPropertyName> conditional as above, I believe used with the proximity triggering, where the player will only trigger if it meets these conditions
+<TriggerProbability></TriggerProbability> 0-1 could be used to do rares
+<RegionName></RegionName> overrides the X1Y1X2Y2 settings
+<ConfigFile></ConfigFile> No idea why you would possibly use this???
+<AllowGhostTriggering></AllowGhostTriggering>
+<AllowNPCTriggering></AllowNPCTriggering>
+<SpawnOnTrigger></SpawnOnTrigger> spawning to occur immediately after triggering regardless of the min/maxdelay settings
+<SmartSpawning></SmartSpawning> 
+<ObjectPropertyName></ObjectPropertyName>
+<ObjectPropertyItemName></ObjectPropertyItemName>
+<SetPropertyItemName></SetPropertyItemName> makes it so SET can be used (e.g. SET/running/true) without the addiotional arguments
+<Duration></Duration> after the last spawn it starts counting down.. can use to make rares harder to get.. also proximity + duration = triggered but limited duration spawns
+<DespawnTime></DespawnTime> 0 = never get deleted... checked every spawn tick (not a separate timer like Duration)
+<ProximityRange></ProximityRange> side note: -2 means that only if ProximityActivated is true will it spawn (proximity and free spawning disabled otherwise).
+<ProximityTriggerSound></ProximityTriggerSound>  400 = click
+<Amount></Amount> amount in a stack that will be spawned by default (if it is a stackable)
+<ExternalTriggering></ExternalTriggering> true / false
+<Waypoint></Waypoint> serial or name
+<Team></Team> hack for amount-use Amount instead
+<IsGroup></IsGroup> The Group property normally operates by forcing the spawner to spawn all of its spawns as a "group", and it will not respawn until all spawns in the "group" are gone (can use to create "levels" that must be cleared before advancing with sequentialspawn)
+<IsRunning></IsRunning> 
+
+:MX=ActualMaxCount
+:SB=SubGroup
+:RT=SequentialResetTime (time they have to advance to the next spawn)
+:TO=SequentialResetTo (spawngroup to jump to if it resets)
+:KL=KillsNeeded (to advance)
+:RK=RestrictKillsToSubgroup (isn't working atm)
+:CA=ClearOnAdvance (clear current subgroup on advance)
+:DN=MinDelay
+:DX=MaxDelay
+:SP=SpawnsPerTick
+:PR=PackRange (mobs in a spawn entry all spawn together with this range)
+					
+conditional tests of the form "a=b & c<d", "e<f | g!h". These can be extended arbitrarily, i.e. "a*b $ c*d $ e*f $ g*h ..." , where * is one of <>!= and $ is one of &|, but the current default grouping precedence is not exactly intuitive.
+Default grouping follows this rule "(a*b $ (c*d $ (e*f $ g*h)))" where, due to parsing efficiency, conditional pairs at the end of an
+expression are tested first and then recursively work their way back to the beginning.
+-->
+</Spawns>

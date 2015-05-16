@@ -1,0 +1,40 @@
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		ints.range = 16 // change this as needed
+		objs.explosionLoc = THIS().location
+		objs.cannonDirVector = THIS().CannonDirectionVector
+		objs.explosionLoc.X += objs.cannonDirVector.X
+		objs.explosionLoc.Y += objs.cannonDirVector.Y
+		objs.explosionLoc.Z -= 5;
+		EFFECT(14000, 3, objs.explosionLoc)
+		SOUND(THIS(), 0x307)
+		
+		objs.target = GETCANNONTARGET(THIS(), ints.range)
+		if (objs.target != null && IS(objs.target, baseboat))
+		{
+			SENDMSG(TRIGMOB(), "HIT " + objs.target.hits)
+			ints.distanceToTarget = GETCANNONTARGETRANGE(THIS(), ints.range)
+			objs.endLoc = THIS().location
+			objs.endLoc.X += objs.cannonDirVector.X * ints.distanceToTarget
+			objs.endLoc.Y += objs.cannonDirVector.Y * ints.distanceToTarget
+			objs.target.hits -= 11
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "PEW PEW PEW...")
+			objs.endLoc = THIS().location
+			objs.endLoc.X += objs.cannonDirVector.X * ints.range
+			objs.endLoc.Y += objs.cannonDirVector.Y * ints.range
+		}
+		objs.explosionLoc.Z += 3
+		//MEFFECT(0x4224, 20, objs.explosionLoc, objs.endLoc, false, false)
+		MEFFECT(14000, 20, objs.explosionLoc, objs.endLoc, false, false)
+		//MEFFECT(130, 20, objs.explosionLoc, objs.endLoc, false, false)
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You are too far away!")
+	}
+}

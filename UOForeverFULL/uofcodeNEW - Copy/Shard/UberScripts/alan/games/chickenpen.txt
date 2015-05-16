@@ -1,0 +1,24 @@
+onCreate
+{
+	SUBSCRIBETIMER(FiveSeconds)
+}
+
+onFiveSeconds
+{
+	objs.nearby = GETNEARBYMOBS(THIS(), 15)
+	foreach (objs.mob ; objs.nearby)
+	{
+		if (IS(objs.mob, chicken))
+		{
+			if (objs.mob.xmlints.noRegen == null)
+			{
+				objs.mob.xmlints.noRegen = 1
+				objs.mob.xmlints.noRegen.expiration = 3:0:0
+				objs.attachment = NEWATTACHMENT(xmlscript)
+				objs.attachment.scriptfile = "alan\\games\\chickenNoRegen.txt"
+				objs.attachment.expiration = 3:0:0
+				ATTACH(objs.mob, objs.attachment)
+			}
+		}
+	}
+}

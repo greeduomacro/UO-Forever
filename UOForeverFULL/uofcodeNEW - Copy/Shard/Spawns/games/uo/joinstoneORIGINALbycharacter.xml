@@ -1,0 +1,54 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>UOJoinStone</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29bb2ca10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>0</X>
+    <Y>0</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=*static,3804/name/The Ultimate Ultima Event Join Stone - Double Click to Join!/ATTACH/&lt;xmlvalue,team2,0&gt;/ATTACH/&lt;xmlvalue,team4,0&gt;/ATTACH/&lt;xmlvalue,lastteam,0&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		
+		:OBJ=SETONSPAWN,1/ATTACH/&lt;xmluse/name/assignTeam/successaction/@#CONDITION,~"${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,name]$}"="uoteam"&amp;GETONTHIS,[ATTACHMENT,xmlvalue,team2,value]$&lt;GETONTHIS,[ATTACHMENT,xmlvalue,team4,value]$;SETONTHIS/ATTACHMENT,xmlvalue,team2,value/INC,1/ATTACHMENT,xmlvalue,lastteam,value/2;#CONDITION,~"${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,name]$}"="uoteam"&amp;GETONTHIS,[ATTACHMENT,xmlvalue,team2,value]$&gt;GETONTHIS,[ATTACHMENT,xmlvalue,team4,value]$;SETONTHIS/ATTACHMENT,xmlvalue,team4,value/INC,1/ATTACHMENT,xmlvalue,lastteam,value/4;#CONDITION,~"${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,name]$}"="uoteam"&amp;GETONTHIS,[ATTACHMENT,xmlvalue,team2,value]=GETONTHIS,[ATTACHMENT,xmlvalue,team4,value]$;SETONTHIS/ATTACHMENT,xmlvalue,team4,value/INC,1/ATTACHMENT,xmlvalue,lastteam,value/4;#CONDITION,~"${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,name]$}"="uoteam"$;SETONTRIGMOB/ATTACH/&lt;xmlvalue,uoteam,${GETONTHIS,[ATTACHMENT,xmlvalue,lastteam,value]$}&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		
+		
+		:OBJ=SETONSPAWN,1/ATTACH/&lt;xmluse/name/connect/condition/@~GETONTHIS,[ATTACHMENT,xmlvalue,${GETONTRIGMOB,ip$},value]$&gt;-1@successaction/@SETONTHIS/ATTACH/&lt;xmlvalue,${GETONTRIGMOB,IP$},0&gt;;humanmob/teamflags/${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,value]$}/name/temporaryone;SETONTHIS/ATTACHMENT,xmlvalue,${GETONTRIGMOB,IP$},value/${GETONMOB,temporaryone,humanmob,serial$};SETONMOB,temporaryone,humanmob/hitsmaxseed/60/str/60/dex/20/int/20/name/${GETONTRIGMOB,name$}/hue/${GETONTRIGMOB,hue$}/bodyvalue/${GETONTRIGMOB,bodyvalue$}/female/${GETONTRIGMOB,female$}/hairitemid/${GETONTRIGMOB,hairitemid$}/hairhue/${GETONTRIGMOB,hairhue$}/facialhairitemid/${GETONTRIGMOB,hairitemid$}/facialhairhue/${GETONTRIGMOB,hairhue$}/ATTACH/&lt;xmllocalvariable,ip/data/${GETONTRIGMOB,ip$}&gt;/ATTACH/&lt;xmldeathaction/action/$$@SET,The Ultimate Ultima Event Join Stone - Double Click to Join!,static/ATTACHMENT,xmlvalue,$${GETONTHIS,[ATTACHMENT,xmllocalvariable,ip,data]$$},dodelete/true&gt;/POSSESS/${GETONTRIGMOB,serial$}@failureaction/@SETONTRIGMOB/SENDMSG/You must still be logged into your mob on another client! If this is not the case, please page! Also if you are whitelisted, please page-we can get you in the game.;SET,${GETONTHIS,[ATTACHMENT,xmlvalue,${GETONTRIGMOB,ip$},value]$},humanmob/POSSESS/${GETONTRIGMOB,serial$}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		<!--
+		:OBJ=SETONSPAWN,1/name/The Ultimate Ultima Event Join Stone - Double Click to Join!/ATTACH/&lt;xmluse/condition/@~GETONTHIS,[ATTACHMENT,xmlvalue,${GETONTRIGMOB,ip$},value]$&gt;-1@successaction/@#CONDITION,$~{GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,value]$}$&gt;-1&amp;GETONTHIS,[ATTACHMENT,xmlvalue,team2,value]$&lt;GETONTHIS,[ATTACHMENT,xmlvalue,team4,value]$;SETONTHIS/ATTACHMENT,xmlvalue,team2,value/INC,1/ATTACHMENT,xmlvalue,lastteam,value/2$;SETONTHIS/ATTACHMENT,xmlvalue,team4,value/INC,1/ATTACHMENT,xmlvalue,lastteam,value/4;#CONDITION,~${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,value]$}$&gt;-1$;SETONTRIGMOB/ATTACH/&lt;xmlvalue,uoteam,${GETONTHIS,[ATTACHMENT,xmlvalue,lastteam,value]$}&gt;;SETONTHIS/ATTACH/&lt;xmlvalue,${GETONTRIGMOB,IP$},0&gt;;humanmob/teamflags/${GETONTRIGMOB,[ATTACHMENT,xmlvalue,uoteam,value]$}/name/temporaryone;SETONTHIS/ATTACHMENT,xmlvalue,${GETONTRIGMOB,IP$},value/${GETONMOB,temporaryone,humanmob,serial$};SETONMOB,temporaryone,humanmob/hitsmaxseed/60/str/60/dex/20/int/20/name/${GETONTRIGMOB,name$}/hue/${GETONTRIGMOB,hue$}/bodyvalue/${GETONTRIGMOB,bodyvalue$}/female/${GETONTRIGMOB,female$}/hairitemid/${GETONTRIGMOB,hairitemid$}/hairhue/${GETONTRIGMOB,hairhue$}/facialhairitemid/${GETONTRIGMOB,hairitemid$}/facialhairhue/${GETONTRIGMOB,hairhue$}/ATTACH/&lt;xmllocalvariable,ip/data/${GETONTRIGMOB,ip$}&gt;/ATTACH/&lt;xmldeathaction/action/$$@SET,The Ultimate Ultima Event Join Stone - Double Click to Join!,static/ATTACHMENT,xmlvalue,$${GETONTHIS,[ATTACHMENT,xmllocalvariable,ip,data]$$},dodelete/true&gt;/POSSESS/${GETONTRIGMOB,serial$}@failureaction/@SETONTRIGMOB/SENDMSG/You must still be logged into your mob on another client! If this is not the case, please page! Also if you are whitelisted, please page-we can get you in the game.;SET,${GETONTHIS,[ATTACHMENT,xmlvalue,${GETONTRIGMOB,ip$},value]$},humanmob/POSSESS/${GETONTRIGMOB,serial$}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		-->
+		
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

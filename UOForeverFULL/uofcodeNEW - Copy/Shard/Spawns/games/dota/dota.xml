@@ -1,0 +1,69 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DotaController</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1500</X>
+    <Y>1500</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1500</CentreX>
+    <CentreY>1500</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>#XY,1506,1425,0;*static,3804/hue/38/ATTACH/&lt;xmluse/condition/@~GETONCARRIED,eventsupply,item,,visible=true&amp;GETONTRIGMOB,teamflags=2@failureaction/@SETONTRIGMOB/SENDMSG/You already have supplies!@successaction/@SETONTRIGMOB/EQUIP/&lt;leatherarms/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leathergloves/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leathercap/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leatherlegs/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leathergorget/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leatherchest/name/eventsupply/quality/exceptional&gt;/ADD/&lt;bag/hue/100/name/eventsupply/ADD/&lt;blackpearl,100/name/eventsupply&gt;/ADD/&lt;garlic,100/name/eventsupply&gt;/ADD/&lt;ginseng,80/name/eventsupply&gt;/ADD/&lt;bloodmoss,80/name/eventsupply&gt;/ADD/&lt;sulfurousash,80/name/eventsupply&gt;/ADD/&lt;spiderssilk,80/name/eventsupply&gt;/ADD/&lt;mandrakeroot,80/name/eventsupply&gt;/ADD/&lt;nightshade,80/name/eventsupply&gt;/ADD/&lt;bolt/amount/100/name/eventsupply&gt;/ADD/&lt;arrow/amount/100/name/eventsupply&gt;&gt;/ADD/&lt;bag/hue/38/name/eventsupply/ADD/&lt;katana/quality/exceptional/name/eventsupply&gt;/ADD/&lt;bow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;crossbow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;halberd/quality/exceptional/name/eventsupply&gt;/ADD/&lt;spear/quality/exceptional/name/eventsupply&gt;/ADD/&lt;kryss/quality/exceptional/name/eventsupply&gt;/ADD/&lt;quarterstaff/quality/exceptional/name/eventsupply&gt;/ADD/&lt;woodenshield/quality/exceptional/name/eventsupply&gt;/ADD/&lt;warhammer/quality/exceptional/name/eventsupply&gt;/ADD/&lt;heavycrossbow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;waraxe/quality/exceptional/name/eventsupply&gt;&gt;/ADD/&lt;bandage/amount/100/name/eventsupply&gt;/ADD/&lt;refreshpotion/amount/3/name/eventsupply&gt;/hits/70&gt;/name/Leather Armor Stone:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,1510,1425,0;*evilhealer/frozen/true/blessed/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=xmlspawner/configfile/Spawns\killteam4.xml/loadconfig/true/location/(1510,1429,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=#XY,1391,1520,0;*static,3804/hue/38/ATTACH/&lt;xmluse/condition/@~GETONCARRIED,eventsupply,item,,visible=true&amp;GETONTRIGMOB,teamflags=4@failureaction/@SETONTRIGMOB/SENDMSG/You already have supplies!@successaction/@SETONTRIGMOB/EQUIP/&lt;leatherarms/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leathergloves/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leathercap/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leatherlegs/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leathergorget/name/eventsupply/quality/exceptional&gt;/EQUIP/&lt;leatherchest/name/eventsupply/quality/exceptional&gt;/ADD/&lt;bag/hue/100/name/eventsupply/ADD/&lt;blackpearl,100/name/eventsupply&gt;/ADD/&lt;garlic,100/name/eventsupply&gt;/ADD/&lt;ginseng,80/name/eventsupply&gt;/ADD/&lt;bloodmoss,80/name/eventsupply&gt;/ADD/&lt;sulfurousash,80/name/eventsupply&gt;/ADD/&lt;spiderssilk,80/name/eventsupply&gt;/ADD/&lt;mandrakeroot,80/name/eventsupply&gt;/ADD/&lt;nightshade,80/name/eventsupply&gt;/ADD/&lt;bolt/amount/100/name/eventsupply&gt;/ADD/&lt;arrow/amount/100/name/eventsupply&gt;&gt;/ADD/&lt;bag/hue/38/name/eventsupply/ADD/&lt;katana/quality/exceptional/name/eventsupply&gt;/ADD/&lt;bow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;crossbow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;halberd/quality/exceptional/name/eventsupply&gt;/ADD/&lt;spear/quality/exceptional/name/eventsupply&gt;/ADD/&lt;kryss/quality/exceptional/name/eventsupply&gt;/ADD/&lt;quarterstaff/quality/exceptional/name/eventsupply&gt;/ADD/&lt;woodenshield/quality/exceptional/name/eventsupply&gt;/ADD/&lt;warhammer/quality/exceptional/name/eventsupply&gt;/ADD/&lt;heavycrossbow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;waraxe/quality/exceptional/name/eventsupply&gt;&gt;/ADD/&lt;bandage/amount/100/name/eventsupply&gt;/ADD/&lt;refreshpotion/amount/5/name/eventsupply&gt;/hits/70&gt;/name/Leather Armor Stone:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,1392,1518,0;*evilhealer/frozen/true/blessed/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=xmlspawner/configfile/Spawns\killteam2.xml/loadconfig/true/location/(1393,1519,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=static,3804/hue/38/location/(1434,1704,0)/name/Double click to join a random team!/ATTACH/&lt;xmluse/requirelos/true/condition/@GETONTRIGMOB,teamflags=4|GETONTHIS,[ATTACHMENT,xmlvalue,orcs,value]$&lt;GETONTHIS,[ATTACHMENT,xmlvalue,humans,value]@successaction/@SETONTRIGMOB/teamflags/4/location/(1381,1476,22)/SENDMSG/Protect your commander at all costs!  Supplies are provided by double clicking the supply stone! ; SETONTHIS/ATTACHMENT,xmlvalue,orcs,value/INC,1@failureaction/@SETONTRIGMOB/teamflags/2/location/(1477,1434,30)/SENDMSG/Protect your commander at all costs!  Supplies are provided by double clicking the supply stone! ; SETONTHIS/ATTACHMENT,xmlvalue,humans,value/INC,1&gt;/ATTACH/&lt;xmlvalue,orcs,0&gt;/ATTACH/&lt;xmlvalue,humans,0&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\autorevealer.xml/loadconfig/true/location/(1379,1476,22):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,1379,1476,22;*orcarcher/teamflags/4/name/an Orcish Commander/innocentdefault/true/pseu_canbehealed/false/frozen/true/hitsmaxseed/10000/hits/10000/dex/100/stammaxseed/100/stam/100/damagemin/20/damagemax/30/SKILL,wrestling/50/basesoundid/0/ATTACH/&lt;xmldeathaction/action/@BCAST/The Orc commander has fallen-the Humans win! ; SETONNEARBY,300,*,playermobile,,teamflags=2/ATTACH/&lt;xmlvalue,dotawin3,1&gt; ; SET,DotaEnd,xmlspawner/running/true&gt;/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=xmlspawner/configfile/Spawns\autorevealer.xml/loadconfig/true/location/(1479,1432,30):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,1479,1432,30;*orcarcher/teamflags/2/innocentdefault/true/name/a Galven Commander/innocentdefault/true/pseu_canbehealed/false/bodyvalue/400/frozen/true/hitsmaxseed/10000/hits/10000/dex/100/stammaxseed/100/stam/100/damagemin/20/damagemax/30/SKILL,wrestling/50/basesoundid/0/speaks/false/EQUIP/&lt;platehelm/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainlegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platearms/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platelegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;plategorget/movable/false/basearmorrating/0&gt;/EQUIP/&lt;doublet/hue/95/movable/false&gt;/ATTACH/&lt;xmldeathaction/action/@BCAST/The Galven commander has fallen-the Orcs win! ; SETONNEARBY,300,*,playermobile,,teamflags=4/ATTACH/&lt;xmlvalue,dotawin3,1&gt; ; SET,DotaEnd,xmlspawner/running/true&gt;/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200/ADD/gold,200:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=#XY,1487,1450,15;*orcarcher/teamflags/2/innocentdefault/true/name/a Galven Turret/innocentdefault/true/pseu_canbehealed/false/bodyvalue/400/frozen/true/hitsmaxseed/1500/hits/1500/dex/100/stammaxseed/100/stam/100/damagemin/30/damagemax/40/SKILL,wrestling/75/SKILL,archery/75/basesoundid/0/speaks/false/EQUIP/&lt;platehelm/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainlegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platearms/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platelegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;plategorget/movable/false/basearmorrating/0&gt;/EQUIP/&lt;doublet/hue/95/movable/false&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=#XY,1510,1451,0;*orcarcher/teamflags/2/innocentdefault/true/name/a Galven Turret/innocentdefault/true/pseu_canbehealed/false/bodyvalue/400/frozen/true/hitsmaxseed/1500/hits/1500/dex/100/stammaxseed/100/stam/100/damagemin/30/damagemax/40/SKILL,wrestling/75/SKILL,archery/75/basesoundid/0/speaks/false/EQUIP/&lt;platehelm/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainlegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platearms/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platelegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;plategorget/movable/false/basearmorrating/0&gt;/EQUIP/&lt;doublet/hue/95/movable/false&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=#XY,1505,1484,0;*orcarcher/teamflags/2/innocentdefault/true/name/a Galven Turret/innocentdefault/true/pseu_canbehealed/false/bodyvalue/400/frozen/true/hitsmaxseed/3000/hits/3000/dex/100/stammaxseed/100/stam/100/damagemin/30/damagemax/40/SKILL,wrestling/75/SKILL,archery/75/basesoundid/0/speaks/false/EQUIP/&lt;platehelm/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainlegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platearms/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platelegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;plategorget/movable/false/basearmorrating/0&gt;/EQUIP/&lt;doublet/hue/95/movable/false&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=#XY,1394,1481,3;*orcarcher/teamflags/4/name/an Orcish Turret/innocentdefault/true/pseu_canbehealed/false/frozen/true/hitsmaxseed/1500/hits/1500/dex/100/stammaxseed/100/stam/100/damagemin/30/damagemax/40/SKILL,wrestling/74/SKILL,archery/75/basesoundid/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=#XY,1428,1493,0;*orcarcher/teamflags/4/name/an Orcish Turret/innocentdefault/true/pseu_canbehealed/false/frozen/true/hitsmaxseed/1500/hits/1500/dex/100/stammaxseed/100/stam/100/damagemin/30/damagemax/40/SKILL,wrestling/73/SKILL,archery/75/basesoundid/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=#XY,1448,1501,0;*orcarcher/teamflags/4/name/an Orcish Turret/innocentdefault/true/pseu_canbehealed/false/frozen/true/hitsmaxseed/3000/hits/3000/dex/100/stammaxseed/100/stam/100/damagemin/30/damagemax/40/SKILL,wrestling/76/SKILL,archery/76/basesoundid/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		
+		
+		:OBJ=xmlspawner/configfile/Spawns\dotaorcmobs.xml/loadconfig/true/spawnrange/5:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\dotahumanmobs.xml/loadconfig/true/spawnrange/5:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\dotastatus.xml/loadconfig/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=xmlspawner/configfile/Spawns\dotabegin.xml/loadconfig/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\dotaend.xml/loadconfig/true/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=#XY,1560,1420,1 ; MULTIADDON,dotaEWall.txt:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,1391,1544,2 ; MULTIADDON,dotaWWall.txt:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

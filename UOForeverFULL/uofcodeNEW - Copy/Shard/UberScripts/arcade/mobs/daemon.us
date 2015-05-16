@@ -1,0 +1,60 @@
+onCreate
+{
+	xmlobjs.owner.xmlints.daemonCount += 1
+	
+	objs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	
+	objs.possible2 = [RECTANGLE2D(POINT2D(5213, 4016), POINT2D(5222, 4007)), RECTANGLE2D(POINT2D(5232, 4064), POINT2D(5262, 4040)), RECTANGLE2D(POINT2D(5184, 4071), POINT2D(5202, 4054)), RECTANGLE2D(POINT2D(5183, 3993), POINT2D(5198, 3984)), RECTANGLE2D(POINT2D(5258, 3946), POINT2D(5267, 3931)), RECTANGLE2D(POINT2D(5200, 3662), POINT2D(5214, 3648)), RECTANGLE2D(POINT2D(5232, 4064), POINT2D(5262, 4040)), RECTANGLE2D(POINT2D(5793, 3305), POINT2D(5815, 3295)), RECTANGLE2D(POINT2D(5797, 3275), POINT2D(5814, 3268)), RECTANGLE2D(POINT2D(5758, 3168), POINT2D(5782, 3151)), RECTANGLE2D(POINT2D(5761, 2630), POINT2D(5782, 2610)), RECTANGLE2D(POINT2D(5672, 2406), POINT2D(5678, 2397))]
+
+	objs.weights = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+	objs.Zlocs = [37, 37, 37, 37, 77, 0, 37, 10, 11, 14, 46, 59]
+	if (RANDOMDOUBLE() > 0.7)
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		// try up to 4 times
+		
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+				}
+			}
+		}
+	}
+	else
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible2, objs.weights, objs.Zlocs, true)
+		// try up to 4 times
+		
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible2, objs.weights, objs.Zlocs, true)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible2, objs.weights, objs.Zlocs, true)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible2, objs.weights, objs.Zlocs, true)
+				}
+			}
+		}
+	}
+	MOVETOWORLD(THIS(), objs.spawnLoc, MAP(Trammel))
+}
+onBeforeDeath
+{
+	xmlobjs.owner.xmlints.daemonCount -= 1
+	
+	if (RANDOMDOUBLE() < 0.2)
+	{
+		objs.item = UberScriptItem, 22305
+		objs.item.name = "Daemon Claw"
+		ADDSCRIPT(objs.item, "arcade\\regs\\daemonClaw.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+}

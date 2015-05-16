@@ -1,0 +1,177 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>ChampController</Name>
+    <UniqueId>abcde17d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1500</X>
+    <Y>1500</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1500</CentreX>
+    <CentreY>1500</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>1000</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=12;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,800,801,802,803,804,805,800,801,802,803,804,805,900,901,902,903,904,905,906,907,908,909,910,911,912,913,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=22;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,900,901,902,903,904,905,906,907,908,909,910,911,912,913,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,200,201,202,203,204,205,206,207,208,209,210,211,212}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=32;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,200,201,202,203,204,205,206,207,208,209,210,211,212,300,301,302,303,304,305,306,307,308,309}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=42;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,200,201,202,203,204,205,206,207,208,209,210,211,212,300,301,302,303,304,305,306,307,308,309,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=52;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,300,301,302,303,304,305,306,307,308,309,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,500,501,502,503,504,505,506,507,508,509,510,511}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=62;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,400,401,402,403,404,405,406,407,408,409,410,411,412,413,414,500,501,502,503,504,505,506,507,508,509,510,511,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=72;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,500,501,502,503,504,505,506,507,508,509,510,511,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,700,701,702,703,704,705,706,707,708,709,710,711,712,713}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=82;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,600,601,602,603,604,605,606,607,608,609,610,611,612,613,614,615,700,701,702,703,704,705,706,707,708,709,710,711,712,713,800,801,802,803,804,805,800,801,802,803,804,805}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,{GET,DungeonController,xmlspawner,SequentialSpawn}=92;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/{RNDSTRLIST,700,701,702,703,704,705,706,707,708,709,710,711,712,713,800,801,802,803,804,805,800,801,802,803,804,805,900,901,902,903,904,905,906,907,908,909,910,911,912,913}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#CONDITION,~{GET,DungeonController,xmlspawner,SequentialSpawn}&gt;0;SETONTHIS/ATTACH/&lt;xmllocalvariable,currentspawngroup/data/0&gt;
+:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/MSG/Chosen {GETVAR,currentspawngroup}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=IF/{GETVAR,currentspawngroup}&gt;0/{GETVAR,currentspawngroup}/30:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=BCAST,101/Galven Diviners indicate that a rift is forming in one of Atria's dungeons! The Galven Guard asks all citizens of Atria for assistance in finding it!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=9
+:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+:OBJ=WAITUNTIL,{RND,30,60}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+:OBJ=SETONTHIS/sequentialspawn/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5853,1161,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=100
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5836,1127,4)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=101
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5808,1126,4)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=102
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5757,1132,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=103
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5740,1102,25)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=104
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5669,1008,70)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=105
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5644,1180,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=106
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5634,1129,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=107
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5640,1107,30)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=108
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5659,1082,40)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=109
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5699,1085,40)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=110
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5635,1060,58)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=111
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5627,1047,58)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=112
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5694,1054,55)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=113
+:OBJ=xmlspawner/configfile/Spawns\champs\serosan.xml/loadconfig/true/spawnrange/30/location/(5743,1020,55)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=114
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5540,638,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=200
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5480,657,25)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=201
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5509,832,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=202
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5472,816,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=203
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5527,796,35)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=204
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5486,754,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=205
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5438,776,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=206
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5595,773,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=207
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5515,682,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=208
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5552,676,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=209
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5515,721,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=210
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5516,724,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=211
+:OBJ=xmlspawner/configfile/Spawns\champs\castra.xml/loadconfig/true/spawnrange/30/location/(5530,730,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=212
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5675,480,21)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=300
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5684,451,21)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=301
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5712,458,21)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=302
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5701,394,31)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=303
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5765,447,21)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=304
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5818,450,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=305
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5820,383,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=306
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5735,357,31)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=307
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5749,385,15)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=308
+:OBJ=xmlspawner/configfile/Spawns\champs\demergo.xml/loadconfig/true/spawnrange/30/location/(5736,480,21)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=309
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5810,234,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=400
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5834,215,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=401
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5800,210,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=402
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5745,234,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=403
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5769,209,25)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=404
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5763,164,23)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=405
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5785,114,23)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=406
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5783,148,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=407
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5818,157,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=408
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5840,189,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=409
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5901,165,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=410
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5905,214,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=411
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5921,200,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=412
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5872,121,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=413
+:OBJ=xmlspawner/configfile/Spawns\champs\endium.xml/loadconfig/true/spawnrange/30/location/(5932,121,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=414
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5212,172,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=500
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5246,168,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=501
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5240,133,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=502
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5145,109,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=503
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5339,93,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=504
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5284,140,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=505
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5336,125,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=506
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5323,125,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=507
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5401,130,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=508
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5389,162,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=509
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5461,141,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=510
+:OBJ=xmlspawner/configfile/Spawns\champs\edgewich.xml/loadconfig/true/spawnrange/30/location/(5449,89,25)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=511
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5660,87,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=600
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5661,51,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=601
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5628,63,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=602
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5641,80,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=603
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5525,112,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=604
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5549,105,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=605
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5550,84,15)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=606
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5539,81,35)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=607
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5608,115,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=608
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5576,154,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=609
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5695,149,40)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=610
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5702,182,40)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=611
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5645,141,40)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=612
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5641,164,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=613
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5683,185,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=614
+:OBJ=xmlspawner/configfile/Spawns\champs\khalmer.xml/loadconfig/true/spawnrange/30/location/(5713,164,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=615
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5751,849,-5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=700
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5793,858,-5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=701
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5769,805,15)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=702
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5788,744,-5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=703
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5829,718,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=704
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5918,727,10)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=705
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5904,702,10)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=706
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5855,727,-5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=707
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5757,686,35)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=708
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5759,652,39)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=709
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5800,689,-5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=710
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5801,647,25)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=711
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5800,610,15)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=712
+:OBJ=xmlspawner/configfile/Spawns\champs\pulma.xml/loadconfig/true/spawnrange/30/location/(5818,610,-5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=713
+:OBJ=xmlspawner/configfile/Spawns\champs\lockmoorOrc.xml/loadconfig/true/spawnrange/30/location/(5276,1016,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=800
+:OBJ=xmlspawner/configfile/Spawns\champs\lockmoorOrc.xml/loadconfig/true/spawnrange/30/location/(5270,999,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=801
+:OBJ=xmlspawner/configfile/Spawns\champs\lockmoorOrc.xml/loadconfig/true/spawnrange/30/location/(5312,1010,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=802
+:OBJ=xmlspawner/configfile/Spawns\champs\lockmoorOrc.xml/loadconfig/true/spawnrange/30/location/(5314,1039,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=803
+:OBJ=xmlspawner/configfile/Spawns\champs\lockmoorOrc.xml/loadconfig/true/spawnrange/30/location/(5331,1023,40)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=804
+:OBJ=xmlspawner/configfile/Spawns\champs\lockmoorOrc.xml/loadconfig/true/spawnrange/30/location/(5327,993,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=805
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5347,571,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=900
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5377,505,20)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=901
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5298,547,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=902
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5277,575,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=903
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5235,553,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=904
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5261,531,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=905
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5304,502,0)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=906
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5305,468,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=907
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5287,417,30)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=908
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5283,387,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=909
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5320,422,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=910
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5344,436,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=911
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5373,389,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=912
+:OBJ=xmlspawner/configfile/Spawns\champs\lapisan.xml/loadconfig/true/spawnrange/30/location/(5347,414,5)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=913
+:OBJ=xmlspawner/configfile/Spawns\champs\crankfrost.xml/loadconfig/true/spawnrange/30/location/(5367,2146,1)/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1000
+	</Objects2>
+  </Points>
+</Spawns>

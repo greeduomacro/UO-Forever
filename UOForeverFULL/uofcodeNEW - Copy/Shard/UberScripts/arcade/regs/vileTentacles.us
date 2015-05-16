@@ -1,0 +1,62 @@
+onTargeted
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TRIGITEM(), BaseKnife))
+	{
+		xmlints.cutUp = 1
+		LOCALMSG(TRIGMOB(), "You cut up the tentacles into smaller pieces.")
+		hue = 38
+		name = "Cut up vile tentacles"
+	}
+}
+onUse
+{
+	if (TRIGMOB() != rootparententity) { return }
+	SENDTARGET(TRIGMOB())
+	LOCALMSG(TRIGMOB(), "What do you want to combine that with or use that on?")
+}
+onTarget
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TARGETED(), EmptyPewterBowl))
+	{
+		if (TARGETED().xmlints.correctMixture == 1)
+		{
+			if (xmlints.cutUp == 1)
+			{
+				LOCALMSG(TRIGMOB(), "You add the cut up vile tentacles to the cooked mixture, and it mixes well.")
+				TARGETED().xmlints.tentacles = 1
+				DELETE(THIS())
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You try to add the vile tentacles to the cooked mixture, but it doesn't mix very well, so you take it out.")
+			}
+		}
+		else
+		{
+			if (TARGETED().xmlints.spiderCarapace == 1 || TARGETED().xmlints.vialOfVitriol == 1 || TARGETED().xmlints.feyWings == 1)
+			{
+				TARGETED().xmlints.spiderCarapace = null
+				TARGETED().xmlints.vialOfVitriol = null
+				TARGETED().xmlints.feyWings = null
+				LOCALMSG(TRIGMOB(), "The mixture blows up in your face! Clearly that was not the right step to take!")
+				DELETE(TARGETED())
+				DELETE(THIS())
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You decide not to put the tentacles in the bowl for now.")
+			}
+		}
+	}
+	else if (IS(TARGETED(), MortarPestle))
+	{
+		LOCALMSG(TRIGMOB(), "You pound the tentacles into a pulp and realize they is ruined.")
+		DELETE(THIS())
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+	}
+}

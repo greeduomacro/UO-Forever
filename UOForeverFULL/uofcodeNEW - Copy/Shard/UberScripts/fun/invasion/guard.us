@@ -1,0 +1,56 @@
+onCreate
+{
+	Blessed = true
+	CantWalk = true
+	Name = "Britannian Recruiter"
+	objs.equipment = platehelm { hue = 1719; movable = false; quality = exceptional; association = 51; identified = true } EQUIP(THIS(), objs.equipment); 
+	objs.equipment = plategorget { hue = 1719; movable = false; quality = exceptional; association = 51; identified = true } EQUIP(THIS(), objs.equipment); 
+	objs.equipment = platechest { hue = 1719; movable = false; quality = exceptional; association = 51; identified = true } EQUIP(THIS(), objs.equipment); 
+	objs.equipment = platelegs { hue = 1719; movable = false; quality = exceptional; association = 51; identified = true } EQUIP(THIS(), objs.equipment); 
+	objs.equipment = platearms { hue = 1719; movable = false; quality = exceptional; association = 51; identified = true } EQUIP(THIS(), objs.equipment); 
+	objs.equipment = plategloves { hue = 1719; movable = false; quality = exceptional; association = 51; identified = true } EQUIP(THIS(), objs.equipment); 
+	objs.horse = horse
+	objs.horse.Hue = 1719
+	objs.horse.Rider = THIS()
+	Direction = South
+}
+
+onSpeech
+{
+	if (IS(TRIGMOB(), PlayerMobile))
+	{
+		if (SAID("i wish to join the guard"))
+		{
+			SETTEAM(TRIGMOB(), Order, false, true, true)
+			SENDMSG(TRIGMOB(), "You can now communicate with other guardsmen using comma chat (e.g. type \",hello\". You can leave the guard by saying 'I wish to quit the guard'", 0x38)
+		}
+		else if (SAID("i wish to quit the guard"))
+		{
+			objs.attachment = GETATTACHMENT(TRIGMOB(), XmlTeam)
+			if (objs.attachment != null)
+			{
+				DELETE(objs.attachment)
+			}
+			SENDMSG(TRIGMOB(), "You are no longer part of the guard.", 0x38)
+		}
+	}
+}
+onTargeted
+{
+	if (IS(SPELL(),invisibilityspell))
+	{
+		pause 100
+		THIS().hidden = false
+		SAY(THIS(), "You'll regret casting invisibility on me, dirtbag!")
+		ANIMATE(THIS(), 17, 7, 1, true, false, 0 )
+		pause 1000
+		THIS().hidden = false
+		SAY(THIS(), "Game over for you!")
+		if (TRIGMOB().alive && TRIGMOB().blessed == false)
+		{
+			EFFECT(14089,30,TRIGMOB())
+			SOUND(TRIGMOB(),0x208)
+			KILL(TRIGMOB())
+		}
+	}
+}

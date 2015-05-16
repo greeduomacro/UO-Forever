@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DotaHumanMobs</Name>
+    <UniqueId>cce2785d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1540</X>
+    <Y>1450</Y>
+    <Width>10</Width>
+    <Height>10</Height>
+    <CentreX>1544</CentreX>
+    <CentreY>1455</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>120</MinDelay>
+    <MaxDelay>120</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>orc/currentwaypoint/0x400E0CD2/basesoundid/0/bodyvalue/400/teamflags/2/name/a footman/EQUIP/&lt;chaincoif/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainlegs/movable/false/basearmorrating/0&gt;/EQUIP/broadsword/EQUIP/boots/hue/33791/SKILL,swords/50/EQUIP/&lt;doublet/hue/95/movable/false&gt;/speaks/false/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=9:SP=2:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=orcishlord/currentwaypoint/0x400E0CD2/basesoundid/0/bodyvalue/400/teamflags/2/name/a Galven Seargent/EQUIP/&lt;platehelm/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainchest/movable/false/basearmorrating/0&gt;/EQUIP/&lt;chainlegs/movable/false/basearmorrating/0&gt;/EQUIP/&lt;platearms/movable/false/basearmorrating/0&gt;/EQUIP/&lt;plategloves/movable/false/basearmorrating/0&gt;/EQUIP/&lt;plategorget/movable/false/basearmorrating/0&gt;/EQUIP/broadsword/EQUIP/boots/hue/33791/SKILL,swords/65/EQUIP/&lt;doublet/hue/38/movable/false&gt;/speaks/false/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=3:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=orcishmage/currentwaypoint/0x400E0CD2/basesoundid/0/bodyvalue/400/teamflags/2/name/a Galven Mage/EQUIP/&lt;robe/movable/false/hue/38&gt;/EQUIP/&lt;wizardshat/movable/false/hue/38&gt;/EQUIP/boots/hue/33791/speaks/false/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=6:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

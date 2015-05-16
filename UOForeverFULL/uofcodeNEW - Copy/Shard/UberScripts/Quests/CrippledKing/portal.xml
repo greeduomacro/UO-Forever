@@ -1,0 +1,9 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<Label hue="1153" x="200" y="100">"Curse of the Crippled King"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>As you place your arm through the portal, preparing yourself to enter into the Crippled King's demense, you notice a strange tingling sensation.  As you pull your arm back throguh the gate, you notice it is covered in stone.  As you examine your hand, the stone flakes and sloughs off.  You realize that the petrification curse is not a legend but a reality.  You cannot enter the Crippled King's realm until you can find a way to make yourself immune to the curse.  Perhaps the Royal Alchemist may have a way for you to gain immunity to petrification.</p>
+		</HTML>	
+	</Box> 
+</Gump>

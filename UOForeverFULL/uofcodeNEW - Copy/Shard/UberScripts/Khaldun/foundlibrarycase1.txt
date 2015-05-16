@@ -1,0 +1,8 @@
+onUse
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 3)
+	{
+		SENDMSG(TRIGMOB(),"You FOUND something! It appears that the cultists of Khaldun discovered that the power word 'Fallax' enabled them to conceal their lair.",38)
+		return override
+	}
+}

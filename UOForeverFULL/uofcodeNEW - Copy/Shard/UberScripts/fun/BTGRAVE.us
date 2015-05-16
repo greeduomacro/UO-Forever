@@ -1,0 +1,19 @@
+onCreate
+{
+
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		INDIVIDUALFLASHEFFECT(TRIGMOB())
+		MOVETOWORLD(TRIGMOB(), POINT3D(1323, 1624, 55), MAP(felucca))
+		SENDMSG(TRIGMOB(), "You have been moved to Lord Britishes throne room by some magical force.")
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You are too far away to do that.")
+	}
+}
+
+

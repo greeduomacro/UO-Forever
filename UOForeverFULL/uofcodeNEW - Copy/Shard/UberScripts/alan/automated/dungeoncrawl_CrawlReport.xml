@@ -1,0 +1,24 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.RawName+"'s Team Dungeon Crawl Report"</Label>
+		
+		<HBox width="10" height="5" FitToContents="false"/>
+		<Label hue ="1553">"Your Team:"</Label>
+		<List list="TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.xmlobjs.dungeonCrawlTeam" objs="tempTeamMob">
+			<HBox>
+				<Image x="5" gumpID="5032"/>
+				<Label hue="1153">objs.tempTeamMob.rawname</Label>
+			</HBox>
+		</List>
+		<HBox width="10" height="5" FitToContents="false"/>
+		<HBox>
+			<Label hue ="1553">"Your Team's Time:"</Label>
+			<Label hue ="1153">GETACCOUNTTAG(TRIGMOB(),"dungeonCrawlCompleted")</Label>
+		</HBox>
+		<HTML hasbackground="true" scrollbar="false" width="400" height="140">
+			<p><b><u>Now what?</u></b></p>
+			<p>You're done!</p>
+			<p>This event runs for approximately two weeks. After that time is up, the teams with the fastest scores will be rewarded.</p>
+		</HTML>		
+	</VBox>
+</Gump>

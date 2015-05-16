@@ -1,0 +1,51 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>MorthunaIsland</Name>
+    <UniqueId>cde2788d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>713</X>
+    <Y>1649</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>713</CentreX>
+    <CentreY>1649</CentreY>
+    <CentreZ>15</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>True</IsGroup>	
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>SETONNEARBY,100,*,spawner/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONNEARBY,100,*,basecreature/DAMAGE,1500,1500:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=zombie/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,1&gt;:MX=70:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=daemon/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,8&gt;:MX=30:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONTHIS/group/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=BCAST/The island appears to have been cleared of the most foul creatures!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=9
+		:OBJ=SETONNEARBY,100,*,spawner/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=9
+		:OBJ=xmlspawner/configfile/Spawns\morthuna\rift.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=9
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

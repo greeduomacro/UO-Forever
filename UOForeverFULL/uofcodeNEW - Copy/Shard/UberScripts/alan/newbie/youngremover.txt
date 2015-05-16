@@ -1,0 +1,18 @@
+onUse
+{
+	SENDTARGET(TRIGMOB())
+	SENDMSG(TRIGMOB(), "Select young player to remove young status from.")
+}
+onTarget
+{
+	if (IS(TARGETED(), playermobile) && TARGETED().young)
+	{
+		SENDMSG(TRIGMOB(), "You have removed their young status.")
+		SENDMSG(TARGETED(), "Your young status has been removed.")
+		TARGETED().young = false
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is not a young player!")
+	}
+}

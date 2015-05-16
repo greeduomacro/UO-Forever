@@ -1,0 +1,199 @@
+onCreate
+{
+	FightMode = Evil
+	Pseu_SpellBookRequired = true
+	Pseu_ConsumeReagents = true
+	xmlobjs.NextSuicide = NOW()
+	xmlints.zombieKills = 0
+}
+onCraft
+{
+	if (IS(TRIGITEM(), BaseWeapon))
+	{
+		TRIGITEM().speed = FLOAT(1)
+	}
+}
+onBeforeDeath
+{
+	if (THIS().netstate == null)
+	{
+		THIS().blessed = true
+		THIS().cantwalk = true
+		objs.spawnLoc = POINT3D(5980, 2983, 12)
+	}
+	else
+	{
+		DROPHOLDING(THIS())
+		INDIVIDUALFLASHEFFECT(THIS())
+		objs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+		objs.weights = [6, 2, 2, 1]
+		
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+		// try up to 4 times
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+				}
+			}
+		}
+	}
+	objs.corpse = CREATECORPSE(THIS())
+	DEATHANIMATION(THIS())
+	DEATHSOUND(THIS())
+	MOVETOWORLD(THIS(), objs.spawnLoc, THIS().Map)
+	objs.bandage = bandage, 7
+	objs.dagger = dagger { speed = FLOAT(1) }
+	ADDTOPACK(THIS(), objs.bandage)
+	ADDTOPACK(THIS(), objs.dagger)
+	Hits = THIS().HitsMaxSeed
+	Stam = THIS().StamMaxSeed
+	RANDOMOUTFIT(THIS())
+	if (TRIGMOB() != null && IS(TRIGMOB(), HumanMob))
+	{
+		if (TRIGMOB().xmlobjs.killList == null)
+		{
+			TRIGMOB().xmlobjs.killList = NEWLIST()
+		}
+		if (LISTCONTAINS(TRIGMOB().xmlobjs.killList, THIS()) == false)
+		{
+			ADDTOLIST(TRIGMOB().xmlobjs.killList, THIS())
+		}
+	}
+	return override	
+}
+onSay
+{
+	objs.now = NOW()
+	objs.weapon = TRIGMOB().weapon
+	if (xmlobjs.next == null || objs.now > xmlobjs.next)
+	{
+		if (SAID("!9"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(North))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("!6"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Right))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("!3"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(East))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("!2"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Down))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("!1"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(South))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.4 * objs.weapon.damagemax / 24.0 )
+			return override
+		}
+		else if (SAID("!4"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Left))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("!7"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(West))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("!8"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Up))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+		else if (SAID("i don't want to live"))
+		{
+			if (xmlobjs.NextSuicide < objs.now)
+			{
+				xmlobjs.NextSuicide = objs.now + TIMESPANMINUTES(1.0)
+				KILL(THIS())
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You must wait 1 minute between suicides.")
+			}
+			return override
+		}
+		else if (SAID("i wish to log out"))
+		{
+			xmlints.loggingOut = 1
+			xmlints.logoutTimer = 0
+			SUBSCRIBETIMER(OneMinute)
+			SENDMSG(TRIGMOB(), "You will log out in about 2 minutes if you are not interrupted.")
+		}
+	}
+	else
+	{
+		objs.test = ["!9", "!6", "!3", "!2", "!1", "!4", "!7", "!8"]
+		if (SAID(objs.test))
+		{
+			SENDMSG(TRIGMOB(), "You fumble your weapon by attempting to swing too quickly.", 38)
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.8 * (objs.weapon.damagemax / 48.0)^0.5)
+			return override
+		}
+	}
+}
+onDelete
+{
+	LOG("Arcade.txt", THIS() + " WAS DELETED SHOULD NOT BE POSSIBLE!")
+}
+onTakenHit
+{
+	if (xmlints.loggingOut != null)
+	{
+		xmlints.loggingOut = null
+		xmlints.logoutTimer = null
+		SENDMSG(THIS(), "Your log-out attempt has been cancelled!")
+	}
+}
+onOneMinute
+{
+	if (xmlints.loggingOut == 1)
+	{
+		xmlints.logoutTimer += 1
+		if (xmlints.logoutTimer == 2)
+		{
+			xmlints.loggingOut = null
+			xmlints.logoutTimer = null
+			THIS().blessed = true
+			THIS().hidden = true
+			THIS().ignoremobiles = true
+			THIS().cantwalk = true
+			LOCALMSG(THIS(), "You are safe and will now lose connection.")
+			DISCONNECT(THIS())
+		}
+	}
+	else
+	{
+		UNSUBSCRIBETIMER(OneMinute)
+	}
+}
+
+onBeginCast
+{
+	if (IS(SPELL(),EnergyVortexSpell) || IS(SPELL(),SummonDaemonSpell) || IS(SPELL(),WaterElementalSpell) || IS(SPELL(),AirElementalSpell) || IS(SPELL(),FireElementalSpell) || IS(SPELL(),EarthElementalSpell) || IS(SPELL(),PolymorphSpell) || IS(SPELL(),SummonCreatureSpell) || IS(SPELL(),BladeSpiritsSpell))
+	{
+		SENDMSG(TRIGMOB(), "It appears some dark energy is preventing you from casting that here!")
+		return override
+	}
+}

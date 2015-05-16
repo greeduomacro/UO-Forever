@@ -1,0 +1,23 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"GET BACK INTO THE FIGHT FASTER (for only 4,000 gold)"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="400" height="290">
+			<p>For the duration of this event, you have the option to pay 4,000 gold to resurrect with basic supplies.</p>
+			
+			<p>If you accept, in 30 seconds you will be transported somewhere in Britain (at random) with: 40 of each reagent, 80 bandages, 4 trapped pouches, and an exceptional weapon (if you have a weapon skill), 2 greater cure, greater heal, and total refresh potions, and 2 poison potions if you have poisoning.</p>
+			
+			<p>The cost of these items is about 1700 gold if purchased from vendors, so while you are paying a bit more than that, this will enable you to get back into the action faster!</p>
+			
+			<p>If you resurrect during the 30 second wait time, you will NOT be moved, but you will get all the stuff.</p>
+		</HTML>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="agree"/>
+			<Label hue ="1553">"Pay 4000 gold to come back fast."</Label>
+		</HBox>
+		<Spacer/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="nope"/>
+			<Label hue ="1553">"No thanks."</Label>
+		</HBox>
+	</VBox>
+</Gump>

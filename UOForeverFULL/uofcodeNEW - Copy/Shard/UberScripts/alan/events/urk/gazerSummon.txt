@@ -1,0 +1,90 @@
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+objs.upHigh = POINT3D(THIS().x, THIS().y, THIS().z + 90)
+MEFFECT(14078, 3, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.X += 5
+objs.upHigh.Y += 5
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+objs.upHigh.Y -= 10
+MEFFECT(14068, 1, objs.upHigh, THIS(), false, false)
+pause 200
+SOUND(THIS(),41)
+objs.gazer = eldergazer
+objs.script = NEWATTACHMENT(xmlscript,scoringScript)
+objs.script.ScriptFile = "rewards\\points.txt"
+ATTACH(objs.gazer, objs.script)
+DELETE(THIS())

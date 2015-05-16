@@ -1,0 +1,38 @@
+onCreate
+{
+	xmlobjs.target = GETMOB("British", TYPE(PlayerMobile))
+	ItemID = 3026
+	Name = "The Throne Room of Lord British"
+	Movable = false
+	MOVETOWORLD(THIS(), POINT3D(xmlobjs.target.X, xmlobjs.target.Y, 75), MAP(Felucca))
+}
+onUse
+{
+	
+	if (TRIGMOB().RawName == "Alan")
+	{
+		if (THIS().X != xmlobjs.target.X || THIS().Y != xmlobjs.target.Y)
+		{
+			MOVETOWORLD(THIS(), POINT3D(xmlobjs.target.X, xmlobjs.target.Y, 75), MAP(Felucca))
+			return
+		}
+		
+		// < 55 is the target
+		LOCALMSG(TRIGMOB(), "The sign shook loose!")
+		SUBSCRIBETIMER(FiftyMS)
+		xmlobjs.target.Frozen = true
+		
+	}
+}
+onFiftyMS
+{
+	THIS().Z -= 1
+	if (THIS().Z < xmlobjs.target.Z)
+	{
+		xmlobjs.target.xmlints.dead = 1
+	}
+	if (THIS().Z < xmlobjs.target.Z - 3)
+	{
+		UNSUBSCRIBETIMER(FiftyMS)
+	}
+}

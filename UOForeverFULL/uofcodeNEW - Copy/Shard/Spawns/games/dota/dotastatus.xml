@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DotaHumanMobs</Name>
+    <UniqueId>cce2785d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1500</X>
+    <Y>1501</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1500</CentreX>
+    <CentreY>1501</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>45</MinDelay>
+    <MaxDelay>45</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>BCAST/LIFE REPORT: GALVEN COMMANDER: {GETONMOB,a Galven Commander,orcarcher,hits} out of 10000 hits left, ORC COMMANDER: {GETONMOB,an Orcish Commander,orcarcher,hits} out of 10000:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

@@ -1,0 +1,34 @@
+onCreate
+{
+	name = "a treefellow"
+	xmlobjs.owner.xmlints.treeFellowCount += 1
+	BodyValue = 301
+	BaseSoundID = 0x1ba
+	objs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+	// try up to 4 times
+	if (objs.spawnLoc == POINT3D(0,0,0))
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			}
+		}
+	}
+	MOVETOWORLD(THIS(), objs.spawnLoc, MAP(Trammel))
+}
+onBeforeDeath
+{
+	xmlobjs.owner.xmlints.treeFellowCount -= 1
+	if (RANDOMDOUBLE() < 0.35)
+	{
+		objs.item = UberScriptItem, 22326
+		objs.item.name = "Seed of Renewal"
+		ADDSCRIPT(objs.item, "arcade\\regs\\seedOfRenewal.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+}

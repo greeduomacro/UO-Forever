@@ -1,0 +1,32 @@
+// do spawn this with an xmlspawner use this entry:
+// custommob/ATTACH/<xmlscript,mobs\dobby.us>
+onCreate
+{
+	BodyValue = 723
+	BaseSoundID = 0x252 // terathan drone (super annoying)
+	name = "a dobby"
+	// as difficult to tame as a white wyrm ??
+	Tamable = true
+	ControlSlots = 2;
+	MinTameSkill = 96.3;
+}
+onSpeech
+{
+// only respond to their master
+	if (TRIGMOB() == THIS().ControlMaster)
+	{
+		if (SAID("hello"))
+		{
+			SAY(THIS(), "Oooo Dobby does like hello's, Dobby wonders how is you?")
+		}
+		else if (SAID("bye"))
+		{
+			SAY(THIS(), "Dobby hates goodbyes.")
+		}
+		else if (SAID("follow me"))
+		{
+			SAY(THIS(), "Dobby follows, Dobby follows!")
+		}
+
+	}
+}

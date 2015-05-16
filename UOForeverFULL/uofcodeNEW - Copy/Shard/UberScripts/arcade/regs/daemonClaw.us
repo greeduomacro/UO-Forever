@@ -1,0 +1,53 @@
+onTargeted
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TRIGITEM(), BaseKnife))
+	{
+		LOCALMSG(TRIGMOB(), "The claw dissolves as you cut into it.")
+		DELETE(THIS())
+	}
+}
+onUse
+{
+	if (TRIGMOB() != rootparententity) { return }
+	SENDTARGET(TRIGMOB())
+	LOCALMSG(TRIGMOB(), "What do you want to combine that with or use that on?")
+}
+onTarget
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TARGETED(), EmptyPewterBowl))
+	{
+		if (TARGETED().xmlints.correctMixture == 1)
+		{
+			LOCALMSG(TRIGMOB(), "You add the daemon claw to the cooked mixture, and it dissolves.")
+			TARGETED().xmlints.daemonClaw = 1
+			DELETE(THIS())
+		}
+		else
+		{
+			if (TARGETED().xmlints.spiderCarapace == 1 || TARGETED().xmlints.vialOfVitriol == 1 || TARGETED().xmlints.feyWings == 1)
+			{
+				TARGETED().xmlints.spiderCarapace = null
+				TARGETED().xmlints.vialOfVitriol = null
+				TARGETED().xmlints.feyWings = null
+				LOCALMSG(TRIGMOB(), "The mixture blows up in your face! Clearly that was not the right step to take!")
+				DELETE(TARGETED())
+				DELETE(THIS())
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+			}
+		}
+	}
+	else if (IS(TARGETED(), MortarPestle))
+	{
+		LOCALMSG(TRIGMOB(), "You pound the flesh into a pulp and realize it is ruined.")
+		DELETE(THIS())
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+	}
+}

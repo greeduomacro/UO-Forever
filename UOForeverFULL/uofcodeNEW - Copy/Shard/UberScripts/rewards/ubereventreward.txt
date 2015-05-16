@@ -1,0 +1,158 @@
+//REWARD,gameTeam,linear,1,bank,gameTeam
+//REWARD,bossKill,linear,1000,bank,bossKill
+//REWARD,bossHitsScore,linear,1000,bank,bossHitsScore
+//REWARD,playerKillsScore,linear,1000,bank,playerKillsScore
+//REWARD,playerHitsScore,linear,1000,bank,playerHitsScore
+//REWARD,standardHitsScore,linear,1000,bank,standardHitsScore
+//REWARD,standardKillScore,linear,1000,bank,standardKillScore
+
+onUse
+{
+	if (TRIGMOB().xmlints.gameTeam == null)
+	{
+		LOCALMSG(TRIGMOB(), "You either weren't part of the event or have already received your reward!")
+		return
+	}
+	if (IS(TRIGMOB(), playermobile))
+	{
+		ints.losingteam = 1
+		
+		doubles.maxStandardKillScore = 144.0
+		doubles.maxStandardHitsScore = 10964.0
+		doubles.maxPlayerHitsScore = 3136.0
+		doubles.maxPlayerKillsScore = 5.0
+		doubles.maxBossHitsScore = 388.0
+		
+		doubles.maxRatio = 0.6456 // this is the highest ratio achieved by any player summing over all categories
+		doubles.numQuantities = 5
+		
+		doubles.bossKillBonusPlatinum = 200.0
+		doubles.sumOfWeightedSummations = 9.8856
+		
+		doubles.totalPlatAwardedFromThisEvent = 30000
+		
+		ints.standardKillScore = 0
+		ints.standardHitsScore = 0
+		ints.playerKillsScore = 0
+		ints.playerHitsScore = 0
+		ints.bossHitsScore = 0
+		
+		doubles.platAward = 0.0
+		
+		if (TRIGMOB().xmlints.standardKillScore != null)
+		{
+			doubles.platAward += TRIGMOB().xmlints.standardKillScore / doubles.maxStandardKillScore
+			ints.standardKillScore = TRIGMOB().xmlints.standardKillScore
+			ints.StandardKillPercentile = INT(ROUND(100.0 * TRIGMOB().xmlints.standardKillScore / doubles.maxStandardKillScore))
+			TRIGMOB().xmlints.standardKillScore.dodelete = true
+		}
+		else
+		{
+			ints.StandardKillPercentile = 0
+		}
+		
+		
+		if (TRIGMOB().xmlints.standardHitsScore != null)
+		{
+			doubles.platAward += TRIGMOB().xmlints.standardHitsScore / doubles.maxStandardHitsScore
+			ints.standardHitsScore = TRIGMOB().xmlints.standardHitsScore
+			ints.StandardHitsPercentile = INT(ROUND(100.0 * TRIGMOB().xmlints.standardHitsScore / doubles.maxStandardHitsScore))
+			TRIGMOB().xmlints.standardHitsScore.dodelete = true
+		}
+		else
+		{
+			ints.StandardHitsPercentile = 0
+		}
+		
+		
+		if (TRIGMOB().xmlints.playerHitsScore != null)
+		{
+			doubles.platAward += TRIGMOB().xmlints.playerHitsScore / doubles.maxPlayerHitsScore
+			ints.playerHitsScore = TRIGMOB().xmlints.playerHitsScore
+			ints.PlayerHitsPercentile = INT(ROUND(100.0 * TRIGMOB().xmlints.playerHitsScore / doubles.maxPlayerHitsScore))
+			TRIGMOB().xmlints.playerHitsScore.dodelete = true
+		}
+		else
+		{
+			ints.PlayerHitsPercentile = 0
+		}
+		
+		
+		if (TRIGMOB().xmlints.playerKillsScore != null)
+		{
+			doubles.platAward += TRIGMOB().xmlints.playerKillsScore / doubles.maxPlayerKillsScore
+			ints.playerKillsScore = TRIGMOB().xmlints.playerKillsScore
+			ints.PlayerKillsPercentile = INT(ROUND(100.0 * TRIGMOB().xmlints.playerKillsScore / doubles.maxPlayerKillsScore))
+			TRIGMOB().xmlints.playerKillsScore.dodelete = true
+		}
+		else
+		{
+			ints.PlayerKillsPercentile = 0
+		}
+		
+		
+		if (TRIGMOB().xmlints.bossHitsScore != null)
+		{
+			doubles.platAward += TRIGMOB().xmlints.bossHitsScore / doubles.maxBossHitsScore
+			ints.bossHitsScore = TRIGMOB().xmlints.bossHitsScore
+			ints.BossHitsPercentile = INT(ROUND(100.0 * TRIGMOB().xmlints.bossHitsScore / doubles.maxBossHitsScore))
+			TRIGMOB().xmlints.bossHitsScore.dodelete = true
+		}
+		else
+		{
+			ints.BossHitsPercentile = 0
+		}
+		doubles.platAward = doubles.platAward * doubles.totalPlatAwardedFromThisEvent / doubles.sumOfWeightedSummations / doubles.numQuantities
+		
+		strings.winner = "(member of winning team)"
+		if (TRIGMOB().xmlints.gameTeam == ints.losingteam)
+		{
+			SENDMSG(TRIGMOB(), "You were on the losing team and therefore only get 1/4 of the platinum reward that you earned based on your score!")
+			doubles.platAward /= 4
+			strings.winner = "(member of losing team)"
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You were on the winning team and therefore received the full platinum reward that you earned based on your score!")
+		}
+		TRIGMOB().xmlints.gameTeam.dodelete = true
+		
+		// multiply by the total amount distributed
+		
+		if (TRIGMOB().xmlints.bossKillsScore != null)
+		{
+			// add bonus platinum for getting the kill shot
+			doubles.platAward += doubles.bossKillBonusPlatinum
+			TRIGMOB().xmlints.bossKillsScore.dodelete = true
+			SENDMSG(TRIGMOB(),"You got the final hit on the champion, so you get an extra bit of platinum (" + doubles.bossKillBonusPlatinum + ")!")
+		}
+		doubles.platAward = ROUND(doubles.platAward)
+		if (doubles.platAward > 0)
+		{
+			objs.reward = platinum
+			{
+				amount = INT(doubles.platAward)
+			}
+			ADDTOCONTAINER(TRIGMOB().bankbox, objs.reward)
+		}
+		objs.report = static, 5360
+		{
+			association = 99
+			movable = true
+			loottype = blessed
+			name = TRIGMOB().name + "-" + strings.winner + ":-dueling champ spawn report: " + "--" + ints.StandardKillPercentile + "% on mob kills (" + ints.standardKillScore + " pts)" + "--" + ints.StandardHitsPercentile + "% on mob damage (" + ints.standardHitsScore + " pts)" + "--" + ints.PlayerHitsPercentile + "% on player damage (" + ints.playerHitsScore + " pts)" + "--" + ints.PlayerKillsPercentile + "% on player kills (" + ints.playerKillsScore + " pts)" + "--" + ints.BossHitsPercentile + "% on boss damage (" + ints.bossHitsScore + " pts)"
+		}
+		ADDTOPACK(TRIGMOB(), objs.report)
+		//SENDMSG(TRIGMOB(),ints.StandardKillPercentile + "% on mob kills (" + ints.standardKillScore + " pts)")
+		//SENDMSG(TRIGMOB(),ints.StandardHitsPercentile + "% on mob damage (" + ints.standardHitsScore + " pts)")
+		//SENDMSG(TRIGMOB(),ints.PlayerHitsPercentile + "% on player hits (" + ints.playerHitsScore + " pts)")
+		//SENDMSG(TRIGMOB(),ints.PlayerKillsPercentile + "% on player kills (" + ints.playerKillsScore + " pts)")
+		//SENDMSG(TRIGMOB(),ints.BossHitsPercentile + "% on boss damage (" + ints.bossHitsScore + " pts)")
+		
+		SENDMSG(TRIGMOB(),doubles.platAward + " platinum has been placed in your bank! You have also been given a report of the event and what your score was in the different categories relative to other players.")
+		objs.tracker = NEWATTACHMENT(xmlvalue, TRIGMOB().name)
+		
+		objs.tracker.value = INT(doubles.platAward)
+		ATTACH(THIS(), objs.tracker)
+	}
+}

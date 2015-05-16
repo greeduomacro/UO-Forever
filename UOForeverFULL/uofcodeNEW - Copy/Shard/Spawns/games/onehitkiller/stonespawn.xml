@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>KillTheKingStone</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>5699</X>
+    <Y>391</Y>
+    <Width>11</Width>
+    <Height>11</Height>
+    <CentreX>1404</CentreX>
+    <CentreY>1803</CentreY>
+    <CentreZ>-26</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>WAITUNTIL,0.1:MX=1:SP=0:RT=0:TO=0:CA=1:KL=0:SB=1
+		:OBJ=static,3804/ATTACH/&lt;xmluse/successaction/@SET,KillTheKingControl,xmlspawner/mobtriggername/{GETONTRIGMOB,name}&gt;/hue/38:MX=1:SP=0:RT=0:TO=0:CA=1:KL=0:SB=2
+		:OBJ=static,3804 /ATTACH/&lt;xmluse/successaction/@SET,KillTheKingControl,xmlspawner/mobtriggername/{GETONTRIGMOB,name}&gt;/hue/38:MX=1:SP=0:RT=0:TO=0:CA=1:KL=0:SB=3
+		:OBJ=GOTO/2:MX=1:SP=0:RT=0:TO=0:CA=1:KL=0:SB=4
+	</Objects2>
+  </Points>
+</Spawns>

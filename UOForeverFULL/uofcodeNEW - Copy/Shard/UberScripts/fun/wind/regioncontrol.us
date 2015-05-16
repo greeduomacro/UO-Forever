@@ -1,0 +1,376 @@
+// TODO: Probably should add entrances from each faction stronghold??
+// make sure logging out runs the onExit command
+// maybe make it if a player dies, they pop back to their faction stronghold? other players can then join??
+
+function cleanup()
+{
+	foreach (objs.spawnedItem ; xmlobjs.spawned)
+	{
+		if (objs.spawnedItem != null && objs.spawnedItem.deleted == false)
+		{
+			DELETE(objs.spawnedItem)
+		}
+	}
+	Active = false
+	Unsubscribetimer(OneMinute)
+}
+
+function initialize()
+{
+	// keep track of the number of players in each fa
+	xmlobjs.minaxPlayers = NEWLIST()
+	xmlobjs.shadowlordsPlayers = NEWLIST()
+	xmlobjs.truebritPlayers = NEWLIST()
+	xmlobjs.councilPlayers = NEWLIST()
+	xmlobjs.spawnLocations = [RECTANGLE2D(POINT2D(5216,160), POINT2D(5219, 163)), RECTANGLE2D(POINT2D(5307,36), POINT2D(5315, 39)), RECTANGLE2D(POINT2D(5252,19), POINT2D(5255, 22)), RECTANGLE2D(POINT2D(5163,22), POINT2D(5164, 24))]
+	
+	//if persistent crystal does nto exist, create it
+	if (xmlobjs.crystal == null)
+	{
+		xmlobjs.crystal = UberScriptItem
+		ADDSCRIPT(xmlobjs.crystal, "fun\\wind\\ShardofPower.us", "regionshard")
+		MOVETOSPAWNLOCATION(xmlobjs.crystal, MAP(Felucca), xmlobjs.spawnLocations)
+	}
+	else
+	{
+		MOVETOSPAWNLOCATION(xmlobjs.crystal, MAP(Felucca), objs.spawnLocations)
+    		xmlobjs.crystal.name = "the Crystal of Power" 
+	}
+
+	//brazier 1
+	xmlobjs.brazier1 = UberScriptItem
+	ADDSCRIPT(xmlobjs.brazier1, "fun\\wind\\brazier.us", "brazier1")
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.brazier1)
+       	xmlobjs.brazier1.xmlobjs.crystal = xmlobjs.crystal
+	MOVETOWORLD(xmlobjs.brazier1, POINT3D(5192,95,5))
+	//brazier 2
+	xmlobjs.brazier2 = UberScriptItem
+       	xmlobjs.brazier2.xmlobjs.crystal = xmlobjs.crystal
+	ADDSCRIPT(xmlobjs.brazier2, "fun\\wind\\brazier.us", "brazier2")
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.brazier2)
+	MOVETOWORLD(xmlobjs.brazier2, POINT3D(5342,30,40))
+	//brazier 3
+	xmlobjs.brazier3 = UberScriptItem
+	ADDSCRIPT(xmlobjs.brazier3, "fun\\wind\\brazier.us", "brazier3")
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.brazier3)
+       	xmlobjs.brazier3.xmlobjs.crystal = xmlobjs.crystal
+	MOVETOWORLD(xmlobjs.brazier3, POINT3D(5216,161,25))
+	
+	EJECTREGIONPLAYERS(THIS().Region) // eject anybody already in the region
+	xmlints.check = 0
+	xmlobjs.crystal.xmlints.Active = 1
+}
+
+// THIS SCRIPT MUST BE ATTACHED TO A RegionControl!
+onCreate
+{
+	// TODO: figure out the exact areas that we want to make faction only
+	ADDREGIONCONTROLAREA(THIS(), POINT2D(5123, 9), POINT2D(5370, 209))
+	
+	// check every minute if it is time to do this
+	SUBSCRIBETIMER(OneMinute)
+	xmlobjs.spawned = NEWLIST() // add the crystal and anything else spawned to this that will be deleted when it is over
+	xmlobjs.crystal = null	
+	RegionPriority = 100 // make sure it's the top dog
+	Active = true
+	AllowGateIn = false
+	AllowRecallIn = false
+	AllowCutCorpse = false
+	CanMountEthereal = false
+	NoMounts = true	
+}
+
+onOneMinute
+{
+	objs.now = NOW()
+	if (THIS().Active && xmlints.check == 1)
+	{
+		//if (GETHOUR(objs.now) == 19 && GETMINUTE(objs.now) ==55) // 8:00pm EST
+		//{
+			objs.online = ONLINEMOBS()
+			foreach (objs.player ; objs.online)
+			{
+				if (IS(objs.player,playermobile))
+				{
+					if (objs.player.FactionName != null)
+					{ 
+						SENDMSG(objs.player, "The Battle of Wind is starting in 5 minutes.", 0x38)
+					}
+				}
+			}
+		//}
+		//if (GETHOUR(objs.now) == 20 && GETMINUTE(objs.now) == 0) // 8:00pm EST
+		//{
+			Active = true
+			objs.online = ONLINEMOBS()
+			foreach (objs.player ; objs.online)
+			{
+				if (IS(objs.player,playermobile))
+				{
+					if (objs.player.FactionName != null)
+					{ 
+						SENDMSG(objs.player, "The Battle of Wind has begun!", 0x38)
+					}
+				}
+			}
+			// start it up
+			initialize()
+			SUBSCRIBETIMER(FiveSeconds)
+			UNSUBSCRIBETIMER(OneMinute)
+		//}
+	}
+}
+
+onFiveSeconds
+{
+	if (xmlobjs.crystal.xmlints.Active == 0)
+	{
+		cleanup()
+		return
+	}
+	objs.PlayerList = GETREGIONMOBS(THIS().Region)
+	if (xmlobjs.crystal != null && xmlobjs.crystal.xmlobjs.carrier != null && xmlobjs.crystal.xmlints.Active == 1)
+	{
+		foreach (objs.player ; objs.PlayerList)
+		{
+			if (IS(objs.player,playermobile))
+			{
+				if (xmlobjs.crystal.xmlobjs.carrier != objs.player && objs.player.FactionName != null)
+				{ 
+					ADDQUESTARROW(objs.player, xmlobjs.crystal.xmlobjs.carrier)
+				}
+			}
+		}
+	}
+	elif (xmlobjs.crystal != null && xmlobjs.crystal.xmlobjs.carrier == null && xmlobjs.crystal.xmlints.Active == 1)
+	{
+		foreach (objs.player ; objs.PlayerList)
+		{
+			if (IS(objs.player,playermobile))
+			{
+				if (objs.player.FactionName != null)
+				{ 
+					ADDQUESTARROW(objs.player, xmlobjs.crystal)
+				}
+			}
+		}
+	}
+}
+onMoveIntoRegion // only executed if Region Control is Active
+{
+	if (IS(TRIGMOB(), BaseCreature) && TRIGMOB().Controlled)
+	{
+		SENDMSG(TRIGMOB().ControlMaster, "Pets are not allowed in the Battle of Wind.  Your pet has been stabled.")
+		AUTOSTABLE(TRIGMOB().ControlMaster, TRIGMOB())
+	}
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (TRIGMOB().FactionName == null)
+		{
+			SENDMSG(TRIGMOB(), "Only faction members can enter at this time.")
+			return override // kicks them back out
+		}
+		if (TRIGMOB().Mount != null)
+		{
+			SENDMSG(TRIGMOB(), "Your mount refuses to enter.  You must continue on foot to participate.")
+			return override
+		}
+		ints.minPlayers = 10000
+		// figure out the number cap
+		if (xmlobjs.minaxPlayers != null && xmlobjs.minaxPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.minaxPlayers.Count+1 }
+		if (xmlobjs.shadowlordsPlayers != null && xmlobjs.shadowlordsPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.shadowlordsPlayers.Count+1 }
+		if (xmlobjs.truebritPlayers != null && xmlobjs.truebritPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.truebritPlayers.Count+1 }
+		if (xmlobjs.councilPlayers != null && xmlobjs.councilPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.councilPlayers.Count+1 }
+	
+		if (TRIGMOB().FactionName == "MINAX")
+		{
+		
+			if (xmlobjs.minaxPlayers.Count > ints.minPlayers)
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				return override // don't let them in
+			}
+		}
+		else if (TRIGMOB().FactionName == "LORD BRITISH")
+		{
+			if (xmlobjs.truebritPlayers.Count > ints.minPlayers)
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				return override // don't let them in
+			}
+		}
+		else if (TRIGMOB().FactionName == "COUNCIL OF MAGES")
+		{
+			if (xmlobjs.councilPlayers.Count > ints.minPlayers)
+			{
+			SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+			return override // don't let them in
+			}
+
+		}
+		else if (TRIGMOB().FactionName == "SHADOWLORDS")
+		{
+			if (xmlobjs.shadowlordsPlayers.Count > ints.minPlayers)
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				return override // don't let them in
+			}
+		}
+	}
+}
+onEnterRegion
+{
+	if (IS(TRIGMOB(), BaseCreature) && TRIGMOB().Controlled)
+	{
+		SENDMSG(TRIGMOB().ControlMaster, "Pets are not allowed in the Battle of Wind.  Your pet has been stabled.")
+		AUTOSTABLE(TRIGMOB().ControlMaster, TRIGMOB())
+		
+	}
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (TRIGMOB().FactionName == null)
+		{
+			SENDMSG(TRIGMOB(), "Only faction members can enter at this time.")
+			MOVETOWORLD(TRIGMOB(), POINT3D(1162, 2595, 0))
+		}
+		if (TRIGMOB().Mount != null)
+		{
+			SENDMSG(TRIGMOB(), "Nice try!")
+			MOVETOWORLD(TRIGMOB(), POINT3D(1162, 2595, 0))
+		}
+
+		ints.minPlayers = 10000
+		// figure out the number cap
+		if (xmlobjs.minaxPlayers != null && xmlobjs.minaxPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.minaxPlayers.Count+1 }
+		if (xmlobjs.shadowlordsPlayers != null && xmlobjs.shadowlordsPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.shadowlordsPlayers.Count+1 }
+		if (xmlobjs.truebritPlayers != null && xmlobjs.truebritPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.truebritPlayers.Count+1 }
+		if (xmlobjs.councilPlayers != null && xmlobjs.councilPlayers.Count < ints.minPlayers) { ints.minPlayers = xmlobjs.councilPlayers.Count+1 }
+	
+		if (TRIGMOB().FactionName == "MINAX")
+		{
+		
+			if (xmlobjs.minaxPlayers.Count <= ints.minPlayers)
+			{
+				if (xmlobjs.crystal != null)
+				{
+					ADDQUESTARROW(TRIGMOB(), xmlobjs.crystal)
+				}
+				SENDMSG(TRIGMOB(), "You have joined the battle.")
+				ADDTOLIST(xmlobjs.minaxPlayers, TRIGMOB())
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				MOVETOWORLD(TRIGMOB(), POINT3D(1162, 2595, 0))
+			}
+		}
+		else if (TRIGMOB().FactionName == "LORD BRITISH")
+		{
+			if (xmlobjs.truebritPlayers.Count <= ints.minPlayers)
+			{
+				if (xmlobjs.crystal != null)
+				{
+					ADDQUESTARROW(TRIGMOB(), xmlobjs.crystal)
+				}
+				SENDMSG(TRIGMOB(), "You have joined the battle.")
+				ADDTOLIST(xmlobjs.truebritPlayers, TRIGMOB())
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				MOVETOWORLD(TRIGMOB(), POINT3D(1378, 1667, 30))
+			}
+		}
+		else if (TRIGMOB().FactionName == "COUNCIL OF MAGES")
+		{
+			if (xmlobjs.councilPlayers.Count <= ints.minPlayers)
+			{
+				if (xmlobjs.crystal != null)
+				{
+					ADDQUESTARROW(TRIGMOB(), xmlobjs.crystal)
+				}
+				SENDMSG(TRIGMOB(), "You have joined the battle.")
+				ADDTOLIST(xmlobjs.councilPlayers, TRIGMOB())
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				MOVETOWORLD(TRIGMOB(), POINT3D(4467, 1553, 1))
+			}
+		}
+		else if (TRIGMOB().FactionName == "SHADOWLORDS")
+		{
+			if (xmlobjs.shadowlordsPlayers.Count <= ints.minPlayers)
+			{
+				if (xmlobjs.crystal != null)
+				{
+					ADDQUESTARROW(TRIGMOB(), xmlobjs.crystal)
+				}
+				SENDMSG(TRIGMOB(), "You have joined the battle.")
+				ADDTOLIST(xmlobjs.shadowlordsPlayers, TRIGMOB())
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You can't currently join the fray until the teams are more balanced.")
+				MOVETOWORLD(TRIGMOB(), POINT3D(959, 703, 0))
+			}
+		}
+	}
+}
+onExitRegion
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (xmlobjs.crystal.xmlobjs.carrier != TRIGMOB() && xmlobjs.crystal.xmlints.Active == 1)
+		{ 
+			if (TRIGMOB().FactionName == "MINAX" && xmlobjs.minaxPlayers != null)
+			{
+				SENDMSG(TRIGMOB(), "You have left the battle.")
+				REMOVEFROMLIST(xmlobjs.minaxPlayers, TRIGMOB())
+			}
+			else if (TRIGMOB().FactionName == "LORD BRITISH" && xmlobjs.truebritPlayers != null)
+			{
+				SENDMSG(TRIGMOB(), "You have left the battle.")
+				REMOVEFROMLIST(xmlobjs.truebritPlayers, TRIGMOB())
+			}
+			else if (TRIGMOB().FactionName == "COUNCIL OF MAGES" && xmlobjs.councilPlayers != null)
+			{
+				SENDMSG(TRIGMOB(), "You have left the battle.")
+				REMOVEFROMLIST(xmlobjs.councilPlayers, TRIGMOB())
+			}
+			else if (TRIGMOB().FactionName == "SHADOWLORDS" && xmlobjs.shadowlordsPlayers != null)
+			{
+				SENDMSG(TRIGMOB(), "You have left the battle.")
+				REMOVEFROMLIST(xmlobjs.shadowlordsPlayers, TRIGMOB())
+			}
+			if (xmlobjs.crystal != null && xmlobjs.crystal.xmlobjs.carrier == null)
+			{
+				REMOVEQUESTARROW(TRIGMOB())
+			}
+			elif (xmlobjs.crystal != null && xmlobjs.crystal.xmlobjs.carrier != null)
+			{
+				REMOVEQUESTARROW(TRIGMOB())
+			}
+		}
+		elif (xmlobjs.crystal.xmlobjs.carrier == TRIGMOB())
+		{
+    			xmlobjs.crystal.xmlobjs.carrier.SolidHueOverride = -1
+    			xmlobjs.crystal.xmlstrings.controller = null
+			xmlobjs.crystal.xmlobjs.carrier.xmlobjs.crystal = null
+    			xmlobjs.crystal.xmlobjs.carrier = null
+			GLOBALDELATTACHMENTS(XmlScript, "windbreaker")
+			MOVETOSPAWNLOCATION(xmlobjs.crystal, MAP(Felucca), xmlobjs.spawnLocations)
+        		MSG(TRIGMOB(), "Leaving the area with the Crystal of Power has caused it to move to a random location!", 2049) 
+		}
+	}
+}
+
+onDelete
+{
+	GLOBALDELATTACHMENTS(XmlScript, "windbreaker")
+	cleanup()
+	if (xmlobjs.crystal != null && xmlobjs.crystal.deleted == false)
+	{
+		DELETE(xmlobjs.crystal)
+	}
+}

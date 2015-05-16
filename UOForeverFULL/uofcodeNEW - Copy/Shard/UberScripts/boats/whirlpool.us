@@ -1,0 +1,123 @@
+onCreate
+{
+	xmlints.charges = RANDOMMINMAX(15, 50)
+}
+onTargeted
+{
+	if (IS(TRIGITEM(), FishingPole))
+	{
+		if (xmlobjs.harvester == null)
+		{
+			// TODO, add skill check
+			if (GETSKILL(TRIGMOB(), Fishing) < 100.0)
+			{
+				SENDMSG(TRIGMOB(), "You aren't skilled enough at fishing to manage the currents of the whirlpool!")
+				return override
+			}
+			xmlobjs.harvester = TRIGMOB()
+			ANIMATE(TRIGMOB(), 12, 5, 1, true, false, 0)
+			xmlints.count = 0
+			SUBSCRIBETIMER(OneSecond)
+			return override
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "Somebody else already has a line in that whirlpool!")
+			return override
+		}
+	}
+}
+onOneSecond
+{
+	if (xmlobjs.harvester == null) { UNSUBSCRIBETIMER(OneSecond); return }
+	
+	if (DISTANCE(THIS(), xmlobjs.harvester) > 5)
+	{
+		SENDMSG(xmlobjs.harvester, "You got too far away from the whirlpool to continue fishing in it!")
+		xmlobjs.harvester = null
+		UNSUBSCRIBETIMER(OneSecond)
+		return
+	}
+	
+	xmlints.count += 1
+	if (xmlints.count == 2)
+	{
+		SOUND(THIS(), 0x364)
+		EFFECT(0x352D, 16, THIS())
+		SENDMSG(xmlobjs.harvester, "You send a line into the whirlpool.")
+	}
+	if (xmlints.count >= 10)
+	{
+		xmlints.count = 0
+		xmlints.charges -= 1
+		UNSUBSCRIBETIMER(OneSecond)
+		
+		// spawn something
+		if (RANDOMDOUBLE() < 0.1)
+		{
+			SENDMSG(xmlobjs.harvester, "You pulled up a monster!")
+			doubles.roll = RANDOMDOUBLE();
+			ints.amount = RANDOMMINMAX(1,3)
+			if (doubles.roll > 0.8)
+			{
+				for (ints.i = 0; ints.i < ints.amount; ints.i += 1) 
+				{
+					objs.monster = deepseaserpent
+					MOVETOWORLD(objs.monster, THIS(), THIS().Map) 
+					if (RANDOMBOOL()) { objs.monster.combatant = xmlobjs.harvester }
+				}
+			}
+			else if (doubles.roll > 0.6)
+			{
+				for (ints.i = 0; ints.i < ints.amount; ints.i += 1) 
+				{ 
+					objs.monster = deepwaterelemental
+					MOVETOWORLD(objs.monster, THIS(), THIS().Map) 
+					if (RANDOMBOOL()) { objs.monster.combatant = xmlobjs.harvester }
+				}
+			}
+			else if (doubles.roll > 0.5)
+			{
+				for (ints.i = 0; ints.i < ints.amount; ints.i += 1) 
+				{ 
+					objs.monster = kraken
+					MOVETOWORLD(objs.monster, THIS(), THIS().Map) 
+					if (RANDOMBOOL()) { objs.monster.combatant = xmlobjs.harvester }
+				}
+			}
+			else
+			{
+				for (ints.i = 0; ints.i < ints.amount * 2; ints.i += 1) 
+				{ 
+					objs.monster = waterelemental; 
+					MOVETOWORLD(objs.monster, THIS(), THIS().Map)
+					if (RANDOMBOOL()) { objs.monster.combatant = xmlobjs.harvester }
+				}
+			}
+			xmlobjs.harvester = null
+			return
+		}
+		doubles.chance = 0.05 * (GETSKILL(xmlobjs.harvester, Fishing) - 80.0) / 20.0
+		if (RANDOMDOUBLE() < doubles.chance )
+		{
+			objs.rare = RARE("whirlpools.txt")
+			ADDTOPACK(xmlobjs.harvester, objs.rare)
+			LOG("fishing rewards", xmlobjs.harvester.Account + "\t" + xmlobjs.harvester + " got " + objs.rare)
+			SENDMSG(xmlobjs.harvester, "You got something!")
+		}
+		else
+		{
+			SENDMSG(xmlobjs.harvester, "No luck this time!")
+		}
+		
+		if (xmlints.charges < 1)
+		{
+			SENDMSG(xmlobjs.harvester, "The whirlpool has vanished!")
+			DELETE(THIS())
+		}
+		else
+		{
+			xmlobjs.harvester = null
+		}
+	}
+}

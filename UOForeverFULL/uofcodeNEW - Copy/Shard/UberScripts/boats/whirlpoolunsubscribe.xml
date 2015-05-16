@@ -1,0 +1,23 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"Welome Treasure Seeker!"</Label>
+		<Label hue="1153">"The most recent whirlpool sighting was at"</Label>
+		<Label hue="1153">THIS().xmlstrings.sextantcoords</Label>
+		<Spacer height="30"/>
+		<Label hue="1153">"TREASURE SEEKER INSTRUCTIONS"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="400" height="290">
+			<p>There have been strange occurences of late in the oceans. Whirlpools have been appearing and sunken treasure is being pulled into their vicinity by their currents. This is a great opportunity for treasure seekers!</p>
+			<p>If you wish to receive notifications when such whirlpools are sighted and where (in sextant coordinates), then register below. Only grandmaster fisherman (over 100.0 Fishing or higher) have the skill necessary to pull treasure out of these whirlpools, but you don't have to be registered on your fisherman-the registration is just to get a notification regarding where the whirlpools were sighted.</p>
+			<p>When you find a whirlpool, simply use your fishing pole on it to try to find some treasure.  Each whirlpool will have several chances for treasure.  Only one fisherman can harvest a given whirlpool at a time. You must also stay close enough to the whirlpool in order to fish from it.</p>
+			<p>Beware! Pirates may be roaming the waters and it is certainly possible that they will come and sink your boat! If your boat is sunk, the owner (who placed the boat) will receive a ransom note which can be used in order to get the boat back for 10% of the original cost (or you can try to go back to the boat yourself and repair it, but you could lose the boat completely if you fail to succeed in 1 hours time and another person repairs the boat.</p>
+			<p>Fair winds!</p>
+		</HTML>		
+		<Spacer height="30"/>
+		<Label hue="1153">"If you don't want to receive"</Label>
+		<Label hue="1153">"notifications anymore:"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="unsubscribe"/>
+			<Label hue ="1553">"Remove my registration"</Label>
+		</HBox>
+	</VBox>
+</Gump>

@@ -1,0 +1,186 @@
+function effect()
+{
+	if (TRIGMOB().Alive == false || DISTANCE(TRIGMOB(), xmlobjs.workBench) > 1) 
+	{
+		objs.toDelete = GETATTACHMENT(xmlobjs.workBench, XmlScript, "ImbueEffect")
+		DELETE(objs.toDelete)
+		xmlints.working = null
+		xmlobjs.workBench.xmlints.working = null
+		return
+	}
+	TRIGMOB().Direction = GETDIRECTIONTO(TRIGMOB(), xmlobjs.workBench)
+	ANIMATE(TRIGMOB(), 9, 10, 1, true, false, 0)
+	//SOUND(TRIGMOB(), 0x5D1)
+}
+
+onCreate
+{
+	ItemID = 4020 // sledge hammer
+	Hue = 2966
+	Layer = FirstValid
+	LootType = Blessed
+	Movable = true
+	Name = "a legendary hammer"
+	
+	//Hue = 1165
+	//Hue = 1266 // bright blue
+	//1287 // glowing
+	//1288 // glowing ice
+	//1360 // glowing fire
+}
+onUse
+{
+	if (THIS().RootParentEntity == TRIGMOB())
+	{
+		if (xmlints.working == 1)
+		{
+			SENDMSG(TRIGMOB(), "You are in the middle of working!")
+			return
+		}
+		SENDTARGET(TRIGMOB(), false)
+		SENDMSG(TRIGMOB(), "Which crystal workbench do you wish to craft with?")
+		xmlstrings.targetType = "bench"
+		xmlstrings.targetType.Expiration = TIMESPANMINUTES(1.0)
+	}
+}
+onTarget
+{
+	if (xmlstrings.targetType == null) { return }
+	if (xmlints.working != null) { SENDMSG(TRIGMOB(), "That hammer is already being used."); return }
+	if (xmlstrings.targetType == "bench")
+	{
+		if (IS(TARGETED(), OrnateElvenBox) && TARGETED().Hue == 2963 && TARGETED().Movable == false)
+		{
+			if (CHECKUSERANGE(TRIGMOB(), TARGETED()))
+			{
+				if (TARGETED().Items.Count == 0)
+				{
+					SENDMSG(TRIGMOB(), "That workbench has no gargish runes on it!")
+					xmlstrings.targetType = null
+				}
+				else
+				{
+					xmlstrings.targetType = "imbue"
+					xmlobjs.workBench = TARGETED()
+					SENDTARGET(TRIGMOB(), false)
+					SENDMSG(TRIGMOB(), "Target the item you would like to imbue the runes upon. BEWARE! An invalid runic combination is deadly (and makes you lose the runes!)")
+				}
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You are either too far away or don't have access to that workbench!")
+			}
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You must target a locked down Legendary Workbench (it should probably be secured)!")
+		}
+	}
+	else if (xmlstrings.targetType == "imbue")
+	{
+		if (xmlobjs.workBench == null) { SENDMSG(TRIGMOB(), "Error with workbench, contact staff!"); return }
+		// SOUND(TRIGMOB(), 0x5D1)
+		if (IS(TARGETED(), BaseWeapon) || IS(TARGETED(), BaseArmor))
+		{
+			if (TARGETED().RootParentEntity != TRIGMOB()) { SENDMSG(TRIGMOB(), "That must be in your backpack to imbue it!"); return }
+			if (DISTANCE(TRIGMOB(), xmlobjs.workBench) > 1) { SENDMSG(TRIGMOB(), "You must be next to the workbench to continue!"); return }
+			if (xmlobjs.workBench.xmlints.working != null) { SENDMSG(TRIGMOB(), "Somebody else is working with that right now.") }
+			
+			xmlobjs.workBench.xmlobjs.runeSpinStart = xmlobjs.workBench.Location
+			xmlints.working = 1
+			xmlints.working.Expiration = TIMESPANMINUTES(1.0)
+			xmlobjs.workBench.xmlints.working = 1
+			xmlobjs.workBench.xmlints.working.Expiration = TIMESPANMINUTES(1.0)
+			xmlstrings.targetType = null
+			objs.script = ADDSCRIPT(xmlobjs.workBench, "crystal\\crystalImbue.us", "ImbueEffect")
+			objs.script.Expiration = TIMESPANMINUTES(1.0)
+			
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+			
+			xmlints.working = null
+			xmlobjs.workBench.xmlints.working = null
+			
+			// grab the runes and apply it
+			// first need to sort the runes by their x value
+			objs.sortedRunes = NEWLIST()
+			foreach (objs.rune ; xmlobjs.workBench.Items)
+			{
+				if (objs.sortedRunes.Count == 0) { ADDTOLIST(objs.sortedRunes, objs.rune); continue }
+				
+				ints.added = 0
+				for (ints.i = 0; ints.i < objs.sortedRunes.Count; ints.i += 1)
+				{
+					if (objs.sortedRunes[ints.i].X > objs.rune.X)
+					{
+						ADDTOLISTAT(objs.sortedRunes, objs.rune, ints.i)
+						ints.added = 1
+						break
+					}
+				}
+				if (ints.added == 0)
+				{
+					ADDTOLIST(objs.sortedRunes, objs.rune)
+				}
+			}
+			
+			// for (ints.i = 0; ints.i < objs.sortedRunes.Count; ints.i += 1)
+			// {
+				// SENDMSG(TRIGMOB(), objs.sortedRunes[ints.i].X + "   " + objs.sortedRunes[ints.i].ItemID)
+			// }
+// ========================= BEGIN RUNE APPLICATIONS ==============================
+			strings.incantation = EMPTYSTRING()
+			foreach (objs.rune ; objs.sortedRunes)
+			{
+				if (objs.rune.ItemID == 0x483B) { strings.incantation += a }
+				else if (objs.rune.ItemID == 0x483E) { strings.incantation += b }
+				else if (objs.rune.ItemID == 0x4841) { strings.incantation += ch }
+				else if (objs.rune.ItemID == 0x4844) { strings.incantation += d }
+				else if (objs.rune.ItemID == 0x4847) { strings.incantation += e }
+				else if (objs.rune.ItemID == 0x484A) { strings.incantation += f }
+				else if (objs.rune.ItemID == 0x484D) { strings.incantation += g }
+				else if (objs.rune.ItemID == 0x4850) { strings.incantation += h }
+				else if (objs.rune.ItemID == 0x4853) { strings.incantation += i }
+				else if (objs.rune.ItemID == 0x4856) { strings.incantation += j }
+				else if (objs.rune.ItemID == 0x4859) { strings.incantation += gl }
+				else if (objs.rune.ItemID == 0x485C) { strings.incantation += k }
+				else if (objs.rune.ItemID == 0x485F) { strings.incantation += l }
+				else if (objs.rune.ItemID == 0x4862) { strings.incantation += m }
+				else if (objs.rune.ItemID == 0x4865) { strings.incantation += ng }
+				else if (objs.rune.ItemID == 0x4868) { strings.incantation += n }
+				else if (objs.rune.ItemID == 0x486B) { strings.incantation += p }
+				else if (objs.rune.ItemID == 0x486E) { strings.incantation += r }
+				else if (objs.rune.ItemID == 0x4871) { strings.incantation += sh }
+				else if (objs.rune.ItemID == 0x4874) { strings.incantation += s }
+				else if (objs.rune.ItemID == 0x4877) { strings.incantation += t }
+				else if (objs.rune.ItemID == 0x487A) { strings.incantation += u }
+				else if (objs.rune.ItemID == 0x487D) { strings.incantation += v }
+				else if (objs.rune.ItemID == 0x4880) { strings.incantation += zh }
+				else if (objs.rune.ItemID == 0x4883) { strings.incantation += z }
+			}
+			INDIVIDUALFLASHEFFECT(TRIGMOB())
+			pause 200
+			
+			
+			
+			if (strings.incantation == "alan")
+			{
+				TARGETED().Hue = 2963
+				LOCALMSG(TRIGMOB(), "You have successfully imbued the runes into the object.", 0x38)
+			}
+			//SENDMSG(TRIGMOB(), strings.incantation)
+// ========================= END RUNE INCANTATION =================================
+		}
+		else // maybe allow them to target wood in order to create addons?
+		{
+			SENDMSG(TRIGMOB(), "You must select either a weapon or armor!")
+		}
+	}
+}

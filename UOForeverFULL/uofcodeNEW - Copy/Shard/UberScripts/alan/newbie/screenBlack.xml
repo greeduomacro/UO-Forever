@@ -1,0 +1,11 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<PaperDoll mob="THIS()" x="0" y="0"/>
+		<Label hue="1153" x="200" y="100">"If Your Screen is All Black..."</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>  You are using an older client. We support client version 7.0.15.1. You CAN have more than one client on your computer at the same time - We recommend that you simply download and run the full client installer from uoforever.com . So long as you don't already have another client in "C:\Program Files (x86)\Electronic Arts" or "C:\Program Files\Electronic Arts" then you won't overwrite your current client in any way. When Razor starts up you can change the "Load Client" and "UO Data Directory" locations to use the older or newer client (just browse to the proper locations) as desired, so don't worry about not being able to use the older client if you want to!</p>
+			<p>  Welcome to UO Forever! If you still have problems, please page try to ask other players or (if that fails) page a Game Master using the paperdoll (Alt P) "Help" button.</p>
+		</HTML>	
+	</Box> 
+</Gump>

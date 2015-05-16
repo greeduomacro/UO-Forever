@@ -1,0 +1,33 @@
+onTakenHit
+{
+	if (TRIGMOB().netstate != null && TRIGMOB().xmlints.gameMob != null)
+	{
+		objs.mob = GETMOB(TRIGMOB().xmlints.gameMob)
+		if (objs.mob == null) { return }
+		if (objs.mob.xmlints.playerHitsScore == null)
+		{
+			objs.mob.xmlints.playerHitsScore = THIS().LastDamageAmount
+		}
+		else
+		{
+			objs.mob.xmlints.playerHitsScore += THIS().LastDamageAmount
+		}
+	}
+}
+onDeath
+{
+	if (TRIGMOB() == null) { return }
+	if (TRIGMOB().netstate != null && TRIGMOB().xmlints.gameMob != null)
+	{
+		objs.mob = GETMOB(TRIGMOB().xmlints.gameMob)
+		if (objs.mob == null) { return }
+		if (objs.mob.xmlints.playerKillsScore == null) 
+		{
+			objs.mob.xmlints.playerKillsScore = 1
+		}
+		else
+		{
+			objs.mob.xmlints.playerKillsScore += 1
+		}
+	}
+}

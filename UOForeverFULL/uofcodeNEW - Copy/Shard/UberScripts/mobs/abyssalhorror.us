@@ -1,0 +1,5 @@
+onCreate
+{
+	objs.spawnLocations = [RECTANGLE2D(POINT2D(6500,112), POINT2D(6508,133))]
+	MOVETOSPAWNLOCATION(THIS(), MAP(Portals), objs.spawnLocations)
+}

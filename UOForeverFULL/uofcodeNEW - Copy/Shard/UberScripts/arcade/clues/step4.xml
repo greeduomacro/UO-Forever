@@ -1,0 +1,10 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<PaperDoll mob="THIS()" x="0" y="0"/>
+		<Label hue="1153" x="200" y="100">"To Make the Cure (Step 4)"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>The magic found in fey wings will be required in order to bring life back to the undead. The wings must be ground up also in order to release their power. The fey creatures from which these wings are plucked are fearsome, so be careful!</p>
+		</HTML>	
+	</Box> 
+</Gump>

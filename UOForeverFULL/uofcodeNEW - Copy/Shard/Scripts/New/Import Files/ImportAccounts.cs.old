@@ -1,0 +1,259 @@
+using System;
+using System.IO;
+using System.Xml;
+using System.Collections.Generic;
+using System.Net;
+using System.Security;
+using System.Security.Cryptography;
+using System.Text;
+using Server;
+using Server.Misc;
+using Server.Mobiles;
+using Server.Multis;
+using Server.Network;
+using Server.Accounting;
+using Server.Engines.Accounting;
+
+namespace Server.Importing
+{
+	public class ImportedAccount
+	{
+		public static void Initialize()
+		{
+			//ImportedAccount.ImportAccounts();
+		}
+
+		private string m_Username, m_PlainPassword, m_CryptPassword, m_NewCryptPassword;
+		private AccessLevel m_AccessLevel;
+		private int m_Flags;
+		private DateTime m_Created, m_LastLogin;
+		private TimeSpan m_TotalGameTime;
+		private string[] m_IPRestrictions;
+		private IPAddress[] m_LoginIPs;
+		private int m_SFO;
+		private string m_Email;
+		private int m_MobileCount;
+
+		public ImportedAccount( XmlElement node )
+		{
+			m_Username = Utility.GetText( node["username"], "empty" );
+
+			string plainPassword = Utility.GetText( node["password"], null );
+			string cryptPassword = Utility.GetText( node["cryptPassword"], null );
+			string newCryptPassword = Utility.GetText( node["newCryptPassword"], null );
+
+			switch ( AccountHandler.ProtectPasswords )
+			{
+				case PasswordProtection.None:
+					{
+						if ( plainPassword != null )
+							SetPassword( plainPassword );
+						else if ( newCryptPassword != null )
+							m_NewCryptPassword = newCryptPassword;
+						else if ( cryptPassword != null )
+							m_CryptPassword = cryptPassword;
+						else
+							SetPassword( "empty" );
+
+						break;
+					}
+				case PasswordProtection.Crypt:
+					{
+						if ( cryptPassword != null )
+							m_CryptPassword = cryptPassword;
+						else if ( plainPassword != null )
+							SetPassword( plainPassword );
+						else if ( newCryptPassword != null )
+							m_NewCryptPassword = newCryptPassword;
+						else
+							SetPassword( "empty" );
+
+						break;
+					}
+				default: // PasswordProtection.NewCrypt
+					{
+						if ( newCryptPassword != null )
+							m_NewCryptPassword = newCryptPassword;
+						else if ( plainPassword != null )
+							SetPassword( plainPassword );
+						else if ( cryptPassword != null )
+							m_CryptPassword = cryptPassword;
+						else
+							SetPassword( "empty" );
+
+						break;
+					}
+			}
+
+			m_AccessLevel = (AccessLevel)Enum.Parse( typeof( AccessLevel ), Utility.GetText( node["accessLevel"], "Player" ), true );
+			m_Flags = Utility.GetInt32( Utility.GetText( node["flags"], "0" ), 0 );
+			m_SFO = Utility.GetInt32( Utility.GetText( node["SFO"], "0" ), 0 );
+			m_Created = Utility.GetDateTime( Utility.GetText( node["created"], null ), DateTime.UtcNow );
+			m_LastLogin = Utility.GetDateTime( Utility.GetText( node["lastLogin"], null ), DateTime.UtcNow );
+
+			m_Email = Utility.GetText( node["email"], String.Empty );
+
+			//m_Mobiles = LoadMobiles( node );
+
+			m_MobileCount = 0;
+
+			XmlElement chars = node["chars"];
+
+			if ( chars != null )
+			{
+				foreach ( XmlElement ele in chars.GetElementsByTagName( "char" ) )
+				{
+					try
+					{
+						int index = Utility.GetInt32( Utility.GetAttribute( ele, "index", "0" ), 0 );
+						int serial = Utility.GetInt32( Utility.GetText( ele, "0" ), 0 );
+
+						if ( index >= 0 && index < 7 && serial > 0 )
+							m_MobileCount++;
+					}
+					catch
+					{
+					}
+				}
+			}
+
+			//m_Comments = LoadComments( node );
+			//m_Tags = LoadTags( node );
+			m_LoginIPs = Account.LoadAddressList( node );
+			m_IPRestrictions = Account.LoadAccessCheck( node );
+/*
+			for ( int i = 0; i < m_Mobiles.Length; ++i )
+			{
+				if ( m_Mobiles[i] != null )
+					m_Mobiles[i].Account = this;
+			}
+*/
+			TimeSpan totalGameTime = Utility.GetTimeSpan( Utility.GetText( node["totalGameTime"], null ), TimeSpan.Zero );
+/*
+			if ( totalGameTime == TimeSpan.Zero )
+			{
+				for ( int i = 0; i < m_Mobiles.Length; i++ )
+				{
+					PlayerMobile m = m_Mobiles[i] as PlayerMobile;
+
+					if ( m != null )
+						totalGameTime += m.GameTime;
+				}
+			}
+*/
+			m_TotalGameTime = totalGameTime;
+
+//			if ( this.Young )
+//				CheckYoung();
+		}
+
+		public static void ImportAccounts()
+		{
+			string filePath = Path.Combine( "Import/Accounts", "accounts.xml" );
+
+			if ( !File.Exists( filePath ) )
+				return;
+
+			Console.Write( "Import: Loading Accounts..." );
+			int totalcount = 0;
+			int synccount = 0;
+
+			XmlDocument doc = new XmlDocument();
+			doc.Load( filePath );
+
+			XmlElement root = doc["accounts"];
+
+			foreach ( XmlElement account in root.GetElementsByTagName( "account" ) )
+			{
+				try
+				{
+					ImportedAccount acct = new ImportedAccount( account );
+					totalcount++;
+					if ( acct.SyncAccount() )
+						synccount++;
+				}
+				catch
+				{
+					Console.WriteLine( "Warning: Account instance load failed" );
+				}
+			}
+
+			Console.WriteLine( "done ({0} imported, {1} total).", synccount, totalcount );
+		}
+
+		public bool SyncAccount()
+		{
+			Account acct = Accounts.GetAccount( m_Username ) as Account;
+
+			if ( acct != null ) //They have an acct on DFIB already
+			{
+				acct.Created = m_Created;
+				acct.TotalAcctGameTime = acct.TotalGameTime + m_TotalGameTime;
+				List<string> restrictions = new List<string>( acct.IPRestrictions );
+				for ( int i = 0;i < m_IPRestrictions.Length; i++ )
+					if ( !restrictions.Contains( m_IPRestrictions[i] ) )
+						restrictions.Add( m_IPRestrictions[i] );
+
+				acct.IPRestrictions = restrictions.ToArray();
+
+				List<IPAddress> addresses = new List<IPAddress>( acct.LoginIPs );
+				for ( int i = 0;i < m_LoginIPs.Count; i++ )
+					if ( !addresses.Contains( m_LoginIPs[i] ) )
+						addresses.Add( m_LoginIPs[i] );
+
+				acct.LoginIPs = addresses.ToArray();
+			}
+			else if ( ( m_TotalGameTime > TimeSpan.FromHours( 8.0 ) || DateTime.UtcNow - m_LastLogin < TimeSpan.FromDays( 180.0 ) ) && m_MobileCount > 0 )
+			{
+				acct = new Account( m_Username, "empty" );
+
+				acct.CryptPassword = m_CryptPassword;
+				acct.PlainPassword = m_PlainPassword;
+				acct.NewCryptPassword = m_NewCryptPassword;
+
+				acct.Created = m_Created;
+				acct.LastLogin = m_LastLogin;
+				acct.TotalAcctGameTime = m_TotalGameTime;
+				acct.IPRestrictions = m_IPRestrictions;
+				acct.LoginIPs = m_LoginIPs;
+				acct.AccessLevel = m_AccessLevel;
+				acct.Flags = m_Flags;
+			}
+			else
+				return false;
+
+			return true;
+		}
+
+		public void SetPassword( string plainPassword )
+		{
+			switch ( AccountHandler.ProtectPasswords )
+			{
+				case PasswordProtection.None:
+					{
+						m_PlainPassword = plainPassword;
+						m_CryptPassword = null;
+						m_NewCryptPassword = null;
+
+						break;
+					}
+				case PasswordProtection.Crypt:
+					{
+						m_PlainPassword = null;
+						m_CryptPassword = Account.HashMD5( plainPassword );
+						m_NewCryptPassword = null;
+
+						break;
+					}
+				default: // PasswordProtection.NewCrypt
+					{
+						m_PlainPassword = null;
+						m_CryptPassword = null;
+						m_NewCryptPassword = Account.HashSHA1( m_Username + plainPassword );
+
+						break;
+					}
+			}
+		}
+	}
+}

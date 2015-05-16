@@ -1,0 +1,79 @@
+onCreate
+{
+    THIS().SolidHueOverride = 2498
+}
+onBeforeDeath
+{
+	objs.online = ONLINEMOBS()
+	if (xmlobjs.crystal.xmlobjs.carrier == THIS())
+	{
+		MSG(THIS(), "The power crystal drops to the ground.", 2049)
+
+		foreach (objs.player ; objs.online)
+		{
+			if (IS(objs.player,playermobile))
+			{
+				if (objs.player.FactionName != null)
+				{ 
+					if (THIS().FactionName == "LORD BRITISH")
+					{
+						SENDMSG(objs.player, "The True Britannians have lost control of the Crystal of Power!", 0x38)
+					}
+					elif (THIS().FactionName == "MINAX")
+					{
+						SENDMSG(objs.player, "Minax has lost control of the Crystal of Power!", 0x38)
+					}
+					elif (THIS().FactionName == "COUNCIL OF MAGES")
+					{
+						SENDMSG(objs.player, "The Council of Mages has lost control of the Crystal of Power!", 0x38)
+					}
+					elif (THIS().FactionName == "SHADOWLORDS")
+					{
+						SENDMSG(objs.player, "The Shadowlords have lost control of the Crystal of Power!", 0x38)
+					}
+				}
+			}
+		}
+    		MOVETOWORLD(xmlobjs.crystal, THIS().Location, THIS().Map)
+    		THIS().SolidHueOverride = -1
+    		xmlobjs.crystal.xmlstrings.controller = null
+		xmlobjs.crystal.xmlobjs.carrier = null
+		xmlobjs.crystal = null
+		GLOBALDELATTACHMENTS(XmlScript, "windbreaker")
+	}	
+    
+}
+
+onDisconnected
+{
+	if (xmlobjs.crystal.xmlobjs.carrier == THIS())
+	{
+    		MOVETOWORLD(xmlobjs.crystal, THIS().Location, THIS().Map)
+    		THIS().SolidHueOverride = -1
+    		xmlobjs.crystal.xmlstrings.controller = null
+    		xmlobjs.crystal.xmlobjs.carrier = null
+		xmlobjs.crystal = null
+		GLOBALDELATTACHMENTS(XmlScript, "windbreaker")
+	}
+}
+
+onSwing
+{
+	if (xmlobjs.crystal.xmlobjs.carrier == THIS())
+	{
+    		SENDMSG(TRIGMOB(), "You cannot attack others while holding the Crystal of Power")
+		return override
+	}
+}
+
+onBeginCast
+{
+	if (xmlobjs.carrier == THIS())
+{
+	if (IS(SPELL(),EnergyVortexSpell) || IS(SPELL(),SummonDaemonSpell) || IS(SPELL(),ClumsySpell) || IS(SPELL(),WaterElementalSpell) || IS(SPELL(),WeakenSpell) || IS(SPELL(),WallOfStoneSpell) || IS(SPELL(),AirElementalSpell) || IS(SPELL(),FireElementalSpell) || IS(SPELL(),EarthElementalSpell) || IS(SPELL(),PolymorphSpell) || IS(SPELL(),SummonCreatureSpell) || IS(SPELL(),BladeSpiritsSpell) || IS(SPELL(),InvisibilitySpell) || IS(SPELL(),MagicArrowSpell) || IS(SPELL(),HarmSpell) || IS(SPELL(),FireballSpell) || IS(SPELL(),PoisonSpell) || IS(SPELL(),FireFieldSpell) || IS(SPELL(),LightningSpell) || IS(SPELL(),ManaDrainSpell) || IS(SPELL(),MindBlastSpell) || IS(SPELL(),ParalyzeSpell) || IS(SPELL(),PoisonFieldSpell) || IS(SPELL(),EnergyBoltSpell) || IS(SPELL(),ExplosionSpell) || IS(SPELL(),MassCurseSpell) || IS(SPELL(),ParalyzeFieldSpell) || IS(SPELL(),ChainLightningSpell) || IS(SPELL(),EnergyFieldSpell) || IS(SPELL(),FlameStrikeSpell) || IS(SPELL(),ManaVampireSpell) || IS(SPELL(),MeteorSwarmSpell) || IS(SPELL(),Earthqu	akeSpell))
+	{
+		SENDMSG(TRIGMOB(), "It appears some dark energy is preventing you from casting that here!")
+		return override
+	}
+}
+}

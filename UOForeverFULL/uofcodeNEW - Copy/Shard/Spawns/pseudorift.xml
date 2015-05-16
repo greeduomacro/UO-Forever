@@ -1,0 +1,55 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>ChampRift</Name>
+    <!--<UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>0</X>
+    <Y>0</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>1000</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=static,14089/OFFSET,-1,2/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=static,14089/OFFSET,-1,1/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=static,14089/OFFSET,0,1/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=static,14089/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		:OBJ=static,14089/OFFSET,1,0/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+		:OBJ=static,14089/OFFSET,1,-1/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+		:OBJ=static,14089/OFFSET,2,-1/ghostvisible/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=SETONTHIS/basepriority/TwoFiftyMS:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=SETONNEARBY,4,*,playermobile/location/(1711,1647,0)/ATTACH/&lt;xmlvalue,ultimate,1/expiration/0:0:2/expireaction/@balron/location/(1203,1336,0)/teamflags/2/guardimmune/true/location/(1370,1352,0)/POSSESS/${GETONTRIGMOB,serial$};&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=SETONNEARBY,4,*,playermobile/location/(1711,1647,0)/ATTACH/&lt;xmlvalue,ultimate,1/expiration/0:0:2/expireaction/@ancientwyrm/location/(1370,1352,0)/teamflags/4/guardimmune/true/location/(1370,1352,0)/POSSESS/${GETONTRIGMOB,serial$};&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=11
+		:OBJ=SETONNEARBY,4,*,playermobile/location/(1711,1647,0)/ATTACH/&lt;xmlvalue,ultimate,1/expiration/0:0:2/expireaction/@ancientlich/location/(1247,1423,0)/teamflags/8/guardimmune/true/location/(1370,1352,0)/POSSESS/${GETONTRIGMOB,serial$};&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=12
+		:OBJ=GOTO/10:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=999
+	</Objects2>
+  </Points>
+</Spawns>

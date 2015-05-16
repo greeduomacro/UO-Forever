@@ -1,0 +1,15 @@
+onCreate
+{
+	if (xmlobjs.deleteTime == null)
+	{
+		xmlobjs.deleteTime = NOW() + TIMESPANMINUTES(1.0)
+	}
+	SUBSCRIBETIMER(FiveSeconds)
+}	
+onFiveSeconds
+{
+	if (NOW() > xmlobjs.deleteTime)
+	{
+		DELETE(THIS())
+	}
+}

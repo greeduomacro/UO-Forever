@@ -1,0 +1,10 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<PaperDoll mob="THIS()" x="0" y="0"/>
+		<Label hue="1153" x="200" y="100">"To Make the Cure (Step 6)"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>A chunk of undying flesh is required in the mixture-a sort of inoculation, as it were... be sure to chop it up with a blade so that it mixes well with the cooked mixture in the bowl!  If you are fortunate, you may find some such flesh on the corpse of one of the poor infected souls.</p>
+		</HTML>	
+	</Box> 
+</Gump>

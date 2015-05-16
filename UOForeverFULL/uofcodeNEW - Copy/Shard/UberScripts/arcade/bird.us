@@ -1,0 +1,19 @@
+// POINT3D(5780,2865,0)
+// POINT3D(5689,2934,0)
+// POINT3D(5723,3014,0)
+// POINT3D(5797,2971,0)
+// POINT3D(5704,3124,-15)
+// POINT3D(5645,3157,-15)
+// POINT3D(5667,3266,-15)
+// POINT3D(5657,3312,-15)
+// POINT3D(5771,3303,-15)
+// POINT3D(5930,3367,0)
+// RECTANGLE2D(POINT2D(5912, 3271, -15), POINT2D(6078, 3546))
+onCreate
+{
+	xmlobjs.owner.xmlints.birdCount += 1
+}
+onDeath
+{
+	xmlobjs.owner.xmlints.birdCount -=1
+}

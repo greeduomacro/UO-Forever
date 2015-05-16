@@ -1,0 +1,72 @@
+onCraft
+{
+	if (IS(TRIGITEM(), BaseWeapon))
+	{
+		TRIGITEM().speed = FLOAT(1)
+	}
+}
+onSay
+{
+	objs.now = NOW()
+	if (xmlobjs.next == null || objs.now > xmlobjs.next)
+	{
+		if (SAID("!9"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(North))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (SAID("!6"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Right))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (SAID("!3"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(East))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (SAID("!2"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Down))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (SAID("!1"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(South))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5 )
+			return override
+		}
+		else if (SAID("!4"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Left))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (SAID("!7"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(West))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (SAID("!8"))
+		{
+			SWINGDIRECTION(TRIGMOB(), DIRECTION(Up))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+	}
+	else
+	{
+		objs.test = ["!9", "!6", "!3", "!2", "!1", "!4", "!7", "!8"]
+		if (SAID(objs.test))
+		{
+			SENDMSG(TRIGMOB(), "You fumble your weapon by attempting to swing too quickly.", 38)
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+	}
+}

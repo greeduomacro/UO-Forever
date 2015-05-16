@@ -1,0 +1,43 @@
+onCreate
+{
+	THIS().ItemID = 5360
+	THIS().Hue = 1170
+	THIS().Name = "a sandals layering deed"
+	THIS().movable = true
+}
+
+onUse
+{
+	if (THIS().RootParentEntity != TRIGMOB())
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it.")
+		return
+	}
+	SENDTARGET(TRIGMOB())
+	SENDMSG(TRIGMOB(), "Select a pair of sandals to layer. This reassigns the layer to the rin slot, which allows it to be displayed over a pair of boots.")
+}
+onTarget
+{
+	if (THIS().RootParentEntity != TRIGMOB())
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it.")
+		return
+	}
+	if (IS(TARGETED(), Sandals))
+	{
+		if (STRING(TARGETED().Layer) != Ring)
+		{
+			ADDSCRIPT(TARGETED(), "Donation\\ringlayered.us", "layered")
+			SENDMSG(TRIGMOB(), "You layer the object. It is now considered to be on the ring layer.")
+			DELETE(THIS())
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "That item is already layered.")
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must select a pair of sandals.")
+	}
+}

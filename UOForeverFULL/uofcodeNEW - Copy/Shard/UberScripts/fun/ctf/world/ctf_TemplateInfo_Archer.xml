@@ -1,0 +1,18 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		
+		<Label hue="1153">"Dungeon Crawl Available Templates"</Label>
+		<Label hue="1153">"Be sure to SCROLL DOWN to see them all!"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" width="400" height="400">
+			<basefont color="#000000">
+				<p>NOTE: All templates spawn with bandages, a full spellbook, 10 greater explosion potions, some refresh and lesser cure potions.</p>
+				<basefont color="#ff0000">Archer:<basefont color="#000000">
+				Grandmaster Archery, Tactics, Anatomy, Healing
+				Str:100 - Dex: 100 - Int: 25
+				</basefont></basefont>
+				
+			</basefont>
+		</HTML>
+	</VBox>
+</Gump>

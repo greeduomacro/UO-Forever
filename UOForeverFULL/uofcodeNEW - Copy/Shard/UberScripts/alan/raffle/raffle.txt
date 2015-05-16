@@ -1,0 +1,179 @@
+onCreate
+{
+	hairitemid = 8252
+	hairhue = 1135
+	hue = 33778
+	blessed = true
+	cantwalk = true
+	name = "Ericka the Gold Raffle Ticket Vendor"
+	bodyvalue = 401
+	xmlints.price = 1000
+	xmlints.totalSold = 0
+	xmlstrings.currentPrize = "The Marble Island Castle"
+	xmlstrings.endingTime = "Wednesday, 10:00pm EST"
+	xmlstrings.moderator = "Alan"
+	xmlints.active = 0
+	SCRIPT().name = "Gold Raffle Vendor"
+	SUBSCRIBETIMER(OneMinute)
+}
+
+function finishRaffle()
+{
+	xmlints.active = 0
+	objs.now = NOW()
+	LOG("LOG_RaffleGold.txt", "====== Raffle ending " + STRING(objs.now) + " ======")
+	objs.raffleTicketAttachments = GLOBALGETATTACHMENTS("xmlvalue", "goldraffletickets", true)
+	ints.totalNumTickets = GETATTACHMENTINTSUM("goldraffletickets", true)
+	LOG("LOG_RaffleGold.txt", "==> total number of tickets: " + ints.totalNumTickets)
+	if (ints.totalNumTickets == 0)
+	{
+		BCAST("The raffle has ended but no tickets were sold so there was no winner this time!", 38)
+		return
+	}
+	BCAST("The raffle has ended!", 38)
+	ints.winningDraw = RANDOM(ints.totalNumTickets)
+	LOG("LOG_RaffleGold.txt", "==> winning draw: " + ints.winningDraw)
+	
+	foreach (objs.raffleTicketAttachment ; objs.raffleTicketAttachments)
+	{
+		LOG("LOG_RaffleGold.txt", objs.raffleTicketAttachment.AttachedTo + " " + objs.raffleTicketAttachment.Value) 
+		if (xmlstrings.winner == null)
+		{
+			ints.winningDraw -= objs.raffleTicketAttachment.value
+			if (ints.winningDraw < 0)
+			{
+				xmlstrings.winner = objs.raffleTicketAttachment.AttachedTo.name
+				BCAST("Congratulations to " + xmlstrings.winner + " for winning " + xmlstrings.currentPrize + "! Thanks to all others who participated - better luck next time!", 38)
+				objs.award = redbook
+				{
+					hue = 1161
+					name = "Deed the Marble Island Castle"
+					title = "Deed the Marble Island Castle"
+					author = "Carl"
+					writable = false
+					loottype = blessed
+				}
+				LOG("LOG_RaffleGold.txt", objs.raffleTicketAttachment.AttachedTo + " IS THE WINNER OF THE " + objs.award + " " + xmlstrings.currentPrize)
+				ADDTOPACK(objs.raffleTicketAttachment.AttachedTo, objs.award)
+			}
+		}
+	}
+	if (xmlstrings.winner != null)
+	{
+		xmlstrings.winner.dodelete = true
+	}
+	GLOBALDELATTACHMENTS("xmlvalue", "goldraffletickets", true)
+	xmlints.totalSold = 0
+}
+
+onOneMinute
+{
+	if (xmlints.active == 0)
+	{
+		SAY(THIS(), "Our next 5 day raffle will be coming soon!")
+		return
+	}
+	
+	objs.now = NOW()
+	if (GETDAYOFWEEK(objs.now) == Wednesday && GETHOUR(objs.now) == 22)
+	{
+		finishRaffle()
+	}
+	else
+	{
+		SAY(THIS(), "Buy raffle tickets here for a chance at " + xmlstrings.currentPrize + "! Say \"info\" for directions! Raffle ends " + xmlstrings.endingTime + "!")
+	}
+	
+}
+onSpeech
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 5)
+	{
+		if (xmlints.active == 0)
+		{
+			if (SAID("info") || SAID("buy raffle ticket") || SAID("buy 5 raffle tickets") || SAID("buy 10 raffle tickets"))
+			{
+				SENDMSG(TRIGMOB(), "There is currently no Gold raffle running - check back another time!", 0x38)
+			}
+			return
+		}
+	
+	
+		if (SAID("info"))
+		{
+			SENDMSG(TRIGMOB(), "The current prize is: " + xmlstrings.currentPrize + " ... buying ends at " + xmlstrings.endingTime + " ... Tickets cost " + xmlints.price + " gold EACH and to buy tickets, say 'buy raffle ticket', 'buy 5 raffle tickets', or 'buy 10 raffle tickets'.", 0x38)
+			if (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor)
+			{
+				SENDMSG(TRIGMOB(), "Staff Message: So far " + xmlints.totalSold + " tickets have been sold in total during this raffle!", 38)
+			}
+		}
+		elif (SAID("buy raffle ticket"))
+		{
+			if (TAKEGOLDFROM(TRIGMOB(),xmlints.price))
+			{
+				if (TRIGMOB().xmlints.goldraffletickets == null) { TRIGMOB().xmlints.goldraffletickets = 1; xmlints.totalSold += 1 }
+				else { TRIGMOB().xmlints.goldraffletickets += 1; xmlints.totalSold += 1 }
+				LOCALMSG(TRIGMOB(), "You spent " + xmlints.price + " gold and now have " + TRIGMOB().xmlints.goldraffletickets + " raffle tickets!")
+			}
+			else
+			{
+				SAY(THIS(), "I'm sorry, " + TRIGMOB().name + ", but you can't afford that!")
+			}
+		}
+		elif (SAID("buy 5 raffle tickets"))
+		{
+			if (TAKEGOLDFROM(TRIGMOB(),xmlints.price * 5))
+			{
+				if (TRIGMOB().xmlints.goldraffletickets == null) { TRIGMOB().xmlints.goldraffletickets = 5; xmlints.totalSold += 5 }
+				else { TRIGMOB().xmlints.goldraffletickets += 5; xmlints.totalSold += 5 }
+				LOCALMSG(TRIGMOB(), "You spent " + (xmlints.price * 5) + " gold and now have " + TRIGMOB().xmlints.goldraffletickets + " raffle tickets!")
+			}
+			else
+			{
+				SAY(THIS(), "I'm sorry, " + TRIGMOB().name + ", but you can't afford that!")
+			}
+		}
+		elif (SAID("buy 10 raffle tickets"))
+		{
+			if (TAKEGOLDFROM(TRIGMOB(),xmlints.price * 10))
+			{
+				if (TRIGMOB().xmlints.goldraffletickets == null) { TRIGMOB().xmlints.goldraffletickets = 10; xmlints.totalSold += 10 }
+				else { TRIGMOB().xmlints.goldraffletickets += 10; xmlints.totalSold += 10 }
+				LOCALMSG(TRIGMOB(), "You spent " + (xmlints.price * 10) + " gold and now have " + TRIGMOB().xmlints.goldraffletickets + " raffle tickets!")
+			}
+			else
+			{
+				SAY(THIS(), "I'm sorry, " + TRIGMOB().name + ", but you can't afford that!")
+			}
+		}
+		elif (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor && TRIGMOB().name == xmlstrings.moderator)
+		{
+			if (SAID("finish raffle"))
+			{
+				finishRaffle()
+			}
+		}
+	}
+}
+onUse
+{
+	if (xmlints.active == 0)
+	{
+		SENDMSG(TRIGMOB(), "There is currently no Gold raffle running - check back another time!", 0x38)
+		return override
+	}
+	
+	if (TRIGMOB().xmlints.goldraffletickets == null)
+	{
+		LOCALMSG(TRIGMOB(), "You don't have any raffle tickets. Say 'info' for directions on buying some!")
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You have " + TRIGMOB().xmlints.goldraffletickets + " raffle tickets! Say 'info' for directions on buying more!")
+	}
+	if (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor)
+	{
+		SENDMSG(TRIGMOB(), "Staff Message: So far " + xmlints.totalSold + " tickets have been sold in total during this raffle!", 38)
+	}
+	return override
+}

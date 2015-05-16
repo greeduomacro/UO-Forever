@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>MorthunaCave</Name>
+    <UniqueId>ccf5887d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>5368</X>
+    <Y>317</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>5368</CentreX>
+    <CentreY>317</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>True</IsGroup>	
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>daemon/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,8&gt;:MX=14:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONNEARBY,40,*,spawner/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONNEARBY,40,*,basecreature/DAMAGE,1500,1500:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONTHIS/group/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=xmlspawner/configfile/Spawns\common\eventsupply.xml/loadconfig/true/location/(5368,317,0)/spawnrange/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=BCAST/The cave has been secured! A SUPPLY STONE and HEALER has been provided by the Galven Guard!  Now, proceed into Morthuna and let us beat the foul beasts back into the abyss where they belong! Every last one must be eliminated!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=SETONNEARBY,40,*,spawner/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

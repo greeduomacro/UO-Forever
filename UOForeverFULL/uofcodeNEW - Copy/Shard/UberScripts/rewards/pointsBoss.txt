@@ -1,0 +1,22 @@
+onTakenHit
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (TRIGMOB().xmlints.bossHitsScore == null)
+		{
+			TRIGMOB().xmlints.bossHitsScore = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.bossHitsScore += DAMAGE()
+		}
+	}
+}
+onDeath
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+
+		TRIGMOB().xmlints.bossKillScore = 1
+	}
+}

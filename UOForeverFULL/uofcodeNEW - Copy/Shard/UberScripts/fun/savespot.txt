@@ -1,0 +1,53 @@
+onCreate
+{
+	itemid = 3804
+	visible = true
+	movable = false
+	hue = 1153
+	name = "If enough players use this stone, then your spawn point will be updated to this location!"
+	xmlobjs.accountsAdded = NEWLIST()
+	xmlints.requiredNumber = 4
+	// expecting these to be set on the outside:
+	// xmlobjs.owner (the event master who has all the scripts attached to them)
+	// xmlstrings.spawnLocationVarName
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) > 2)
+	{
+		SENDMSG(TRIGMOB(), "That is too far away.")
+		return
+	}
+	
+	if (xmlobjs.accountsAdded.count == xmlints.requiredNumber)
+	{
+		LOCALMSG(TRIGMOB(), "Your spawn location has already been updated!")
+		return
+	}
+	
+	objs.account = GETACCOUNT(TRIGMOB())
+	
+	if (LISTCONTAINS(xmlobjs.accountsAdded,STRING(objs.account)))
+	{
+		LOCALMSG(TRIGMOB(), "You have already used this stone. " + xmlints.requiredNumber + " unique players must use this stone in order to update the spawn location.", 38)
+	}
+	else
+	{
+		ADDTOLIST(xmlobjs.accountsAdded, STRING(objs.account))
+		SOUND(THIS(),0x1E6)
+		EFFECT(14138,16,THIS())
+		if (xmlobjs.accountsAdded.count == xmlints.requiredNumber)
+		{
+			static,14089 // it's active now (flamestrike animation)
+			{
+				hue = 1153
+			}
+			LOCALMSG(TRIGMOB(), "Your spawn point has been updated.")
+			XMLOBJS(xmlobjs.owner, xmlstrings.spawnLocationVarName, THIS().location)
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), xmlobjs.accountsAdded.count + " unique players have used this stone. " + xmlints.requiredNumber + " unique players must use this stone in order to update the spawn location.", 38)
+		}
+	}
+}

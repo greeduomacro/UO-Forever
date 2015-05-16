@@ -1,0 +1,266 @@
+function addItems()
+{
+	// expects objs.container to contain the container to which the items will be added
+	
+	if (objs.container.xmlints.numItemsToSpawn == null) // can force a particular number of items
+	{
+		doubles.roll = RANDOMDOUBLE()
+		if (doubles.roll > 0.99) { ints.items = 10}
+		else if (doubles.roll > 0.95) { ints.items = 5}
+		else if (doubles.roll > 0.7) { ints.items = 3 }
+		else if (doubles.roll > 0.3) { ints.items = 2}
+		else { ints.items = 1 }
+	}
+	else
+	{
+		ints.items = objs.container.xmlints.numItemsToSpawn
+	}
+	
+	for (ints.i = 0 ; ints.i < ints.items; ints.i += 1)
+	{
+		doubles.roll = RANDOMDOUBLE()
+		if (doubles.roll > 0.4) // random utility item
+		{
+			// potions, bandages, other basic resources
+			if (doubles.roll > 0.85) { objs.spawned = Bandage; objs.spawned.Amount = RANDOMMINMAX(5, 20) } // 15% chance of bandages
+			else if (doubles.roll > 0.75)  // 10% chance for a potion
+			{
+				if (global_objs.potionlist == null)
+				{
+					global_objs.potionlist = [AgilityPotion, GreaterAgilityPotion, CurePotion, LesserCurePotion, GreaterCurePotion, ExplosionPotion, GreaterExplosionPotion, LesserExplosionPotion, GreaterHealPotion, HealPotion, LesserHealPotion, LesserPoisonPotion, PoisonPotion, GreaterPoisonPotion, DeadlyPoisonPotion, RefreshPotion, TotalRefreshPotion, StrengthPotion, GreaterStrengthPotion]
+				}
+				objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.potionlist))
+			}
+			else if (doubles.roll > 0.55) // 20% chance for reagents
+			{
+				if (global_objs.reagentlist == null)
+				{
+					global_objs.reagentlist = [BlackPearl, Bloodmoss, SpidersSilk, MandrakeRoot, SulfurousAsh, Nightshade, Garlic, Ginseng]
+				}
+				objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.reagentlist))
+				objs.spawned.Amount = RANDOMMINMAX(3, 20)
+			}
+			else if (doubles.roll > 0.5) // 5% chance for bag of some kind
+			{
+				if (global_objs.baglist == null)
+				{
+					global_objs.baglist = [TPouch, Pouch, Bag, Backpack, WoodenChest]
+				}
+				objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.baglist))
+				objs.spawned.doesnotdecay = true
+			}
+			else if (doubles.roll > 0.4) // chance for random item (bowl needed to mix in)
+			{
+				if (doubles.roll > 0.49)
+				{
+					objs.spawned = arrow, 10
+				}
+				else
+				{
+					if (global_objs.randomList == null)
+					{
+						global_objs.randomList = [FootStool, Spoon, Fork, EmptyPewterBowl, Plate, Knife]
+					}
+					objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.randomList))
+				}
+			}
+		}
+		else if (doubles.roll > 0.3) // 10% chance for a weapon
+		{
+// ============= WEAPONS LIST ==========================================
+			if (global_objs.weaponlist == null)
+			{
+				global_objs.weaponlist = [Katana, VikingSword, BroadSword, Halberd, TwoHandedAxe, DoubleAxe, BattleAxe, LargeBattleAxe, ExecutionersAxe, Warhammer, Club, WarAxe, Kryss, Spear, WarFork, ShortSpear, Bow, Crossbow, HeavyCrossbow]
+			}
+			objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.weaponlist))
+			objs.spawned.Speed = FLOAT(1.0) // all weapons are slow like this
+			doubles.powerRoll = RANDOMDOUBLE()
+			objs.spawned.MaxHitPoints = 25
+			objs.spawned.HitPoints = 25
+			
+			if (doubles.powerRoll > 0.20) 
+			{  
+				// normal
+			} 
+			else if (doubles.powerRoll > 0.12) 
+			{  
+				objs.spawned.AccuracyLevel = Accurate
+				objs.spawned.DamageLevel = Ruin
+			}
+			else if (doubles.powerRoll > 0.06) 
+			{  
+				objs.spawned.AccuracyLevel = Surpassingly
+				objs.spawned.DamageLevel = Might
+			}
+			else if (doubles.powerRoll > 0.03) 
+			{  
+				objs.spawned.AccuracyLevel = Eminently
+				objs.spawned.DamageLevel = Force
+			}
+			else if (doubles.powerRoll > 0.01) 
+			{			
+				objs.spawned.AccuracyLevel = Exceedingly
+				objs.spawned.DamageLevel = Power
+			}
+			else 
+			{
+				objs.spawned.AccuracyLevel = Supremely
+				objs.spawned.DamageLevel = Vanq
+			}
+			
+		}
+// ============= ARMOR LIST ==========================================
+		else if (doubles.roll > 0.2) // 10% chance for a piece of armor
+		{
+			if (global_objs.armorlist == null)
+			{
+				global_objs.armorlist = [LeatherArms, LeatherLegs, LeatherGorget, LeatherCap, LeatherChest, LeatherGloves, StuddedArms, StuddedCap, StuddedGloves, StuddedGorget, StuddedLegs, RingmailArms, RingmailChest, RingmailGloves, RingmailLegs, ChainChest, ChainCoif, ChainLegs, PlateArms, PlateChest, PlateGloves, PlateGorget, PlateHelm, PlateLegs]
+			}
+			objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.armorlist))
+			doubles.powerRoll = RANDOMDOUBLE()
+			objs.spawned.MaxHitPoints = 25
+			objs.spawned.HitPoints = 25
+			
+			if (doubles.powerRoll > 0.20) 
+			{  
+				// normal
+			} 
+			else if (doubles.powerRoll > 0.12) 
+			{  
+				objs.spawned.ProtectionLevel = Defense
+			}
+			else if (doubles.powerRoll > 0.06) 
+			{  
+				objs.spawned.ProtectionLevel = Guarding
+			}
+			else if (doubles.powerRoll > 0.03) 
+			{  
+				objs.spawned.ProtectionLevel = Hardening
+			}
+			else if (doubles.powerRoll > 0.01) 
+			{			
+				objs.spawned.ProtectionLevel = Fortification
+			}
+			else 
+			{
+				objs.spawned.ProtectionLevel = Invulnerability
+			}
+		}
+		else if (doubles.roll > 0.1) // 10% chance for a tool of some kind
+		{
+			if (global_objs.toollist == null)
+			{
+				global_objs.toollist = [TinkerTools, Shovel, Tongs, Hammer, FletcherTools, MortarPestle]
+			}
+			objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.toollist))
+		}
+		else if (doubles.roll > 0.02) // 8% chance for a scroll or spellbook
+		{
+			if (doubles.roll > 0.09) // 1% chance (total) for spellbook
+			{
+				objs.spawned = SpellBook { LootType = Regular }
+			}
+			else // spawn a scroll
+			{
+				if (global_objs.scrollList == null)
+				{
+					global_objs.scrollList = [DispelFieldScroll, MagicReflectScroll, MindBlastScroll, ParalyzeScroll, ClumsyScroll, CreateFoodScroll, FeeblemindScroll, HealScroll, MagicArrowScroll, ReactiveArmorScroll, WeakenScroll, ArchCureScroll, ArchProtectionScroll, CurseScroll, FireFieldScroll, GreaterHealScroll, LightningScroll, ManaDrainScroll, AgilityScroll, CunningScroll, CureScroll, HarmScroll, MagicTrapScroll, ProtectionScroll, StrengthScroll, ChainLightningScroll, EnergyFieldScroll, GateTravelScroll, ManaVampireScroll, MeteorSwarmScroll, EnergyBoltScroll, ExplosionScroll, MarkScroll, MassCurseScroll, ParalyzeFieldScroll, BlessScroll, FireballScroll, PoisonScroll, TeleportScroll, WallOfStoneScroll]
+				}
+				objs.spawned = SPAWN(RANDOMFROMLIST(global_objs.scrollList))
+			}
+		}
+		else
+		{
+			if (doubles.roll > 0.005)
+			{
+				objs.spawned = UberscriptItem, 22321
+				objs.spawned.Name = "Undying Flesh"
+				ADDSCRIPT(objs.spawned, "arcade\\regs\\undyingFlesh.us")
+			}
+			else if (doubles.roll > 0.0025)
+			{
+				// give them one of the random reagents
+				objs.reagentNameList = ["Daemon Claw",                   "Vial of Vitriol",                "Fey Wings",                           "Spider Carapace",                 "Vile Tentacles",                "Seed of Renewal"]
+				objs.reagentScriptList = ["arcade\\regs\\daemonClaw.us", "arcade\\regs\\vialOfVitriol.us", "arcade\\regs\\feyWings.us", "arcade\\regs\\spiderCarapace.us", "arcade\\regs\\vileTentacles.us", "arcade\\regs\\seedOfRenewal.us"]
+				objs.reagentItemIDs = [ 22305,                           22307,                            22310,                                      22304,                              22311,                            22326]
+				
+				ints.draw = RANDOM(objs.reagentNameList.count)
+				objs.spawned = UberScriptItem, 22326
+				objs.spawned.Name = objs.reagentNameList[ints.draw]
+				objs.spawned.ItemID = objs.reagentItemIDs[ints.draw]
+				ADDSCRIPT(objs.spawned, objs.reagentScriptList[ints.draw])
+			}
+			else
+			{
+				// give them a scroll with instructions
+				objs.spawned = UberScriptItem, 8792
+				ADDSCRIPT(objs.spawned, "arcade\\clues\\cluescroll.us")
+			}
+		}
+		
+		if (objs.spawned != null)
+		{
+			ADDTOCONTAINER(objs.container, objs.spawned)
+		}
+		
+		// always a 5% chance at an extra bonus pouch and magic trap scroll
+		if (doubles.roll > 0.95)
+		{
+			objs.magictrapScroll = MagicTrapScroll
+			ADDTOCONTAINER(objs.container, objs.magictrapScroll)
+			objs.tpouch = TPouch
+			ADDTOCONTAINER(objs.container, objs.tpouch)
+		}
+	}
+}
+
+onBeforeDeath
+{
+	objs.container = THIS().BackPack
+	if (objs.container == null) { return }
+	addItems()
+}
+onCreate
+{
+	if (IS(THIS(), Container))
+	{
+		objs.container = THIS()
+		THIS().xmlints.numItemsToSpawn = RANDOM(15)
+		addItems()
+	}
+}
+onUse
+{
+	if (xmlints.notZombie == null)
+	{
+		if (IS(THIS(), corpse))
+		{
+			if (RANDOMDOUBLE() < 0.3) // zombie!
+			{
+				objs.spawned = CustomMob
+				{
+					RawName = "a zombie"
+					BodyValue = 3
+					CurrentSpeed = 0.6
+					PassiveSpeed = 0.6
+					ActiveSpeed = 0.16
+					BaseSoundId = 471
+					RangePerception = 18
+					WeaponDamage = false
+					HitsMaxSeed = 50
+					Hits = 50
+					DamageMin = 10
+					DamageMax = 26
+				}
+				ADDSCRIPT(objs.spawned, "arcade\\hallow.us")
+				SOUND(THIS(), 471)
+				DELETE(THIS())
+				return override
+			}
+			else
+			{
+				xmlints.notZombie = 1
+			}
+		}
+	}
+}

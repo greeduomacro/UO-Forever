@@ -1,0 +1,414 @@
+function cleanup()
+{
+	objs.mobsToDelete = XMLOBJS(THIS(), SCRIPT().name + "_Spawned")
+	foreach (objs.mob ; objs.mobsToDelete)
+	{
+		if (objs.mob != null && objs.mob.deleted == false)
+		{
+			DELETE(objs.mob)
+		}
+	}
+	XMLOBJS(THIS(), SCRIPT().name + "_Captain.xmlobject.dodelete", true)
+	XMLOBJS(THIS(), SCRIPT().name + "_Spawned.xmlobject.dodelete", true)
+	XMLOBJS(THIS(), SCRIPT().name + "_InProgress.xmlobject.dodelete", true)
+	XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft.dodelete", true)
+	DELETEMAP(SCRIPT().name + "_CrawlMap")
+	SCRIPT().dodelete = true
+}
+function addBoulderRow() 
+{
+	// expecting objs.rowStart, objs.endPoint, ints.rowLength, ints.missingColumn, objs.spawnMap
+	for (ints.i = 0; ints.i < ints.rowLength; ints.i += 1)
+	{
+		if (ints.i != ints.missingColumn)
+		{
+			objs.boulder = static, 4534
+			{
+				hue = 1 // less of a boulder, more of a dark energy
+				map = objs.spawnMap
+				location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y, objs.rowStart.z)
+				xmlobjs.killType = TYPE(humanmob)
+			}
+			objs.target = POINT3D(objs.endPoint.x + ints.i, objs.endPoint.y, objs.endPoint.z)
+			objs.boulder.xmlobjs.targetLoc = objs.target
+			objs.boulder.xmlobjs.startingLoc = POINT3D(objs.returnPoint.x + ints.i, objs.returnPoint.y, objs.returnPoint.z)
+			ADDSCRIPT(objs.boulder, "fun\\boulder.txt")
+			ADDTOLIST(objs.spawnedList, objs.boulder)
+		}
+	}	
+}
+function spawn()
+{
+	for (ints.i = 0; ints.i < ints.spawnCount; ints.i += 1)
+	{
+		// SOMEHOW SPAWNING BEHIND WALLS?
+		//objs.spawned = SPAWN(objs.spawnLoc, objs.spawnName, ints.spawnRange, objs.spawnMap)
+		objs.spawned = SPAWN(objs.spawnLoc, objs.spawnName, objs.spawnMap)
+		objs.spawned.xmlobjs.owner = THIS()
+		if (IS(objs.spawned, basecreature))
+		{
+			objs.spawned.rangehome = 10
+			objs.script = NEWATTACHMENT(xmlscript, SCRIPT().name)
+			objs.script.ScriptFile = "alan\\automated\\monster.txt"
+			ATTACH(objs.spawned, objs.script)
+			XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft", (XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft") + 1)) // kind of hacky, but meh...  This is just "monstersleft += 1", but have to use XMLINTS to access and set it b/c we don't know the name of the variable (it's based on the team captain's name)
+		}
+		ADDTOLIST(objs.spawnedList, objs.spawned)
+	}
+}
+
+onOneMinute
+{
+	if (NOW() > XMLOBJS(THIS(), SCRIPT().name + "_InProgress") + TIMESPANMINUTES(xmldoubles.MaxMinutesAllowed)) // see if NOW > startTime + maxminutesAllowed time is up
+	{
+		objs.captain = XMLOBJS(THIS(), SCRIPT().name + "_Captain")
+		foreach (objs.teamMember ; objs.captain.xmlobjs.dungeonCrawlTeam)
+		{
+			SETACCOUNTTAG(objs.teamMember, "dungeonCrawlCompleted", "failure")
+			LOCALMSG(objs.teamMember, "You failed to complete the dungeon crawl in the " + xmldoubles.MaxMinutesAllowed + " minutes allotted!", 38)
+		}
+		cleanup()
+	}
+}
+onTwoFiftyMS
+{
+	if (XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft") <= 0)
+	{
+		objs.captain = XMLOBJS(THIS(), SCRIPT().name + "_Captain")
+		objs.captain.xmlobjs.dungeonCrawlTime = NOW() - XMLOBJS(THIS(), SCRIPT().name + "_InProgress")
+		foreach (objs.teamMember ; objs.captain.xmlobjs.dungeonCrawlTeam)
+		{
+			SETACCOUNTTAG(objs.teamMember, "dungeonCrawlCompleted", STRING(objs.captain.xmlobjs.dungeonCrawlTime))
+			LOCALMSG(objs.teamMember, "You completed the dungeon crawl in " + TIMESPANSTRING(objs.captain.xmlobjs.dungeonCrawlTime), 38)
+		}
+		cleanup()
+	}
+}
+onCreate
+{
+	SUBSCRIBETIMER(OneMinute)
+	
+	XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft", 0) // initialize number of monsters to 0
+	XMLOBJS(THIS(), SCRIPT().name + "_Spawned", NEWLIST()) // add a list of all spawned mobs specific to this team
+	// spawn a map just for them
+	CREATEMAP(felucca, SCRIPT().name + "_CrawlMap")
+	
+	// spawn monsters, add to list
+	// Deceit Level 1
+	objs.spawnMap = MAP(SCRIPT().name + "_CrawlMap")
+	objs.spawnedList = XMLOBJS(THIS(), SCRIPT().name + "_Spawned")
+	
+	// spiderqueen boss on first level
+	objs.spawnLoc = POINT3D(5169, 610, 0); objs.spawnName = "spiderqueen"; ints.spawnRange = 5; ints.spawnCount = 1; spawn()
+	objs.spawned.stammaxseed = 70
+	objs.spawned.stam = 70
+	objs.spawned.dex = 70
+	objs.spawned.damagemin = 10
+	objs.spawned.damagemax = 20
+	
+	objs.spawnLoc = POINT3D(5187, 615, 0); objs.spawnName = "mummy"; ints.spawnRange = 5; ints.spawnCount = 5; spawn()
+	objs.spawnLoc = POINT3D(5187, 615, 0); objs.spawnName = "skeleton"; ints.spawnRange = 5; ints.spawnCount = 10; spawn()
+	objs.spawnLoc = POINT3D(5187, 615, 0); objs.spawnName = "skeletalmage"; ints.spawnRange = 5; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5187, 576, 0); objs.spawnName = "waterelemental"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	objs.spawnLoc = POINT3D(5187, 576, 0); objs.spawnName = "deepwaterelemental"; ints.spawnRange = 8; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5187, 547, 0); objs.spawnName = "skeletalmage"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5187, 547, 0); objs.spawnName = "zombie"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	objs.spawnLoc = POINT3D(5187, 547, 0); objs.spawnName = "skeletalknight"; ints.spawnRange = 8; ints.spawnCount = 3; spawn()
+	objs.spawnLoc = POINT3D(5187, 547, 0); objs.spawnName = "skeletalmage"; ints.spawnRange = 8; ints.spawnCount = 3; spawn()
+	
+	objs.spawnLoc = POINT3D(5165, 566, 0); objs.spawnName = "balron"; ints.spawnRange = 8; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5147, 592, -50); objs.spawnName = "spectre"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5145, 619, -50); objs.spawnName = "rottingcorpse"; ints.spawnRange = 8; ints.spawnCount = 3; spawn()
+	
+	objs.spawnLoc = POINT3D(5145, 619, -50); objs.spawnName = "ancientlich"; ints.spawnRange = 8; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5219, 542, 0); objs.spawnName = "skeleton"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5221, 566, 0); objs.spawnName = "wraith"; ints.spawnRange = 6; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5221, 566, 0); objs.spawnName = "daemon"; ints.spawnRange = 6; ints.spawnCount = 1; spawn()
+	
+	// LEVEL 2
+	objs.spawnLoc = POINT3D(5307, 544, 0); objs.spawnName = "shade"; ints.spawnRange = 6; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5327, 543, 0); objs.spawnName = "balron"; ints.spawnRange = 8; ints.spawnCount = 1; spawn()
+	
+	objs.spawnLoc = POINT3D(5327, 543, 0); objs.spawnName = "lich"; ints.spawnRange = 8; ints.spawnCount = 3; spawn()
+	
+	objs.spawnLoc = POINT3D(5286, 543, 0); objs.spawnName = "rottingcorpse"; ints.spawnRange = 8; ints.spawnCount = 3; spawn()
+	
+	objs.spawnLoc = POINT3D(5286, 543, 0); objs.spawnName = "poisonelemental"; ints.spawnRange = 8; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5283, 567, 0); objs.spawnName = "skeletalmage"; ints.spawnRange = 3; ints.spawnCount = 15; spawn()
+	
+	objs.spawnLoc = POINT3D(5287, 583, 0); objs.spawnName = "skeletalmage"; ints.spawnRange = 8; ints.spawnCount = 15; spawn()
+	
+	//objs.spawnLoc = POINT3D(5319, 583, 0); objs.spawnName = "bogle"; ints.spawnRange = 8; //ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5302, 606, 0); objs.spawnName = "ancientwyrm"; ints.spawnRange = 8; ints.spawnCount = 1; spawn()
+	
+	objs.spawnLoc = POINT3D(5290, 618, 0); objs.spawnName = "succubus"; ints.spawnRange = 2; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5342, 584, 0); objs.spawnName = "daemon"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	//objs.spawnLoc = POINT3D(5139, 675, 0); objs.spawnName = "mummy"; ints.spawnRange = 8; //ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5155, 695, 0); objs.spawnName = "dreadspider"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	//objs.spawnLoc = POINT3D(5179, 700, 0); objs.spawnName = "rottingcorpse"; ints.spawnRange = 8; ints.spawnCount = 1; spawn()
+	
+	//objs.spawnLoc = POINT3D(5179, 700, 0); objs.spawnName = "wraith"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5183, 727, 0); objs.spawnName = "poisonelemental"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5216, 678, -20); objs.spawnName = "lich"; ints.spawnRange = 6; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5219, 733, -20); objs.spawnName = "lichlord"; ints.spawnRange = 10; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5219, 733, -20); objs.spawnName = "ancientlich"; ints.spawnRange = 10; ints.spawnCount = 1; spawn()
+	
+	// LEVEL 4
+	objs.spawnLoc = POINT3D(5308, 672, 0); objs.spawnName = "rottingcorpse"; ints.spawnRange = 10; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5308, 672, 0); objs.spawnName = "balron"; ints.spawnRange = 10; ints.spawnCount = 1; spawn()
+	
+	objs.spawnLoc = POINT3D(5295, 699, 0); objs.spawnName = "lichlord"; ints.spawnRange = 4; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5275, 675, 5); objs.spawnName = "balron"; ints.spawnRange = 12; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5257, 657, 0); objs.spawnName = "skeletalknight"; ints.spawnRange = 2; ints.spawnCount = 2; spawn()
+	objs.spawnLoc = POINT3D(5257, 657, 0); objs.spawnName = "ancientlich"; ints.spawnRange = 2; ints.spawnCount = 2; spawn()
+	
+	objs.spawnLoc = POINT3D(5330, 706, 0); objs.spawnName = "lich"; ints.spawnRange = 5; ints.spawnCount = 5; spawn()
+	
+	objs.spawnLoc = POINT3D(5330, 706, 0); objs.spawnName = "ancientlich"; ints.spawnRange = 5; ints.spawnCount = 2; spawn()
+	
+	// lich lord room
+	objs.spawnLoc = POINT3D(5314, 749, -20); objs.spawnName = "ancientlich"; ints.spawnRange = 12; ints.spawnCount = 1; spawn()
+	
+	//================ THE BOSS ==============================================================
+	objs.spawned = neira
+	{
+		dex = 70
+		stammaxseed = 70
+		stam = 70
+		hitsmaxseed = 4000
+		hits = 4000
+	}
+	objs.spawned.xmlobjs.owner = THIS()
+	objs.script = NEWATTACHMENT(xmlscript, SCRIPT().name)
+	objs.script.ScriptFile = "alan\\automated\\monster.txt"
+	ATTACH(objs.spawned, objs.script)
+	ADDTOLIST(XMLOBJS(THIS(), SCRIPT().name + "_Spawned"), objs.spawned)
+	XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft", (XMLINTS(THIS(), SCRIPT().name + "_MonstersLeft") + 1)) // kind of hacky, but meh...  This is just "monstersleft += 1", but have to use XMLINTS to access and set it b/c we don't know the name of the variable (it's based on the team captain's name)
+	MOVETOWORLD(objs.spawned, objs.spawnLoc, SCRIPT().name + "_CrawlMap")
+	
+	
+	// ================ ADD ALL THE TELEPORTERS ================================================
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5216,587,-18); pointdest = POINT3D(5304,533,2); }	
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5217,587,-18); pointdest = POINT3D(5305,533,2); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5218,587,-18); pointdest = POINT3D(5306,533,2); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5304,529,20); pointdest = POINT3D(5216,585,-8); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5305,529,20); pointdest = POINT3D(5217,585,-8); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5306,529,20); pointdest = POINT3D(5218,585,-8); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5346,578,5); pointdest = POINT3D(5137,649,5); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5137,649,5); pointdest = POINT3D(5346,578,5); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5218,760,-23); pointdest = POINT3D(5305,651,7); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5219,760,-23); pointdest = POINT3D(5306,651,7); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5305,650,12); pointdest = POINT3D(5218,760,-23); }
+	objs.teleporter = teleporter { map = objs.spawnMap; mapdest = objs.spawnMap; location = POINT3D(5306,650,12); pointdest = POINT3D(5219,760,-23); }
+	
+	//=========== COVER THE PIT ON LEVEL 4 ==========================================
+	for (ints.i = 0; ints.i < 6; ints.i += 1)
+	{
+		for (ints.j = 0; ints.j < 6; ints.j += 1)
+		{
+			static, 1309
+			{
+				map = objs.spawnMap
+				location = POINT3D(5305 + ints.i, 673 + ints.j, 0)
+			}
+		}
+	}
+	
+	//=========== STAIR TILES MISSING FROM MAP ======================================
+	// fill in missing stair tiles (why are these missing from the map??)
+	static, 1956 { map = objs.spawnMap; location = POINT3D(5306, 649, 15) }
+	static, 1956 { map = objs.spawnMap; location = POINT3D(5305, 531, 10) }
+	static, 1956 { map = objs.spawnMap; location = POINT3D(5217, 587, -20) }
+	blocker { map = objs.spawnMap; location = POINT3D(5218, 762, -35) }
+	blocker { map = objs.spawnMap; location = POINT3D(5218, 763, -35) }
+	blocker { map = objs.spawnMap; location = POINT3D(5219, 763, -35) }
+	
+	//================ OBSTACLES =====================================================
+	//=============== LEVEL 1 ========================================================
+	//============ ADD BOULDERS ======================================================
+	
+	// ---------- BOULDER WARNINGS ------------------------
+	objs.spawnLoc = POINT3D(5209, 538, -3); objs.spawnName = "uberscriptitem"; ints.spawnRange = 0; ints.spawnCount = 1; spawn()
+	ADDSCRIPT(objs.spawned, "fun\\animatedmessagetile.txt", crawlboulderwarn)
+	objs.spawned.xmlstrings.title = "You shiver as you feel dark energy close by."
+	objs.spawned.xmlstrings.gumpPath = "fun\\animatedmessage.xml"
+	objs.spawned.xmlints.gumpstop = 6
+	
+	objs.spawnLoc = POINT3D(5210, 538, -3); objs.spawnName = "uberscriptitem"; ints.spawnRange = 0; ints.spawnCount = 1; spawn()
+	ADDSCRIPT(objs.spawned, "fun\\animatedmessagetile.txt", crawlboulderwarn)
+	objs.spawned.xmlstrings.title = "You shiver as you feel dark energy close by."
+	objs.spawned.xmlstrings.gumpPath = "fun\\animatedmessage.xml"
+	objs.spawned.xmlints.gumpstop = 6
+	
+	objs.spawnLoc = POINT3D(5211, 538, -3); objs.spawnName = "uberscriptitem"; ints.spawnRange = 0; ints.spawnCount = 1; spawn()
+	ADDSCRIPT(objs.spawned, "fun\\animatedmessagetile.txt", crawlboulderwarn)
+	objs.spawned.xmlstrings.title = "You shiver as you feel dark energy close by."
+	objs.spawned.xmlstrings.gumpPath = "fun\\animatedmessage.xml"
+	objs.spawned.xmlints.gumpstop = 6
+	
+	objs.spawnLoc = POINT3D(5208, 529, 0); objs.spawnName = "uberscriptitem"; ints.spawnRange = 0; ints.spawnCount = 1; spawn()
+	ADDSCRIPT(objs.spawned, "fun\\animatedmessagetile.txt", crawlboulderwarn)
+	objs.spawned.xmlstrings.title = "You shiver as you feel dark energy close by."
+	objs.spawned.xmlstrings.gumpPath = "fun\\animatedmessage.xml"
+	objs.spawned.xmlints.gumpstop = 6
+	
+	objs.spawnLoc = POINT3D(5208, 530, 0); objs.spawnName = "uberscriptitem"; ints.spawnRange = 0; ints.spawnCount = 1; spawn()
+	ADDSCRIPT(objs.spawned, "fun\\animatedmessagetile.txt", crawlboulderwarn)
+	objs.spawned.xmlstrings.title = "You shiver as you feel dark energy close by."
+	objs.spawned.xmlstrings.gumpPath = "fun\\animatedmessage.xml"
+	objs.spawned.xmlints.gumpstop = 6
+	
+	objs.endPoint = POINT3D(5216, 529, 0); ints.rowLength = 7;	
+	objs.returnPoint = POINT3D(5216, 577, 0);
+	
+	objs.rowStart = POINT3D(5216, 577, 0);
+	ints.missingColumn = 3
+	addBoulderRow() 
+	
+	objs.rowStart = POINT3D(5216, 567, 0) 
+	ints.missingColumn = 1
+	addBoulderRow() 
+	
+	objs.rowStart = POINT3D(5216, 553, 0) 
+	ints.missingColumn = 4
+	addBoulderRow() 
+	
+	objs.rowStart = POINT3D(5216, 537, 0) 
+	ints.missingColumn = 6
+	addBoulderRow() 
+	
+	//=============== LEVEL 2 ========================================================
+	//================= LAVA PIT =====================================================
+	objs.rowStart = POINT3D(5128, 705, 0)
+	ints.numColumns = 7
+	ints.numRows = 12
+	for (ints.i = 0; ints.i < ints.numColumns; ints.i += 1)
+	{
+		objs.noLOS = losblocker
+		{
+			map = objs.spawnMap
+			location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y, objs.rowStart.z)
+		}
+		objs.stairs = static, 1958
+		{
+			map = objs.spawnMap
+			location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y - 1, objs.rowStart.z)
+		}
+		for (ints.j = 0; ints.j < ints.numRows; ints.j += 1)
+		{
+			objs.lava = uberscriptitem, 4846
+			{
+				map = objs.spawnMap
+				location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y + ints.j, objs.rowStart.z)
+				xmlobjs.killType = TYPE(humanmob)
+			}
+			ADDSCRIPT(objs.lava, "fun\\lavatile.txt")
+		}
+		// stairs and LOS blocker on last row
+		objs.noLOS = losblocker
+		{
+			map = objs.spawnMap
+			location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y + ints.j - 1, objs.rowStart.z)
+		}
+		objs.noLOS = losblocker
+		{
+			map = objs.spawnMap
+			location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y + ints.j - 2, objs.rowStart.z)
+		}
+		objs.stairs = static, 1929
+		{
+			map = objs.spawnMap
+			location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y + ints.j, objs.rowStart.z)
+		}
+		objs.message = uberscriptitem
+		{
+			map = objs.spawnMap
+			location = POINT3D(objs.rowStart.x + ints.i, objs.rowStart.y + ints.j, objs.rowStart.z + 2) // make it a bit higher
+			xmlstrings.title = "You overhear ghastly voices arguing over some research documents related to teleportation"
+			xmlstrings.gumpPath = "fun\\animatedmessage.xml"
+			xmlints.gumpstop = 15
+		}
+		ADDSCRIPT(objs.message, "fun\\animatedmessagetile.txt", "crawlmsg1")
+	}
+	// add the snake platform
+	objs.platform = static, 1928
+	{
+		xmlints.startY = objs.rowStart.y
+		xmlints.targetY = objs.rowStart.y + ints.numRows
+		map = objs.spawnMap
+		location = objs.rowStart
+	}
+	ADDSCRIPT(objs.platform, "fun\\snakeplatform.txt")
+	
+	// BEGIN behind the lava tiles --------------------------------
+	
+	objs.pentagram = uberscriptitem
+	{
+		map = objs.spawnMap
+		location = POINT3D(5151,717,0)
+		visible = false
+		xmlobjs.target = POINT3D(5131,702,0)
+	}	
+	ADDSCRIPT(objs.pentagram, "fun\\powerwordteleporter.txt", "powerwordtele")
+	
+	objs.RandomPowerWords = [An,Bet,Corp,Des,Ex,Flam,Grav,Hur,In,Jux,Kal,Lor,Mani,Nox,Ort,Por,Quas,Rel,Sanct,Tym,Uus,Vas,Xen,Wis,Ylem,Zu,Romien,Frodre,Jatar,Tan,Ulifojias,Echoflerg,Clapias,Thugropias,Ogryfufar, Evakus,Amybien,Tyapicien,Sediel,Ipisa,Gevius,Inuca]
+	
+	strings.chosen = objs.RandomPowerWords[RANDOM(objs.RandomPowerWords.count)]
+	objs.pentagram.xmlstrings.powerword1 = strings.chosen
+	
+	objs.spawnLoc = POINT3D(5151, 719, 0); objs.spawnName = "lichlord"; ints.spawnRange = 8; ints.spawnCount = 1; spawn()
+	objs.scroll = item, 8792
+	{
+		name = "Results of some mystical research involving a pentagram and the power word \"" + strings.chosen + "\""
+	}
+	ADDTOPACK(objs.spawned, objs.scroll)
+	
+	strings.chosen = objs.RandomPowerWords[RANDOM(objs.RandomPowerWords.count)]
+	objs.pentagram.xmlstrings.powerword2 = strings.chosen
+	
+	objs.spawnLoc = POINT3D(5151, 719, 0); objs.spawnName = "lich"; ints.spawnRange = 8; ints.spawnCount = 5; spawn()
+	objs.scroll = item, 8792
+	{
+		name = "Results of some mystical research involving a pentagram and the power word \"" + strings.chosen + "\""
+	}
+	ADDTOPACK(objs.spawned, objs.scroll)
+	
+	strings.chosen = objs.RandomPowerWords[RANDOM(objs.RandomPowerWords.count)]
+	objs.pentagram.xmlstrings.powerword3 = strings.chosen
+	
+	objs.spawnLoc = POINT3D(5151, 743, 0); objs.spawnName = "daemon"; ints.spawnRange = 3; ints.spawnCount = 5; spawn()
+	objs.scroll = item, 8792
+	{
+		name = "Results of some mystical research involving a pentagram and the power word \"" + strings.chosen + "\""
+	}
+	ADDTOPACK(objs.spawned, objs.scroll)
+	
+	
+	// END behind the lava tiles --------------------
+	
+	
+	// start checking whether all the monsters have been defeated
+	SUBSCRIBETIMER(TwoFiftyMS)
+}

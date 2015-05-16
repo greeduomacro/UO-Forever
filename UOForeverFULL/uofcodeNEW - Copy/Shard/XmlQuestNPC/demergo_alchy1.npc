@@ -1,0 +1,81 @@
+<?xml version="1.0" standalone="yes"?>
+<XmlQuestNPC>
+  <NPC>
+    <Running>True</Running>
+    <ProximityRange>3</ProximityRange>
+    <ResetRange>16</ResetRange>
+    <AllowGhost>False</AllowGhost>
+    <SpeechPace>10</SpeechPace>
+    <ResetTime>0.333333333</ResetTime>
+    <ConfigFile>demergo_door</ConfigFile>
+    <SpeechEntries>6</SpeechEntries>
+  </NPC>
+  <SpeechEntry>
+    <EntryNumber>0</EntryNumber>
+    <ID>0</ID>
+    <DependsOn />
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>10</EntryNumber>
+    <ID>10</ID>
+	<Condition>AMOUNTCARRIED,noxcrystal&lt;1</Condition>
+	<Action>SETONTHIS/SAY/I have everything I need for the counter ssspell exsscept 10 Nox cryssstals.  Pleassse hurry and find sssome and bring it here!  They grow on rotting corpsssesss here in the ssssewer.</Action>
+    <DependsOn>-1</DependsOn>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>20</EntryNumber>
+    <ID>20</ID>
+	<Condition>AMOUNTCARRIED,noxcrystal&gt;0</Condition>
+	<Action>SETONTHIS/SAY/Sssplendid, you found sssome Noxsss crysstal! I'll take that!... ; TAKEBYTYPE,1,100/noxcrystal ; SETONTHIS/ATTACHMENT,xmlvalue,noxcrystals,value/INC,{GETONTAKEN,amount}</Action>
+    <DependsOn>-1</DependsOn>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>21</EntryNumber>
+    <ID>21</ID>
+	<Condition>GETONMOB,an ophidian alchemist,ophidianmage,[ATTACHMENT,xmlvalue,noxcrystals,value]&lt;10</Condition>
+	<Action>SETONTHIS/SAY/I have {GETONMOB,an ophidian alchemist,ophidianmage,[ATTACHMENT,xmlvalue,noxcrystals,value]} noxss crysstals... I need at leassst 10 to work the ssspell!</Action>
+    <DependsOn>20</DependsOn>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>25</EntryNumber>
+    <ID>25</ID>
+	<Condition>GETONMOB,an ophidian alchemist,ophidianmage,[ATTACHMENT,xmlvalue,noxcrystals,value]&gt;9</Condition>
+	<Action>SETONTHIS/SAY/It isss enough! ; SET,DemergoAlch_DoorBlowUp,xmlspawner/running/true ; SETONMOB,an ophidian alchemist,ophidianmage/ATTACHMENT,xmldialog,,dodelete/true</Action>
+    <DependsOn>20</DependsOn>
+    <Pause>4</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+</XmlQuestNPC>

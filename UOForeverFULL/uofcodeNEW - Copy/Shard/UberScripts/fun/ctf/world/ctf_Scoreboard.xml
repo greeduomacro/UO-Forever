@@ -1,0 +1,53 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue ="1553">"======================= Scoreboard ========================="</Label>
+		<Spacer height="10"/>
+		<HBox>
+			<VBox>
+				<Label hue="1153">objs.groups[0].name+" Flag Captures: "+objs.groups[0].score</Label>
+				<Label hue="100">"Individual Scores..."</Label>
+				<Label hue="100">"     Kills  Assists  Captures      Name"</Label>
+				<List list="objs.groups[0].members" objs="member">
+					<HBox>
+						<Image x="5" gumpID="5032"/>
+						<Label hue="1153">"    "+objs.member.xmlints.ctfkills+"       "+objs.member.xmlints.ctfassists+"       "+objs.member.xmlints.ctfcaptures+"       "+objs.member.name</Label>
+				 	</HBox>
+				</List>
+			</VBox>
+			<Spacer width="50"/>
+			<VBox>
+				<Label hue="1153">objs.groups[1].name+" Flag Captures: "+objs.groups[1].score</Label>
+				<Label hue="100">"Individual Scores..."</Label>
+				<Label hue="100">"     Kills  Assists  Captures      Name"</Label>
+				<List list="objs.groups[1].members" objs="member">
+					<HBox>
+						<Image x="5" gumpID="5032"/>
+						<Label hue="1153">"    "+objs.member.xmlints.ctfkills+"       "+objs.member.xmlints.ctfassists+"       "+objs.member.xmlints.ctfcaptures+"       "+objs.member.name</Label>
+					</HBox>
+				</List>
+			</VBox>
+			<VBox condition="objs.groups.count>2">
+				<Label hue="1153">objs.groups[2].name+" Flag Captures: "+objs.groups[2].score</Label>
+				<Label hue="100">"Individual Scores..."</Label>
+				<Label hue="100">"     Kills  Assists  Captures      Name"</Label>
+				<List list="objs.groups[2].members" objs="member">
+					<HBox>
+						<Image x="5" gumpID="5032"/>
+						<Label hue="1153">"    "+objs.member.xmlints.ctfkills+"       "+objs.member.xmlints.ctfassists+"       "+objs.member.xmlints.ctfcaptures+"       "+objs.member.name</Label>
+					</HBox>
+				</List>
+			</VBox>
+			<VBox condition="objs.groups.count>3">
+				<Label hue="1153">objs.groups[3].name+" Flag Captures: "+objs.groups[3].score</Label>
+				<Label hue="100">"Individual Scores..."</Label>
+				<Label hue="100">"     Kills  Assists  Captures      Name"</Label>
+				<List list="objs.groups[3].members" objs="member">
+					<HBox>
+						<Image x="5" gumpID="5032"/>
+						<Label hue="1153">"    "+objs.member.xmlints.ctfkills+"       "+objs.member.xmlints.ctfassists+"       "+objs.member.xmlints.ctfcaptures+"       "+objs.member.name</Label>
+					</HBox>
+				</List>
+			</VBox>
+		</HBox>
+	</VBox>
+</Gump>

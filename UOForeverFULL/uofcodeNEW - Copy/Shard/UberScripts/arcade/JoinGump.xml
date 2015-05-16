@@ -1,0 +1,23 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"UO Forever Survival Event Instructions"</Label>
+		<Label hue="1153">"YOU ARE RESPONSIBLE FOR THE WEB PAGE INSTRUCTIONS!"</Label>
+		<Label hue="1153">"If you page about something that is clearly"</Label>
+		<Label hue="1153">"answered on that website, we will not be happy!"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="instructions"/>
+			<Label hue ="1553">"Read the instructions"</Label>
+		</HBox>
+		<Label hue="1153">"If pressing the above button doesn't open"</Label> 
+		<Label hue="1153">"Your browser, then simply go to www.uoforever.com"</Label>
+		<Label hue="1153">"and navigate to Community-->Forums"</Label>
+		<Label hue="1153">"--->Ultima Online Forever News"</Label>
+		<Label hue="1153">"----->ULTIMA ONLINE FOREVER SURVIVAL! in Announcements"</Label>
+		<Spacer height="60"/>
+		<Label hue="1153">"AFTER you have read the instructions:"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="joinEvent"/>
+			<Label hue ="1553">"Join this Event"</Label>
+		</HBox>
+	</VBox>
+</Gump>

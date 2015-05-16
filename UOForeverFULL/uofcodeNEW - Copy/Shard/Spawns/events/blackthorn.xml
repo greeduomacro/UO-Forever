@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>BlackthornInvasionControl</Name>
+    <UniqueId>ccf1787d-a526-4376-9c51-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1345</X>
+    <Y>1497</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1345</CentreX>
+    <CentreY>1497</CentreY>
+    <CentreZ>25</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornGY.xml/loadconfig/true/location/(1348,1492,20)/spawnrange/11/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornTrinsic.xml/loadconfig/true/location/(1852,2793,-8)/spawnrange/25/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornTrinsic.xml/loadconfig/true/location/(1899,2818,0)/spawnrange/25/running/true :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornTrinsic.xml/loadconfig/true/location/(2003,2868,10)/spawnrange/25/running/true   :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornTrinsic.xml/loadconfig/true/location/(2070,2856,-2)/spawnrange/25/running/true    :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornTrinsic.xml/loadconfig/true/location/(1994,2747,30)/spawnrange/25/running/true     :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+		:OBJ=xmlspawner/configfile/Spawns\events\blackthornBoss.xml/loadconfig/true/location/(2029,2720,31)/spawnrange/0/running/false     :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		
+		:OBJ=xmlspawner/configfile/Spawns\common\autorevealer.xml/loadconfig/true/location/(2030,2879,0)/spawnrange/0/running/true     :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		
+		
+		:OBJ=static,4768/location/(2029,2878,0)/ATTACH/&lt;xmlscript,Uberscripts\Khaldun\statue.txt&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=static,4767/location/(2029,2879,0)/ATTACH/&lt;xmlscript,Uberscripts\Khaldun\statue.txt&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=static,4769/location/(2028,2879,0)/ATTACH/&lt;xmlscript,Uberscripts\Khaldun\statue.txt&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		
+		:OBJ=xmlquestnpc/location/(1418,1579,30)/bodyvalue/400/name/Michael Angelo/cantwalk/true/blessed/true/home/(1418,1579,30)/ATTACH/&lt;xmlscript,Uberscripts\Khaldun\michaelangelo.txt&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=11
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+	</Objects2>
+
+  </Points>
+</Spawns>

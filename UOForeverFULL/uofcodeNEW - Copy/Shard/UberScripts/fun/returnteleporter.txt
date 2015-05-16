@@ -1,0 +1,24 @@
+onCreate
+{
+	movable = false
+	itemid = 3546
+	visible = true
+	xmlstrings.command = "I wish to go back"
+}
+onMoveOver
+{
+	LOCALMSG(TRIGMOB(), "To go back, say \"" + xmlstrings.command + "\"", 0x38)
+}
+onSpeech
+{
+	if (xmlobjs.target == null) { return }
+	
+	if (TRIGMOB().x == THIS().x && TRIGMOB().y == THIS().y)
+	{
+		if (SAID(xmlstrings.command))
+		{
+			TRIGMOB().location = xmlobjs.target
+		}
+	}
+	
+}

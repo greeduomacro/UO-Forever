@@ -1,0 +1,4 @@
+onCreate
+{
+	THIS().companion = true
+}

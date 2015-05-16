@@ -1,0 +1,7 @@
+onUse 
+{ 
+  if (THIS().rootparententity == TRIGMOB()) 
+{ 
+ TRIGMOB().solidhueoverride = 0x4001 
+} 
+}

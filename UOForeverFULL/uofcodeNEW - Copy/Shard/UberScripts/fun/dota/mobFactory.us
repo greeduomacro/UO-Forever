@@ -1,0 +1,66 @@
+onCreate
+{
+	Hue = 1863
+	BaseSoundID = 442
+	BodyValue = 47
+	BreathCustomDelay = 2.0
+	BreathDamageCustom = 20
+	CanBreathCustom = true
+	Pseu_CanBeHealed = false
+	RangePerception = 15
+	HitsMaxSeed = 2000
+	Hits = 2000
+	xmlints.count = 0
+	PoisonCustomImmune = Lethal
+	Name = "Elemental Factory"
+	BardImmuneCustom = true
+	SUBSCRIBETIMER(OneSecond)
+	// expecting xmlobjs.waypoint to be the first waypoint the spawned mobs should go
+	// expecting xmlints.teamColor to be the team's color
+}
+onOneSecond
+{
+	if (xmlobjs.owner.xmlints.enabled != 1) { return }
+	
+	xmlints.count += 1
+	if (xmlints.count >= xmlobjs.owner.xmlints.secondsBetweenSpawn)
+	{
+		xmlints.count = 0
+		// create mobs
+		for (ints.i = 0; ints.i < 3; ints.i += 1)
+		{
+			objs.elemental = CustomMob // earth elemental
+			objs.elemental.Hue = THIS().Hue
+			ADDSCRIPT(objs.elemental, "fun\\dota\\earthElemental.us")
+			objs.team = GETATTACHMENT(THIS(), XmlTeam)
+			SETSKILL(objs.elemental, Wrestling, 60.0)
+			SETTEAM(objs.elemental, STRING(objs.team.TeamVal))
+			ADDTOLIST(xmlobjs.owner.xmlobjs.Spawned, objs.elemental)
+			objs.elemental.CurrentWaypoint = xmlobjs.waypoint
+		}
+		objs.elemental = CustomMob // air elemental
+		objs.elemental.Hue = THIS().Hue
+		ADDSCRIPT(objs.elemental, "fun\\dota\\airElemental.us")
+		SETSKILL(objs.elemental, Magery, 75.0)
+		SETSKILL(objs.elemental, Wrestling, 60.0)
+		SETTEAM(objs.elemental, STRING(objs.team.TeamVal))
+		objs.elemental.CurrentWaypoint = xmlobjs.waypoint
+		ADDTOLIST(xmlobjs.owner.xmlobjs.Spawned, objs.elemental)
+	}
+}
+
+onTakenHit
+{
+	if (IS(TRIGMOB(),HumanMob))
+	{
+		if (IS(SPELL(),earthquakespell)) { return }
+		if (TRIGMOB().xmlints.dotaTurretDamage == null)
+		{
+			TRIGMOB().xmlints.dotaTurretDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.dotaTurretDamage += DAMAGE()
+		}
+	}
+}

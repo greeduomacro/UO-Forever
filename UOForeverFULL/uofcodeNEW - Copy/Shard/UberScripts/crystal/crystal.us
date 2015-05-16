@@ -1,0 +1,36 @@
+onCreate
+{
+	objs.list = [8710, 8720, 8730, 8740]
+	ItemID = RANDOMFROMLIST(objs.list) + RANDOMMINMAX(0,8)
+}
+onTargeted
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		if (IS(TRIGITEM(),GargoylesPickaxe) || IS(TRIGITEM(), Shovel) || IS(TRIGITEM(), Pickaxe) || IS (TRIGITEM(), SturdyPickaxe) || IS (TRIGITEM(), OrcishPickaxe))
+		{
+			if (GETSKILL(TRIGMOB(), Mining) < 120.0)
+			{
+				SWINGANIMATION(TRIGMOB());
+				SOUND(THIS(), 0x4B8)
+				//LOCALMSG(TRIGMOB(), "Your tool is incinerated! Only gargoyle pickaxes can be used to harvest this crystal!")
+				SENDMSG(TRIGMOB(), "Your tool was incinerated! Only a legendary miner has the skill necessary harvest these crystals (i.e. 120 Mining skill)!")
+				DELETE(TRIGITEM())
+				return override
+			}
+			else
+			{
+				TRIGMOB().xmlobjs.crystal = THIS()
+				TRIGMOB().xmlobjs.crystal.xmlobject.expiration = TIMESPANMINUTES(0.5)
+				ADDSCRIPT(TRIGMOB(), "crystal\\crystalHarvest.us", "crystalMining")
+				return override
+			}
+			
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is too far away.")
+		return override
+	}
+}

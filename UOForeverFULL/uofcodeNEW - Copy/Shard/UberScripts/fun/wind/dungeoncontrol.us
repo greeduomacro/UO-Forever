@@ -1,0 +1,327 @@
+// TODO: Probably should add entrances from each faction stronghold??
+// make sure logging out runs the onExit command
+// maybe make it if a player dies, they pop back to their faction stronghold? other players can then join??
+
+function cleanup()
+{
+	foreach (objs.spawnedItem ; xmlobjs.spawned)
+	{
+		if (objs.spawnedItem != null && objs.spawnedItem.deleted == false)
+		{
+			DELETE(objs.spawnedItem)
+		}
+	}
+	Active = false
+	UNSUBSCRIBETIMER(OneMinute)
+}
+
+function switchtiles()
+{
+	//moving tiles
+	xmlobjs.rtile1 = UberScriptItem
+	xmlobjs.rtile1.ItemID = 7385
+	xmlobjs.rtile1.Hue = 1150
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile1, POINT3D(1378, 1034, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile1, "fun\\wind\\tileraise.us", "rtile1")
+	
+	xmlobjs.rtile2 = UberScriptItem
+	xmlobjs.rtile2.ItemID = 7385
+	xmlobjs.rtile2.Hue = 1150
+	xmlobjs.rtile2.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile2, POINT3D(1378, 1033, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile2, "fun\\wind\\tileraise.us", "rtile2")
+
+	xmlobjs.rtile3 = UberScriptItem
+	xmlobjs.rtile3.ItemID = 7385
+	xmlobjs.rtile3.Hue = 1150
+	xmlobjs.rtile3.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile3, POINT3D(1378, 1032, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile3, "fun\\wind\\tileraise.us", "rtile3")
+
+	xmlobjs.rtile4 = UberScriptItem
+	xmlobjs.rtile4.ItemID = 7385
+	xmlobjs.rtile4.Hue = 1150
+	xmlobjs.rtile4.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile4, POINT3D(1378, 1031, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile4, "fun\\wind\\tileraise.us", "rtile4")
+
+	xmlobjs.rtile5 = UberScriptItem
+	xmlobjs.rtile5.ItemID = 7385
+	xmlobjs.rtile5.Hue = 1150
+	xmlobjs.rtile5.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile5, POINT3D(1378, 1030, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile5, "fun\\wind\\tileraise.us", "rtile5")
+
+	xmlobjs.rtile6 = UberScriptItem
+	xmlobjs.rtile6.ItemID = 7385
+	xmlobjs.rtile6.Hue = 1150
+	xmlobjs.rtile6.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile6, POINT3D(1377, 1034, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile6, "fun\\wind\\tileraise.us", "rtile6")
+	
+	xmlobjs.rtile7 = UberScriptItem
+	xmlobjs.rtile7.ItemID = 7385
+	xmlobjs.rtile7.Hue = 1150
+	xmlobjs.rtile7.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile7, POINT3D(1377, 1033, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile7, "fun\\wind\\tileraise.us", "rtile7")
+
+	xmlobjs.rtile8 = UberScriptItem
+	xmlobjs.rtile8.ItemID = 7385
+	xmlobjs.rtile8.Hue = 1150
+	xmlobjs.rtile8.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile8, POINT3D(1377, 1032, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile8, "fun\\wind\\tileraise.us", "rtile8")
+
+	xmlobjs.rtile9 = UberScriptItem
+	xmlobjs.rtile9.ItemID = 7385
+	xmlobjs.rtile9.Hue = 1150
+	xmlobjs.rtile9.name = "a magical floor tile"
+	xmlobjs.name = "a magical floor tile"
+	MOVETOWORLD(xmlobjs.rtile9, POINT3D(1377, 1031, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile9, "fun\\wind\\tileraise.us", "rtile9")
+
+	xmlobjs.rtile10 = UberScriptItem
+	xmlobjs.rtile10.ItemID = 7385
+	xmlobjs.rtile10.Hue = 1150
+	MOVETOWORLD(xmlobjs.rtile10, POINT3D(1377, 1030, -15), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile10, "fun\\wind\\tileraise.us", "rtile10")
+
+
+	xmlobjs.rtile12 = UberScriptItem
+	xmlobjs.rtile12.ItemID = 1807
+	xmlobjs.rtile12.Hue = 1150
+	MOVETOWORLD(xmlobjs.rtile12, POINT3D(1379, 1035, -18), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile12, "fun\\wind\\tileraise.us", "rtile12")
+
+
+	xmlobjs.rtile13 = UberScriptItem
+	xmlobjs.rtile13.ItemID = 1802
+	xmlobjs.rtile13.Hue = 1150
+	MOVETOWORLD(xmlobjs.rtile13, POINT3D(1378, 1035, -18), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile13, "fun\\wind\\tileraise.us", "rtile13")
+
+
+	xmlobjs.rtile14 = UberScriptItem
+	xmlobjs.rtile14.ItemID = 1802
+	xmlobjs.rtile14.Hue = 1150
+	MOVETOWORLD(xmlobjs.rtile14, POINT3D(1377, 1035, -18), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile14, "fun\\wind\\tileraise.us", "rtile14")
+
+
+	xmlobjs.rtile15 = UberScriptItem
+	xmlobjs.rtile15.ItemID = 1809
+	xmlobjs.rtile15.Hue = 1150
+	MOVETOWORLD(xmlobjs.rtile15, POINT3D(1376, 1035, -18), MAP(Ilshenar))
+	ADDSCRIPT(xmlobjs.rtile15, "fun\\wind\\tileraise.us", "rtile15")
+
+
+	//switch 4
+	xmlobjs.switch4 = SimpleLever
+	ADDSCRIPT(xmlobjs.switch4, "fun\\wind\\switch.us", "switch4")
+	ADDSCRIPT(xmlobjs.switch4, "fun\\wind\\tileraise.us", "switch4raise")
+	MOVETOWORLD(xmlobjs.switch4, POINT3D(1378, 1030, -10), MAP(Ilshenar))
+}
+function initialize()
+{
+
+	//switch 1
+	xmlobjs.switch1 = walltorch
+	ADDSCRIPT(xmlobjs.switch1, "fun\\wind\\switch.us", "switch1")
+	MOVETOWORLD(xmlobjs.switch1, POINT3D(1346, 1033, 18), MAP(Ilshenar))
+
+	//switch 2
+	xmlobjs.switch2 = SimpleSwitch
+	xmlobjs.switch2.visible = false
+	ADDSCRIPT(xmlobjs.switch2, "fun\\wind\\switch.us", "switch2")
+	MOVETOWORLD(xmlobjs.switch2, POINT3D(1358, 1052, -3), MAP(Ilshenar))
+
+	//creepy portrait switch 2
+	xmlobjs.hide1 = TapestryOfSosaria
+	xmlobjs.hide1.movable = false
+	xmlobjs.hide1.DoesNotDecay = true
+	ADDSCRIPT(xmlobjs.hide1, "fun\\wind\\hideobject.us", "hide1")
+	MOVETOWORLD(xmlobjs.hide1, POINT3D(1358, 1053, -8), MAP(Ilshenar))
+	xmlobjs.hide1.xmlobjs.hideobject = xmlobjs.switch2
+
+	//switch 3
+	xmlobjs.switch3 = SimpleSwitch
+	ADDSCRIPT(xmlobjs.switch3, "fun\\wind\\switch.us", "switch3")
+	MOVETOWORLD(xmlobjs.switch3, POINT3D(1373, 1055, -13), MAP(Ilshenar))
+
+	//moving tiles
+	xmlobjs.tile1 = UberScriptItem
+	xmlobjs.tile1.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile1)
+	MOVETOWORLD(xmlobjs.tile1, POINT3D(1362, 1032, -8), MAP(Ilshenar))
+	
+	xmlobjs.tile2 = UberScriptItem
+	xmlobjs.tile2.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile2)
+	MOVETOWORLD(xmlobjs.tile2, POINT3D(1363, 1032, -8), MAP(Ilshenar))
+
+	xmlobjs.tile3 = UberScriptItem
+	xmlobjs.tile3.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile3)
+	MOVETOWORLD(xmlobjs.tile3, POINT3D(1364, 1032, -8), MAP(Ilshenar))
+
+	xmlobjs.tile4 = UberScriptItem
+	xmlobjs.tile4.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile4)
+	MOVETOWORLD(xmlobjs.tile4, POINT3D(1362, 1031, -8), MAP(Ilshenar))
+	
+	xmlobjs.tile5 = UberScriptItem
+	xmlobjs.tile5.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile5)
+	MOVETOWORLD(xmlobjs.tile5, POINT3D(1363, 1031, -8), MAP(Ilshenar))
+
+	xmlobjs.tile6 = UberScriptItem
+	xmlobjs.tile6.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile6)
+	MOVETOWORLD(xmlobjs.tile6, POINT3D(1364, 1031, -8), MAP(Ilshenar))
+
+	xmlobjs.tile7 = UberScriptItem
+	xmlobjs.tile7.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile7)
+	MOVETOWORLD(xmlobjs.tile7, POINT3D(1362, 1030, -8), MAP(Ilshenar))
+	
+	xmlobjs.tile8 = UberScriptItem
+	xmlobjs.tile8.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile8)
+	MOVETOWORLD(xmlobjs.tile8, POINT3D(1363, 1030, -8), MAP(Ilshenar))
+
+	xmlobjs.tile9 = UberScriptItem
+	xmlobjs.tile9.ItemID = 1300
+	ADDTOLIST(xmlobjs.spawned, xmlobjs.tile9)
+	MOVETOWORLD(xmlobjs.tile9, POINT3D(1364, 1030, -8), MAP(Ilshenar))
+
+	xmlobjs.gate1 = UberScriptItem
+	xmlobjs.gate1.ItemID = 1781
+	ADDSCRIPT(xmlobjs.gate1, "fun\\wind\\gate.us", "gate1")
+	MOVETOWORLD(xmlobjs.gate1, POINT3D(1361, 1087, -13), MAP(Ilshenar))
+
+	xmlobjs.gate2 = UberScriptItem
+	xmlobjs.gate2.ItemID = 1781
+	ADDSCRIPT(xmlobjs.gate2, "fun\\wind\\gate.us", "gate2")
+	MOVETOWORLD(xmlobjs.gate2, POINT3D(1362, 1087, -13), MAP(Ilshenar))
+
+	xmlobjs.gate3 = UberScriptItem
+	xmlobjs.gate3.ItemID = 1781
+	ADDSCRIPT(xmlobjs.gate3, "fun\\wind\\gate.us", "gate3")
+	MOVETOWORLD(xmlobjs.gate3, POINT3D(1363, 1087, -13), MAP(Ilshenar))
+
+	xmlobjs.gate4 = UberScriptItem
+	xmlobjs.gate4.ItemID = 1781
+	ADDSCRIPT(xmlobjs.gate4, "fun\\wind\\gate.us", "gate4")
+	MOVETOWORLD(xmlobjs.gate4, POINT3D(1364, 1087, -13), MAP(Ilshenar))
+
+	xmlobjs.gate5 = UberScriptItem
+	xmlobjs.gate5.ItemID = 1781
+	ADDSCRIPT(xmlobjs.gate5, "fun\\wind\\gate.us", "gate5")
+	MOVETOWORLD(xmlobjs.gate5, POINT3D(1365, 1087, -13), MAP(Ilshenar))
+
+	switchtiles()
+
+	SUBSCRIBETIMER(FiveSeconds)
+}
+
+// THIS SCRIPT MUST BE ATTACHED TO A RegionControl!
+onCreate
+{
+	// TODO: figure out the exact areas that we want to make faction only
+	//ADDREGIONCONTROLAREA(THIS(), POINT2D(5123, 9), POINT2D(5370, 209))
+	
+	// check every minute if it is time to do this
+	SUBSCRIBETIMER(FiveSeconds)
+	xmlobjs.spawned = NEWLIST() // add the crystal and anything else spawned to this that will be deleted when it is over	
+	RegionPriority = 100 // make sure it's the top dog
+	Active = true
+	AllowGateIn = false
+	AllowRecallIn = false
+	AllowCutCorpse = false
+	CanMountEthereal = false
+	NoMounts = true	
+	xmlints.movecount = 0
+	xmlints.minutecount = 0
+	xmlints.active = 0
+	initialize()
+}
+
+
+onOneSecond
+{
+	if (xmlints.movecount < 4 && xmlints.active == 1)
+	{
+		foreach (objs.spawnedItem ; xmlobjs.spawned)
+		{
+			if (objs.spawnedItem != null && objs.spawnedItem.deleted == false)
+			{
+				objs.spawnedItem.Y -= 1
+			}
+		}
+		xmlints.movecount+= 1
+	}
+	if (xmlints.movecount >= 4 && xmlints.active == 1)
+	{
+		xmlints.movecount = 0
+		UNSUBSCRIBETIMER(OneSecond)
+	}
+
+	if (xmlints.movecount < 4 && xmlints.active == 0)
+	{
+		foreach (objs.spawnedItem ; xmlobjs.spawned)
+		{
+			if (objs.spawnedItem != null && objs.spawnedItem.deleted == false)
+			{
+				objs.spawnedItem.Y += 1
+			}
+		}
+		xmlints.movecount += 1
+	}
+	if (xmlints.movecount >= 4 && xmlints.active == 0)
+	{
+		xmlints.movecount = 0
+		UNSUBSCRIBETIMER(OneSecond)
+	}
+}
+
+onFiveSeconds
+{
+	if (xmlobjs.switch1.xmlints.state == 1 && xmlobjs.switch2.xmlints.state == 1 && xmlobjs.switch3.xmlints.state == 1 && xmlobjs.switch4.xmlints.state == 1 && xmlints.active == 0)
+	{
+		SUBSCRIBETIMER(OneSecond)
+		SUBSCRIBETIMER(OneMinute)
+		xmlints.active = 1
+		
+	}
+}
+
+onOneMinute
+{
+	if (xmlints.minutecount == 3)
+	{
+		xmlints.active = 0
+		xmlobjs.switch1.xmlints.state = 0
+		xmlobjs.switch1.Burning = false
+		xmlobjs.switch2.xmlints.state = 0
+		xmlobjs.switch2.SwitchState = 0
+		xmlobjs.switch3.xmlints.state = 0
+		xmlobjs.switch3.SwitchState = 0
+		xmlobjs.switch4.xmlints.state = 0
+		xmlobjs.switch4.LeverState = 0
+		UNSUBSCRIBETIMER(OneMinute)
+		SUBSCRIBETIMER(OneSecond)
+		xmlints.minutecount = 0
+	}
+	else
+	{
+		xmlints.minutecount += 1
+	}
+}

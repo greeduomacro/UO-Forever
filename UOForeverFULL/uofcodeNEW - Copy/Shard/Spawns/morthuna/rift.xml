@@ -1,0 +1,59 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>MorthunaRift</Name>
+    <UniqueId>ccf5887d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>692</X>
+    <Y>1689</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>692</CentreX>
+    <CentreY>1689</CentreY>
+    <CentreZ>10</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>	
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=xmlspawner/configfile/Spawns\common\eventsupply.xml/loadconfig/true/location/(5177,3588,0)/spawnrange/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\common\eventsupply.xml/loadconfig/true/location/(5177,3630,0)/spawnrange/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\common\eventsupply.xml/loadconfig/true/location/(5227,3588,0)/spawnrange/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\common\eventsupply.xml/loadconfig/true/location/(5227,3630,0)/spawnrange/0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\morthuna\bossSpawn1.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\morthuna\bossSpawn2.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5180,3639,0 ; MULTIADDON,Spawns\morthuna\morthunafinal.txt:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=BCAST/The rift has been opened on the SOUTHWEST corner of Morthuna! All brave souls, please enter the gate!... THIS WILL BE A COMPETITION, please read on for how it works!-IMPORTANT NOTE-Tamers will not be able to bring pets into this competition, so leave them at home! In  4 minutes, the wall of fire will drop, granting access to the join stone. You will randomly be assigned to one side of the board, and your goal is to destroy the Balron. The team who kills the balron first wins!  Good luck!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,692,1689,10 ; moongate/dispellable/false/targetmap/felucca/target/(5290,3591,0)/hue/38:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5290,3591,0 ; moongate/dispellable/false/targetmap/felucca/target/(692,1689,10)/hue/38:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5278,3591,0 ; *static,3804/hue/38/name/Double click to join a random team!/ATTACH/&lt;xmluse/requirelos/true/condition/@GETONTRIGMOB,teamflags=4|GETONTHIS,[ATTACHMENT,xmlvalue,team4,value]$&lt;GETONTHIS,[ATTACHMENT,xmlvalue,team2,value]@successaction/@SETONTRIGMOB/teamflags/4/location/(5229,3590,0)/SENDMSG/Be the first team to defeat the Balron! Supplies are provided by double clicking the supply stone! ; SETONTHIS/ATTACHMENT,xmlvalue,team4,value/INC,1@failureaction/@SETONTRIGMOB/teamflags/2/location/(5178,3590,0)/SENDMSG/Be the first team to defeat the Balron! Supplies are provided by double clicking the supply stone! ; SETONTHIS/ATTACHMENT,xmlvalue,team2,value/INC,1&gt;/ATTACH/&lt;xmlvalue,team4,0&gt;/ATTACH/&lt;xmlvalue,team2,0&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5282,3596,0 ; *MULTIADDON,Spawns\morthuna\bossblocker.txt:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=WAITUNTIL,4:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=SETONSPAWN,2/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=BCAST/The wall of fire has been dropped! Double click the stone to join the game! Players are still welcome to join in-just go through the gate on the SOUTHWEST corner of Morthuna!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

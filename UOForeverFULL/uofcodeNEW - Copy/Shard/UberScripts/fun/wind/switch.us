@@ -1,0 +1,30 @@
+onCreate
+{
+	xmlints.state = 0
+	THIS().hue = 0
+}
+
+onSingleClick
+{
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 3)
+	{
+		if (xmlints.state == 0)
+		{
+			xmlints.state = 1
+			SENDMSG(TRIGMOB(), "You flip the switch.")
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "This has already been switched on.")
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You are too far away to do that.")
+	}
+}
+
+

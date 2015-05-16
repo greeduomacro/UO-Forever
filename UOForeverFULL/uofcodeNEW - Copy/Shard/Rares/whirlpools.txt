@@ -1,0 +1,19 @@
+# Name|itemid hue $relativeProbability
+Rusted Bell|2330 2959 $1
+Rusted Seahorse Statue|9658 2959 $1
+Rusted Anchor|5367 2959 $1
+Old Rope|5368 2959 $1
+Old Fishing Net|15758 2959 $1
+a giant clam shell|15123 2959 $1
+a giant shell|15122 2959 $1
+Antique Vase|2885 2959 $1
+a petrified nautilus shell|4039 2959 $5
+petrified shell|4044 2959 $10
+petrified shell|4043 2959 $10
+petrified shells|4042 2959 $20
+petrified shells|4039 2959 $20
+a petrified shell|4040 2959 $50
+petrified shells|4041 2959 $30
+petrified shells|4038 2959 $30
+petrified shells|4037 2959 $50
+petrified conch shell|4036 2959 $5

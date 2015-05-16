@@ -1,0 +1,17 @@
+onCreate
+{
+	movable = false
+	visible = false
+	xmlobjs.repeatDelay = TIMESPANMINUTES(1.0)
+}
+onMoveOver
+{
+	if (xmlstrings.gumpPath == null || TRIGMOB().xmlstrings.seenMessage == xmlstrings.gumpPath) { return }
+	
+	SENDGUMP(TRIGMOB(), xmlstrings.gumpPath)
+	if (xmlobjs.repeatDelay != null)
+	{
+		TRIGMOB().xmlstrings.seenMessage = xmlstrings.gumpPath
+		TRIGMOB().xmlstrings.seenMessage.expiration = xmlobjs.repeatDelay
+	}
+}

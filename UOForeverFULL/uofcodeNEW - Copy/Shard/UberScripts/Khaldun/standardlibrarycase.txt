@@ -1,0 +1,8 @@
+onUse
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 3)
+	{
+		SENDMSG(TRIGMOB(),"You find nothing about Khaldun here.")
+		return override
+	}
+}

@@ -1,0 +1,90 @@
+onCreate
+{
+	blessed = true
+	name = "Luke the Greeter"
+	cantwalk = true
+	bodyvalue = 400
+	SUBSCRIBETIMER(OneSecond)
+}
+
+onOneSecond
+{
+	if (THIS().xmlints.talking == null)
+	{
+		objs.nearbymobs = GETNEARBYMOBS(THIS(),5)
+		objs.foundNew = null
+		foreach (objs.mob ; objs.nearbymobs)
+		{
+			if (IS(objs.mob, playermobile))
+			{
+				if (objs.mob.Young == true && objs.mob.xmlints.gotTour == null)
+				{
+					objs.foundNew = objs.mob
+					break
+				}
+			}
+		}
+		if (objs.foundNew != null)
+		{
+			THIS().xmlints.talking = 1
+			THIS().xmlints.talking.expiration = 0:0:20
+			THIS().direction = down
+			SAY(THIS(),"Welcome to UOForever! Say 'help' to me for a brief tour!")
+			pause 6000
+			SAY(THIS(),"If you follow your tour to the end, you will receive a 500gp reward!")
+		}
+	}
+}
+onSpeech
+{
+	if (TRIGMOB().young == true)
+	{
+		if (STRINGCONTAINSIGNORECASE(SPEECH(),"help"))
+		{
+			if (TRIGMOB().xmlints.gotTour == null)
+			{
+				if (THIS().xmlints.tourInProgress == null)
+				{
+					objs.script = NEWATTACHMENT(xmlscript)
+					objs.script.ScriptFile = "alan\\newbie\\tour.txt"
+					objs.wisp = wisp
+					objs.wisp.Y += 3
+					ATTACH(objs.wisp, objs.script)
+					TRIGMOB().xmlints.gotTour = 1
+					// note, if you do anything at or bigger than 24:0:0 it assumes you mean 24 days!
+					TRIGMOB().xmlints.gotTour.expiration = 12:0:0
+					THIS().xmlints.tourInProgress = 1
+					THIS().xmlints.tourInProgress.expiration = 0:4:30
+				}
+				else
+				{
+					// possible reward in case they join the tour ahead of them
+					TRIGMOB().xmlints.tourPossibleReward = 1
+					TRIGMOB().xmlints.tourPossibleReward.expiration = 0:20:0
+					SAY(THIS(),"Sorry, a tour is already in progress - please try again in a few minutes!")
+					pause 1000
+					SAY(THIS(),"Trust me, it will be worth the wait!")
+					pause 3000
+					SAY(THIS(),"If you really can't wait, feel free to join the tour in session - just to the southwest of here. Hurry!")
+				}
+			}
+			else
+			{
+				SAY(THIS(),"Sorry, but tours are limited of one per player!")
+			}
+		}
+		else
+		{
+			SAY(THIS(),"Welcome to UOForever! Say 'help' to me for a brief tour!")
+		}
+	}
+	else
+	{
+		if (TRIGMOB().xmlints.talked == null && DISTANCE(THIS(), TRIGMOB()) < 4)
+		{
+			SAY(THIS(),"Sorry, I only do tours for young players.")
+			TRIGMOB().xmlints.talked = 1
+			TRIGMOB().xmlints.talked.expiration = 0:1:0
+		}
+	}
+}

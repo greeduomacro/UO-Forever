@@ -1,0 +1,113 @@
+using System;
+using Server;
+using Server.Engines.Conquests;
+using Server.Mobiles;
+using Server.Spells;
+using Server.Regions;
+
+namespace Server.Items
+{
+	public class CureLevelInfo
+	{
+		private Poison m_Poison;
+		private double m_Chance;
+
+		public Poison Poison
+		{
+			get{ return m_Poison; }
+		}
+
+		public double Chance
+		{
+			get{ return m_Chance; }
+		}
+
+		public CureLevelInfo( Poison poison, double chance )
+		{
+			m_Poison = poison;
+			m_Chance = chance;
+		}
+	}
+
+	public abstract class BaseCurePotion : BasePotion
+	{
+		public abstract CureLevelInfo[] LevelInfo{ get; }
+
+		public BaseCurePotion( PotionEffect effect ) : base( 0xF07, effect )
+		{
+		}
+
+		public BaseCurePotion( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+
+			writer.Write( (int) 0 ); // version
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+
+			int version = reader.ReadInt();
+		}
+
+		public void DoCure( Mobile from )
+		{
+			bool cure = false;
+
+			CureLevelInfo[] info = LevelInfo;
+
+			for ( int i = 0; i < info.Length; ++i )
+			{
+				CureLevelInfo li = info[i];
+
+				if ( li.Poison == from.Poison && Scale( from, li.Chance ) > Utility.RandomDouble() )
+				{
+					cure = true;
+					break;
+				}
+			}
+
+			if ( cure && from.CurePoison( from ) )
+			{
+				from.SendLocalizedMessage( 500231 ); // You feel cured of poison!
+
+				from.FixedEffect( 0x373A, 10, 15 );
+				from.PlaySound( 0x1E0 );
+			}
+			else if ( !cure )
+			{
+				from.SendLocalizedMessage( 500232 ); // That potion was not strong enough to cure your ailment!
+			}
+		}
+
+		public override bool Drink( Mobile from )
+		{
+			if ( from.Poisoned )
+			{
+				DoCure( from );
+
+				BasePotion.PlayDrinkEffect( from );
+
+				from.FixedParticles( 0x373A, 10, 15, 5012, EffectLayer.Waist );
+				from.PlaySound( 0x1E0 );
+
+                CustomRegion region1 = from.Region as CustomRegion;
+
+                if (!Engines.ConPVP.DuelContext.IsFreeConsume(from) && (region1 == null || !region1.PlayingGame(from)))
+					this.Consume();
+			}
+			else
+			{
+				from.SendLocalizedMessage( 1042000 ); // You are not poisoned.
+				return false;
+			}
+
+			return true;
+		}
+	}
+}

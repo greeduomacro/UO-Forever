@@ -1,0 +1,65 @@
+onCreate
+{
+    xmlints.count = 0
+	xmlints.target = RANDOMMINMAX(30, 100)
+    itemID = 8198
+    amount = 3
+    doesnotdecay = true
+    name = "wheel of corpse"
+    movable = true
+}
+
+onUse
+{
+    if (THIS().rootparententity == null)
+	{
+	SUBSCRIBETIMER(FiftyMS)
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That has to be on the ground to use it!")
+	}
+}
+onFiftyMS
+{
+    if (THIS().direction == North)
+    {
+        THIS().direction = Right
+    }
+    else if (THIS().direction == Right)
+    {
+        THIS().direction = East
+    }
+    else if (THIS().direction == East)
+    {
+        THIS().direction = Down
+    }
+    else if (THIS().direction == Down)
+    {
+        THIS().direction = South
+    }
+    else if (THIS().direction == South)
+    {
+        THIS().direction = Left
+    }
+    else if (THIS().direction == Left)
+    {
+        THIS().direction = West
+    }
+    else if (THIS().direction == West)
+    {
+        THIS().direction = Up
+    }
+    else if (THIS().direction == Mask)
+    {
+        THIS().direction = North
+    }
+    xmlints.count  += 1
+    
+    if (xmlints.count > xmlints.target)
+    {
+        UNSUBSCRIBETIMER(FiftyMS)
+        xmlints.count = 0
+		xmlints.target = RANDOMMINMAX(30, 100)
+    }
+}

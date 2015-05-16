@@ -1,0 +1,67 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>MorthunaInvasion</Name>
+    <UniqueId>ccf1787d-a216-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1574</X>
+    <Y>1260</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1574</CentreX>
+    <CentreY>1260</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>True</IsGroup>	
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=BCAST/Galven diviners indicate that a legion of Undead is marching upon Galven. They are coming from the cave that leads to the island of Morthuna! All citizens are called upon to beat them back! A SUPPLY STONE is provided right outside of GALVEN HEALERS:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONTHIS/waypoint/0x400001D1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=zombie/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,1&gt;:MX=40:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=skeletalknight/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,2&gt;:MX=15:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		
+		:OBJ=BCAST/The wave of skeletons and zombies has been defeated! Now liches have poured out of the cave!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		:OBJ=lich/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,2&gt;:MX=20:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		
+		:OBJ=BCAST/That wave has been defeated! Now lich lords have poured out of the cave!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=lichlord/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,3&gt;:MX=20:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		
+		:OBJ=BCAST/The lich lords have been defeated! Now vampires have poured out of the cave!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		:OBJ=vampire/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,6&gt;:MX=15:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		
+		:OBJ=BCAST/The vampires have been defeated! Now ancient liches have poured out of the cave!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+		:OBJ=ancientlich/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,8&gt;:MX=10:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+		
+		:OBJ=BCAST/The ancient liches have been defeated! Now Balrons have poured out of the cave!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+		:OBJ=balron/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,morthunaInvade,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,morthunaInvade,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,morthunaInvade,value/INC,8&gt;:MX=10:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+		
+		:OBJ=SETONTHIS/group/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=BCAST/The invasion has been defeated... Now we must proceed onto the island of Morthuna to find and destroy the source of the rift!... But first, we must TAKE THE CAVE that leads to the island.  Once the beasts are removed from that cave, A HEALER AND SUPPLY STONE shall be provided by the Galven Guard!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=SET,MorthunaCaveBlockerAndMonitor,xmlspawner/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

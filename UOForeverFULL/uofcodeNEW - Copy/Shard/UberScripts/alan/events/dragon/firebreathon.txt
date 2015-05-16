@@ -1,0 +1,18 @@
+onCreate
+{
+	SUBSCRIBETIMER(OneSecond)
+	THIS().xmlints.count = 0
+}
+onOneSecond
+{
+	THIS().xmlints.count += 1
+	if (THIS().alive && xmlints.count % 2 == 1)
+	{
+		DODAMAGE(THIS(),5)
+		EFFECT(3555,30,THIS())
+	}
+	if (THIS().xmlints.count > 8)
+	{
+		SCRIPT().dodelete = true
+	}
+}

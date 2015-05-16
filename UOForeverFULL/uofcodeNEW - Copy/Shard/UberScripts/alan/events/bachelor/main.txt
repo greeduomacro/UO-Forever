@@ -1,0 +1,342 @@
+onSay
+{
+	if (SAID("make a"))
+	{
+		if (SAID("fencer"))
+		{		
+			xmlstrings.type = "fencer"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS());
+		}
+		elif (SAID("macer"))
+		{
+			xmlstrings.type = "macer"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS());
+		}
+		elif (SAID("archer"))
+		{
+			xmlstrings.type = "archer"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS());
+		}
+		elif (SAID("lumberjack"))
+		{
+			xmlstrings.type = "lumberjack"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS());
+		}
+		elif (SAID("mage"))
+		{
+			xmlstrings.type = "mage"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS());
+		}
+		return override
+	}
+	elif (SAID("go to felucca"))
+	{
+		xmlstrings.type = "go to felucca"
+		xmlstrings.type.expiration = 2:0:0
+		SENDTARGET(THIS())
+		return override
+	}
+	elif (SAID("go to trammel"))
+	{
+		xmlstrings.type = "go to trammel"
+		xmlstrings.type.expiration = 2:0:0
+		SENDTARGET(THIS())
+	}
+	if (TRIGMOB().map == MAP(trammel))
+	{
+		if (SAID("spawn daemon"))
+		{
+			xmlstrings.type = "spawn daemon"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS())
+		}
+		elif (SAID("spawn balron"))
+		{
+			xmlstrings.type = "spawn balron"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS())
+		}
+		elif (SAID("spawn lich"))
+		{
+			xmlstrings.type = "spawn lich"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS())
+		}
+		elif (SAID("spawn lich lord"))
+		{
+			xmlstrings.type = "spawn lich lord"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS())
+		}
+		elif (SAID("spawn ancient lich"))
+		{
+			xmlstrings.type = "spawn ancient lich"
+			xmlstrings.type.expiration = 2:0:0
+			SENDTARGET(THIS())
+		}
+	}
+}
+onTarget
+{
+	if (TRIGMOB().map == MAP(trammel))
+	{
+		if (xmlstrings.type == "spawn daemon") { objs.evilSpawn = daemon }
+		elif (xmlstrings.type == "spawn balron") { objs.evilSpawn = balron }
+		elif (xmlstrings.type == "spawn lich") { objs.evilSpawn = lich }
+		elif (xmlstrings.type == "spawn lich lord") { objs.evilSpawn = lichlord }
+		elif (xmlstrings.type == "spawn ancient lich") { objs.evilSpawn = ancientlich }
+		
+		if (objs.evilSpawn != null)
+		{
+			MOVETOWORLD(objs.evilSpawn, TARGETED(), trammel)
+			return
+		}
+	}
+	
+	if (TARGETED() == TRIGMOB() || (IS(TARGETED(),humanmob) && TARGETED().netstate != null))
+	{
+		if (xmlstrings.type == "go to trammel")
+		{
+			MOVETOWORLD(TARGETED(), POINT3D(5188, 637, 0), trammel)
+			return
+		}
+		elif (xmlstrings.type == "go to felucca")
+		{
+			MOVETOWORLD(TARGETED(), POINT3D(1495, 1609, 21), felucca)
+			return
+		}
+	}
+	
+	if (IS(TARGETED(), playermobile) && STRINGCONTAINS(TARGETED().name, "Bachelor"))
+	{
+		if (TARGETED().netstate == null)
+		{
+			SENDMSG(TRIGMOB(), "That target is not currently under control by anybody!")
+			return
+		}
+		if (TARGETED().young)
+		{
+			TARGETED().young = false
+		}
+		
+		if (xmlstrings.type == "go to trammel")
+		{
+			MOVETOWORLD(TARGETED(), POINT3D(5188, 637, 0), trammel)
+			return
+		}
+		elif (xmlstrings.type == "go to felucca")
+		{
+			MOVETOWORLD(TARGETED(), POINT3D(1495, 1609, 21), felucca)
+			return
+		}
+		
+		
+		objs.spawned = humanmob
+		if (xmlstrings.type == "fencer")
+		{
+			objs.spawned.str = 100
+			objs.spawned.int = 25
+			objs.spawned.dex = 100
+			objs.spawned.hitsmaxseed = 100
+			objs.spawned.hits = 100
+			objs.spawned.stammaxseed = 100
+			objs.spawned.stam = 100
+			objs.spawned.manamaxseed = 25
+			objs.spawned.mana = 25
+			SETSKILL(objs.spawned, "Fencing", 100.0)
+			SETSKILL(objs.spawned, "Tactics", 100.0)
+			SETSKILL(objs.spawned, "Anatomy", 100.0)
+			SETSKILL(objs.spawned, "Healing", 100.0)
+			SETSKILL(objs.spawned, "Magery", 100.0)
+			SETSKILL(objs.spawned, "MagicResist", 100.0)
+			SETSKILL(objs.spawned, "Hiding", 100.0)
+			
+			objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+		}
+		elif (xmlstrings.type == "macer")
+		{
+			objs.spawned.str = 100
+			objs.spawned.int = 25
+			objs.spawned.dex = 100
+			objs.spawned.hitsmaxseed = 100
+			objs.spawned.hits = 100
+			objs.spawned.stammaxseed = 100
+			objs.spawned.stam = 100
+			objs.spawned.manamaxseed = 25
+			objs.spawned.mana = 25
+			SETSKILL(objs.spawned, "Macing", 100.0)
+			SETSKILL(objs.spawned, "Tactics", 100.0)
+			SETSKILL(objs.spawned, "Anatomy", 100.0)
+			SETSKILL(objs.spawned, "Healing", 100.0)
+			SETSKILL(objs.spawned, "Magery", 100.0)
+			SETSKILL(objs.spawned, "MagicResist", 100.0)
+			SETSKILL(objs.spawned, "Hiding", 100.0)
+			objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+		}
+		elif (xmlstrings.type == "archer")
+		{
+			objs.spawned.str = 100
+			objs.spawned.int = 25
+			objs.spawned.dex = 100
+			objs.spawned.hitsmaxseed = 100
+			objs.spawned.hits = 100
+			objs.spawned.stammaxseed = 100
+			objs.spawned.stam = 100
+			objs.spawned.manamaxseed = 25
+			objs.spawned.mana = 25
+			SETSKILL(objs.spawned, "Archery", 100.0)
+			SETSKILL(objs.spawned, "Tactics", 100.0)
+			SETSKILL(objs.spawned, "Anatomy", 100.0)
+			SETSKILL(objs.spawned, "Healing", 100.0)
+			SETSKILL(objs.spawned, "Magery", 100.0)
+			SETSKILL(objs.spawned, "MagicResist", 100.0)
+			SETSKILL(objs.spawned, "Hiding", 100.0)
+			objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+		}
+		elif (xmlstrings.type == "lumberjack")
+		{
+			objs.spawned.str = 100
+			objs.spawned.int = 25
+			objs.spawned.dex = 100
+			objs.spawned.hitsmaxseed = 100
+			objs.spawned.hits = 100
+			objs.spawned.stammaxseed = 100
+			objs.spawned.stam = 100
+			objs.spawned.manamaxseed = 25
+			objs.spawned.mana = 25
+			SETSKILL(objs.spawned, "Swords", 100.0)
+			SETSKILL(objs.spawned, "Tactics", 100.0)
+			SETSKILL(objs.spawned, "Anatomy", 100.0)
+			SETSKILL(objs.spawned, "Healing", 100.0)
+			SETSKILL(objs.spawned, "Magery", 100.0)
+			SETSKILL(objs.spawned, "MagicResist", 100.0)
+			SETSKILL(objs.spawned, "Lumberjacking", 100.0)
+			objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+		}
+		elif (xmlstrings.type == "mage")
+		{
+			objs.spawned.str = 100
+			objs.spawned.int = 100
+			objs.spawned.dex = 25
+			objs.spawned.hitsmaxseed = 100
+			objs.spawned.hits = 100
+			objs.spawned.stammaxseed = 25
+			objs.spawned.stam = 25
+			objs.spawned.manamaxseed = 100
+			objs.spawned.mana = 100
+			SETSKILL(objs.spawned, "Inscribe", 100.0)
+			SETSKILL(objs.spawned, "Wrestling", 100.0)
+			SETSKILL(objs.spawned, "EvalInt", 100.0)
+			SETSKILL(objs.spawned, "Meditation", 100.0)
+			SETSKILL(objs.spawned, "Magery", 100.0)
+			SETSKILL(objs.spawned, "MagicResist", 100.0)
+			SETSKILL(objs.spawned, "Poisoning", 100.0)
+			objs.armor = leatherchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = leathergorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = leatherarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = leatherlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = leathercap { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			objs.armor = leathergloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+		}
+		
+		if (objs.spawned != null)
+		{
+			objs.bandage = bandage, 50
+			ADDTOPACK(objs.spawned, objs.bandage)
+			objs.robe = robe
+			{
+				hue = 38
+			}
+			EQUIP(objs.spawned, objs.robe)
+			objs.fullspellbook = fullspellbook
+			{
+				movable = false
+			}
+			ADDTOPACK(objs.spawned, objs.fullspellbook)
+			objs.sandals = sandals
+			EQUIP(objs.spawned, objs.sandals)
+			
+			for (ints.i = 0; ints.i < 8; ints.i += 1)
+			{
+				objs.potion = refreshpotion
+				ADDTOPACK(objs.spawned, objs.potion)
+				if (ints.i % 2 == 0)
+				{
+					objs.potion = lessercurepotion
+					ADDTOPACK(objs.spawned, objs.potion)
+				}
+			}
+			
+			objs.spawned.fightmode = evil
+			objs.spawned.name = TARGETED().name
+			objs.spawned.hue = TARGETED().hue
+			objs.spawned.facialHairItemID = TARGETED().facialHairItemID
+			objs.spawned.facialHairHue = TARGETED().facialHairHue
+			objs.spawned.hairItemID =  TARGETED().hairItemID
+			objs.spawned.hairHue = TARGETED().hairHue
+			objs.spawned.bodyValue = 400
+			objs.spawned.xmlobjs.owner = TARGETED()
+			
+			objs.attachment = NEWATTACHMENT(xmlscript, bachelorSpawn)
+			objs.attachment.scriptfile = "alan\\events\\bachelor\\spawn.txt"
+			ATTACH(objs.spawned, objs.attachment)
+			
+			objs.names = ["Ildbeltonril", "Darrad", "Riswore", "Hinhon", "Honradper", "Arlsay", "Teycis", "Swes", "Itnys", "Asbel", "Denkel", "Erfaw", "Neal", "Nakon", "Dodenina", "Oughougheng", "Polton", "Tanes", "Lidid", "Ryneji", "Ildnyshon", "Loradyn", "Lubana", "Lyran", "Tyingash", "Ingcris", "Bur'undi", "Ageghai", "Shyess", "Emat", "Shytin", "Chissmor", "Athund", "Mosrodir", "Taness", "Issar", "Leyer", "Shyiaom", "Ettia", "Wor'hin", "Polis", "Verit", "Odrai", "Filex", "Gar'che", "Rhaer", "Querad", "Thiellaw", "Gabanu", "Tasest", "Zuralo", "Laillack", "Leelum", "Ther'ril", "Risall", "Anden", "Sokare", "Rakth", "Danaugh", "Essk", "Peustton", "Skelim", "Mordel", "Setosyd", "Vaelltai", "Garhontai", "Rodqua", "Engunt", "Kimkel", "Rynech", "Tyxan", "Belic", "Num", "Lauphale", "Arodra", "Ight'ach", "Iacha", "Rod'kela", "Dania", "Angtia", "Arwara", "Rodbny", "Torendage", "Buickran", "Hatnt", "Smehonage", "Hinque", "At'old", "Kalnale", "Gha'ight", "Nalkel", "Aughrod", "Llayrtdyn", "Hatr", "Estdia", "Nysgar", "Athust", "Unttia", "Dudynang", "Rothche", "Nys-en", "Tanhon", "Et'ny", "Samer", "Zoencer", "Tantangar", "Atu", "Whoel", "Urntaitia", "Ackash", "Shyril", "Therumsul", "Ineund", "Ageech", "Vanac", "Kalih", "Ancight", "Elddan", "Rayrage"]
+			
+			ints.roll = RANDOM(117)
+			ints.count = 0
+			foreach (objs.name ; objs.names)
+			{
+				if (ints.roll == ints.count)
+				{
+					objs.spawned.name = objs.name
+				}
+				ints.count += 1
+			}
+			
+			objs.horse = horse
+			{
+				controlled = true
+				controlmaster = objs.spawned
+				rider = objs.spawned
+			}
+			
+			POSSESS(TARGETED(), objs.spawned)
+		}
+		
+//To make sure I will have everything I need.
+//Armor: I won't need to make armor/leather sets.
+//Reagents: I won't need to provide any Reagents.
+//Weapons: I will need to provide all of the different weapons.
+//Bandages: I will need to provide bandages
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must target a playermobile with \"Bachelor\" in their name, or one of the controlled spawned mobs!")
+	}
+}

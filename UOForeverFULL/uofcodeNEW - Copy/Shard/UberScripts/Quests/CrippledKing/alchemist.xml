@@ -1,0 +1,10 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<PaperDoll mob="THIS()" x="0" y="0"/>
+		<Label hue="1153" x="200" y="100">"Petrification Immunity Potions"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>Aye, so you need a potion from ol Erasmus do ya?  Want to enter the Crippled King's lands?.  I can help ye with that.  Potions deailing with petrification immunity are difficult and costly to craft.  I require four key components to craft one.  All of these components come from one of the four stone constructs native to Britannia.  First I need you to bring me the eye of a stone gargoyle.  Next, I will need the feather of a stone harpy. Thirdly, I require the scale of a great stone wyrm.  These are dangerous beasts, so take heed when combating them.  Lastly, I will need the claw of a basalisk. This beast is deadly, beware his venemous claws.  Once you have collected these, you will need to purchase a catalyst from me.  A golden needle is required to compelte the potion.I would offer it to you for free, but alas, I am not running a charity.  One gold needle will set you back 15,000 gold coins.  Initiate contact with me when you have all 5 compenents and I will happily craft you a potion.</p>
+		</HTML>	
+	</Box> 
+</Gump>

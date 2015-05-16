@@ -1,0 +1,102 @@
+using System;
+using System.Collections.Generic;
+using Server.Items;
+
+namespace Server.Mobiles
+{
+	[CorpseName( "a spider corpse" )]
+	public class GhostSpider : BaseCreature
+	{
+		public override string DefaultName{ get{ return "a ghost spider"; } }
+
+		[Constructable]
+		public GhostSpider() : base( AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4 )
+		{
+			Body = 736;
+			Hue = 0x4001;
+			BaseSoundID = 0x388;
+
+			SetStr( 76, 100 );
+			SetDex( 76, 95 );
+			SetInt( 36, 60 );
+
+			SetHits( 96, 116 );
+
+			SetDamage( 5, 13 );
+
+			SetSkill( SkillName.Poisoning, 60.1, 80.0 );
+			SetSkill( SkillName.MagicResist, 25.1, 40.0 );
+			SetSkill( SkillName.Tactics, 35.1, 50.0 );
+			SetSkill( SkillName.Wrestling, 50.1, 65.0 );
+
+			Fame = 600;
+			Karma = -600;
+
+			VirtualArmor = 16;
+
+			Hidden = true;
+			CantWalk = true;
+
+			PackItem( new SpidersSilk( 5 ) );
+		}
+
+		public override void GenerateLoot()
+		{
+			AddLoot( LootPack.Average );
+			AddLoot( LootPack.Meager );
+			AddLoot( LootPack.Gems );
+		}
+
+		public override void OnDeath( Container c )
+		{
+			base.OnDeath( c );	
+
+			double rand = Utility.RandomDouble();
+
+			if ( 0.008 > rand ) //Small Web
+				c.AddItem( new SmallWebEast() );
+			else if ( 0.008 > rand ) //Small Web
+				c.AddItem( new SmallWebSouth() );
+		}
+
+		public override FoodType FavoriteFood{ get{ return FoodType.Meat; } }
+		public override PackInstinct PackInstinct{ get{ return PackInstinct.Arachnid; } }
+		public override Poison PoisonImmune{ get{ return Poison.Regular; } }
+		public override Poison HitPoison{ get{ return Poison.Regular; } }
+
+		public GhostSpider( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void OnThink()
+		{
+			List<Mobile> players = new List<Mobile>();
+
+			foreach ( Mobile player in GetMobilesInRange(4) )
+				if ( player is PlayerMobile )
+					players.Add( player );
+
+			if ( players.Count > 0 )
+				CantWalk = false;
+			else
+			{
+				CantWalk = true;
+				Hidden = true;
+			}
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+
+			writer.WriteEncodedInt( (int) 0 );
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+
+			int version = reader.ReadEncodedInt();
+		}
+	}
+}

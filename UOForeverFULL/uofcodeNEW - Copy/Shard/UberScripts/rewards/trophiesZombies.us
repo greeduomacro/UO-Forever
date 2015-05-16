@@ -1,0 +1,72 @@
+function awardTrophies()
+{
+	// expects objs.firstMobNames to contain a list of players who get the 1st prize trophy
+	// expects objs.secondMobNames to contain a list of players who get the 2nd prize trophy
+	// expects objs.thirdMobNames to contain a list of players who get the 3rd prize trophy
+	// expects strings.contestName to contain the name of the contest
+	//  example label: Alan, 1st place: DOTU Turret Smasher
+	objs.list1 = [5020,4647]
+	objs.list2 = [5019,4646]
+	objs.list3 = [5018,4644]
+	objs.players = PLAYERMOBS()
+	foreach (objs.mob ; objs.players)
+	{
+		if (objs.mob == null || objs.mob.Deleted || objs.mob.BankBox == null) { continue; }
+		if (LISTCONTAINS(objs.firstMobNames, objs.mob.RawName))
+		{
+			objs.award = Item, 100
+			{
+				Hue = 1721
+				Name = objs.mob.RawName + ", 1st place: " + strings.contestName
+			}
+			objs.award.ItemID = RANDOMFROMLIST(objs.list1)
+			ADDTOCONTAINER(objs.mob.BankBox, objs.award)
+			xmlints.count += 1
+		}
+		if (LISTCONTAINS(objs.secondMobNames, objs.mob.RawName))
+		{
+			objs.award = Item, 100
+			objs.award.Name = objs.mob.RawName + ", 2nd place: " + strings.contestName
+			objs.award.ItemID = RANDOMFROMLIST(objs.list2)
+			ADDTOCONTAINER(objs.mob.BankBox, objs.award)
+			xmlints.count += 1
+		}
+		if (LISTCONTAINS(objs.thirdMobNames, objs.mob.RawName))
+		{
+			objs.award = Item, 100
+			{
+				Hue = 1748
+			}
+			objs.award.Name = objs.mob.RawName + ", 3rd place: " + strings.contestName
+			objs.award.ItemID = RANDOMFROMLIST(objs.list3)
+			ADDTOCONTAINER(objs.mob.BankBox, objs.award)
+			xmlints.count += 1
+		}
+	}
+}
+
+onUse
+{
+	xmlints.count = 0
+	objs.firstMobNames = ["Furies"]
+	objs.secondMobNames = ["Ramtha Co"]
+	objs.thirdMobNames = ["Kynk"]
+	strings.contestName = "Feb. 2014 Survival Ultimate Crafter"
+	awardTrophies()
+	
+	objs.firstMobNames = ["Famara"]
+	objs.secondMobNames = ["Babethoven"]
+	objs.thirdMobNames = ["Gore"]
+	strings.contestName = "Feb. 2014 Survival Zombie Killer"
+	awardTrophies()
+	
+	objs.firstMobNames = ["Gore"]
+	objs.secondMobNames = ["Famara"]
+	objs.thirdMobNames = ["Babethoven"]
+	strings.contestName = "Feb. 2014 Survival Player Killer"
+	awardTrophies()
+	
+	SENDMSG(TRIGMOB(), "All done")
+	SENDMSG(TRIGMOB(), "Awarded " + xmlints.count + " trophies.")
+	DELETE(THIS())
+}

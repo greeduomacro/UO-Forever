@@ -1,0 +1,19 @@
+onCreate
+{
+	objs.spawnLocations = [RECTANGLE2D(POINT2D(6519,112), POINT2D(6527,134))]
+	MOVETOSPAWNLOCATION(THIS(), MAP(Portals), objs.spawnLocations)
+}
+onDeath
+{
+    // add any loot here, add to the TRIGITEM() container
+   // e.g.
+    objs.gold = gold { amount = RANDOMMINMAX(500,600) }
+    ADDTOCONTAINER(TRIGITEM(), objs.gold)
+    
+    // example: adding 30 piles of 6 platinum each
+    //for (ints.i = 0; ints.i < 30; ints.i += 1)
+  //  {
+   //   objs.plat = platinum, 6
+   //   ADDTOCONTAINER(TRIGITEM(), objs.plat)
+   // }
+}

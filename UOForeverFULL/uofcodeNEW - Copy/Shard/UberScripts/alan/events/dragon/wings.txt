@@ -1,0 +1,8 @@
+onUse
+{
+	if (TRIGMOB() == THIS().rootparententity)
+	{
+		SAY(THIS(),"*beats wings*")
+		CONCUSSION(TRIGMOB(), 2, 9, TwoFiftyMS)
+	}
+}

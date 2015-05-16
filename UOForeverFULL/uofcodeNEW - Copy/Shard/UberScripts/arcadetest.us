@@ -1,0 +1,61 @@
+onCreate
+{
+	SUBSCRIBETIMER(FiftyMS)
+}
+onFiftyMS
+{
+	objs.now = NOW()
+	objs.test = "!8"
+	xmlobjs.next = DATETIMEMIN()
+	if (xmlobjs.next == null || objs.now > xmlobjs.next)
+	{
+		if (STRINGCONTAINS(objs.test,"!9"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(North))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!6"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(Right))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!3"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(East))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!2"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(Down))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!1"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(South))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5 )
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!4"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(Left))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!7"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(West))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+		else if (STRINGCONTAINS(objs.test,"!8"))
+		{
+			SWINGDIRECTION(THIS(), DIRECTION(Up))
+			xmlobjs.next = NOW() + TIMESPANSECONDS(0.5)
+			return override
+		}
+	}
+}

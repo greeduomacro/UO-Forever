@@ -1,0 +1,32 @@
+onCreate
+{
+	objs.spawnLocations = [RECTANGLE2D(POINT2D(6539,113), POINT2D(6541,128))]
+	MOVETOSPAWNLOCATION(THIS(), MAP(Portals), objs.spawnLocations)
+	ADDSCRIPT(THIS(), "portals\\runeLoot.us", "runeLoot")
+}
+onBeforeDeath
+{
+    // add any loot here, add to the TRIGITEM() container
+   // e.g.
+    objs.gold = gold { amount = RANDOMMINMAX(800,1200) }
+    ADDTOCONTAINER(THIS().Backpack, objs.gold)
+    
+    // example: adding 30 piles of 6 platinum each
+    //for (ints.i = 0; ints.i < 30; ints.i += 1)
+  //  {
+   //   objs.plat = platinum, 6
+   //   ADDTOCONTAINER(THIS().Backpack, objs.plat)
+   // }
+   
+   if (RANDOMDOUBLE() < 0.50) // USE LESS THAN HERE: 50% chance
+   {
+       objs.toDrop = LegendaryHammer
+       ADDTOCONTAINER(THIS().Backpack, objs.toDrop )
+   }
+   
+   if (RANDOMDOUBLE() < 0.01) // USE LESS THAN HERE: 1%
+   {
+       objs.rares = RARE("rares.txt")
+       ADDTOCONTAINER(THIS().Backpack, objs.rares )
+   }
+}

@@ -1,0 +1,24 @@
+Gargoyle Urn Large|17074 $4
+Gargoyle Urn|17075 $4
+Fancy Basket|9435 $3
+Ruined Books|3094 $5
+Ruined Armoire|3091 $4
+Ruined Chair|3099 $5
+Ruined Chair|3088 $4
+Ruined Clock|3109 $3
+Ruined Bookcase|3092 $6
+Ruined Dresser|3108 $5
+Closed Barrel|4014 $1
+Deco Hay|3892 $2
+Bowl of Flour|2590 $2
+Spittoon|4099 $2
+Fruit Basket|2451 $4
+Empty Jar|4101 $5
+Empty Jars|3653 $6
+Red Checkers|3610 $3
+White Checkers|3611 $3
+Cauldron|2541 $2
+Daemon Bone|3968 $3
+Deco Bottles|2462 $3
+Wash Basin|4104 $1
+Bone Container|3790 $5

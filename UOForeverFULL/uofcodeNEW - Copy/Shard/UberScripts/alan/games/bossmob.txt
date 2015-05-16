@@ -1,0 +1,52 @@
+onTakenHit
+{
+	if (TRIGMOB().netstate != null && TRIGMOB().xmlints.gameMob != null)
+	{
+		objs.mob = GETMOB(TRIGMOB().xmlints.gameMob)
+		if (objs.mob == null) { return }
+		if (objs.mob.xmlints.bossHitsScore == null)
+		{
+			objs.mob.xmlints.bossHitsScore = DAMAGE()
+		}
+		else
+		{
+			objs.mob.xmlints.bossHitsScore += DAMAGE()
+		}
+	}
+}
+onDeath
+{
+	if (TRIGMOB() == null) { return }
+	if (TRIGMOB().netstate != null && TRIGMOB().xmlints.gameMob != null)
+	{
+		objs.mob = GETMOB(TRIGMOB().xmlints.gameMob)
+		if (objs.mob == null) { return }
+		objs.mob.xmlints.bossKill = 1
+	}
+	objs.onlineMobs = ONLINEMOBS()
+	objs.team = GETATTACHMENT(THIS(),xmlteam)
+	if (objs.team.TeamVal == Team1) // Team2 wins (killed the boss)
+	{
+		foreach (objs.mob ; objs.onlineMobs)
+		{
+			if (objs.mob.xmlints.gameTeam == 2)
+			{
+				objs.mob.xmlints.gameWinner = 1
+			}
+			elif (IS(objs.mob,basecreature))
+			{
+				KILL(objs.mob)
+			}
+		}
+	}
+	else // Team2, so team 1 wins
+	{
+		foreach (objs.mob ; objs.onlineMobs)
+		{
+			if (objs.mob.xmlints.gameTeam == 1)
+			{
+				objs.mob.xmlints.gameWinner = 1
+			}
+		}
+	}
+}

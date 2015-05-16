@@ -1,0 +1,130 @@
+function moveLocations()
+{
+	EJECTPLAYERSTOFELUCCA()
+	
+	// delete old gates
+	foreach (objs.currentPortal ; xmlobjs.CurrentPortals)
+	{
+		DELETE(objs.currentPortal)
+	}
+	CLEARLIST(xmlobjs.CurrentPortals)
+	
+	ints.dungeonGateSpawnsUsed = 0
+	ints.overworldGateSpawnsUsed = 0
+	
+	for (ints.dumb = 0 ; ints.dungeonGateSpawnsUsed + ints.overworldGateSpawnsUsed < xmlints.dungeonGateSpawns + xmlints.overworldGateSpawns; ints.dumb = 0)
+	{
+		for (ints.i = 0; ints.i < 10; ints.i += 1)
+		{
+			ints.alreadyUsedSpot = 0
+			ints.randomLocationIndex = RANDOM(xmlobjs.targetLocations.Count)
+			objs.targetLocation = xmlobjs.targetLocations[ints.randomLocationIndex ]
+			foreach (objs.currentPortal ; xmlobjs.CurrentPortals)
+			{
+				if (objs.currentPortal.xmlobjs.returnGate.Location == objs.targetLocation)
+				{
+					ints.alreadyUsedSpot = 1
+				}
+			}
+			if (ints.alreadyUsedSpot == 0)
+			{
+				break
+			}
+		}
+		if (ints.alreadyUsedSpot == 0)
+		{
+			if (ints.dungeonGateSpawnsUsed < xmlints.dungeonGateSpawns)
+			{
+				// try a couple times to get a dungeon location
+				objs.spawnpoint = GETRANDOMDUNGEONLOCATION()
+				if (objs.spawnpoint == POINT3D(0,0,0))
+				{
+					objs.spawnpoint = GETRANDOMDUNGEONLOCATION()
+					if (objs.spawnpoint == POINT3D(0,0,0))
+					{
+						objs.spawnpoint = xmlobjs.overworldSpawnPoints[RANDOM(xmlobjs.overworldSpawnPoints.Count)]
+					}
+				}
+				ints.dungeonGateSpawnsUsed += 1
+			}
+			else // do overworld SPAWN
+			{
+				objs.spawnpoint = xmlobjs.overworldSpawnPoints[RANDOM(xmlobjs.overworldSpawnPoints.Count)]
+				ints.overworldGateSpawnsUsed += 1
+			}
+			
+			objs.portal = UberScriptItem
+			MOVETOWORLD(objs.portal, objs.spawnpoint, MAP(Felucca))
+			
+			objs.returnGate = ExtEventMoongate
+			{
+				ResGhosts = false
+				Hue = 2498
+				Target = objs.spawnpoint
+				TargetMap = MAP(Felucca)
+			}
+			objs.portal.xmlobjs.returnGate = objs.returnGate
+			MOVETOWORLD(objs.returnGate, xmlobjs.targetLocations[ints.randomLocationIndex], xmlobjs.targetMaps[ints.randomLocationIndex])
+			
+			ADDSCRIPT(objs.portal, "portals\portal.us", "portal")
+			
+			// only add a portal if it has a unique location
+			ADDTOLIST(xmlobjs.CurrentPortals, objs.portal)
+		}
+		else
+		{
+			ints.dungeonGateSpawnsUsed += 1 // rely on this to get out of the forloop
+			LOG("PortalSpawning", "Could not get unique portal targetlocation!")
+		}
+	}
+	
+	
+	
+	//MOVETOWORLD(TRIGMOB(), xmlobjs.overworldSpawnPoints[xmlints.index], MAP(felucca))
+	//
+	//xmlints.index +=1
+	// reset all the spawners
+	objs.spawners = GETITEMSINBOUNDS(POINT3D(5888,824,0), POINT3D(5910,864,0), MAP(Felucca))
+	foreach (objs.spawner ; objs.spawners)
+	{
+		if (IS(objs.spawner,XmlSpawner))
+		{
+			objs.spawner.Running = true
+		}
+	}
+	pause 2000
+	foreach (objs.spawner ; objs.spawners)
+	{
+		if (IS(objs.spawner,XmlSpawner))
+		{
+			objs.spawner.Running = false
+		}
+	}
+}
+onCreate
+{
+	xmlobjs.overworldSpawnPoints = [POINT3D(5418, 670, 60), POINT3D(5501, 1992, 0), POINT3D(5290, 618, 0), POINT3D(5260, 803, 0), POINT3D(5979, 220, 44), POINT3D(5497, 177, 0), POINT3D(5691, 629, 0), POINT3D(5207, 1580, 0), POINT3D(5745, 1434, 0), POINT3D(5663, 306, 0), POINT3D(5312, 1314, 0), POINT3D(5486, 1348, 0), POINT3D(4594, 3585, 75), POINT3D(858, 1687, 0), POINT3D(1541, 876, 0), POINT3D(2059, 804, 40), POINT3D(3920, 180, 0), POINT3D(1774, 3355, 0), POINT3D(4491, 3725, 1), POINT3D(1328, 527, 28), POINT3D(3411, 336, 0), POINT3D(1468, 2510, 5), POINT3D(1351, 946, 0), POINT3D(1445, 1225, 0), POINT3D(2206, 1271, 0), POINT3D(2657, 494, 15), POINT3D(955, 2209, 0), POINT3D(1691, 2741, 10), POINT3D(2884, 357, 7), POINT3D(365, 1471, 2), POINT3D(1231, 2930, 0), POINT3D(2006, 251, 8), POINT3D(2481, 3631, 3), POINT3D(2349, 820, 0), POINT3D(1099, 2352, 0), POINT3D(1183, 3600, 0), POINT3D(2437, 1099, 8), POINT3D(2193, 3333, 0), POINT3D(2329, 619, 3), POINT3D(3407, 2631, 48), POINT3D(1989, 1083, 0), POINT3D(5255, 71, 16), POINT3D(569, 1644, 0), POINT3D(1507, 760, 16), POINT3D(5990, 63, 22), POINT3D(1684, 2974, 0), POINT3D(1958, 2068, 0), POINT3D(866, 1194, 0), POINT3D(3707, 2096, 5), POINT3D(5996, 1307, 0), POINT3D(2427, 95, 0), POINT3D(6049, 1438, 4), POINT3D(5528, 900, 30), POINT3D(1234, 848, 0), POINT3D(4551, 2341, -2), POINT3D(6104, 33, 27), POINT3D(5817, 80, 0), POINT3D(5204, 1677, -3), POINT3D(1827, 1471, 0), POINT3D(1060, 838, 9), POINT3D(1641, 1404, 0), POINT3D(1007, 1641, 0), POINT3D(5686, 109, 0), POINT3D(2032, 3293, 0), POINT3D(2629, 230, 0), POINT3D(1399, 2980, 0), POINT3D(1473, 2144, 0), POINT3D(2325, 1179, 5), POINT3D(1053, 539, 16), POINT3D(164, 1161, 0), POINT3D(2760, 2053, -20), POINT3D(2352, 3475, 3), POINT3D(2172, 301, 0), POINT3D(866, 556, 0), POINT3D(1328, 1473, 8), POINT3D(1659, 1336, 0), POINT3D(2573, 271, 39), POINT3D(2873, 80, 0), POINT3D(3597, 2839, 53), POINT3D(5451, 1800, 0), POINT3D(2427, 1160, 0), POINT3D(1848, 621, 0), POINT3D(1073, 529, 6), POINT3D(7076, 801, 26), POINT3D(5146, 1760, 0), POINT3D(2355, 138, 0), POINT3D(2101, 1037, 0), POINT3D(3004, 257, 0), POINT3D(5794, 288, 1), POINT3D(1710, 2889, 0), POINT3D(2137, 620, 0), POINT3D(2443, 896, 0), POINT3D(6047, 223, 44), POINT3D(5189, 1292, 0), POINT3D(5312, 1964, 0), POINT3D(5169, 561, 0), POINT3D(5689, 536, 0), POINT3D(880, 1939, 0), POINT3D(6113, 1292, 15), POINT3D(5345, 1543, 0)]
+	xmlobjs.CurrentPortals = NEWLIST()
+	
+	xmlobjs.targetLocations = [POINT3D(85, 1955, 0), POINT3D(347, 618, 26), POINT3D(1787, 67, -26), POINT3D(78, 364, 0), POINT3D(5776, 1898, 22), POINT3D(6520, 125, -20)]
+	xmlobjs.targetMaps = ["Malas", "Ter Mur", "Ilshenar", "Ter Mur", "Portals", "Portals"]
+	
+	xmlints.dungeonGateSpawns = 1
+	xmlints.overworldGateSpawns = 1
+	xmlints.count = 0
+	xmlints.MinutesPerSwitch = 120
+	SUBSCRIBETIMER(OneMinute)
+	
+}
+
+// move everybody who is inside the RDA out of the RDA
+//EJECTPLAYERSFROMMAP(Malas)
+onOneMinute
+{
+	xmlints.count += 1
+	if (xmlints.count >= xmlints.MinutesPerSwitch)
+	{
+		moveLocations()
+		xmlints.count = 0
+	}
+}

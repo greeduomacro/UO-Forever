@@ -1,0 +1,4 @@
+onUse
+{
+	SENDMSG(TRIGMOB(), "At last the prophecy is fulfilled: Yancey-Hausman will pay!")
+}

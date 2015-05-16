@@ -1,0 +1,227 @@
+onCreate
+{
+	THIS().xmlints.totalPlayers = 0
+	THIS().movable = false
+	
+	THIS().xmlstrings.Moderator = "Alan"
+	THIS().itemid = 13920
+	objs.holder = static, 13911
+	THIS().z = objs.holder.z
+	THIS().name = "Game World"
+}
+onUse
+{
+	if(TRIGMOB().name == THIS().xmlstrings.Moderator)
+	{
+		if (xmlobjs.team1Spawner == null)
+		{
+			xmlobjs.team1Spawner = xmlspawner
+			{
+				configfile = "Spawns\\champs\\gameTeam1.xml"
+				loadconfig = true
+			}
+			xmlobjs.team1Spawner.location = POINT3D(5338,1443,0)
+			xmlobjs.team1Spawner.spawnrange = 30
+			xmlobjs.team1Spawner.running = true
+			
+			xmlobjs.team2Spawner = xmlspawner
+			{
+				configfile = "Spawns\\champs\\gameTeam2.xml"
+				loadconfig = true
+			}
+			xmlobjs.team2Spawner.location = POINT3D(5155,1459,0)
+			xmlobjs.team2Spawner.spawnrange = 30
+			xmlobjs.team2Spawner.running = true
+		}
+		
+		objs.nearby = GETNEARBYMOBS(THIS(),20)
+		foreach (objs.mob ; objs.nearby)
+		{
+			if (objs.mob.xmlints.buyIn == null)
+			{
+				// do nothing
+			}
+			elif (objs.mob.xmlints.buyIn >= 7)
+			{
+				objs.mob.xmlints.buyIn -= 7
+				// join the game
+				objs.balron = balron
+				{
+					name = objs.mob.Name
+					Pseu_KeepKillCredit = false
+				}
+				
+				// so we can reconnect if disconnected
+				objs.mob.xmlints.gameMob = INT(objs.balron.serial)
+				objs.mob.xmlints.gameMob.expiration = 4:0:0
+				objs.balron.xmlints.gameMob = INT(objs.mob.serial)
+				objs.balron.xmlints.gameMob.expiration = 4:0:0
+				objs.spellbook = fullspellbook
+				{
+					movable = false
+				}
+				ADDTOPACK(objs.balron, objs.spellbook)
+				objs.tpouch = tpouch
+				ADDTOPACK(objs.balron, objs.tpouch)
+				objs.tpouch = tpouch
+				ADDTOPACK(objs.balron, objs.tpouch)
+				objs.tpouch = tpouch
+				ADDTOPACK(objs.balron, objs.tpouch)
+				objs.tpouch = tpouch
+				ADDTOPACK(objs.balron, objs.tpouch)
+				objs.tpouch = tpouch
+				ADDTOPACK(objs.balron, objs.tpouch)
+				
+				if (THIS().xmlints.totalPlayers % 2 == 1)
+				{
+					MOVETOWORLD(objs.balron, POINT3D(5338,1443,0))
+					SETTEAM(objs.balron, Team1)
+					objs.mob.xmlints.gameTeam = 1
+					objs.balron.hue = 1157
+				}
+				else
+				{
+					MOVETOWORLD(objs.balron, POINT3D(5155,1459,0))
+					SETTEAM(objs.balron, Team2)
+					objs.mob.xmlints.gameTeam = 2
+					objs.balron.hue = 2019
+				}
+				ADDSCRIPT(objs.balron, "alan\\games\\playermob.txt", "balronplayer")
+				
+				THIS().xmlints.totalPlayers += 1
+				POSSESS(objs.mob, objs.balron)
+				objs.mob.map = internal
+			}
+		}
+	}
+	else
+	{
+		if (TRIGMOB().xmlints.gameMob != null)
+		{
+			objs.gameMob = GETMOB(TRIGMOB().xmlints.gameMob)
+			if (objs.gameMob.xmlints.gameMob != null)
+			{
+				if (objs.gameMob.xmlints.gameMob == INT(TRIGMOB().serial))
+				{
+					POSSESS(TRIGMOB(), objs.gameMob)
+					TRIGMOB().map = internal
+				}
+				else
+				{
+					if (TRIGMOB().xmlints.buyIn >= 3)
+					{
+						TRIGMOB().xmlints.buyIn -= 3
+						// rejoin the game
+						objs.balron = balron
+						{
+							name = TRIGMOB().Name
+							Pseu_KeepKillCredit = false
+						}
+						
+						// so we can reconnect if disconnected
+						TRIGMOB().xmlints.gameMob = INT(objs.balron.serial)
+						TRIGMOB().xmlints.gameMob.expiration = 4:0:0
+						objs.balron.xmlints.gameMob = INT(TRIGMOB().serial)
+						objs.balron.xmlints.gameMob.expiration = 4:0:0
+						objs.spellbook = fullspellbook
+						{
+							movable = false
+						}
+						ADDTOPACK(objs.balron, objs.spellbook)
+						objs.tpouch = tpouch
+						ADDTOPACK(objs.balron, objs.tpouch)
+						objs.tpouch = tpouch
+						ADDTOPACK(objs.balron, objs.tpouch)
+						objs.tpouch = tpouch
+						ADDTOPACK(objs.balron, objs.tpouch)
+						objs.tpouch = tpouch
+						ADDTOPACK(objs.balron, objs.tpouch)
+						objs.tpouch = tpouch
+						ADDTOPACK(objs.balron, objs.tpouch)
+						
+						if (TRIGMOB().xmlints.gameTeam == 1)
+						{
+							MOVETOWORLD(objs.balron, POINT3D(5338,1443,0))
+							SETTEAM(objs.balron, Team1)
+							objs.balron.hue = 1157
+						}
+						else // team 2
+						{
+							MOVETOWORLD(objs.balron, POINT3D(5155,1459,0))
+							SETTEAM(objs.balron, Team2)
+							objs.balron.hue = 2019
+						}
+						ADDSCRIPT(objs.balron, "alan\\games\\playermob.txt", "balronplayer")
+						
+						POSSESS(TRIGMOB(), objs.balron)
+						TRIGMOB().map = internal
+					}
+					else
+					{
+						LOCALMSG(TRIGMOB(), "You need 3 points to rejoin the game! You only have  " + TRIGMOB().xmlints.buyIn)
+					}
+				}
+			}
+			else
+			{
+				if (TRIGMOB().xmlints.buyIn >= 3)
+				{
+					TRIGMOB().xmlints.buyIn -= 3
+					// rejoin the game
+					objs.balron = balron
+					{
+						name = TRIGMOB().Name
+						Pseu_KeepKillCredit = false
+					}
+					
+					// so we can reconnect if disconnected
+					TRIGMOB().xmlints.gameMob = INT(objs.balron.serial)
+					TRIGMOB().xmlints.gameMob.expiration = 4:0:0
+					objs.balron.xmlints.gameMob = INT(TRIGMOB().serial)
+					objs.balron.xmlints.gameMob.expiration = 4:0:0
+					objs.spellbook = fullspellbook
+					{
+						movable = false
+					}
+					ADDTOPACK(objs.balron, objs.spellbook)
+					objs.tpouch = tpouch
+					ADDTOPACK(objs.balron, objs.tpouch)
+					objs.tpouch = tpouch
+					ADDTOPACK(objs.balron, objs.tpouch)
+					objs.tpouch = tpouch
+					ADDTOPACK(objs.balron, objs.tpouch)
+					objs.tpouch = tpouch
+					ADDTOPACK(objs.balron, objs.tpouch)
+					objs.tpouch = tpouch
+					ADDTOPACK(objs.balron, objs.tpouch)
+					
+					if (TRIGMOB().xmlints.gameTeam == 1)
+					{
+						MOVETOWORLD(objs.balron, POINT3D(5338,1443,0))
+						SETTEAM(objs.balron, Team1)
+						objs.balron.hue = 1157
+					}
+					else // team 2
+					{
+						MOVETOWORLD(objs.balron, POINT3D(5155,1459,0))
+						SETTEAM(objs.balron, Team2)
+						objs.balron.hue = 2019
+					}
+					objs.teamattachment = GETATTACHMENT(objs.balron, xmlteam)
+					objs.teamattachment.scriptfile = "alan\\games\\playermob.txt"
+					
+					POSSESS(TRIGMOB(), objs.balron)
+					TRIGMOB().map = internal
+				}
+				else
+				{
+					LOCALMSG(TRIGMOB(), "You need 3 points to rejoin the game! You only have  " + TRIGMOB().xmlints.buyIn)
+				}
+			}
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "Either the game hasn't started or you weren't in it when it was!")
+		}
+	}
+}

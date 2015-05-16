@@ -1,0 +1,76 @@
+onCreate
+{
+	// this is applied to a human mob, so set all the initial stuff
+	cantwalk = true
+	blessed = true
+	SUBSCRIBETIMER(FiveSeconds)
+	xmlints.count = 0
+	xmlstrings.time = "5:30"
+	xmlobjs.joinstone = static, 13920
+	xmlobjs.joinstone.location = POINT3D(THIS().x - 1, THIS().y, THIS().z)
+	objs.script = NEWATTACHMENT(xmlscript)
+	objs.script.scriptfile = "alan\\games\\vanqeventjoinstone.txt"
+	ATTACH(xmlobjs.joinstone, objs.script)
+}
+onDragDrop
+{
+	if (IS(TRIGITEM(),baseweapon))
+	{
+		if (TRIGITEM().damagelevel == power)
+		{
+			if (TRIGMOB().xmlints.buyIn == null)
+			{
+				TRIGMOB().xmlints.buyIn = 1
+			}
+			else
+			{
+				TRIGMOB().xmlints.buyIn += 1
+			}
+			LOCALMSG(TRIGMOB(), "You now have " + TRIGMOB().xmlints.buyIn + " points.")
+			EFFECT(14089,30,xmlobjs.joinstone.x, xmlobjs.joinstone.y, xmlobjs.joinstone.z + 16)
+			SOUND(THIS(),0x208)
+			pause 200
+			MOVETOWORLD(TRIGITEM(), POINT3D(5379, 1085, 0))
+			TRIGITEM().xmlstrings.formerowner = TRIGMOB().name
+		}
+		elif (TRIGITEM().damagelevel == vanq)
+		{
+			if (TRIGMOB().xmlints.buyIn == null)
+			{
+				TRIGMOB().xmlints.buyIn = 3
+			}
+			else
+			{
+				TRIGMOB().xmlints.buyIn += 3
+			}
+			LOCALMSG(TRIGMOB(), "You now have " + TRIGMOB().xmlints.buyIn + " points.")
+			EFFECT(14089,30,xmlobjs.joinstone.x, xmlobjs.joinstone.y, xmlobjs.joinstone.z + 16)
+			SOUND(THIS(),0x208)
+			pause 200
+			MOVETOWORLD(TRIGITEM(), POINT3D(5379, 1086, 0))
+			TRIGITEM().xmlstrings.formerowner = TRIGMOB().name
+		}
+		else
+		{
+			SAY(THIS(), "I only accept weapons of power or vanquishing!")
+		}
+	}
+	else
+	{
+		SAY(THIS(), "I only accept weapons!")
+	}
+}
+onFiveSeconds
+{
+	xmlints.count += 1
+	// every 25 seconds
+	if (xmlints.count > 5)
+	{
+		xmlints.count = 0
+		SAY(THIS(),"Join the Amazing Dueling Champion Spawn event!  Bring me your vanquishing weapons and power weapons! (Watch out for thieves!)")
+		pause 3000
+		SAY(THIS(),"It takes 10 points to join, and you get 1 point per power weapon and 3 points per vanquishing weapon!")
+		pause 5000
+		SAY(THIS(),"The event will be starting at " + xmlstrings.time + "EST!")
+	}
+}

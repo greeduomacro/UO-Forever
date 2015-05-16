@@ -1,0 +1,100 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>MeteorFireElemental</Name>
+    <!--<UniqueId>ccf1787d-a526-4376-9b91-29b523a20529</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>0</X>
+    <Y>0</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+	:OBJ=SETONTHIS/MEFFECT,13920,1,{GETONTHIS,x},{GETONTHIS,y},127:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/MEFFECT,14360,30,{GETONTHIS,x},{GETONTHIS,y},127:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,x-1,{GETONTHIS,x}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,x-2,{GETONTHIS,x}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,x+1,{GETONTHIS,x}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,x+2,{GETONTHIS,x}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,y-1,{GETONTHIS,y}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,y-2,{GETONTHIS,y}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,y+1,{GETONTHIS,y}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,y+2,{GETONTHIS,y}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/ATTACH/&lt;xmlvalue,y+2,{GETONTHIS,y}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONTHIS/basepriority/twofiftyms:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,x-1,value/INC,-1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,x-2,value/INC,-2:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,x+1,value/INC,1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,x+2,value/INC,2:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,y-1,value/INC,-1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,y-2,value/INC,-2:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,y+1,value/INC,1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,y+2,value/INC,2:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=EFFECT,14000,25,{GETONTHIS,x},{GETONTHIS,y}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-2,value]},{GETONTHIS,y},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-1,value]},{GETONTHIS,y},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x-1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,x},{GETONTHIS,[ATTACHMENT,xmlvalue,y-2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,x},{GETONTHIS,[ATTACHMENT,xmlvalue,y-1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=EFFECT,14000,25,{GETONTHIS,x},{GETONTHIS,y},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,x},{GETONTHIS,[ATTACHMENT,xmlvalue,y+1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,x},{GETONTHIS,[ATTACHMENT,xmlvalue,y+2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+1,value]},{GETONTHIS,y},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+1,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y-1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+2,value]},{GETONTHIS,y},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+1,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=EFFECT,14000,25,{GETONTHIS,[ATTACHMENT,xmlvalue,x+2,value]},{GETONTHIS,[ATTACHMENT,xmlvalue,y+2,value]},{GETONTHIS,z}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=SETONTHIS/DAMAGE,20,30,2,playeronly:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=SETONTHIS/DAMAGE,10,20,3,playeronly:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+:OBJ=SETONTHIS/DAMAGE,5,10,4,playeronly:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+:OBJ=SETONTHIS/EFFECT,14089,30/SOUND,519:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=plate/movable/false/hue/1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=fireelemental/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=SETONSPAWN,1/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=WAITUNTIL,0.3:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+:OBJ=SETONTHIS/basepriority/onesecond:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+:OBJ=SETONSPAWN,3/DAMAGE,1000,1000:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+:OBJ=SETONTHIS/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

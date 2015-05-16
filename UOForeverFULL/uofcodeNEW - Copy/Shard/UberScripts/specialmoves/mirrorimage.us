@@ -1,0 +1,16 @@
+onUse
+{
+	for (ints.i = 0; ints.i < 4; ints.i += 1)
+	{
+		objs.mirrorImage = custommob
+		{
+			SETHITSSTAMMANA(SPAWNED(), 10, 100, 100)
+			bodyvalue = TRIGMOB().bodyvalue
+			hue = TRIGMOB().hue
+			name = TRIGMOB().RawName
+		}
+		ADDSCRIPT(objs.mirrorImage, "specialmoves\\mirrorimagemob.us", "mirrorImage")
+	}
+	EFFECT(14120, 13, objs.mirrorImage)
+	TRIGMOB().hidden = true
+}

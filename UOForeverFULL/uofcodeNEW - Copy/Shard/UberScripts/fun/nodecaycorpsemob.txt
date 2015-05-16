@@ -1,0 +1,9 @@
+onDeath
+{
+	TRIGITEM().doesnotdecay = true
+	if (xmlobjs.specialitem != null)
+	{
+		TRIGITEM().xmlobjs.specialitem = xmlobjs.specialitem
+	}
+	ADDSCRIPT(TRIGITEM(), "fun\\nodecaycorpseuse.txt")
+}

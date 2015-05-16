@@ -1,0 +1,122 @@
+// THIS SHOULD BE ATTACHED TO A CustomMob
+onCreate
+{
+    SCRIPT().Name = "metalbeetle"
+	ADDSCRIPT(THIS(), "portals\\runeLoot.us", "runeLoot")
+    RawName = "a metal beetle"
+    BodyValue = 714
+	// Hue = 23
+    BaseSoundID = 1264
+
+    RawInt = RANDOMMINMAX(151,250)
+    SETHITSSTAMMANA(THIS(), 300, RANDOMMINMAX(277,355), THIS().RawInt)
+    
+    DamageMin = 32
+    DamageMax = 39
+    
+//============= CUSTOM MOB ARMOR ============================================================================== 
+    VirtualArmor = 65
+   
+    ActiveSpeed = 0.16 // 0.004 is as fast as horse, 0.01 is VERY slightly slower than horse, 0.16 is a bit slower than running, 0.12 is VERY slightly slower than running, 0.1 is exactly running speed
+    
+    AutoDispelCustom = true
+	WeaponDamage = false
+	AlwaysMurdererCustom = True
+	
+	AI = AI_Arcade
+   
+    RangePerception = 14
+	ReduceSpeedWithDamageCustom = false
+    
+    // CustomMob default skills are
+    // 100 tactics
+    // 50 magicresist
+    // 80 wrestling
+    // 100 anatomy
+    // can customize from there:
+    
+    //SETSKILL(THIS(), "EvalInt", 120.0)
+   // SETSKILL(THIS(), "Magery", 120.0)
+  //  SETSKILL(THIS(), "Meditation", 65.0)
+    SETSKILL(THIS(), "MagicResist", 150.0)
+    SETSKILL(THIS(), "Wrestling", 120.0)
+	SETSKILL(THIS(), "Anatomy", 100.0)
+	SETSKILL(THIS(), "Tactics", 100.0)
+
+   // Fame = 20000
+   // Karma = -20000
+    
+    objs.spawnLocations = [RECTANGLE2D(POINT2D(5770,1882), POINT2D(5787,1918))]
+    MOVETOSPAWNLOCATION(THIS(), MAP(Portals), objs.spawnLocations)
+    
+    // Set the spawn locations and 
+    // there are 4 ways to set up spawn locations:  
+    // #1: The simplest is simply by a list of rectangles. A rectangle will be chosen randomly WEIGHTED BY THE AREA OF EACH RECTANGLE.  So if objs.spawnLocations had 2 rectangles, one with 100 tiles encompassed in it and one with 1000 tiles encompassed in it, then the 1000 tile rectangle would be chosen 1000/1100 (about 9%) of the time.
+    // example: (several spawn locations in T2A)
+    //objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+    //MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations)
+    
+    // #2: You can set it up with weighted probabilities by using a second list containing INTEGERS. The weighted probability list MUST have the same number of elements as the rectangle LISTCONTAINS
+    // example:
+    //objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+    //objs.weightings = [1, 2, 100, 4]
+    //MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings)
+    // the 3rd rectangle would be chosen 100 out of 107 times. Note that you can 
+    
+    // #3: You can set it with a particular z level AND whether it requiresSurface (mobs generally should always requireSurface)
+    // example
+    // example:
+    //objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+    //objs.weightings = [1, 2, 100, 4]
+    //MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings, 10, true)
+    // it will try to find a spawn location at the z level of 10 before using the GetDefaultZ function
+    // which often returns something wrong if there is more than 1 level or a foundation in a building
+    
+    // #4: You can set it with a particular z level SPECIFRIC TO EACH RECTANGLE AND whether it requiresSurface (mobs generally should always requireSurface)
+    // example
+    // example:
+    //objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+    //objs.weightings = [1, 2, 100, 4]
+    //objs.zLevels = [10, 4, 3, 2]
+    //MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings, 10, true)
+    // since each rectangle has a different z level it should try to spawn in, you can control the z levels
+    // to be rectangle specific this way
+    
+    // if this mob is in human form and you want to add armor (movable or not) and stuff
+    // EXAMPLE:
+    //objs.armor = tricornehat { hue = 1626 } EQUIP(THIS(), objs.armor)
+    //objs.armor = tunic { hue = 1626 } EQUIP(THIS(), objs.armor)
+    // set movable to false to make it not drop:
+    //objs.armor = studdedgorget { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+    //objs.armor = ringmailchest { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+    //objs.armor = ringmaillegs { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+    //objs.armor = ringmailarms { quality = exceptional ; movable = false} EQUIP(THIS(), objs.armor)
+    //objs.armor = ringmailgloves { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+    //objs.weapon = arrow { amount = 20 } ADDTOPACK(THIS(), objs.weapon)
+    //objs.weapon = bow { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+    //objs.weapon = spear { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+    //objs.bandage = bandage, 300 { movable = false } ADDTOPACK(THIS(), objs.bandage)
+    // spellbook doesn't drop b/c movable is false (helpful if they are going to be pseudoseered
+    //objs.fullspellbook = fullspellbook { movable = false }; ADDTOPACK(THIS(), objs.fullspellbook)
+    //objs.thighboots = thighboots; EQUIP(THIS(), objs.thighboots)
+    
+    
+    // if you want to add loot that thieves can steal EXAMPLE:
+    // objs.gold = gold { amount = RANDOMMINMAX(500,600) }
+    // ADDTOPACK(THIS(), objs.gold)
+}
+
+onBeforeDeath
+{
+    // add any loot here, add to the TRIGITEM() container
+   // e.g.
+    objs.gold = gold { amount = RANDOMMINMAX(500,600) }
+    ADDTOCONTAINER(THIS().Backpack, objs.gold)
+    
+    // example: adding 30 piles of 6 platinum each
+    //for (ints.i = 0; ints.i < 30; ints.i += 1)
+  //  {
+   //   objs.plat = platinum, 6
+   //   ADDTOCONTAINER(THIS().Backpack, objs.plat)
+   // }
+}

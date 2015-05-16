@@ -1,0 +1,24 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"No, SERIOUSLY, did you read the instructions?"</Label>
+		<Label hue="1153">"If you page or ask about things explicitly stated"</Label>
+		<Label hue="1153">"in the instructions, we will not be happy."</Label>
+		<Label hue="1153">"We may even kick you from the event."</Label>
+		
+		<Label hue="1153">"We are tired of people complaining about things or"</Label>
+		<Label hue="1153">"constantly paging about things that are clearly explained."</Label>
+		
+		<Label hue="1153">"(If something is unclear, incorrect, or wrong, let us know, of course)"</Label>
+		
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="joinEvent2"/>
+			<Label hue ="1553">"Yes I carefully read the instructions. Let me join!"</Label>
+		</HBox>
+		<Spacer height="20"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="instructions"/>
+			<Label hue ="1553">"No, please give me the instructions again."</Label>
+		</HBox>
+		
+	</VBox>
+</Gump>

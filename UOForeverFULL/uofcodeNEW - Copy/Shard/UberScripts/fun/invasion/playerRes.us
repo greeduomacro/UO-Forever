@@ -1,0 +1,103 @@
+onDeath
+{
+	pause 1500
+	SENDGUMP(THIS(), "fun\\invasion\\playerRes.xml")
+	SCRIPT().Expiration = TIMESPANMINUTES(10.0)
+}
+onGumpResponse
+{
+	if (THIS().Alive == false)
+	{
+		if (ints.agree == 1)
+		{
+			if (TAKEGOLDFROM(TRIGMOB(), 4000))
+			{
+				LOCALMSG(TRIGMOB(), "You will be resurrected and placed somewhere random in Britain in 30 seconds.")
+				pause 30000
+				if (TRIGMOB().Alive == false)
+				{
+					RESURRECT(TRIGMOB())
+					objs.spawnRectangles = [RECTANGLE2D(POINT2D(1413,1654), POINT2D(1499, 1724)), RECTANGLE2D(POINT2D(1603,1554), POINT2D(1686, 1658)), RECTANGLE2D(POINT2D(1534,1709), POINT2D(1623, 1757))]
+					MOVETOSPAWNLOCATION(TRIGMOB(), MAP(Felucca), objs.spawnRectangles)
+				}
+				else
+				{
+					LOCALMSG(TRIGMOB(), "You were not moved, but you did get the stuff you ordered.")
+				}
+				
+				objs.bag = Bag
+				objs.equipment = SulfurousAsh, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = BlackPearl, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = SpidersSilk, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = MandrakeRoot, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = Ginseng, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = Garlic, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = Nightshade, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				objs.equipment = BloodMoss, 40; ADDTOCONTAINER(objs.bag, objs.equipment)
+				ADDTOPACK(TRIGMOB(), objs.bag)
+				
+				objs.equipment = Bandage, 80; ADDTOPACK(TRIGMOB(), objs.equipment)
+				
+				for (ints.i = 0; ints.i < 2; ints.i += 1)
+				{
+					objs.equipment = GreaterCurePotion; ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = GreaterHealPotion; ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = TotalRefreshPotion; ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = TPouch; ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = TPouch; ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				if (GETSKILL(TRIGMOB(), Fencing) > 75.0)
+				{
+					objs.equipment = Spear { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = WarFork { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				if (GETSKILL(TRIGMOB(), Macing) > 75.0)
+				{
+					objs.equipment = Warhammer { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = Waraxe { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				if (GETSKILL(TRIGMOB(), Swords) > 75.0)
+				{
+					objs.equipment = Katana { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = Halberd { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				if (GETSKILL(TRIGMOB(), Lumberjacking) > 75.0)
+				{
+					objs.equipment = TwoHandedAxe { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = DoubleAxe { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				if (GETSKILL(TRIGMOB(), Archery) > 75.0)
+				{	
+					objs.equipment = Bow { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = HeavyCrossbow { Quality = Exceptional}  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = Arrow { Amount = 120 }  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = Bolt { Amount = 75 }  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				if (GETSKILL(TRIGMOB(), Parry) > 75.0)
+				{
+					objs.equipment = MetalKiteShield { Quality = Exceptional }  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				
+				if (GETSKILL(TRIGMOB(), Poisoning) > 99.0)
+				{
+					objs.equipment = DeadlyPoisonPotion;  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = DeadlyPoisonPotion;  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+				else if (GETSKILL(TRIGMOB(), Poisoning) > 75)
+				{
+					objs.equipment = GreaterPoisonPotion;  ADDTOPACK(TRIGMOB(), objs.equipment)
+					objs.equipment = GreaterPoisonPotion;  ADDTOPACK(TRIGMOB(), objs.equipment)
+				}
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You don't have 4000 gold!", 38)
+			}
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You are no longer dead!")
+	}
+	DELETE(SCRIPT())
+}

@@ -1,0 +1,82 @@
+onCreate
+{
+	THIS().movable = true
+	//THIS().itemid = 14078 // explosion ball
+	THIS().itemid = 13920
+	THIS().name = "four-square ball"
+	THIS().xmlints.timer = 0
+	THIS().xmlints.explosionCount = 0
+	THIS().xmlints.FiftyMSTicksBeforeDeath = 12
+}
+onDragLift
+{
+	if (IS(TRIGMOB(),humanmob) == false)
+	{
+		LOCALMSG(TRIGMOB(), "You must be a game participant to pick that up!")
+		return override
+	}
+}
+
+onUse
+{
+	if (THIS().RootParentEntity != TRIGMOB())
+	{
+		LOCALMSG(TRIGMOB(), "That must be in your pack to throw it!")
+		return override
+	}
+	SENDTARGET(TRIGMOB(),true)
+}
+
+onTarget
+{
+	THIS().xmlints.timer = 0
+	SUBSCRIBETIMER(TwoFiftyMS)
+	MOVETOWORLD(THIS(), POINT3D(0, 0, 0)) // get it out of the backpack
+	MEFFECT(13920, 15, TRIGMOB(), TARGETED())
+	pause 200
+	MOVETOWORLD(THIS(), TARGETED())
+	THIS().z += 10
+}
+
+onTwoFiftyMS
+{
+	THIS().xmlints.timer += 1
+	if (THIS().xmlints.timer == THIS().xmlints.FiftyMSTicksBeforeDeath)
+	{
+		if (THIS().RootParentEntity != null) // it's in their pack
+		{
+			MOVETOWORLD(THIS(), THIS().RootParentEntity)
+		}
+		elif (THIS().heldby != null)
+		{
+			MOVETOWORLD(THIS(), THIS().heldby)
+		}
+		THIS().movable = false
+		MSG(THIS(),"Game over for you!")
+		pause 1000
+		xmlints.explosionCount = 0
+		UNSUBSCRIBETIMER(TwoFiftyMS)
+		SUBSCRIBETIMER(TwentyFiveMS)
+	}
+}
+
+onTwentyFiveMS
+{
+	xmlints.explosionCount += 1
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-5,5), THIS().y + RANDOMMINMAX(-5,5), THIS().z)
+	EFFECT(14000,25,objs.target)
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-5,5), THIS().y + RANDOMMINMAX(-5,5), THIS().z)
+	EFFECT(14000,25,objs.target)
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-3,3), THIS().y + RANDOMMINMAX(-3,3), THIS().z + RANDOMMINMAX(0,7))
+	EFFECT(14000,25,objs.target)
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-3,3), THIS().y + RANDOMMINMAX(-3,3), THIS().z + RANDOMMINMAX(0,7))
+	EFFECT(14089,30,objs.target)
+	
+	if (xmlints.explosionCount > 80)
+	{
+		
+		xmlints.explosionCount = 0
+		UNSUBSCRIBETIMER(TwentyFiveMS)
+		THIS().movable = true
+	}
+}

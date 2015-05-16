@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>WorldWarsControlSpawner</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29abcde10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1500</X>
+    <Y>1500</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1500</CentreX>
+    <CentreY>1500</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=SET,World Wars Controller,WorldWarsController/ResetScores/true/StartGame/True/SetNextEventHoursFromNow/8:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=WAITUNTIL,0.2:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=BCAST/If you did not already know- In order to change your armor, type "[wwequip" while on the boat. To see who controls the different capture points, type "[wwmap". To see the current cumulative score (across three games) type "[wwscore".:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=WAITUNTIL,52:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=BCAST,101/Congratulations to {GET,World Wars Controller,WorldWarsController,lastwinner} for being the leader! Whoever accrues the most points over this and the next two wars (2.30pm and 10.30pm EST) gains a hero bonus statue and temporary wearables until the next world war 3 days from now!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		:OBJ=WAITUNTIL,427.8:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		
+		:OBJ=SET,World Wars Controller,WorldWarsController/StartGame/True/SetNextEventHoursFromNow/8   :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+		:OBJ=WAITUNTIL,0.20:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+		:OBJ=BCAST,101/If you did not already know- In order to change your armor, type "[wwequip" while on the boat. To see who controls the different capture points, type "[wwmap". To see the current cumulative score (across three games) type "[wwscore".:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=WAITUNTIL,52.0:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=9
+		:OBJ=BCAST,101/Congratulations to {GET,World Wars Controller,WorldWarsController,lastwinner} for being the leader! Whoever accrues the most points over this and the next two wars (10.30pm EST) gains a hero bonus statue and temporary wearables until the next world war 3 days from now!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=WAITUNTIL,427.80:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		
+		:OBJ=SET,World Wars Controller,WorldWarsController/StartGame/True/SetNextEventHoursFromNow/56  :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=11
+		:OBJ=WAITUNTIL,0.200:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=12
+		:OBJ=BCAST,101/If you did not already know- In order to change your armor, type "[wwequip" while on the boat. To see who controls the different capture points, type "[wwmap". To see the current cumulative score (across three games) type "[wwscore".:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=13
+		:OBJ=WAITUNTIL,52.00:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=14
+		:OBJ=BCAST,101/Congratulations to {GET,World Wars Controller,WorldWarsController,lastwinner} for being the winner of the world wars! You have been granted temporary wearable (note that this particular wearable can be worn WITH a helmet provided you put it on first):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=15
+		:OBJ=WAITUNTIL,0.2000:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=16
+		
+		:OBJ=COMMAND/global addtopack temporaryitem set hue 1174 itemid 5449 duration 56 town {GET,World Wars Controller,WorldWarsController,lastwinner} layer Talisman loottype blessed name "Flaming Head (Temporary)" where playermobile citizenship = "{GET,World Wars Controller,WorldWarsController,lastwinner}":MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONSPAWN,21/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONSPAWN,22/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONSPAWN,23/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONSPAWN,24/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONSPAWN,25/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=#CONDITION,"{GET,World Wars Controller,WorldWarsController,lastwinner}"="Pedran";MULTIADDON,Spawns\vorshun\pedranstatue.txt/location/(5547,3908,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=21
+		:OBJ=#CONDITION,"{GET,World Wars Controller,WorldWarsController,lastwinner}"="Lillano";MULTIADDON,Spawns\vorshun\lillanostatue.txt/location/(5417,3908,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=22
+		:OBJ=#CONDITION,"{GET,World Wars Controller,WorldWarsController,lastwinner}"="Calor";MULTIADDON,Spawns\vorshun\calorstatue.txt/location/(5867,3907,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=23
+		:OBJ=#CONDITION,"{GET,World Wars Controller,WorldWarsController,lastwinner}"="Vermell";MULTIADDON,Spawns\vorshun\vermellstatue.txt/location/(6017,3908,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=24
+		:OBJ=#CONDITION,"{GET,World Wars Controller,WorldWarsController,lastwinner}"="Arbor";MULTIADDON,Spawns\vorshun\arborstatue.txt/location/(5667,3907,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=25
+		:OBJ=SET,World War Statue,WorldWarStatue/lastwinner/{GET,World Wars Controller,WorldWarsController,lastwinner}:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=26
+		
+		:OBJ=WAITUNTIL,3307.1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=49
+		:OBJ=GOTO/1:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=WAITUNTIL,160:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+		
+		:OBJ=:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+	</Objects2>
+  </Points>
+ 
+</Spawns>

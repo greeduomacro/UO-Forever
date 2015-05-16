@@ -1,0 +1,54 @@
+onCreate
+{
+	xmlints.active = 0
+	xmlints.zoffset = 1
+	xmlints.canraise = 1
+}
+onSpeech
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 10 && xmlints.canraise == 1 && STRINGCONTAINSIGNORECASE(SPEECH(),"Ex Por Rel Uus"))
+	{
+		xmlints.canraise = 0
+		xmlints.active = 1
+		SUBSCRIBETIMER(OneSecond)
+		SUBSCRIBETIMER(OneMinute)
+	}
+}
+
+onOneSecond
+{
+	if (xmlints.active == 1)
+	{
+		if (xmlints.zoffset < 17)
+		{
+			xmlints.zoffset += 1
+			THIS().Z += 1
+		}
+		else
+		{
+			UNSUBSCRIBETIMER(OneSecond)
+		
+		}
+	}
+	else
+	{
+		if (xmlints.zoffset <= 17 && xmlints.zoffset > 0)
+		{
+			xmlints.zoffset -= 1
+			THIS().Z -= 1
+		}
+		else
+		{
+			UNSUBSCRIBETIMER(OneSecond)
+			xmlints.canraise = 1
+		
+		}
+	}
+}
+
+onOneMinute
+{
+	xmlints.active = 0
+	SUBSCRIBETIMER(OneSecond)
+	UNSUBSCRIBETIMER(OneMinute)
+}

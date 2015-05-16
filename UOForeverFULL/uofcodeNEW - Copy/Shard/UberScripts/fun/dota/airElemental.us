@@ -1,0 +1,42 @@
+onCreate
+{
+	BodyValue = 13
+	BaseSoundID = 655
+	CurrentSpeed = 0.2
+	PassiveSpeed = 0.2
+	ActiveSpeed = 0.16
+	RangePerception = 16
+	WeaponDamage = false
+	HitsMaxSeed = 60
+	Hits = 60
+	TakesNormalDamage = True
+	DamageMin = 10
+	DamageMax = 26
+	AI = AI_Mage
+	BardImmuneCustom = true
+	Name = "an air elemental"
+}
+onTakenHit
+{
+	if (IS(TRIGMOB(),HumanMob))
+	{
+		if (IS(SPELL(),earthquakespell)) { return }
+		if (TRIGMOB().xmlints.dotaElementalDamage == null)
+		{
+			TRIGMOB().xmlints.dotaElementalDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.dotaElementalDamage += DAMAGE()
+		}
+	}
+}
+onDeath
+{
+	if (IS(TRIGMOB(),HumanMob))
+	{
+		LOCALMSG(TRIGMOB(), "+50gp")
+		objs.gold = Gold, 50
+		ADDTOPACK(TRIGMOB(), objs.gold)
+	}
+}

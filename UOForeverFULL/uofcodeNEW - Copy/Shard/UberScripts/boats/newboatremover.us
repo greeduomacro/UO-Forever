@@ -1,0 +1,77 @@
+function removeBoats()
+{
+	// expects objs.boats to have a list of the boat deeds or drydocked
+	foreach (objs.boat ; objs.boats)
+	{
+		LOG("boatdeletion", objs.boat + "\t" + objs.boat.Owner + "\t" + objs.boat.location)
+		if (objs.boat.Owner != null && objs.boat.Owner.BankBox != null)
+		{
+			objs.reward = bankcheck, 7500
+			ADDTOCONTAINER(objs.boat.Owner.BankBox, objs.reward)
+			LOG("boatdeletion", "7500 gold added: " + objs.boat.Owner)
+		}
+		DELETE(objs.boat)
+	}
+}
+
+function removeBoatDeeds()
+{
+	// expects objs.boats to have a list of the boats
+	foreach (objs.boat ; objs.boats)
+	{
+		LOG("boatdeletion", objs.boat + "\t" + objs.boat.RootParentEntity)
+		if (objs.boat.RootParentEntity != null)
+		{
+			if (IS(objs.boat.RootParentEntity, PlayerVendor))
+			{
+				if (objs.boat.RootParentEntity.Owner != null && objs.boat.RootParentEntity.Owner.BankBox != null)
+				{
+					objs.reward = bankcheck, 7500
+					ADDTOCONTAINER(objs.boat.RootParentEntity.Owner.BankBox, objs.reward)
+					LOG("boatdeletion", "off player vendor: 7500 gold added: " + objs.boat.RootParentEntity.Owner)
+				}
+			}
+			else if (IS(objs.boat.ParentEntity, "Container"))
+			{
+				objs.reward = bankcheck, 7500
+				ADDTOCONTAINER(objs.boat.ParentEntity, objs.reward)
+				LOG("boatdeletion", "7500 gold added: " + objs.boat.ParentEntity)
+			}
+		}
+		DELETE(objs.boat)
+	}
+}
+
+onUse
+{
+	objs.boats = ALLITEMSOFTYPE(TYPE(GargoyleBoat))
+	removeBoats()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(OrcBoat))
+	removeBoats()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(TokunoBoat))
+	removeBoats()
+	pause 500
+	
+	
+	objs.boats = ALLITEMSOFTYPE(TYPE(TokunoBoatDocked))
+	removeBoatDeeds()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(TokunoBoatDeed))
+	removeBoatDeeds()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(OrcBoatDocked))
+	removeBoatDeeds()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(OrcBoatDeed))
+	removeBoatDeeds()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(GargoyleBoatDocked))
+	removeBoatDeeds()
+	pause 500
+	objs.boats = ALLITEMSOFTYPE(TYPE(GargoyleBoatDeed))
+	removeBoatDeeds()
+	pause 500
+	DELETE(THIS())
+}

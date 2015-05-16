@@ -1,0 +1,193 @@
+onCreate
+{
+	xmlstrings.controller = "none"
+	xmlints.MINAX = 0
+	xmlints.TRUE_BRITANNIANS = 0
+	xmlints.COUNCIL_OF_MAGES = 0
+	xmlints.SHADOWLORDS = 0
+	SUBSCRIBETIMER(FiveSeconds)
+	xmlints.ClicksToStop = 5
+	xmlints.DefaultClicksToStop = 5
+	xmlints.MatchLengthMinutes = 40
+	xmlints.FiveSecondCount = 0
+	xmlints.switchCount = 0
+	THIS().itemid = 3633
+}
+
+onUse
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (TRIGMOB().FactionName == null)
+		{
+			LOCALMSG(TRIGMOB(), "You aren't in factions and therefore cannot participate!")
+			return
+		}
+		
+		if (xmlstrings.switchTo == null)
+		{
+			if (TRIGMOB().FactionName != xmlstrings.controller)
+			{
+				// start switch control
+				xmlints.switchCount = 1
+				xmlstrings.switchTo = TRIGMOB().FactionName
+				SUBSCRIBETIMER(OneSecond)
+				objs.online = ONLINEMOBS()
+				xmlints.ClicksToStop = 5
+				foreach (objs.player ; objs.online)
+				{
+					if (IS(objs.player,playermobile))
+					{
+						if (objs.player.FactionName != null)
+						{ 
+							SENDMSG(objs.player, TRIGMOB().FactionName + "--is attempting to take control of the brazier!", 0x38)
+						}
+					}
+				}
+				LOCALMSG(TRIGMOB(), "You begin lighting the Brazier.")
+				
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(),"Your faction is already in control of it!")
+			}
+		}
+		else
+		{
+			if (TRIGMOB().FactionName == xmlstrings.switchTo)
+			{
+				// make it harder to switch
+				xmlints.ClicksToStop += 1
+				SENDMSG(TRIGMOB(), "You fortify the brazier... it now takes-" + xmlints.ClicksToStop + " uses for the enemy to stop your faction!")
+				DODAMAGE(TRIGMOB(),20)
+				EFFECT(14000,25,TRIGMOB())
+			}
+			else
+			{
+				EFFECT(14000,25,TRIGMOB())
+				xmlints.ClicksToStop -= 1
+				if (xmlints.ClicksToStop == 0)
+				{
+					xmlints.ClicksToStop = xmlints.DefaultClicksToStop
+					UNSUBSCRIBETIMER(OneSecond)
+					xmlints.switchCount = 0
+					objs.online = ONLINEMOBS()
+					foreach (objs.player ; objs.online)
+					{
+						if (IS(objs.player,playermobile))
+						{
+							if (objs.player.FactionName != null)
+							{ 
+								SENDMSG(objs.player, TRIGMOB().FactionName + "--has defended the brazier!",0x38)
+								xmlstrings.switchTo = null
+							}
+						}
+					}
+				}
+				else
+				{
+					EFFECT(14000,25,TRIGMOB())
+					SENDMSG(TRIGMOB(), "You must use this-" + xmlints.ClicksToStop + " more times to stop the switch!")
+					DODAMAGE(TRIGMOB(),20)
+				}
+			}
+		}
+	}
+}
+onOneSecond
+{
+	xmlints.switchCount += 1
+	EFFECT(14089,30,THIS().X, THIS().Y, THIS().Z + 8)
+	SOUND(THIS(), 0x208)
+	if (xmlints.switchCount == 20)
+	{
+		xmlstrings.controller = xmlstrings.switchTo
+		xmlstrings.switchTo = null
+		UNSUBSCRIBETIMER(OneSecond)
+		
+		if (xmlstrings.controller == "MINAX")
+		{
+			THIS().hue = 1645
+		}
+		elif (xmlstrings.controller == "LORD BRITISH")
+		{
+			THIS().hue = 2214
+		}
+		elif (xmlstrings.controller == "COUNCIL OF MAGES")
+		{
+			THIS().hue = 1325
+		}
+		elif (xmlstrings.controller == "SHADOWLORDS")
+		{
+			THIS().hue = 1109
+		}
+		objs.online = ONLINEMOBS()
+		foreach (objs.player ; objs.online)
+		{
+			if (IS(objs.player,playermobile))
+			{
+				if (objs.player.FactionName != null)
+				{ 
+					SENDMSG(objs.player, xmlstrings.controller + "--has taken control of the brazier!",38)
+				}
+			}
+		}
+	}
+}
+
+onFiveSeconds
+{
+	xmlints.FiveSecondCount += 1
+	if (xmlints.FiveSecondCount > xmlints.MatchLengthMinutes * 12)
+	{
+		UNSUBSCRIBETIMER(FiveSeconds)
+		BCAST("Final Brazier Match Score",38)
+		BCAST("Minax:" + xmlints.MINAX, 38)
+		BCAST("True Britannians:" + xmlints.TRUE_BRITANNIANS, 38)
+		BCAST("Council of Mages:" + xmlints.COUNCIL_OF_MAGES, 38)
+		BCAST("Shadowlords:" + xmlints.SHADOWLORDS, 38)
+		SCRIPT().enabled = false
+		return
+	}
+	
+	objs.nearbyMobs = GETNEARBYMOBS(THIS(),15)
+	//objs.playerMobileType = TYPE(playermobile)
+	foreach (objs.mob ; objs.nearbyMobs)
+	{
+		//if (IS(objs.mob, objs.playerMobileType))
+		if (IS(objs.mob, playermobile))
+		{
+			if (objs.mob.FactionName == xmlstrings.controller)
+			{
+				if (objs.mob.Hidden == false)
+				{
+					if (objs.mob.xmlints.captureScore == null)
+					{
+						objs.mob.xmlints.captureScore = 1
+					}
+					else
+					{
+						objs.mob.xmlints.captureScore += 1
+					}
+				}
+			}
+		}
+	}
+	
+	if (xmlstrings.controller == "MINAX")
+	{
+		xmlints.MINAX += 1
+	}
+	elif (xmlstrings.controller == "LORD BRITISH")
+	{
+		xmlints.TRUE_BRITANNIANS += 1
+	}
+	elif (xmlstrings.controller == "COUNCIL OF MAGES")
+	{
+		xmlints.COUNCIL_OF_MAGES += 1
+	}
+	elif (xmlstrings.controller == "SHADOWLORDS")
+	{
+		xmlints.SHADOWLORDS += 1
+	}
+}

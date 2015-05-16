@@ -1,0 +1,47 @@
+onSay
+{
+    if (SAID("Neptune aid me!"))
+    {
+		// I changed the bodyvaluesVar to only female 401, to get male back change on entry to 400
+        objs.bodyvaluesVar = [401, 401]
+        
+        for (ints.i = 0; ints.i < 2; ints.i +=1)
+        {
+            objs.mySpawnedVar = WaterElemental
+            {
+                FreelyLootable = true
+                AlwaysMurdererCustom = true
+                Title = "witch spawn"
+            }
+        }
+    }
+	elif (SAID("Here be me chest!")) 
+	{
+		if (xmlints.treasurespawned == null)
+		{
+			xmlints.treasurespawned = 1
+			xmlints.treasurespawned.expiration = 0:10:0
+			objs.newChest = treasuremapchest,4
+			{
+				locked = true
+				traptype = ExplosionTrap
+				traplevel = 9
+				trappower = 100
+			}
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You must wait " + TIMESPANSTRING(xmlints.treasurespawned.expiration ) + " before another chest can be spawned.")
+		}
+	}
+	elif (SAID("Run up the Jolly Rodger!")) 
+	{
+		AlwaysMurdererCustom = true
+	}
+	elif (SAID("Me forsakes me evil fer now!"))
+	{
+		AlwaysMurdererCustom = false
+	}
+
+}
+

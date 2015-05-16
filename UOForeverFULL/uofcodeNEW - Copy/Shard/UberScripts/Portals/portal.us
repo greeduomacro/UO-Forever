@@ -1,0 +1,152 @@
+onCreate
+{
+	xmlobjs.Animation1 = FireElemental
+	{
+		CantWalk = true
+		Blessed = true
+		Direction = Mask
+		IgnoreMobiles = true
+		Name = "a mysterious gate"
+		xmlobjs.owner = THIS()
+	}
+	xmlobjs.Animation2 = FireElemental
+	{
+		CantWalk = true
+		Blessed = true
+		Direction = Mask
+		IgnoreMobiles = true
+		Name = "a mysterious gate"
+		xmlobjs.owner = THIS()
+	}
+	xmlints.count = 1
+	xmlints.count2 = 1
+	xmlints.count3 = 0
+	ADDSCRIPT(xmlobjs.Animation1, "portals\\portalAnimation.us")
+	ADDSCRIPT(xmlobjs.Animation2, "portals\\portalAnimation.us")
+	SUBSCRIBETIMER(OneSecond)
+	SUBSCRIBETIMER(TwoFiftyMS)
+	SUBSCRIBETIMER(OneMinute)
+}
+onOneSecond
+{
+	if (xmlints.count == 1)
+	{
+		xmlints.count = 0
+		ANIMATE(xmlobjs.Animation1, 12, 8, 1, false, false, 0)
+	}
+	else
+	{
+		xmlints.count = 1
+		ANIMATE(xmlobjs.Animation1, 12, 10, 0, true, false, 0)
+	}
+}
+onTwoFiftyMS
+{
+	xmlints.count3 += 1
+	if (xmlints.count3 > 1)
+	{
+		if (xmlints.count2 == 1)
+		{
+			xmlints.count2 = 0
+			ANIMATE(xmlobjs.Animation2, 3, 0, 1, true, false, 1)
+		}
+		else
+		{
+			xmlints.count2 = 1
+			ANIMATE(xmlobjs.Animation2, 3, 4, 1, false, false, 1)
+		}
+		xmlints.count3 = 0
+	}
+}
+onUse
+{
+	if (TRIGMOB().Young)
+	{
+		SENDMSG(TRIGMOB(), "You are too young to go in such a dangerous place!")
+		return
+	}
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		if (xmlobjs.returnGate == null)
+		{
+			SENDMSG(TRIGMOB(), "It appears that this particular gate does not currently go anywhere!")
+			return
+		}
+		
+		if (TRIGMOB().Mount != null)
+		{
+			SENDMSG(TRIGMOB(), "Your mount refuses to enter. You have to go in on foot!")
+			return
+		}
+		
+		INDIVIDUALFLASHEFFECT(TRIGMOB())
+		objs.nearby = GETNEARBYMOBS(TRIGMOB().Location, 4)
+		foreach (objs.mob ; objs.nearby)
+		{
+			if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+			{
+				MOVETOWORLD(objs.mob, xmlobjs.returnGate.Location, xmlobjs.returnGate.Map)
+			}
+		}
+		MOVETOWORLD(TRIGMOB(), xmlobjs.returnGate.Location, xmlobjs.returnGate.Map)
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is too far away.")
+	}
+}
+onMoveOver
+{
+	// return gate holds the target location too
+	if (IS(TRIGMOB(), BaseCreature) && TRIGMOB().NetState == null) { return; }
+	if (TRIGMOB().Young)
+	{
+		SENDMSG(TRIGMOB(), "You are too young to go in such a dangerous place!")
+		return
+	}
+	
+	if (xmlobjs.returnGate == null)
+	{
+		SENDMSG(TRIGMOB(), "It appears that this particular gate does not currently go anywhere!")
+		return
+	}
+	
+	if (TRIGMOB().Mount != null)
+	{
+		SENDMSG(TRIGMOB(), "Your mount refuses to enter. You have to go in on foot!")
+		return
+	}
+	pause 1000
+	if (TRIGMOB().Location == THIS().Location)
+	{
+		// still there
+		if (xmlobjs.returnGate == null)
+		{
+			SENDMSG(TRIGMOB(), "It appears that this particular gate does not currently go anywhere!")
+			return
+		}
+		
+		if (TRIGMOB().Mount != null)
+		{
+			SENDMSG(TRIGMOB(), "Your mount refuses to enter. You have to go in on foot!")
+			return
+		}
+		INDIVIDUALFLASHEFFECT(TRIGMOB())
+		objs.nearby = GETNEARBYMOBS(TRIGMOB().Location, 4)
+		foreach (objs.mob ; objs.nearby)
+		{
+			if (IS(objs.mob, BaseCreature) && objs.mob.ControlMaster == TRIGMOB())
+			{
+				MOVETOWORLD(objs.mob, xmlobjs.returnGate.Location, xmlobjs.returnGate.Map)
+			}
+		}
+		MOVETOWORLD(TRIGMOB(), xmlobjs.returnGate.Location, xmlobjs.returnGate.Map)
+		
+	}
+}
+onDelete
+{
+	DELETE(xmlobjs.Animation1)
+	DELETE(xmlobjs.Animation2)
+	DELETE(xmlobjs.returnGate)
+}

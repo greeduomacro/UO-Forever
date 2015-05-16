@@ -1,0 +1,53 @@
+onCreate
+{
+	visible = false
+	xmlints.outerRadius = 35
+	xmlints.damage = 75
+}
+onUse
+{
+	if (xmlints.on == null)
+	{
+		xmlints.on = 1
+	}
+	else
+	{
+		xmlints.on = (xmlints.on + 1) % 2
+	}
+	if (xmlints.on == 1)
+	{
+		SUBSCRIBETIMER(TwoFiftyMS)
+	}
+	else
+	{
+		UNSUBSCRIBETIMER(TwoFiftyMS)
+	}
+}
+onTwoFiftyMS
+{
+	DODAMAGE(THIS(), xmlints.damage, 0)
+	SOUND(THIS(),0x160)
+	for (ints.i = 0; ints.i < 3; ints.i += 1)
+	{
+		ints.xTarget = THIS().x + RANDOMMINMAX(xmlints.outerRadius*-1, xmlints.outerRadius)
+		ints.yTarget = THIS().y + RANDOMMINMAX(xmlints.outerRadius*-1, xmlints.outerRadius)
+		LINEEFFECT(THIS(), POINT3D(ints.xTarget, ints.yTarget, THIS().z), "alan\\events\\urk\\riftfire.txt", 200)
+	}
+	objs.nearby = GETNEARBYITEMS(THIS(),2)
+	foreach (objs.item ; objs.nearby)
+	{
+		if (objs.item.itemid == 3619)
+		{
+			if (objs.item.xmlobjs.owner.xmlints.basinsTurnedIn == null)
+			{
+				objs.item.xmlobjs.owner.xmlints.basinsTurnedIn = 1
+			}
+			else
+			{
+				objs.item.xmlobjs.owner.xmlints.basinsTurnedIn += 1
+			}
+			BCAST(objs.item.xmlobjs.owner.name + " has brought a basin of orcs blood to the rift and it has been consumed!", 0x38)
+			DELETE(objs.item)
+		}
+	}
+}

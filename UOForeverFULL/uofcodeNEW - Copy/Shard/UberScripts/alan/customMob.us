@@ -1,0 +1,121 @@
+// THIS SHOULD BE ATTACHED TO A CustomMob
+onCreate
+{
+	SCRIPT().Name = goober // name this something easily identified in searches, all one word, probably indicating the mob type
+	RawName = "a goober" // default is "a human"
+	Hue = 33823  // default is 0... a good skin hue is 33823 for humans
+	BodyValue = 3  // use the uberscript _body helper functions to identify the right body
+	BaseSoundID = 0  // use the uberscript _sound helper functions to identify the correct sound
+	
+	// DO NOT SET THE MOB'S STR! CUSTOMMobs are set to
+	// CUSTOMMOBS take NORMAL DAMAGE (like players do), SO SET HITS ACCORDINGLY--probably should be
+	// about half to 2/3 the hits of a corresponding mob (e.g. Balron.cs has 800-1200 hit points (SetHits is a STUPID function), 
+	// so you should probably set a mob who is as strong as a balron to have 500-700 hit points instead
+	SETHITSSTAMMANA(THIS(), 100, 70, 100) // order is hits, stamina, mana (this is completely disconnected from STR, INT, and DEX, which you SHOULD LEAVE ALONE generally!
+	
+	
+//============= CUSTOM MOB DAMAGE ==============================================================================
+	// NOTE: with 100 Str, 100 Tactics, DamageMin and DamageMax are THE ACTUAL damage that will be done 
+	// to an unarmored person.  Full GM dexxer suit takes somewhere between 5-15 damage off of that.
+	//  not sure how a full invulnerability suit would do
+	DamageMin = 20 // default 20
+	DamageMax = 30 // default 30
+	
+//============= CUSTOM MOB ARMOR ==============================================================================	
+	VirtualArmor = 0; // default 0 (just like an unarmored player)
+	// SETSKILL(THIS(), "MagicResist", 100.0)  // default is 50.0... can increase to make them take less magic DAMAGE
+	
+	// ActiveSpeed = 0.2 // 0.004 is as fast as horse, 0.01 is VERY slightly slower than horse, 0.16 is a bit slower than running, 0.12 is VERY slightly slower than running, 0.1 is exactly running speed
+	
+	//AutoDispelCustom = false // default false, true means dispel EVs
+	//BardImmuneCustom = true  // default false
+	//CanBreathCustom = false // default false
+	//BreathCustomDelay = -1.0 // default = -1.0 ... this is seconds between breaths (only affects monsters with breath attack
+	//BreathDamageCustom = -1.0 // default = -1.0 ... damage done by breath weapon. If < 0, breath weapon does 5% of their current Hits
+	//IsScaryToPetsCustom = false // default false
+	//WeaponDamage = true // default true
+	//TakesNormalDamage = true // default true
+	//Pseu_AllowInterrupts = false // default false
+	//RangePerception = 18 // default 18 (normal mobs are 12, players see 16)
+	//FreelyLootable = false // default false (makes it so you won't ever go grey for looting
+	//ReduceSpeedWithDamageCustom = false // default is false for CustomMobs (when the mob is damaged, they don't go slower), unlike ALL other BaseCreatures in the game
+	
+	// ======= Options that might be important for pseudoseered mobs =================
+	//Pseu_SpellBookRequired = false // default false, if true, they need a spellbook to cast spells
+	//Pseu_AllowFizzle = true // default true, if true, mob can fizzle, otherwise they never fizzle
+	//Pseu_AllowInterrupts = false // default false, if true, mob can have spells interrupted
+	//Pseu_SpellDelay = TIMESPANSECONDS(0.0) // default TIMESPANSECONDS(0.0), affects the time between spell casting
+	//Pseu_CanBeHealed = true // default true, if false, cannot be healed by any means (they will regenerate though)
+	//Pseu_CanUseGates = true // default true, only affects pseudoseer controlled mobs
+	//Pseu_CanUseRecall = true // default true, only affects pseudoseer controlled mobs
+	//Pseu_CanAttackInnocents = true // default true
+	//Pseu_ConsumeReagents = false // default false, if true, reagents and arrows are required for spellcasting / using archery
+	//PowerWords = false // default false, if true, they will speak powerwords on cast
+	//ClearHandsOnCast = false // default false
+	//ReduceSpeedWithDamageCustom = true // default true, if false, mob will not slow down when damaged
+	//InnocentDefault = false // default false, if true, mob will be innocent (will go criminal if attacking non-innocents)
+	
+	// CustomMob default skills are
+	// 100 tactics
+	// 50 magicresist
+	// 80 wrestling
+	// 100 anatomy
+	// can customize from there:
+	
+	// examples:
+	//SETSKILL(THIS(), "Archery", 120.0)
+	//SETSKILL(THIS(), "Fencing", 120.0)
+	//SETSKILL(THIS(), "Tactics", 100.0)
+	//SETSKILL(THIS(), "Anatomy", 100.0)
+	//SETSKILL(THIS(), "Healing", 100.0)
+	//SETSKILL(THIS(), "Magery", 100.0)
+	//
+	
+	// Set the spawn locations and 
+	// there are 4 ways to set up spawn locations:  
+	// #1: The simplest is simply by a list of rectangles. A rectangle will be chosen randomly WEIGHTED BY THE AREA OF EACH RECTANGLE.  So if objs.spawnLocations had 2 rectangles, one with 100 tiles encompassed in it and one with 1000 tiles encompassed in it, then the 1000 tile rectangle would be chosen 1000/1100 (about 9%) of the time.
+	// example: (several spawn locations in T2A)
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations)
+	
+	// #2: You can set it up with weighted probabilities by using a second list containing INTEGERS. The weighted probability list MUST have the same number of elements as the rectangle LISTCONTAINS
+	// example:
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//objs.weightings = [1, 2, 100, 4]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings)
+	// the 3rd rectangle would be chosen 100 out of 107 times. Note that you can 
+	
+	// #3: You can set it with a particular z level AND whether it requiresSurface (mobs generally should always requireSurface)
+	// example
+	// example:
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//objs.weightings = [1, 2, 100, 4]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings, 10, true)
+	// it will try to find a spawn location at the z level of 10 before using the GetDefaultZ function
+	// which often returns something wrong if there is more than 1 level or a foundation in a building
+	
+	// #4: You can set it with a particular z level SPECIFRIC TO EACH RECTANGLE AND whether it requiresSurface (mobs generally should always requireSurface)
+	// example
+	// example:
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//objs.weightings = [1, 2, 100, 4]
+	//objs.zLevels = [10, 4, 3, 2]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings, 10, true)
+	// since each rectangle has a different z level it should try to spawn in, you can control the z levels
+	// to be rectangle specific this way
+}
+
+onDeath
+{
+	// add any loot here, add to the TRIGITEM() container
+	// e.g.
+	//objs.gold = gold { amount = RANDOMMINMAX(500,600) }
+	//ADDTOCONTAINER(TRIGITEM(), objs.gold)
+	
+	// example: adding 30 piles of 6 platinum each
+	//for (ints.i = 0; ints.i < 30; ints.i += 1)
+	//{
+	//	objs.plat = platinum, 6
+	//	ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	//}
+}

@@ -1,0 +1,233 @@
+function sendmsg()
+{
+	objs.PlayerList = GETREGIONMOBS(GETREGION(THIS().Location))
+	foreach (objs.player ; objs.PlayerList)
+	{
+		if (IS(objs.player,playermobile))
+		{
+			//split this up for proper display of names
+			if (objs.player.FactionName != null)
+			{ 
+				if (xmlstrings.controller == "COUNCIL OF MAGES")
+				{
+					SENDMSG(objs.player, "The Council of Mages have captured a brazier!", 0x38)
+				}
+				elif (xmlstrings.controller == "MINAX")
+				{
+					SENDMSG(objs.player, "Minax has captured a brazier!", 0x38)
+				}
+				elif (xmlstrings.controller == "LORD BRITISH")
+				{
+					SENDMSG(objs.player, "The True Britannians have captured a brazier!", 0x38)
+				}
+				elif (xmlstrings.controller == "SHADOWLORDS")
+				{
+					SENDMSG(objs.player, "The Shadowlords have captured a brazier!", 0x38)
+				}
+			}
+		}
+	}
+}
+function checkmulti()
+{
+		//remove old multi
+		if (xmlstrings.controller == "COUNCIL OF MAGES" && xmlstrings.controller != TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.ComMulti -= 1
+		}
+		elif (xmlstrings.controller == "LORD BRITISH" && xmlstrings.controller != TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.BritMulti -= 1
+		}
+		elif (xmlstrings.controller == "MINAX" && xmlstrings.controller != TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.MinaxMulti -= 1
+		}
+		elif (xmlstrings.controller == "SHADOWLORDS" && xmlstrings.controller != TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.SLMulti -= 1
+		}
+		
+		//give new multi
+		if (xmlstrings.controller == "COUNCIL OF MAGES" && xmlstrings.controller == TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.ComMulti += 1
+			sendmsg()
+		}
+		elif (xmlstrings.controller == "LORD BRITISH" && xmlstrings.controller == TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.BritMulti += 1
+			sendmsg()
+		}
+		elif (xmlstrings.controller == "MINAX" && xmlstrings.controller == TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.MinaxMulti += 1
+			sendmsg()
+		}
+		elif (xmlstrings.controller == "SHADOWLORDS" && xmlstrings.controller == TRIGMOB().FactionName)
+		{
+			xmlobjs.crystal.xmlints.SLMulti += 1
+			sendmsg()
+		}
+}
+function calcdamage()
+{
+	if (TRIGMOB().FactionName == null)
+	{
+		SENDMSG(TRIGMOB(), "You must be in a faction to capture a brazier.")
+	}
+	else
+	{
+		//if brazier does not belong to my faction
+		if (xmlstrings.controller != TRIGMOB().FactionName)
+		{
+			//damage brazier
+			if (xmlints.currtopscore - xmlints.damage > 0)
+			{
+				xmlints.currtopscore -= xmlints.damage
+        			MSG(THIS(), xmlints.currtopscore + "/10", 33) 
+			}
+			//make brazier neutral
+			elif (xmlints.currtopscore - xmlints.damage == 0)
+			{
+				xmlints.currtopscore = 0
+				xmlstrings.controller = null
+        			MSG(THIS(), "Unowned:", 2049) 
+        			MSG(THIS(), xmlints.currtopscore + "/10", 33) 
+			}
+			//if damage greater than current life, convert to my brazier
+			elif (xmlints.currtopscore - xmlints.damage < 0)
+			{
+				xmlints.currtopscore = xmlints.damage - xmlints.currtopscore
+				xmlstrings.controller = TRIGMOB().FactionName
+				if (xmlstrings.controller == "COUNCIL OF MAGES")
+				{
+       				 	MSG(THIS(), "The Council of Mages", 1325) 
+				}
+				elif (xmlstrings.controller == "MINAX")
+				{
+        				MSG(THIS(), "Minax", 1645) 
+				}
+				elif (xmlstrings.controller == "LORD BRITISH")
+				{
+        				MSG(THIS(), "The True Britannians:", 1287) 
+				}
+				elif (xmlstrings.controller == "SHADOWLORDS")
+				{
+ 					MSG(THIS(), "The Shadowlords:", 1109) 
+				}
+        			MSG(THIS(), xmlints.currtopscore + "/10", 33) 
+				checkmulti()
+			}
+		}
+		//if my brazier add damage up to a max of 10
+		elif (xmlstrings.controller == TRIGMOB().FactionName)
+		{
+			if (xmlints.currtopscore + xmlints.damage <= 10)
+			{
+				xmlints.currtopscore += xmlints.damage
+      				MSG(THIS(), xmlints.currtopscore + "/10", 1287) 
+			}
+			else
+			{
+				xmlints.currtopscore = 10
+      				MSG(THIS(), xmlints.currtopscore + "/10", 33) 
+			}
+		}
+	}	
+}
+onCreate
+{
+	xmlstrings.controller = null
+	xmlints.MINAX = 0
+	xmlints.TRUE_BRITANNIANS = 0
+	xmlints.COUNCIL_OF_MAGES = 0
+	xmlints.SHADOWLORDS = 0
+	xmlints.damage = 0
+	xmlints.currtopscore = 0
+	THIS().itemid = 3633
+	THIS().hue = 0
+	THIS().Name = "a magical brazier"
+}
+
+onSingleClick
+{
+
+	if (xmlstrings.controller == null)
+	{
+        	MSG(THIS(), "Unowned", 2049) 
+	}
+	elif (xmlstrings.controller == "COUNCIL OF MAGES")
+	{
+        	MSG(THIS(), "The Council of Mages", 1325) 
+	}
+	elif (xmlstrings.controller == "MINAX")
+	{
+        	MSG(THIS(), "Minax", 1645) 
+	}
+	elif (xmlstrings.controller == "LORD BRITISH")
+	{
+        	MSG(THIS(), "The True Britannians:", 1287) 
+	}
+	elif (xmlstrings.controller == "SHADOWLORDS")
+	{
+ 		MSG(THIS(), "The Shadowlords:", 1109) 
+	}
+        MSG(THIS(), xmlints.currtopscore + "/10", 33) 
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		if (TRIGMOB().xmlints.brazierSwingDelay != null)
+		{
+			SENDMSG(TRIGMOB(), "You can't attack that again so soon!")
+		}
+		objs.oneHand = FINDITEMONLAYER(TRIGMOB(), FirstValid)
+		if (IS(objs.oneHand, BaseWeapon))
+		{
+			TRIGMOB().Direction = GETDIRECTIONTO(TRIGMOB(), THIS())
+			SWINGANIMATION(TRIGMOB())
+			// ... damages brazier
+			TRIGMOB().xmlints.brazierSwingDelay = 1
+			TRIGMOB().xmlints.brazierSwingDelay.expiration = TIMESPANSECONDS(2.0)
+			xmlints.damage = 1
+			calcdamage()
+		}
+
+		else
+		{
+			objs.twoHand = FINDITEMONLAYER(TRIGMOB(), TwoHanded)
+			if (IS(objs.twoHand, BaseWeapon))
+			{
+				TRIGMOB().Direction = GETDIRECTIONTO(TRIGMOB(), THIS())
+				SWINGANIMATION(TRIGMOB())
+				// ... damages brazier
+				TRIGMOB().xmlints.brazierSwingDelay = 1
+				TRIGMOB().xmlints.brazierSwingDelay.expiration = TIMESPANSECONDS(3.5)
+				xmlints.damage = 1
+				calcdamage()
+			}	
+			else
+			{
+				SENDMSG(TRIGMOB(), "If you want to assault the brazier, you must have a weapon equipped!")
+			}
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You are too far away to do that.")
+	}
+}
+
+onTargeted
+{
+	if (IS(SPELL(), FlameStrikeSpell))
+	{
+		EFFECT(0x3709, 0, THIS().Location)
+		SOUND(THIS().Location, 0x208);
+		xmlints.damage = 4
+		calcdamage()	
+	}
+}
+

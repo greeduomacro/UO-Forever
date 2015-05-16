@@ -1,0 +1,6 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox  x="10" y="10" padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"Whirlpools sighted!"</Label>
+		<Label hue="1153">THIS().xmlstrings.sextantcoords</Label>
+	</VBox>
+</Gump>

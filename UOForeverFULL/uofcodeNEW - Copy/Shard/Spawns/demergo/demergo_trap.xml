@@ -1,0 +1,61 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>Demergo_Trap</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-31a523a23520</UniqueId>
+    <Map>Felucca</Map>
+    <X>5705</X>
+    <Y>451</Y>
+    <Width>15</Width>
+    <Height>15</Height>
+    <CentreX>5712</CentreX>
+    <CentreY>458</CentreY>
+    <CentreZ>21</CentreZ>
+    <Range>5</Range>
+    <MaxCount>20</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>500</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>100</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>False</IsHomeRangeRelative>
+    <Objects2>#XY,5711,466,39 ; *MULTIADDON,portcullis:MX=1:SB=1:RT=0:TO=0:KL=0
+	:OBJ=#XY,5712,450,39 ; *MULTIADDON,portcullis2:MX=1:SB=2:RT=0:TO=0:KL=0
+	:OBJ=WAITUNTIL/PLAYERSINRANGE,7&gt;0:MX=1:SB=3:RT=0:TO=0:KL=0
+	:OBJ=#XY,5707,458,24 ; *mummy:MX=1:SB=4:RT=0:TO=0:KL=0
+	:OBJ=#XY,5706,455,24 ; *rottingcorpse/ADD/NoxCrystal/MSG/*This rotting corpse appears to have crystals growing out of its body!*:MX=1:SB=4:RT=0:TO=0:KL=0
+	:OBJ=#XY,5707,453,24 ; *skeletalknight:MX=1:SB=4:RT=0:TO=0:KL=0
+	:OBJ=#XY,5714,454,21 ; *skeleton:MX=1:SB=4:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,1/z/INC,-2:MX=1:SB=4:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,2/z/INC,-2:MX=1:SB=4:RT=0:TO=0:KL=0
+	:OBJ=WHILE/GETONSPAWN,1,z>23/20:MX=1:SB=5:RT=0:TO=0:KL=0
+	:OBJ=WAITUNTIL,1:MX=1:SB=6:RT=0:TO=0:KL=0
+	:OBJ=WHILE/GETONSPAWN,1,z&lt;39/30:MX=1:SB=7:RT=0:TO=0:KL=0
+	:OBJ=WAITUNTIL,8:MX=1:SB=8:RT=0:TO=0:KL=0
+	:OBJ=GOTO/1:MX=1:SB=9:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,1/z/INC,-3:MX=1:SB=20:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,2/z/INC,-3:MX=1:SB=20:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,1/z/INC,3:MX=1:SB=30:RT=0:TO=0:KL=0
+	:OBJ=SETONSPAWN,2/z/INC,3:MX=1:SB=30:RT=0:TO=0:KL=0
+	</Objects2>
+  </Points>
+</Spawns>

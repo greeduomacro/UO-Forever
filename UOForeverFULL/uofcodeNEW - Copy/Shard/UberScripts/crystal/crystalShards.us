@@ -1,0 +1,71 @@
+onCreate
+{
+	ItemID = RANDOMMINMAX(8762, 8777)
+	Name = "crystal shards"
+}
+onUse
+{
+	if (TRIGMOB() != THIS().RootParentEntity)
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it!")
+		return
+	}
+	
+	if (GETSKILL(TRIGMOB(), Tinkering) < 120.0)
+	{
+		SENDMSG(TRIGMOB(), "Only a legendary tinker can manipulate the crystals (i.e. 120 tinkering skill)!")
+	}
+	else
+	{
+		SENDTARGET(TRIGMOB(), false)
+		SENDMSG(TRIGMOB(), "Select other crystals or an unfinished crystal workbench to combine this with.")
+	}
+}
+onTarget
+{
+	if (IS(TARGETED(), Item))
+	{	
+		if (TARGETED().Name == "crystal shards" && TARGETED().ItemID >= 8762 && TARGETED().ItemID <= 8777 )
+		{
+			objs.started = UberScriptItem
+			ADDSCRIPT(objs.started, "crystal\\crystalStart.us")
+			ADDTOPACK(TRIGMOB(), objs.started)
+			ADDTOLIST(objs.started.xmlobjs.AddedHues, THIS().Hue)
+			ADDTOLIST(objs.started.xmlobjs.AddedHues, TARGETED().Hue)
+			SENDMSG(TRIGMOB(), "With your legendary tinkering skills, you are able to begin putting the crystal workbench together.")
+			DELETE(TARGETED())
+			DELETE(THIS())
+			return
+		}
+		else if (TARGETED().Name == "the beginnings of a crystal workbench")
+		{
+			if (LISTCONTAINS(TARGETED().xmlobjs.AddedHues, THIS().Hue))
+			{
+				SENDMSG(TRIGMOB(), "You can tell that crystal type has already been added to the workbench and that there are still " + (9-TARGETED().xmlobjs.AddedHues.Count) + " crystal types left to add until it is completed.")
+			}
+			else
+			{
+				ADDTOLIST(TARGETED().xmlobjs.AddedHues, THIS().Hue)
+				if (TARGETED().xmlobjs.AddedHues.Count >= 9)
+				{
+					LOG("crystalWorkbench", NOW() + "\t" + TRIGMOB().Account + "\t" + TRIGMOB().Name + "\tcompleted crystal workbench")
+					SENDMSG(TRIGMOB(), "You have completed a crystal workbench!")
+					objs.workBench = OrnateElvenBox
+					ADDSCRIPT(objs.workBench, "crystal\\crystalWorkbench.us", "crystalWorkbench")
+					ADDTOCONTAINER(TRIGMOB().Backpack, objs.workBench)
+					DELETE(TARGETED())
+				}
+				else
+				{
+					SENDMSG(TRIGMOB(), "You incorporate the crystal shards into the workbench. There are still " + (9-TARGETED().xmlobjs.AddedHues.Count) + " crystal types left to add until it is completed.")
+				}
+				DELETE(THIS())
+				return
+			}
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You cannot combine it with that!")
+		}
+	}
+}

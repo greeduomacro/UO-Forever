@@ -1,0 +1,28 @@
+onCreate
+{
+	xmlints.state = 0
+	xmlstrings.toPrint = EMPTYSTRING()
+	hue = 2963
+	name = "Rectangle Generator"
+}
+onUse
+{
+	if (xmlints.state == 0)
+	{
+		xmlstrings.toPrint = "RECTANGLE2D(POINT2D(" + TRIGMOB().X + "," + TRIGMOB().Y + "),"
+		xmlints.state = 1
+		hue = 38
+		LOCALMSG(TRIGMOB(), "Rectangle OPENED", 0x38)
+	}
+	else if (xmlints.state == 1)
+	{
+		xmlstrings.toPrint += " POINT2D(" + TRIGMOB().X + ", " + TRIGMOB().Y + "))"
+		xmlints.state = 0
+		hue = 2963
+		LOCALMSG(TRIGMOB(), "Rectangle CLOSED", 38)
+		//xmlstrings.toPrint = STRINGREPLACE(xmlstrings.toPrint, "{", "(")
+		//xmlstrings.toPrint = STRINGREPLACE(xmlstrings.toPrint, "}", ")")
+		
+		LOG("rectangles", xmlstrings.toPrint )
+	}
+}

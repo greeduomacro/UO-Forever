@@ -1,0 +1,179 @@
+<?xml version="1.0" standalone="yes"?>
+<XmlQuestNPC>
+  <NPC>
+    <Name>The Dyad</Name>
+    <Running>True</Running>
+    <ProximityRange>5</ProximityRange>
+    <ResetRange>16</ResetRange>
+    <AllowGhost>False</AllowGhost>
+    <SpeechPace>10</SpeechPace>
+    <ResetTime>1</ResetTime>
+    <ConfigFile>TheDyad-UnderFire</ConfigFile>
+    <SpeechEntries>12</SpeechEntries>
+  </NPC>
+  <SpeechEntry>
+    <EntryNumber>0</EntryNumber>
+    <ID>0</ID>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>10</EntryNumber>
+    <ID>10</ID>
+    <Text>Hail adventurer, I know what it is that you see, however I do not yet know whether I can trust you with this information. Great evil surrounds the knowledge that I possess and must not fall into the wrong hands. </Text>
+    <Condition>GETONCARRIED,A piece of a summoning ritual,visible=true</Condition>
+    <DependsOn>-1</DependsOn>
+    <Pause>2</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>81</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>20</EntryNumber>
+    <ID>20</ID>
+    <Text>If you can prove your loyalty to my cause I will share all that I know with you. An evil pyromancer in the depths of Khalmer must be stopped. Return to me the essence of the pyromancer in order to gain my trust. Are you willing?   </Text>
+    <DependsOn>10</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>30</EntryNumber>
+    <ID>30</ID>
+    <Text>Then take this crystal as a catalyst to bring forth the pyromancer.</Text>
+    <Keywords>Yeah,yeah,sure,ok,yes,continue</Keywords>
+    <Action>GIVE,1/&lt;ruby/name/a strange fiery crystal/ATTACH/&lt;Xmluse/SuccessAction/@SENDMSG/The crystal glows as you turn it over in your hands. I must take this to the depths of Khalmer in order to summon forth the Pyromancer and defeat him.&gt;;TAKE/A piece of a summoning ritual</Action>
+    <DependsOn>20</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>40</EntryNumber>
+    <ID>40</ID>
+    <Text>Welcome back adventurer. I see you have with you the essence of the slain pyromancer. Well done.  Was it a difficult battle?</Text>
+    <Condition>GETONCARRIED,the essence of a pyromancer,visible=true</Condition>
+    <DependsOn>-1</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>50</EntryNumber>
+    <ID>50</ID>
+    <Text>The pyromancer is a mighty foe though you bested it in the end! Give me the essence so that we may proceed.</Text>
+    <Keywords>Yes,yeah,sure,easy</Keywords>
+    <Action>TAKE,1/the essence of a pyromancer</Action>
+    <DependsOn>40</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>60</EntryNumber>
+    <ID>50</ID>
+    <Text>I am pleased that you found the task simple as the foes you face in the future will only be stronger. Now, give me the essence so that we may proceed.</Text>
+    <Keywords>No,nope,easy</Keywords>
+    <Action>TAKE,1/the essence of a pyromancer</Action>
+    <DependsOn>40</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>70</EntryNumber>
+    <ID>70</ID>
+    <Text>The scroll that you have in your possession is but a fragment of the larger picture. It appears to be a summoning ritual, just as I had suspected.</Text>
+    <DependsOn>50</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>80</EntryNumber>
+    <ID>80</ID>
+    <Text>The gargoyles of Khalmer are preparing that which has been foretold for eons. The reappearance of Taskmaster Drunak and Gargaz the Ancient was the first sign of the reawakening of the fire deity to which they have given their souls.</Text>
+    <DependsOn>70</DependsOn>
+    <Pause>10</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>90</EntryNumber>
+    <ID>90</ID>
+    <Text>The coming times will be dire. I will require your aid again soon, however I must now consider the action we are now forced to take. Farewell, adventurer.. for now..</Text>
+    <DependsOn>80</DependsOn>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>100</EntryNumber>
+    <ID>100</ID>
+    <Text>Before you go take this as a token of my gratitude.</Text>
+    <Action>GIVE/gold,3000; SETONTRIGMOB/alive/true/ATTACH/XmlQuestAttachment,Under Fire;GIVE/&lt;simplenote/Name/Under Fire/titlestring/Under Fire/notestring/The Dyad has warned  of the coming times and what they might bring. Although his message was cryptic, one fact was clear. The creatures of Khalmer were preparing for the reawakening of an ancient evil. The Dyad assures me that I will be called upon soon in order to aid him in thwarting these evil plans.&gt;  </Action>
+    <Condition>~GETONTRIGMOB,[ATTACHMENT,XmlQuestAttachment,Under Fire,name]="Under Fire"</Condition>
+    <DependsOn>90</DependsOn>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+  <SpeechEntry>
+    <EntryNumber>110</EntryNumber>
+    <ID>110</ID>
+    <Text>Very well, farewell adventurer.</Text>
+    <Keywords>No,nope,nah</Keywords>
+    <DependsOn>20</DependsOn>
+    <Pause>1</Pause>
+    <PrePause>-1</PrePause>
+    <LockConversation>True</LockConversation>
+    <IgnoreCarried>False</IgnoreCarried>
+    <AllowNPCTrigger>False</AllowNPCTrigger>
+    <SpeechStyle>Regular</SpeechStyle>
+    <SpeechHue>-1</SpeechHue>
+  </SpeechEntry>
+</XmlQuestNPC>

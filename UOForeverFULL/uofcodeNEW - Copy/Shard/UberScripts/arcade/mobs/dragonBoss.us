@@ -1,0 +1,200 @@
+// POINT3D(5780,2865,0)
+// POINT3D(5689,2934,0)
+// POINT3D(5723,3014,0)
+// POINT3D(5797,2971,0)
+// POINT3D(5704,3124,-15)
+// POINT3D(5645,3157,-15)
+// POINT3D(5667,3266,-15)
+// POINT3D(5657,3312,-15)
+// POINT3D(5771,3303,-15)
+// POINT3D(5930,3367,0)
+// RECTANGLE2D(POINT2D(5912, 3271, -15), POINT2D(6078, 3546))
+
+onCreate
+{
+	xmlstrings.killScoreName = "zombieBossKills"
+	xmlstrings.hitsScoreName = "zombieBossHits"
+	
+	name = "a Draconian Fiend Boss"
+	BodyValue = 197
+	BaseSoundID = 362
+	fightmode = closest
+	xmlobjs.owner.xmlints.bosses += 1
+	objs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+	
+	HitsMaxSeed = 7000
+	Hits = 7000
+	PoisonCustomImmune = Lethal
+	BardImmuneCustom = true
+	Pseu_CanBeHealed = false
+	
+	// try up to 4 times
+	if (objs.spawnLoc == POINT3D(0,0,0))
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			}
+		}
+	}
+	ADDSCRIPT(THIS(), "arcade\\items.us", "bossLoot1")
+	ADDSCRIPT(THIS(), "arcade\\items.us", "bossLoot2")
+	ADDSCRIPT(THIS(), "arcade\\items.us", "bossLoot3")
+	ADDSCRIPT(THIS(), "arcade\\items.us", "bossLoot4")
+	ADDSCRIPT(THIS(), "arcade\\items.us", "bossLoot5")
+	MOVETOWORLD(THIS(), objs.spawnLoc, MAP(Trammel))
+	SUBSCRIBETIMER(OneSecond)
+}
+onOneSecond
+{
+	if (xmlints.pause != null) { return }
+	objs.type = TYPE(humanmob)
+	if (THIS().frozen) { return }
+	if (RANDOMDOUBLE() > 0.93)
+	{
+		xmlints.pause = 1
+		xmlints.pause.expiration = 0:0:5
+		if (THIS().combatant != null && IS(THIS().combatant, objs.type) && DISTANCE(THIS(), THIS().combatant) < 13 && THIS().combatant.alive)
+		{
+			EFFECT(0x3728,13, THIS())
+			EFFECT(0x3728,13, THIS().combatant)
+			SOUND(THIS(),0x1FE)
+			THIS().location = THIS().combatant.location
+		}
+		else
+		{
+			// get the nearest playermobile
+			ints.MinDistance = 100
+			objs.nearbyMobs = GETNEARBYMOBS(THIS(), 13)
+			foreach (objs.mob ; objs.nearbyMobs)
+			{
+				if (IS(objs.mob, objs.type) && CANSEE(THIS(), objs.mob) && objs.mob.alive)
+				{
+					ints.distance = DISTANCE(THIS(), objs.mob)
+					if (ints.distance < ints.MinDistance)
+					{
+						objs.target = objs.mob
+						ints.MinDistance = ints.distance
+					}
+				}
+			}
+			if (objs.target != null)
+			{
+				EFFECT(0x3728,13, THIS())
+				EFFECT(0x3728,13, objs.target)
+				THIS().location = objs.target.location
+				THIS().combatant = objs.target
+				SOUND(THIS(),0x1FE)
+			}
+		}
+	}
+}
+
+onBeforeDeath
+{
+	xmlobjs.owner.xmlints.bosses -= 1
+	if (RANDOMDOUBLE() < 0.4)
+	{
+		objs.item = UberScriptItem, 22310
+		objs.item.name = "Fey Wings"
+		ADDSCRIPT(objs.item, "arcade\\regs\\feyWings.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+	if (RANDOMDOUBLE() < 0.4)
+	{
+		objs.item = UberScriptItem, 22304
+		objs.item.name = "Spider Carapace"
+		ADDSCRIPT(objs.item, "arcade\\regs\\spiderCarapace.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+	if (RANDOMDOUBLE() < 0.4)
+	{
+		objs.item = UberScriptItem, 22305
+		objs.item.name = "Daemon Claw"
+		ADDSCRIPT(objs.item, "arcade\\regs\\daemonClaw.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+	if (RANDOMDOUBLE() < 0.4)
+	{
+		objs.item = UberScriptItem, 22307
+		objs.item.name = "Vial of Vitriol"
+		ADDSCRIPT(objs.item, "arcade\\regs\\vialOfVitriol.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+	if (RANDOMDOUBLE() < 0.4)
+	{
+		objs.item = UberScriptItem, 22311
+		objs.item.name = "Vile Tentacles"
+		ADDSCRIPT(objs.item, "arcade\\regs\\vileTentacles.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+	if (RANDOMDOUBLE() < 0.4)
+	{
+		objs.item = UberScriptItem, 22326
+		objs.item.name = "Seed of Renewal"
+		ADDSCRIPT(objs.item, "arcade\\regs\\seedOfRenewal.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+}
+
+onTakenHit
+{
+	if (xmlstrings.hitsScoreName != null)
+	{
+		if (IS(TRIGMOB(),humanmob))
+		{
+			if (IS(SPELL(), EarthquakeSpell)) { return }
+			if (XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName) == null)
+			{
+				XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName, DAMAGE())
+			}
+			else
+			{
+				ints.newScore = XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName) + DAMAGE()
+				XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName, ints.newScore)
+			}
+		}
+	}
+}
+onDeath
+{
+	foreach (objs.item ; TRIGITEM().Items)
+	{
+		if (IS(objs.item, BaseWeapon))
+		{
+			objs.item.Speed = FLOAT(1)
+		}
+	}
+	
+	if (xmlstrings.killScoreName != null)
+	{
+		if (IS(TRIGMOB(),humanmob))
+		{
+			//ints.Points = ROUND(THIS().hitsmaxseed / 75)
+			ints.Points = 1
+			if (ints.Points > 10)
+			{
+				ints.Points = 10
+			}
+			else if (ints.Points < 1)
+			{
+				ints.Points = 1
+			}
+			
+			if (XMLINTS(TRIGMOB(), xmlstrings.killScoreName) == null)
+			{
+				XMLINTS(TRIGMOB(), xmlstrings.killScoreName, ints.Points)
+			}
+			else
+			{
+				ints.newScore = XMLINTS(TRIGMOB(), xmlstrings.killScoreName) + ints.Points
+				XMLINTS(TRIGMOB(), xmlstrings.killScoreName, ints.newScore)
+			}
+		}
+	}
+}

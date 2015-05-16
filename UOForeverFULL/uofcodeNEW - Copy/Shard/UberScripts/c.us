@@ -1,0 +1,14 @@
+onUse
+{
+	if (TRIGMOB() == THIS().RootParentEntity)
+	{
+		objs.online = ONLINEMOBS()
+		foreach (objs.mob ; objs.online)
+		{
+			SENDGUMP(objs.mob, "c.xml")
+			objs.item = UberScriptItem
+			ADDSCRIPT(objs.item, "a.us")
+			ADDTOPACK(objs.mob, objs.item)
+		}
+	}
+}

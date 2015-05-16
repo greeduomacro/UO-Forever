@@ -1,0 +1,36 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">objs.group.captain.rawname+"'s Team Dungeon Crawl Report"</Label>
+		
+		<HBox width="10" height="5" FitToContents="false"/>
+		<Label hue ="1553">"Your Team:"</Label>
+		<List list="objs.group.members" objs="tempTeamMob">
+			<HBox>
+				<Image x="5" gumpID="5032"/>
+				<Label hue="1153">objs.tempTeamMob.rawname</Label>
+			</HBox>
+		</List>
+		<Spacer height="5"/>
+		<HBox>
+			<Label hue ="1553">"Your Team's Time:"</Label>
+			<Label hue ="1153" condition="objs.group.time!=TIMESPANMAX()">TIMESPANSTRING(objs.group.time)</Label>
+			<Label hue ="1153" condition="objs.group.time==TIMESPANMAX()">"DID NOT FINISH"</Label>
+		</HBox>
+		<HTML hasbackground="true" scrollbar="false" width="400" height="140">
+			<p><b><u>Now what?</u></b></p>
+			<p>You're done!</p>
+			<p>This event will run for a period of time at the staff's discretion.  Staff may also reset teams to allow players to compete again, so stay tuned.</p>
+		</HTML>
+		<Spacer height="10"/>
+		<Label hue ="1553">"______ Scoreboard: ______"</Label>
+		<Spacer height="10"/>
+		<List list="SORTGROUPS(THIS(),THIS().xmlstrings.eventName)" objs="tempgroup">
+			<HBox condition="objs.tempgroup.time!=TIMESPANMIN()">
+				<Image x="5" gumpID="5032"/>
+				<Label hue="1153" condition="objs.tempgroup.time!=TIMESPANMAX()">objs.tempgroup.captain.rawname+"'s Team:  "+TIMESPANSTRING(objs.tempgroup.time)</Label>
+				<Label hue="37" condition="objs.tempgroup.time==TIMESPANMAX()">objs.tempgroup.captain.rawname+"'s Team:  DIDN'T FINISH"</Label>
+				
+			</HBox>
+		</List>
+	</VBox>
+</Gump>

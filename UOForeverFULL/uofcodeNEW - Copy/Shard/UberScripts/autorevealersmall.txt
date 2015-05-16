@@ -1,0 +1,19 @@
+onCreate
+{
+	SUBSCRIBETIMER(OneSecond)
+}
+onOneSecond
+{
+	objs.moblist = GETNEARBYMOBS(THIS(), 30)
+	foreach (objs.mob ; objs.moblist)
+	{
+		if (objs.mob.hidden == true)
+		{
+			if (objs.mob.hits < 121)
+			{
+				objs.mob.hidden = false
+				LOCALMSG(objs.mob, "They see you!",38)
+			}
+		}
+	}
+}

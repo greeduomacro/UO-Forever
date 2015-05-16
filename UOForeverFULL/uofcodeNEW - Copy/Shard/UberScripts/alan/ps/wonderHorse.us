@@ -1,0 +1,61 @@
+onCreate
+{
+	SCRIPT().name = wonderHorse
+	THIS().rawstr = 120
+	THIS().rawint = 40
+	THIS().rawdex = 120
+	THIS().hitsmaxseed = 120
+	THIS().hits = 120
+	THIS().stammaxseed = 120
+	THIS().stam = 120
+	THIS().manamaxseed = 40
+	THIS().mana = 40
+
+	rawname = "Bucephalus the Wonder Horse"
+	//THIS().name = "Bucephalus the Wonder Horse"
+	pseu_eqplayerallowed = true
+	//THIS().pseu_eqplayerallowed = true
+	
+	SETSKILL(THIS(), "EvalInt", 120.0)
+	SETSKILL(THIS(), "Magery", 120.0)
+	SETSKILL(THIS(), "Meditation", 100.0)
+	SETSKILL(THIS(), "Tactics", 100.0)
+	SETSKILL(THIS(), "Wrestling", 100.0)
+	SETSKILL(THIS(), "MagicResist", 125.0)
+
+	THIS().poisoncustomhit = regular
+	THIS().poisoncustomimmune = regular
+	THIS().canbreathcustom = true
+	THIS().breathdamagecustom = 25
+	THIS().breathcustomdelay = 3.0
+	THIS().rawstr = 100
+	THIS().rawint = 100
+	THIS().rawdex = 25
+	THIS().hitsmaxseed = 1400
+	THIS().hits = 1400
+	THIS().stammaxseed = 100
+	THIS().stam = 100
+	THIS().manamaxseed = 700
+	THIS().mana = 700
+	THIS().damagemin = 40
+	THIS().damagemax = 65
+	THIS().virtualarmor = 70
+	THIS().tamable = false
+	THIS().bardimmunecustom = true
+	THIS().name = "Bucephalus the Wonder Horse"
+	THIS().hue = 1157
+	THIS().controlled = true	
+	THIS().pseu_eqplayerallowed = true
+	THIS().controlmaster = THIS().xmlobjs.masterVar
+	THIS().rider = THIS().xmlobjs.masterVar
+	ADDSCRIPT(THIS(), "alan\\ps\\go.txt", "psGo")
+}
+
+onDeath
+{
+	for (ints.i = 0; ints.i < 30; ints.i += 1)
+	{
+		objs.plat = platinum, 6
+		ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	}
+}

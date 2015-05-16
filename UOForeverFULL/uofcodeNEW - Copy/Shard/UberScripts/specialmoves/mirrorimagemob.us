@@ -1,0 +1,19 @@
+onCreate
+{
+	xmlints.count = 0
+	SUBSCRIBETIMER(OneMinute)
+}
+onOneMinute
+{
+	xmlints.count += 1
+	if (xmlints.count >= 2)
+	{
+		EFFECT(14120, 13, THIS())
+		DELETE(THIS())
+	}
+}
+onBeforeDeath
+{
+	EFFECT(14120, 13, THIS())
+	DELETE(THIS())
+}

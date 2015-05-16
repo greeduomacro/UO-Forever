@@ -1,0 +1,43 @@
+<Gump closable="false" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"REJOIN NOW BY SELECTING A TEMPLATE!"</Label>
+		<Label hue="1153">"If you are giving up, just log out..."</Label>
+		<Label hue="1153">"So long as the event is still running,"</Label>
+		<Label hue="1153">"you can rejoin by double-clicking the"</Label>
+		<Label hue="1153">"Stone Pillar..."</Label>
+		<Label hue="1153">"All non-mage orcs have GM Hiding"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="fencer"/>
+			<Label hue ="1553">"Poisoner/Fencer: Kigg'r Orc"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="macer"/>
+			<Label hue ="1553">"Macer: Womp'r Orc"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="archer"/>
+			<Label hue ="1553">"Stealther/Archer: Ligz'r Orc"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="lumberjack"/>
+			<Label hue ="1553">"Sword/LJ: Lusk'r Orc"</Label>
+		</HBox>
+		<Label hue="1153">"PLEASE NOTE! Please use mage templates"</Label>
+		<Label hue="1153">"sparingly, as this is most sensible in"</Label>
+		<Label hue="1153">"terms of the orcish horde. We may remove"</Label>
+		<Label hue="1153">"the mage templates temporarily if we see"</Label>
+		<Label hue="1153">"that they are being overused."</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="stunmage"/>
+			<Label hue ="1553">"Stun-Heal Mage: Bone Mend'r"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="scribemage"/>
+			<Label hue ="1553">"Scribe-Stun Mage: Mojoka"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="noxmage"/>
+			<Label hue ="1553">"Nox-Stun Mage: Mojoka"</Label>
+		</HBox>
+	</VBox>
+</Gump>

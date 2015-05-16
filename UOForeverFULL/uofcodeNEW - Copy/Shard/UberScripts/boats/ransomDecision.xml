@@ -1,0 +1,31 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"==WARNING==WARNING==WARNING=="</Label>
+		<Label hue="1153">"This is a Boat Ransom Notification for "+THIS().Boat.Owner.RawName</Label>
+		<Label hue="1153">"YOU HAVE 15 MINUTES TO REPLY"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="550" height="290">
+			<basefont color="#000000">
+			<p>Your boat has been sunk.</p>
+			<p>You have 15 MINUTES to decide between the following two options:</p>
+			
+			<p>Option 1: You can pay 10% of the boat cost to those who sunk the boat as a ransom. If this option is chosen, the boat will be dry-docked and placed in the owner's bank and everything remaining on-deck or in the hold will be lost.</p>
+			
+			<p>Option 2: You can decide to attempt to rescue the boat by taking another boat to the sunken boat, and repairing it up to full health using boat repair tools. During that time, no new damage can be done to it. You have a <u>1 HOUR</u> window of opportunity (starting from <u>the moment the boat was sunk</u>) during which ONLY YOU, THE OWNER can repair the boat. After that one hour window of opportunity, however, the boat can be repaired by anyone, and the person who completes the repairs is awarded the boat. This means YOUR BOAT COULD BE COMPLETELY LOST! Be aware that all players who were involved in sinking your boat WILL BE NOTIFIED if you decide to reject the ransom note in this way (i.e. they will know you will almost certainly be coming). This is, therefore, a significant risk that should not be undertaken unless you are reasonably confident that you can repair the boat during that time. Again, the boat cannot be further damaged, so repairs by the owner are cumulative (i.e. if you come back to the boat and are able to repair it 30% but then you are killed, you can still return within whatever remains of your hour of opportunity and you will only have 70% left to repair in order to save your boat)</p>
+			
+			<p>IF YOU DO NOT RESPOND to this ransom note, then immediately after 15 minutes has expired, ANYBODY can repair the boat.</p>
+			
+			<p>When a boat is repaired to full health, it is dry-docked and placed in the backpack of the last person to repair it. Dry-docked boats are blessed and cannot be lost.</p>
+			</basefont>
+		</HTML>
+		<Spacer/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="payRansom"/>
+			<Label hue ="1553">"Pay the ransom of "+BOATRANSOMCOST(THIS().Boat)</Label>
+		</HBox>
+		<Spacer height="25"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="riskLosingBoat"/>
+			<Label hue ="1553">"Attempt to salvage the boat yourself (YOU MIGHT LOSE YOUR BOAT!)"</Label>
+		</HBox>
+	</VBox>
+</Gump>

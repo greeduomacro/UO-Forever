@@ -1,0 +1,40 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"DOTA-style Event Instructions"</Label>
+		<Label hue="1153">"YOU ARE RESPONSIBLE FOR THIS INFO!"</Label>
+		<Label hue="1153">"BE SURE TO SCROLL DOWN TO READ IT ALL!"</Label>
+		<Label hue="1153">"If you page about something that is clearly"</Label>
+		<Label hue="1153">"answered here, we will not be happy!"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="400" height="290">
+			<p>I refer to this event as the "Ultimate Ultima" event. It collapses the Ultima Online experience into one amazing MOBA-style competition.</p>
+			
+			<p>When you join, you will be randomly assigned one of two teams. There are 3 "lanes" connecting the opposing teams. Each team has turrets defending those lanes as well as elemental factories that spawn NPC elementals who march down those lanes and help with the assault against the other team.</p>
+			<p>You begin the game as a newbie character with only 50 tinkering and 50 mining skill as well as (unblessed) tinker tools and a shovel. You have super enhanced (15x) skill-gain so it is up to you what and how to train and what to do from there. There is total skill point limit (but max 100 per skill). All characters have 100 Str, Dex, and Int</p>
+			<p>You will almost certainly need to work as a team in order to defeat the enemy. VERY IMPORTANT TO KNOW:
+			-Your team will need to craft their own weapons / armor (harvest ore to do so)
+			-harvest wool for bandages (spinning wheels and looms by your life essence), etc. Sheep can be found in two alcoves not far from each base and they respawn almost instantly after being killed.
+			-Everybody is given a full spellbook. THE ONLY WAY to get reagents is by double clicking your Life Essence when you have 100 gold--you get a bag of 50 of each reagent. You also get 10 empty bottles in case you want to craft potions
+			-You get gold by getting the killshot on enemy mobs (50 gold per).
+			-Dying results in you spawning back at your Life Essence with tinker tools and a shovel.</p>
+			<p>Your goal is to destroy the other team's Life Essence (looks like a blob of energy). The turrets, elemental spawners, and life essence do not regenerate and cannot be healed, so any progress made towards defeating it stays forever.</p>
+			<p>The scores that are tracked are 
+			(1) damage done to players, 
+			(2) players that you killed (a list)
+			(3) damage done to elementals
+			(4) damage to turrets and elemental factories and 
+			(5) damage to the life essence.
+			(6) crafting (mining, alchemy, blacksmith, and tinkering) skill levels</p>
+			<p>Note that this is the first time this has been run on such a massive scale so don't be surprised if it needs some tweaking.</p>
+			
+			<p>Good luck!</p>
+		</HTML>
+		<Spacer height="60"/>
+		<Label hue="1153">"AFTER you have read the instructions:"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="joinEvent"/>
+			<Label hue ="1553">"Join this Event"</Label>
+		</HBox>
+	</VBox>
+	
+	
+</Gump>

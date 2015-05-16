@@ -1,0 +1,37 @@
+onCreate
+{
+	HitsRegenPerTick = 0
+}
+onBeforeDeath
+{
+	if (THIS().Name != null)
+	{
+		MSG(THIS(), THIS().Name + " has been defeated!")
+	}
+	else
+	{
+		MSG(THIS(), "This chicken has been defeated!")
+	}
+	THIS().Blessed = true
+	THIS().Hits = 100
+	return override
+}
+onExpire
+{
+	THIS().Blessed = false
+	HitsRegenPerTick = 1
+}
+onTakenHit
+{
+	if (TRIGMOB() != null && IS(TRIGMOB(),Chicken) == false)
+	{
+		return override
+	}
+}
+onTargeted
+{
+	if (SPELL() != null)
+	{
+		return override
+	}
+}

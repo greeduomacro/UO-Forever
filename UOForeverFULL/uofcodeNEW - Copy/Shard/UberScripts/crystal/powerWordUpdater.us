@@ -1,0 +1,62 @@
+onUse
+{
+	objs.statics = ALLITEMSOFTYPE(TYPE(Static))
+	ints.amount = 0
+	foreach (objs.static ; objs.statics)
+	{
+		if (objs.static.ItemID == 8792)
+		{
+			if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'nyanl'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'nganl'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'nya'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'nra'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'gosh'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'gash'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'nyo'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'nge'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'bokr'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'bakr'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'kliglo'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'kligle'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'nechro'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'nechra'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'fihlo'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'fihla'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'glo'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'gle'"
+				ints.amount += 1
+			}
+			else if (objs.static.Name == "research document regarding the protective properties of the gargish power word 'ngo'")
+			{
+				objs.static.Name = "research document regarding the protective properties of the gargish power word 'nge'"
+				ints.amount += 1
+			}
+		}	
+	}
+	SENDMSG(TRIGMOB(), "all done " + ints.amount)
+}

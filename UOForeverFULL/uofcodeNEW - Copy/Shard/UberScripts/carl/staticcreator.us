@@ -1,0 +1,9 @@
+onCreate
+{
+ xmlints.itemID = 14497
+}
+onUse
+{
+ COMMAND(TRIGMOB(), "add static " + xmlints.itemID)
+ xmlints.itemID += 1
+}

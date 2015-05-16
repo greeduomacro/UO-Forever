@@ -1,0 +1,8 @@
+onUse
+{
+	if ((STRING(TRIGMOB().AccessLevel) == Player || STRING(TRIGMOB().AccessLevel) == Counselor) && TRIGMOB().RawName != "Cassandra Hope")
+	{
+		SENDMSG(TRIGMOB(), "You don't have access to that.")
+		return override
+	}
+}

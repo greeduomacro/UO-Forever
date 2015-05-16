@@ -1,0 +1,82 @@
+﻿using System;
+using Server;
+using Server.Mobiles;
+using Server.Spells;
+
+namespace Server.Items
+{
+    public class covenpaint : Item
+    {
+
+        [Constructable]
+        public covenpaint()
+            : base(0x9EC)
+        {
+            Name = "coven body paint";
+            Hue = 400;
+            Weight = 2.0;
+        }
+
+        public covenpaint(Serial serial)
+            : base(serial)
+        {
+        }
+
+        public override void OnDoubleClick(Mobile from)
+        {
+            if (IsChildOf(from.Backpack))
+            {
+                if (Factions.Sigil.ExistsOn(from))
+                {
+                    from.SendLocalizedMessage(1010465); // You cannot disguise yourself while holding a sigil.
+                }
+                else if (!from.CanBeginAction(typeof(Spells.Fifth.IncognitoSpell)))
+                {
+                    from.SendLocalizedMessage(501698); // You cannot disguise yourself while incognitoed.
+                }
+                else if (!from.CanBeginAction(typeof(Spells.Seventh.PolymorphSpell)))
+                {
+                    from.SendLocalizedMessage(501699); // You cannot disguise yourself while polymorphed.
+                }
+                else if (TransformationSpellHelper.UnderTransformation(from))
+                {
+                    from.SendLocalizedMessage(501699); // You cannot disguise yourself while polymorphed.
+                }
+                else if (from.IsBodyMod || from.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
+                {
+                    from.SendLocalizedMessage(501605); // You are already disguised.
+                }
+                else
+                {
+                    from.BodyMod = (from.Female ? 184 : 183);
+                    from.HueMod = 400;
+
+                    if (from is PlayerMobile)
+                        ((PlayerMobile)from).SavagePaintExpiration = TimeSpan.FromDays(2.0);
+
+                    from.SendMessage("You now bear the markings of a Blackthorn Coven member.  This will wear off in 2 days.");
+
+                    Consume();
+                }
+            }
+            else
+            {
+                from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+            }
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write((int)0);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+}

@@ -1,0 +1,54 @@
+onCreate
+{
+	movable = false
+	hue = 38
+	name = "Gazer Summoner"
+}
+onUse
+{
+	SENDTARGET(TRIGMOB())
+}
+onTarget
+{
+	if (DISTANCE(TARGETED(), TRIGMOB()) < 20)
+	{
+		objs.therald = GETMOB("Therald")
+		objs.skills = COPYSKILLS(objs.therald)
+		
+		for (ints.i = 0; ints.i < 25; ints.i+= 1)
+		{
+			objs.orc = bloodrockorc
+			APPLYSKILLS(objs.orc, objs.skills)
+			MOVETOWORLD(objs.orc, TARGETED())
+			objs.orc.hitsmaxseed = 100
+			objs.orc.hits = 100
+			objs.orc.str = 100
+			objs.orc.int = 100
+			objs.orc.dex = 100
+			objs.orc.stammaxseed = 100
+			objs.orc.stam = 100
+			objs.orc.manamaxseed = 100
+			objs.orc.mana = 100
+			objs.spellbook = fullspellbook
+			objs.spellbook.movable = false
+			ADDTOPACK(objs.orc, objs.spellbook)
+			objs.orc.fightmode = Closest
+			objs.orc.pseu_allowinterrupts = false
+			if (RANDOM(3) == 1)
+			{
+				objs.orc.AI = AI_mage
+			}
+			objs.bandages = bandage
+			{
+				amount = 20
+			}
+			ADDTOPACK(objs.orc, objs.bandages)
+			objs.axe = twohandedaxe
+			EQUIP(objs.orc, objs.axe)
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is too far away!")
+	}
+}

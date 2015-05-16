@@ -1,0 +1,27 @@
+onUse
+{
+	//objs.attachments = GLOBALGETATTACHMENTS("XmlObject", "returnGate")
+	SENDTARGET(TRIGMOB())
+	//ints.count = 0
+	//foreach (objs.attachment ; objs.attachments)
+	//{
+//		if (IS(objs.attachment.AttachedTo, UberScriptItem))
+		//{
+//			DELETE(objs.attachment.AttachedTo)
+			//ints.count += 1
+		//}
+		
+	//}
+	//SENDMSG(TRIGMOB(), ints.count + " deleted")
+}
+onTarget
+{
+	//SENDMSG(TRIGMOB(), TARGETED().xmlobjs.CurrentPortals.Count)
+	objs.maps = TARGETED().xmlobjs.targetMaps
+	foreach(objs.val ; TARGETED().xmlobjs.targetMaps)
+	{
+		SENDMSG(TRIGMOB(), objs.val)
+	}
+	TARGETED().xmlobjs.targetMaps = ["Malas", "Ter Mur", "Ilshenar", "Ter Mur", "Portals", "Portals"]
+	//SENDMSG(TRIGMOB(), GETATTACHMENT(TARGETED().xmlobjs.CurrentPortals[0], "xmlscript"))
+}

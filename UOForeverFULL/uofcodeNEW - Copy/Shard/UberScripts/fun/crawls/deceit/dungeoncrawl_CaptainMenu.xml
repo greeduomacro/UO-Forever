@@ -1,0 +1,40 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label x="20" hue="1153">"Team Captain Menu"</Label>
+		<Spacer height="5"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="helpGump"/>
+			<Label hue ="1553">"See the instructions (YOU ARE RESPONSIBLE FOR THESE!)"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="templateShowScreen"/>
+			<Label hue ="1553">"Show me the available templates."</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="scoreboard"/>
+			<Label hue ="1553">"See the scoreboard."</Label>
+		</HBox>
+		<Spacer height="5"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="addTeamMembers"/>
+			<Label hue ="1553">"Invite Your Party Members to Join Your Team"</Label>
+		</HBox>
+		<Spacer height="20"/>
+		<Label hue ="1553">"Remove Team Member"</Label>
+		<Spacer height="5"/>
+		<List list="objs.group.members" objs="tempTeamMob">
+			<HBox>
+				<Button x="5" normalID="5537" pressedID="5539" name="doesntMatter"/>
+				<Label hue="1153">objs.tempTeamMob.rawname</Label>
+			</HBox>
+		</List>
+		<Spacer height="20"/>
+		<Label hue="38">"WARNING: do not begin the dungeon crawl until"</Label>
+		<Label hue="38">"your entire team is present and ready!"</Label>
+		<Label hue="38">"There is no turning back once you begin!"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="begincrawl"/>
+			<Label hue ="1553">"Begin Dungeon Crawl."</Label>
+		</HBox>
+	</VBox>
+</Gump>

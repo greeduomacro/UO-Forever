@@ -1,0 +1,69 @@
+onCreate
+{
+	// - 1 due to stupid gump hue offset
+	xmlints.gumphue = 1346 - 1
+	xmlobjs.nextTime = NOW()
+	xmlobjs.mount = NULL
+	THIS().Name = "an ethereal dyeing tool"
+	THIS().Hue = 1174
+	THIS().ItemID = 4033
+	THIS().Movable = true
+}
+onUse
+{
+	if (xmlobjs.nextTime == null) { xmlobjs.nextTime = NOW() }
+	if (xmlobjs.mount == NULL)
+	{
+		SENDMSG(TRIGMOB(), "Target the ethereal you wish to be able to dye once per day.")
+		SENDTARGET(TRIGMOB())
+	}
+	else
+	{	
+		if (THIS().rootparententity != TRIGMOB())
+		{
+			return
+		}
+		SENDGUMP(TRIGMOB(), "Donation\\ethrealdyegump.xml")
+	}
+}
+
+onTarget
+{
+	if (IS(TARGETED(),EtherealMount))
+	{ 
+		xmlobjs.mount = TARGETED()
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must target an ethereal mount.")
+	}
+}
+
+onGumpResponse
+{
+		if (strings.buttonPressed == "removecolor")
+		{
+			// have to do -1 because of stupid gump hue offset
+			xmlints.gumphue = 0 - 1
+			SENDGUMP(TRIGMOB(), "Donation\\ethrealdyegump.xml")
+		}
+		elif (strings.buttonPressed == "purewhite")
+		{
+			xmlints.gumphue = 1153 - 1
+			SENDGUMP(TRIGMOB(), "Donation\\ethrealdyegump.xml")
+		}
+		elif (strings.buttonPressed == "black")
+		{
+			xmlints.gumphue = 2055 - 1
+			SENDGUMP(TRIGMOB(), "Donation\\ethrealdyegump.xml")
+		}
+		elif (strings.buttonPressed == "blaze")
+		{
+			xmlints.gumphue = 1161 - 1
+			SENDGUMP(TRIGMOB(), "Donation\\ethrealdyegump.xml")
+		}
+		elif (strings.buttonPressed == "accept")
+		{
+			xmlobjs.mount.hue = xmlints.gumphue + 1
+		}
+}

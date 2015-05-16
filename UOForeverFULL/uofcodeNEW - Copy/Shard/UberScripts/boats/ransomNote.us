@@ -1,0 +1,69 @@
+onCreate
+{
+	SUBSCRIBETIMER(OneMinute)
+}
+onOneMinute
+{
+	if (xmlints.minutes == null)
+	{
+		xmlints.minutes = 0
+	}
+	xmlints.minutes += 1
+	if (xmlints.minutes >= 15)
+	{
+		if (THIS().Boat.Owner != null)
+		{
+			LOCALMSG(THIS().Boat.Owner, "You missed your 15 minute window of opportunity to reply to the ransom! Currently anybody can repair and capture your sunken boat!")
+		}
+		DELETE(THIS())
+		return
+	}
+}
+onUse
+{
+	if (TRIGMOB() != THIS().RootParentEntity)
+	{
+		SENDMSG(TRIGMOB(), "That must be in your backpack to use it.")
+		return
+	}
+	if (TRIGMOB() != THIS().Boat.Owner)
+	{
+		SENDMSG(TRIGMOB(), "Only the boat owner can use that! The boat owner is " + THIS().Boat.Owner)
+		return
+	}
+	SENDGUMP(TRIGMOB(), "boats\\ransomDecision.xml")
+}
+onGumpResponse
+{
+	if (THIS().Boat.Deleted) { DELETE(THIS()); return }
+	if (ints.riskLosingBoat == 1)
+	{
+		if (THIS().Boat.xmlints.repairableByAll == 1)
+		{
+			SENDMSG(TRIGMOB(), "Too late, you missed your 15 minute window of opportunity! Currently anybody can repair and capture your sunken boat!")
+		}
+		else
+		{
+			SENDMSGBOATSINKERS(THIS().Boat, THIS().Boat.Owner.RawName + " has decided to REJECT your ransom offer! If you are able to keep them from repairing the boat fully for 1 hour from sink time, then you can capture the boat by repairing it yourselves!")
+			SENDMSG(TRIGMOB(), "You have decided to REJECT the ransom offer! If they are able to keep you from repairing your boat fully for 1 hour from sink time, then anybody can capture the boat by repairing it themselves!")
+			THIS().Boat.xmlints.ownerRepairOpportunity = 1
+		}
+		DELETE(THIS())
+	}
+	else if (ints.payRansom == 1)
+	{
+		if (THIS().Boat.xmlints.repairableByAll == 1)
+		{
+			SENDMSG(TRIGMOB(), "Too late, you missed your 15 minute window of opportunity! Currently anybody can repair and capture your sunken boat!")
+		}
+		else if (BOATRANSOMPAYOUT(THIS().Boat))
+		{
+			DRYDOCKBOAT(THIS().Boat, TRIGMOB())
+			DELETE(THIS())
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "You don't have enough money for the ransom!", 38)
+		}
+	}
+}

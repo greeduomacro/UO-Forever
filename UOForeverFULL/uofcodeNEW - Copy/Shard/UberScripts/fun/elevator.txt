@@ -1,0 +1,43 @@
+onCreate
+{
+	SUBSCRIBETIMER(TwoFiftyMS)
+}
+onTwoFiftyMS
+{
+	if (xmlints.targetZ != null)
+	{
+		// move toward targetLoc
+		objs.onTop = GETNEARBYOBJS(THIS(), 0)
+		foreach (objs.test ; objs.onTop)
+		{
+			if (objs.test != THIS())
+			{
+				if (objs.test.z == THIS().z)
+				{
+					objs.test.z += 1
+				}
+			}
+		}
+		THIS().z += 1
+		if (xmlints.squishZ != null && THIS().z >= xmlints.squishZ)
+		{
+			objs.mobs = GETNEARBYMOBS(THIS(), 0)
+			foreach (objs.mob ; objs.mobs)
+			{
+				if (objs.mob.z >= THIS().z && objs.mob.z < THIS().z + 10)
+				{
+					KILL(objs.mob)
+				}
+			}
+		}
+		
+		// if reached target location send back to the beginning
+		if (xmlints.targetZ == THIS().z)
+		{
+			if (xmlints.startingZ != null)
+			{
+				THIS().z = xmlints.startingZ
+			}
+		}
+	}
+}

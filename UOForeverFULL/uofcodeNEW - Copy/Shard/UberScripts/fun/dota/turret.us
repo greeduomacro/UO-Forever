@@ -1,0 +1,30 @@
+onCreate
+{
+	Hue = 1863
+	BaseSoundID = 278
+	BodyValue = 159
+	BreathCustomDelay = 1.0
+	BreathDamageCustom = 20
+	CanBreathCustom = true
+	Pseu_CanBeHealed = false
+	RangePerception = 15
+	HitsMaxSeed = 4000
+	Hits = 4000
+	Name = "Turret"
+}
+
+onTakenHit
+{
+	if (IS(TRIGMOB(),HumanMob))
+	{
+		if (IS(SPELL(),earthquakespell)) { return }
+		if (TRIGMOB().xmlints.dotaTurretDamage == null)
+		{
+			TRIGMOB().xmlints.dotaTurretDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.dotaTurretDamage += DAMAGE()
+		}
+	}
+}

@@ -1,0 +1,135 @@
+// 
+//
+onCreate
+{
+	SCRIPT().name = "turkey"
+	Name = "a giant fire-breathing turkey"
+	AI = AI_Arcade
+	WeaponDamage = false
+	ActiveSpeed = 0.16
+	RangePerception = 12
+	CanBreathCustom = true
+	BreathCustomDelay = 0.5
+	BreathDamageCustom = 3
+	BodyValue = 1026
+	BaseSoundID = 110
+	BardImmuneCustom = true
+	IsScaryToPetsCustom = true
+	PoisonCustomImmune = Lethal
+	TakesNormalDamage = true
+	AutoDispelCustom = true
+	Pseu_CanBeHealed = false
+	
+	HitsMaxSeed = 50
+	Hits = 50 
+	
+	xmlstrings.hitsScoreName = "turkeyHits"
+	ADDSCRIPT(THIS(), "rewards\\points.us", "points")
+	
+	objs.possible = [RECTANGLE2D(POINT2D(2569, 2000), POINT2D(2886,2344))]
+	
+	objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+	// try up to 4 times
+	if (objs.spawnLoc == POINT3D(0,0,0))
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			}
+		}
+	}
+	MOVETOWORLD(THIS(), objs.spawnLoc, THIS().Map)
+}
+onDeath
+{
+	if (RANDOMDOUBLE() < 0.006)
+	{
+		doubles.roll = RANDOMDOUBLE()
+		if (doubles.roll > 0.85)
+		{
+			objs.reward = platehelm
+			{
+				Name = "turkey scalp"
+				ProtectionLevel = Invulnerability
+				Resource = Valorite
+				Hue = 1863
+			}
+		}
+		else if (doubles.roll > 0.70)
+		{
+			objs.reward = platechest
+			{
+				Name = "turkey breast"
+				ProtectionLevel = Invulnerability
+				Resource = Valorite
+				Hue = 1863
+			}
+		}
+		else if (doubles.roll > 0.55)
+		{
+			objs.reward = platearms
+			{
+				Name = "turkey wings"
+				ProtectionLevel = Invulnerability
+				Resource = Valorite
+				Hue = 1863
+			}
+		}
+		else if (doubles.roll > 0.40)
+		{
+			objs.reward = plategloves
+			{
+				Name = "turkey fingers"
+				ProtectionLevel = Invulnerability
+				Resource = Valorite
+				Hue = 1863
+			}
+		}
+		else if (doubles.roll > 0.25)
+		{
+			objs.reward = platelegs
+			{
+				Name = "turkey legs"
+				ProtectionLevel = Invulnerability
+				Resource = Valorite
+				Hue = 1863
+			}
+		}
+		else
+		{
+			objs.reward = studdedgorget
+			{
+				Name = "a turkey wattle"
+				ProtectionLevel = Invulnerability
+				Resource = BarbedLeather
+				Hue = 38
+			}
+		}
+		
+		if (objs.reward != null)
+		{
+			ADDTOCONTAINER(TRIGITEM(), objs.reward)
+		}
+	}
+	if (RANDOMDOUBLE() < 0.05)
+	{
+		objs.plat = platinum
+		{
+			amount = RANDOMMINMAX(6, 100)
+		}
+	}
+}
+onGivenHit
+{
+	if (IS(TRIGMOB(),BaseCreature))
+	{
+		if (TRIGMOB().Controlled)
+		{
+			KILL(TRIGMOB())
+		}
+	}
+}

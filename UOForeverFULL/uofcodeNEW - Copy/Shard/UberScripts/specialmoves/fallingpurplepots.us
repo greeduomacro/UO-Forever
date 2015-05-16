@@ -1,0 +1,55 @@
+onTwoFiftyMS
+{
+	xmlints.count += 1
+	objs.loc = THIS().Location
+	if (xmlints.count == 6)
+	{
+		SOUND(THIS(), 0x207)
+		SOUND(THIS(), 0x11b)
+		SOUND(THIS(), 0x11c)
+		SOUND(THIS(), 0x11d)
+		SOUND(THIS(), 0x11e)
+		objs.target = objs.loc; EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x, objs.loc.y, objs.loc.z + 4); EFFECT(14000,25,objs.target);
+		objs.target = POINT3D(objs.loc.x, objs.loc.y, objs.loc.z + 4); EFFECT(14089,30,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	}
+	else if (xmlints.count == 7)
+	{
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	}
+	else if (xmlints.count == 8)
+	{
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+		objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+	}
+	else if (xmlints.count > 8)
+	{
+		DELETE(xmlobjs.shadow)
+		DELETE(THIS())
+	}
+}
+
+SUBSCRIBETIMER(TwoFiftyMS)
+xmlints.count = 0
+objs.loc = THIS().Location
+xmlobjs.shadow = plate
+{
+	hue = 1
+	movable = false
+}
+MOVETOWORLD(xmlobjs.shadow, THIS(), THIS().Map)
+objs.startingLoc = POINT3D(objs.loc.X, objs.loc.Y, 100)
+MEFFECT(3853,1,objs.startingLoc, objs.loc)

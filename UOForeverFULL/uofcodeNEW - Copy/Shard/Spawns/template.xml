@@ -1,0 +1,99 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>Template</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1500</X>
+    <Y>1500</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1500</CentreX>
+    <CentreY>1500</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=ratman:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+  <!-- 
+:OBJ=:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+<KillReset>1</KillReset>
+Don't forget to update the unique ID!
+<Map></Map>
+<TODStart></TODStart>  parsedfromminutes
+<TODEnd></TODEnd>  parsed from minutes
+<TODMode></TODEnd>  0=Realtime,1=Gametime
+<KillReset></KillReset>  Killcount reset on a given spawn level if this number of ticks have gone by without a kill
+NOTE: DelayInSec applies only to MinDelay and MaxDelay, not refractory, etc.
+<ProximityTriggerMessage></ProximityTriggerMessage>
+<ItemTriggerName></ItemTriggerName>  = TRIGONCARRIED, attachmentexample: ATTACHMENT,demergo,xmlvalue
+<NoItemTriggerName></NoItemTriggerName> = NOTRIGONCARRIED
+<SpeechTrigger></SpeechTrigger>
+<SkillTrigger></SkillTrigger> skillname[+/-][,min][,max]  magery+,70,100 = magery must be b/w 70-100 and must have succeeded a skillcheck
+<MobTriggerName></MobTriggerName> The name of the mob that mobpropertyname will check-will randomly pick one if there are many
+<MobPropertyName></MobPropertyName> conditional (e.g. hits>10), can do & and | for multiple properties, ~ ! = > <
+<PlayerPropertyName></PlayerPropertyName> conditional as above, I believe used with the proximity triggering, where the player will only trigger if it meets these conditions
+<TriggerProbability></TriggerProbability> 0-1 could be used to do rares
+<RegionName></RegionName> overrides the X1Y1X2Y2 settings
+<ConfigFile></ConfigFile> No idea why you would possibly use this???
+<AllowGhostTriggering></AllowGhostTriggering>
+<AllowNPCTriggering></AllowNPCTriggering>
+<SpawnOnTrigger></SpawnOnTrigger> spawning to occur immediately after triggering regardless of the min/maxdelay settings
+<SmartSpawning></SmartSpawning> 
+<ObjectPropertyName></ObjectPropertyName>
+<ObjectPropertyItemName></ObjectPropertyItemName>
+<SetPropertyItemName></SetPropertyItemName> makes it so SET can be used (e.g. SET/running/true) without the addiotional arguments
+<Duration></Duration> after the last spawn it starts counting down.. can use to make rares harder to get.. also proximity + duration = triggered but limited duration spawns
+<DespawnTime></DespawnTime> 0 = never get deleted... checked every spawn tick (not a separate timer like Duration)
+<ProximityRange></ProximityRange> side note: -2 means that only if ProximityActivated is true will it spawn (proximity and free spawning disabled otherwise).
+<ProximityTriggerSound></ProximityTriggerSound>  400 = click
+<Amount></Amount> amount in a stack that will be spawned by default (if it is a stackable)
+<ExternalTriggering></ExternalTriggering> true / false
+<Waypoint></Waypoint> serial or name
+<Team></Team> hack for amount-use Amount instead
+<IsGroup></IsGroup> The Group property normally operates by forcing the spawner to spawn all of its spawns as a "group", and it will not respawn until all spawns in the "group" are gone (can use to create "levels" that must be cleared before advancing with sequentialspawn)
+<IsRunning></IsRunning> 
+
+:MX=ActualMaxCount
+:SB=SubGroup
+:RT=SequentialResetTime (time they have to advance to the next spawn)
+:TO=SequentialResetTo (spawngroup to jump to if it resets)
+:KL=KillsNeeded (to advance)
+:RK=RestrictKillsToSubgroup (isn't working atm)
+:CA=ClearOnAdvance (clear current subgroup on advance)
+:DN=MinDelay
+:DX=MaxDelay
+:SP=SpawnsPerTick
+:PR=PackRange (mobs in a spawn entry all spawn together with this range)
+					
+conditional tests of the form "a=b & c<d", "e<f | g!h". These can be extended arbitrarily, i.e. "a*b $ c*d $ e*f $ g*h ..." , where * is one of <>!= and $ is one of &|, but the current default grouping precedence is not exactly intuitive.
+Default grouping follows this rule "(a*b $ (c*d $ (e*f $ g*h)))" where, due to parsing efficiency, conditional pairs at the end of an
+expression are tested first and then recursively work their way back to the beginning.
+-->
+</Spawns>

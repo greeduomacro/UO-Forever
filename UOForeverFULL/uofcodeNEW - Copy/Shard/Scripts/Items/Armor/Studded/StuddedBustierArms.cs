@@ -1,0 +1,47 @@
+using System;
+
+namespace Server.Items
+{
+	[FlipableAttribute( 0x1c0c, 0x1c0d )]
+	public class StuddedBustierArms : BaseArmor
+	{
+		public override int InitMinHits{ get{ return 35; } }
+		public override int InitMaxHits{ get{ return 45; } }
+
+		
+		public override int OldStrReq{ get{ return 35; } }
+
+		public override int ArmorBase{ get{ return 16; } }
+
+		public override ArmorMaterialType MaterialType{ get{ return ArmorMaterialType.Studded; } }
+		public override CraftResource DefaultResource{ get{ return CraftResource.RegularLeather; } }
+		public override int LabelNumber{ get{ return GetLeatherLabel( 1049172 ); } }
+
+		public override ArmorMeditationAllowance DefMedAllowance{ get{ return ArmorMeditationAllowance.Half; } }
+
+		public override bool AllowMaleWearer{ get{ return true; } }
+
+		[Constructable]
+		public StuddedBustierArms() : base( 0x1C0C )
+		{
+			Weight = 1.0;
+			Dyable = true;
+		}
+
+		public StuddedBustierArms( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+			writer.Write( (int) 0 );
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize( reader );
+			int version = reader.ReadInt();
+		}
+	}
+}

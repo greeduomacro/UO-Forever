@@ -1,0 +1,76 @@
+onCreate
+{
+	SCRIPT().Name = "dotaChar"
+	SETSTATS(THIS(), 100, 100, 100)
+	Pseu_SpellBookRequired = true
+	Pseu_ConsumeReagents = true
+	Pseu_EQPlayerAllowed = false
+	xmlints.dotaPlayerDamage = 0
+	xmlobjs.dotaPlayerKills = NEWLIST()
+	xmlints.dotaElementalDamage = 0
+	xmlints.dotaTurretDamage = 0
+	xmlints.dotaLifeEssenceDamage = 0
+	BardImmuneCustom = true
+	// expecting xmlobjs.spawnLocation
+	SkillGainMultiplier = 10.0
+}
+onBeforeDeath
+{
+	if (THIS().netstate == null)
+	{
+		THIS().blessed = true
+		THIS().cantwalk = true
+	}
+	else
+	{
+		DROPHOLDING(THIS())
+		INDIVIDUALFLASHEFFECT(THIS())
+	}
+	objs.corpse = CREATECORPSE(THIS())
+	DEATHANIMATION(THIS())
+	DEATHSOUND(THIS())
+	MOVETOWORLD(THIS(), THIS().xmlobjs.spawnLocation, THIS().Map)
+	objs.tinkertools = TinkerTools
+	objs.shovel = Shovel
+	ADDTOPACK(THIS(), objs.tinkertools)
+	ADDTOPACK(THIS(), objs.shovel)
+	Hits = THIS().HitsMaxSeed
+	Stam = THIS().StamMaxSeed
+	RANDOMOUTFIT(THIS())
+	if (TRIGMOB() != null && IS(TRIGMOB(), HumanMob))
+	{
+		if (TRIGMOB().xmlobjs.dotaPlayerKills == null)
+		{
+			TRIGMOB().xmlobjs.dotaPlayerKills = NEWLIST()
+		}
+		if (LISTCONTAINS(TRIGMOB().xmlobjs.dotaPlayerKills, THIS()) == false)
+		{
+			ADDTOLIST(TRIGMOB().xmlobjs.dotaPlayerKills, THIS())
+		}
+	}
+	return override	
+}
+onDelete
+{
+	LOG("DotaCharDeleted", THIS() + " WAS DELETED SHOULD NOT BE POSSIBLE!")
+}
+onTakenHit
+{
+	if (IS(TRIGMOB(),HumanMob))
+	{
+		if (IS(SPELL(),earthquakespell)) { return }
+		if (TRIGMOB().xmlints.dotaPlayerDamage == null)
+		{
+			TRIGMOB().xmlints.dotaPlayerDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.dotaPlayerDamage += DAMAGE()
+		}
+	}
+}
+onDisconnected
+{
+	pause 20000
+	KILL(THIS())
+}

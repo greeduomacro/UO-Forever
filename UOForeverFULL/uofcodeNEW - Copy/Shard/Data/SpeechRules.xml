@@ -1,0 +1,2387 @@
+<?xml version="1.0" standalone="yes"?>
+<dsSpeechRules xmlns="http://tempuri.org/SpeechRules.xsd">
+  <xs:schema id="dsSpeechRules" targetNamespace="http://tempuri.org/SpeechRules.xsd" xmlns:mstns="http://tempuri.org/SpeechRules.xsd" xmlns="http://tempuri.org/SpeechRules.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" attributeFormDefault="qualified" elementFormDefault="qualified">
+    <xs:element name="dsSpeechRules" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="dtRules">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="index" msdata:AutoIncrement="true" msdata:Caption="Index" type="xs:int" />
+                <xs:element name="rule" msdata:Caption="Rule Name" type="xs:string" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtTriggers">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="index" msdata:Caption="Rule Index" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="trigger" msdata:Caption="Speech Trigger" type="xs:string" />
+                <xs:element name="word" type="xs:boolean" default="false" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtResponses">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="index" msdata:Caption="Rule Index" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="response" msdata:Caption="Speech Response" type="xs:string" minOccurs="0" />
+                <xs:element name="npcName" msdata:Caption="NPC Name" type="xs:string" minOccurs="0" />
+                <xs:element name="npcRegion" msdata:Caption="NPC Region" type="xs:string" minOccurs="0" />
+                <xs:element name="playerGender" msdata:Caption="Player Gender" type="xs:int" default="0" />
+                <xs:element name="questObject" msdata:Caption="Quest Object" type="xs:string" minOccurs="0" />
+                <xs:element name="packObject" msdata:Caption="Pack Object" type="xs:string" minOccurs="0" />
+                <xs:element name="npcAttitude" type="xs:int" default="0" />
+                <xs:element name="npcAnimation" type="xs:int" default="0" />
+                <xs:element name="npcGender" type="xs:int" default="0" />
+                <xs:element name="questObjDelete" type="xs:boolean" default="false" />
+                <xs:element name="timeOfDay" msdata:Caption="Time of Day" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="npcReaction" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="npcTitle" type="xs:string" minOccurs="0" />
+                <xs:element name="objStatus" type="xs:int" default="0" minOccurs="0" />
+                <xs:element name="npcTag" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtGenderTypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="genderID" type="xs:int" />
+                <xs:element name="genderName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtAttitudeTypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="attitudeID" type="xs:int" />
+                <xs:element name="attitudeName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtAnimations">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="animateID" type="xs:int" />
+                <xs:element name="animateName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtGenderTypes1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="genderID" type="xs:int" minOccurs="0" />
+                <xs:element name="genderName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtTimeOfDayTypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="timeID" type="xs:int" />
+                <xs:element name="timeName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtReactions">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="reactionID" type="xs:int" minOccurs="0" />
+                <xs:element name="reactionName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtObjStatusTypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="statusID" type="xs:int" minOccurs="0" />
+                <xs:element name="statusName" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="dtControl">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="index" type="xs:int" minOccurs="0" />
+                <xs:element name="dbVersion" type="xs:double" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="SpeechRulesIndex" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//mstns:dtRules" />
+        <xs:field xpath="mstns:index" />
+      </xs:unique>
+      <xs:unique name="SpeechRulesNameKey">
+        <xs:selector xpath=".//mstns:dtRules" />
+        <xs:field xpath="mstns:rule" />
+      </xs:unique>
+      <xs:unique name="SpeechTriggerKey">
+        <xs:selector xpath=".//mstns:dtTriggers" />
+        <xs:field xpath="mstns:trigger" />
+      </xs:unique>
+      <xs:unique name="GenderKey">
+        <xs:selector xpath=".//mstns:dtGenderTypes" />
+        <xs:field xpath="mstns:genderID" />
+      </xs:unique>
+      <xs:unique name="AttitudeKey">
+        <xs:selector xpath=".//mstns:dtAttitudeTypes" />
+        <xs:field xpath="mstns:attitudeID" />
+      </xs:unique>
+      <xs:unique name="AnimationKey">
+        <xs:selector xpath=".//mstns:dtAnimations" />
+        <xs:field xpath="mstns:animateID" />
+      </xs:unique>
+      <xs:unique name="Constraint1">
+        <xs:selector xpath=".//mstns:dtTimeOfDayTypes" />
+        <xs:field xpath="mstns:timeID" />
+      </xs:unique>
+      <xs:unique name="dtReactions_Constraint1" msdata:ConstraintName="Constraint1">
+        <xs:selector xpath=".//mstns:dtReactions" />
+        <xs:field xpath="mstns:reactionID" />
+      </xs:unique>
+      <xs:unique name="dtObjStatusTypes_Constraint1" msdata:ConstraintName="Constraint1">
+        <xs:selector xpath=".//mstns:dtObjStatusTypes" />
+        <xs:field xpath="mstns:statusID" />
+      </xs:unique>
+      <xs:unique name="dtControl_Constraint1" msdata:ConstraintName="Constraint1">
+        <xs:selector xpath=".//mstns:dtControl" />
+        <xs:field xpath="mstns:index" />
+      </xs:unique>
+      <xs:keyref name="RulesResponsesRelation" refer="SpeechRulesIndex" msdata:ConstraintOnly="true">
+        <xs:selector xpath=".//mstns:dtResponses" />
+        <xs:field xpath="mstns:index" />
+      </xs:keyref>
+      <xs:keyref name="RulesTriggersRelation" refer="SpeechRulesIndex">
+        <xs:selector xpath=".//mstns:dtTriggers" />
+        <xs:field xpath="mstns:index" />
+      </xs:keyref>
+    </xs:element>
+  </xs:schema>
+  <dtRules>
+    <index>0</index>
+    <rule>{Default Rule}</rule>
+  </dtRules>
+  <dtRules>
+    <index>1</index>
+    <rule>Hello</rule>
+  </dtRules>
+  <dtRules>
+    <index>2</index>
+    <rule>GoodBye</rule>
+  </dtRules>
+  <dtRules>
+    <index>3</index>
+    <rule>AskedName</rule>
+  </dtRules>
+  <dtRules>
+    <index>4</index>
+    <rule>ToldName</rule>
+  </dtRules>
+  <dtRules>
+    <index>6</index>
+    <rule>Rumors</rule>
+  </dtRules>
+  <dtRules>
+    <index>7</index>
+    <rule>Occupation</rule>
+  </dtRules>
+  <dtRules>
+    <index>8</index>
+    <rule>Time</rule>
+  </dtRules>
+  <dtTriggers>
+    <index>0</index>
+    <trigger>{*}</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>3</index>
+    <trigger>your name</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>3</index>
+    <trigger>youre name</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>3</index>
+    <trigger>you're name</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>4</index>
+    <trigger>my name</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>4</index>
+    <trigger>me name</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>4</index>
+    <trigger>name is</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>hello</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>hi</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>hey</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>hiya</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>yo</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>hail</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>3</index>
+    <trigger>thy name</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>farewell</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>greetings</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>bye</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>faretheewell</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>fare thee well</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>till next time</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>goodbye</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>until next time</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>1</index>
+    <trigger>you there</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>2</index>
+    <trigger>so long</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>6</index>
+    <trigger>rumor</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>6</index>
+    <trigger>gossip</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>6</index>
+    <trigger>scuttlebutt</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>6</index>
+    <trigger>rumors</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>7</index>
+    <trigger>job</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>7</index>
+    <trigger>work</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>7</index>
+    <trigger>occupation</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>7</index>
+    <trigger>trade</trigger>
+    <word>true</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>7</index>
+    <trigger>do you do</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>8</index>
+    <trigger>time is it</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtTriggers>
+    <index>8</index>
+    <trigger>is the time</trigger>
+    <word>false</word>
+  </dtTriggers>
+  <dtResponses>
+    <index>0</index>
+    <response>ehh?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>I am sorry but I did not understand you.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>My Lady, your speech is too eloquent for me.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>32</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>My Lord, please speak in words my simple ears can understand.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>32</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>so, what now?</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>huh. How about that.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>Me mum found a cat today.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>*looks confused*</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>*blank stare*</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>Do you think it will rain?</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>I don't know.</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>Are you talking to me?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>I was just thinkn about goin to the pub and havin meself a nice warm beer.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>34</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>What were we talking about?</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>Maybe it's time to take some action.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>9</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>My name is {0}.</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>{0} is my name, and yours?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>My name is my own. Call me what you will.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>You can call me {0}.</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>{0}</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>Good to meet you.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>Ah! {1}, a woman of renown I am sure!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>{1}, a strong name worthy of one such as you.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>May the Virtues keep you.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>*nods*</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>*nods*</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>*waves*</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Hello</response>
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Hail and well met!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>*gasp*</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>*laughs* You know me not?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>Farewell {1}!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>Fare thee well m'lord!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>32</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>Fare thee well m'lady!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>32</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>Farewell my lord.  Blessings upon you!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>33</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Hail m'lady!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Hail m'lord!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Hello there!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>A pleasure to meet you {1}.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>{1}, ah such a beautiful name for such a beautiful woman!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>{1}, such a strong name!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>Who are you that you require my name?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>Don't waste my time any longer.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>5</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>2</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>3</index>
+    <response>Why it's {0}, your eyes are dim my friend!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject>candle</packObject>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>May  the Virtues guide you m'lady.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>6</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>Farewell</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>2</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>2</index>
+    <response>Goodbye</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Well met!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>1</index>
+    <response>Greetings!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>4</index>
+    <response>{1} fine, so you shall be known.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>0</index>
+    <response>*looks startled*</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <questObject />
+    <packObject />
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Do you know Tristam from Moonglow? I don't much like the look of those dogs of his. Look like they might have some hellhound blood in them.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>*hic* did you know *hic* in the future *hic* theres gonna be *hic* these flying boats *hic*</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Theres something funny about Renaldo and Heath. They both served in the Royal Navy for three years, when they got back, they bought a house together on Verity Isle.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Marianna has been hoarding reagents for longer than I can remember, Not quite sure when she's expecting the world to end, but I imagine if it doesn't she could open up a reagent shop and retire.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>*hic* rumors? *hic* yeah a few I know *hic* oh hang on--</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>32</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>2</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Rumors? I have better things to do than gossip all my time away, and so do you. Now kindly take your leave.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Rumors? Nay Sir, I'm not privy to such things</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Rumors? No, My Good Lady, I haven't heard anything worth telling.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Sure I've heard a few rumors, Have you heard the one about what happened to the annoying bloke who wouldn't leave me alone?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>There's something not quite right about Kendrick. He was just never the same person after he came back from Serpent's Isle. Touched in the head maybe.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>I hear weird noises coming from Edmunds house at night. Not quite sure what he's up to. Funny character if you ask me...</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>I wouldn't trust anyone delving in the art of necromancy. Something's just unsettling about the whole subject if you ask me.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Strange ships have been coming in to port in the dead of night. Not sure what they be carrying, but the dockworkers are pretty hush about it if you ask them.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>People say Gaston used to be a brigand, but I don't believe he's ever hurt a soul</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>I probably shouldn't tell you this, but Dominic, Captain of the Night Watch, has been known to pilfer coin from unsuspecting people.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>I feel sorry for Sarah, her Ma passed away, and ever since her Father's been a useless lout, always drinking, never working, the poor girls having to feed the both of them on her own.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Maurita is a very handsome woman, I envy her husband</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>I hear shouting all the time at the Bennett's house. Oh how I do pity that poor woman being married to that imbecile.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Clement dissapears often for long periods of time. Wonder hat he's up too. Not entirely bright, that one, I hope he's not mixed up in anything.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Nash and Sarah seem to have seperated. Good thing, if you ask me, He was way too good for her</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>6</index>
+    <response>Sure I know Rumor or two. Don't look like I'd tell them to the likes of you, now does it?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Tailor by trade. I make all the gold while me husband drinks it away in the tavern.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>What I do ain't none of thy business. Now leave me be.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Farrier, though I'm taking a bit of a break right about now. Got a nasty kick a while back, Me wife healed it as best she could, but it weren't a very strong potion, reagents aren't exactly cheap on my salary.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Thief. Now leave me to my lonesome, lest you wish your possesions to cease being yours.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>11</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>Why I'm a fortune teller. I see thee being injured very soon if thou dost not take thy leave.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>9</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Craftsman of sorts. Leather, light metal work, pottery, mostly decorative stuff. Alot of people say its a soft job, but why spend my life making the same curiasses day after day?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Royal Gardener, I tend after the plants in Lord British' Castle Courtyard. It's a very prestigous job, I'll have you know.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Blacksmith, me guilds on strike now, so I'm on a bit of an involuntary vacation.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Mercenary, but I haven't had much luck finding work of late. Too much damn peace in the world for my tastes.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Courier, If your guilds got messages it needs sent fast and discreetly, I'm the man for the job!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Courier, If your guild has got messages it needs sent fast and discreetly, I'm the girl for the job!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I really don't like to get into specifics before receiving payment *winks*</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>3</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm an Artist, I'd offer to paint a portrait of you, but I doubt the canvas could take the agony.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>My dear woman, you have a face so beautiful, that my skills as an Artist would do it little justice.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm an Apprecentice Mage on assignment from the Council in Magincia. Have you thought of joining the Council? It's fascinating work, really.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I wasn't aware that what I did for a living was any of thy business.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>What do I do for a living? I avoid answering questions from complete strangers. Now kindly take your leave before I hex you something fierce.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>9</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>1</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Monk from Empath Abbey, its an easy enough life, once you get over the vow of chasity.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm just a Farmer, I was in the Royal Navy before, but me Pa died and left me a bit o' land, so I decided to put it to good use.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>Me, I'm an Alchemist. It's decent coin, and I've only lost a few fingers</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Bard at the Royal Conservatory</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Carpenter, its an easy enough trade for someone who likes working with their hands.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Blacksmith, my dear lady.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Soldier, and I Apologize but I must take my leave. Good Day Citizen.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Seamstress, and I have a wedding to do, excuse me.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>2</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Shipwright, sorry I don't take orders from citizens, I have my hands busy with military contracts at the moment.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm the Royal Librarian, sorry too busy to talk</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm an Alchemist, and I'm very busy. Good Day</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Blacksmith, my good sir</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>1</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>7</index>
+    <response>I'm a Monk, if you'll excuse me I'll get back to my medititation</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>0</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>*looks at the sun*</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>6</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>5</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>*looks at the moon*</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>2</npcAttitude>
+    <npcAnimation>6</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>6</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>It is early yet</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>1</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>Why, it is afternoon...</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>2</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>Evening time it is! Where's the pub?</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>3</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>It is too late to be about I'm afraid!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>0</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>4</timeOfDay>
+    <npcReaction>2</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>All I know m'lord, is the sun is out</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>1</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>6</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>5</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>All I know m'lady, is the sun is out</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>2</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>6</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>5</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>And a glorious day it is!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>1</npcAttitude>
+    <npcAnimation>16</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>5</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>Daytime, that's all I know.</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>5</timeOfDay>
+    <npcReaction>0</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtResponses>
+    <index>8</index>
+    <response>It is past time for us to be about!</response>
+    <npcName />
+    <npcRegion />
+    <playerGender>0</playerGender>
+    <npcAttitude>3</npcAttitude>
+    <npcAnimation>0</npcAnimation>
+    <npcGender>0</npcGender>
+    <questObjDelete>false</questObjDelete>
+    <timeOfDay>6</timeOfDay>
+    <npcReaction>2</npcReaction>
+    <npcTitle />
+    <objStatus>0</objStatus>
+    <npcTag />
+  </dtResponses>
+  <dtGenderTypes>
+    <genderID>0</genderID>
+    <genderName>Either</genderName>
+  </dtGenderTypes>
+  <dtGenderTypes>
+    <genderID>1</genderID>
+    <genderName>Male</genderName>
+  </dtGenderTypes>
+  <dtGenderTypes>
+    <genderID>2</genderID>
+    <genderName>Female</genderName>
+  </dtGenderTypes>
+  <dtAttitudeTypes>
+    <attitudeID>0</attitudeID>
+    <attitudeName>Any</attitudeName>
+  </dtAttitudeTypes>
+  <dtAttitudeTypes>
+    <attitudeID>1</attitudeID>
+    <attitudeName>Good</attitudeName>
+  </dtAttitudeTypes>
+  <dtAttitudeTypes>
+    <attitudeID>2</attitudeID>
+    <attitudeName>Bad</attitudeName>
+  </dtAttitudeTypes>
+  <dtAttitudeTypes>
+    <attitudeID>3</attitudeID>
+    <attitudeName>Indifferent</attitudeName>
+  </dtAttitudeTypes>
+  <dtAnimations>
+    <animateID>0</animateID>
+    <animateName>Nothing</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>5</animateID>
+    <animateName>Shake Head</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>6</animateID>
+    <animateName>Nod Head</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>9</animateID>
+    <animateName>Slap/Swing</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>10</animateID>
+    <animateName>Punch</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>11</animateID>
+    <animateName>Pound</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>16</animateID>
+    <animateName>Cast Spell</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>17</animateID>
+    <animateName>Area Cast</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>32</animateID>
+    <animateName>Bow</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>33</animateID>
+    <animateName>Salute</animateName>
+  </dtAnimations>
+  <dtAnimations>
+    <animateID>34</animateID>
+    <animateName>Eat</animateName>
+  </dtAnimations>
+  <dtGenderTypes1>
+    <genderID>0</genderID>
+    <genderName>Either</genderName>
+  </dtGenderTypes1>
+  <dtGenderTypes1>
+    <genderID>1</genderID>
+    <genderName>Male</genderName>
+  </dtGenderTypes1>
+  <dtGenderTypes1>
+    <genderID>2</genderID>
+    <genderName>Female</genderName>
+  </dtGenderTypes1>
+  <dtTimeOfDayTypes>
+    <timeID>0</timeID>
+    <timeName>Any</timeName>
+  </dtTimeOfDayTypes>
+  <dtTimeOfDayTypes>
+    <timeID>1</timeID>
+    <timeName>Morning</timeName>
+  </dtTimeOfDayTypes>
+  <dtTimeOfDayTypes>
+    <timeID>2</timeID>
+    <timeName>Afternoon</timeName>
+  </dtTimeOfDayTypes>
+  <dtTimeOfDayTypes>
+    <timeID>3</timeID>
+    <timeName>Evening</timeName>
+  </dtTimeOfDayTypes>
+  <dtTimeOfDayTypes>
+    <timeID>4</timeID>
+    <timeName>Night</timeName>
+  </dtTimeOfDayTypes>
+  <dtTimeOfDayTypes>
+    <timeID>5</timeID>
+    <timeName>Daytime</timeName>
+  </dtTimeOfDayTypes>
+  <dtTimeOfDayTypes>
+    <timeID>6</timeID>
+    <timeName>Nighttime</timeName>
+  </dtTimeOfDayTypes>
+  <dtReactions>
+    <reactionID>0</reactionID>
+    <reactionName>Nothing</reactionName>
+  </dtReactions>
+  <dtReactions>
+    <reactionID>1</reactionID>
+    <reactionName>Attack</reactionName>
+  </dtReactions>
+  <dtReactions>
+    <reactionID>2</reactionID>
+    <reactionName>Flee</reactionName>
+  </dtReactions>
+  <dtReactions>
+    <reactionID>3</reactionID>
+    <reactionName>Criminal</reactionName>
+  </dtReactions>
+  <dtReactions>
+    <reactionID>4</reactionID>
+    <reactionName>Hide</reactionName>
+  </dtReactions>
+  <dtReactions>
+    <reactionID>5</reactionID>
+    <reactionName>Die</reactionName>
+  </dtReactions>
+  <dtReactions>
+    <reactionID>6</reactionID>
+    <reactionName>Delete</reactionName>
+  </dtReactions>
+  <dtObjStatusTypes>
+    <statusID>0</statusID>
+    <statusName>Ignored</statusName>
+  </dtObjStatusTypes>
+  <dtObjStatusTypes>
+    <statusID>1</statusID>
+    <statusName>Present</statusName>
+  </dtObjStatusTypes>
+  <dtObjStatusTypes>
+    <statusID>2</statusID>
+    <statusName>Absent</statusName>
+  </dtObjStatusTypes>
+  <dtControl>
+    <index>0</index>
+    <dbVersion>1.1</dbVersion>
+  </dtControl>
+</dsSpeechRules>

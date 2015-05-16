@@ -1,0 +1,43 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>TurkeyRareSpawner</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29b523a20529</UniqueId>
+    <Map>Felucca</Map>
+    <X>1499</X>
+    <Y>1499</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1499</CentreX>
+    <CentreY>1499</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>gorilla/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,turkey,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,turkey,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,turkey,value/INC,1&gt;/name/a giant turkey/bodyvalue/1026/basesoundid/110/breathcustomdelay/0.25/breathdamagecustom/3/canbreathcustom/true/ADD,0.0015/&lt;platelegs/name/turkey legs/hue/1863/durability/indestructible/protectionlevel/invulnerability&gt;/ADD,0.0015/&lt;platehelm/name/a turkey scalp/hue/1863/durability/indestructible/protectionlevel/invulnerability&gt;/ADD,0.0015/&lt;platechest/name/turkey breast/hue/1863/durability/indestructible/protectionlevel/invulnerability&gt;/ADD,0.0015/&lt;platearms/name/turkey wings/hue/1863/durability/indestructible/protectionlevel/invulnerability&gt;/ADD,0.0015/&lt;plategloves/name/turkey fingers/hue/1863/durability/indestructible/protectionlevel/invulnerability&gt;/ADD,0.0015/&lt;studdedgorget/name/a turkey wattle/hue/37/durability/indestructible/protectionlevel/invulnerability&gt;/ADD/gold,50:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

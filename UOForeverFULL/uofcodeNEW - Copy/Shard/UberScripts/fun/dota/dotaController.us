@@ -1,0 +1,619 @@
+function reboot()
+{
+	if (xmlobjs.Spawned != null)
+	{
+		foreach (objs.prevSpawn ; xmlobjs.Spawned)
+		{
+			DELETE(objs.prevSpawn)
+		}
+	}
+	xmlobjs.Spawned = NEWLIST()
+	// add the waypoints
+// ========= BOTTOM RIGHT LANE ====================
+	objs.current = waypoint; MOVETOWORLD(objs.current, POINT3D(5619,2801,-6), MAP(Felucca))
+	xmlobjs.bottomRightLane = objs.current; ADDTOLIST(xmlobjs.Spawned, objs.current);
+	ADDTOLIST(xmlobjs.Spawned, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5621,2770,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5624,2748,-3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5622,2694,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5627,2643,-8))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5616,2633,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5598,2632,-3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5601,2621,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5618,2609,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5619,2575,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5610,2569,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5574,2555,3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5545,2558,1))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5503,2566,-2))
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.Spawned, objs.current);
+	}
+
+// ========= BOTTOM MIDDLE LANE ====================
+	objs.current = waypoint; MOVETOWORLD(objs.current, POINT3D(5586,2778,-4), MAP(Felucca))
+	xmlobjs.bottomMiddleLane = objs.current; ADDTOLIST(xmlobjs.Spawned, objs.current);
+	ADDTOLIST(xmlobjs.Spawned, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5564,2756,-2))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5560,2738,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5537,2741,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5532,2711,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5486,2705,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5490,2672,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5547,2666,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5548,2636,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5532,2625,-2))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5534,2604,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5503,2566,-2))
+	
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.Spawned, objs.current);
+	}
+
+// ========= BOTTOM LEFT LANE ====================
+	objs.current = waypoint; MOVETOWORLD(objs.current, POINT3D(5546,2809,-6), MAP(Felucca))
+	xmlobjs.bottomLeftLane = objs.current; ADDTOLIST(xmlobjs.Spawned, objs.current);
+	ADDTOLIST(xmlobjs.Spawned, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5472,2809,-8))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5423,2809,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5414,2789,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5409,2741,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5406,2709,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5416,2694,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5410,2647,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5426,2629,-8))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5456,2615,-3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5468,2587,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5470,2568,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5503,2566,-2))
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.Spawned, objs.current);
+	}
+
+
+// ========= TOP RIGHT LANE ====================
+	objs.current = waypoint; MOVETOWORLD(objs.current, POINT3D(5545,2558,1), MAP(Felucca))
+	xmlobjs.topRightLane = objs.current; ADDTOLIST(xmlobjs.Spawned, objs.current);
+	ADDTOLIST(xmlobjs.Spawned, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5574,2555,3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5610,2569,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5619,2575,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5618,2609,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5601,2621,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5598,2632,-3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5616,2633,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5627,2643,-8))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5625,2694,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5624,2748,-3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5621,2770,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5619,2801,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5589,2811,-2))
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.Spawned, objs.current);
+	}
+// ========= TOP MIDDLE LANE ====================
+	objs.current = waypoint; MOVETOWORLD(objs.current,  POINT3D(5534,2604,-5), MAP(Felucca))
+	xmlobjs.topMiddleLane = objs.current; ADDTOLIST(xmlobjs.Spawned, objs.current);
+	ADDTOLIST(xmlobjs.Spawned, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5532,2625,-2))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5548,2636,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5547,2666,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5530,2671,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5490,2672,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5486,2705,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5532,2711,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5537,2741,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5560,2738,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5564,2756,-2))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5586,2778,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5589,2811,-2))
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.Spawned, objs.current);
+	}
+// ========= TOP LEFT LANE ====================
+	objs.current = waypoint; MOVETOWORLD(objs.current, POINT3D(5470,2568,-7), MAP(Felucca))
+	xmlobjs.topLeftLane = objs.current; ADDTOLIST(xmlobjs.Spawned, objs.current);
+	ADDTOLIST(xmlobjs.Spawned, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5468,2587,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5456,2615,-3))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5426,2629,-8))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5410,2647,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5416,2694,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5406,2709,-5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5409,2741,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5414,2789,-4))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5423,2809,-7))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5472,2809,-8))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5546,2809,-6))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5589,2811,-2))
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.Spawned, objs.current);
+	}
+
+	// create the bosses
+	objs.boss1 = reaper; MOVETOWORLD(objs.boss1, POINT3D(5588, 2810, -3), MAP(Felucca)); ADDSCRIPT(objs.boss1, "fun\\dota\\lifeEssence.us"); SETTEAM(objs.boss1, Team1)
+	objs.boss1.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.boss1);
+	objs.boss1.xmlobjs.owner = THIS()
+	
+	objs.boss1 = reaper
+	MOVETOWORLD(objs.boss1, POINT3D(5506, 2568, -4), MAP(Felucca))
+	ADDSCRIPT(objs.boss1, "fun\\dota\\lifeEssence.us")
+	SETTEAM(objs.boss1, Team2)
+	objs.boss1.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.boss1);
+	objs.boss1.xmlobjs.owner = THIS()
+	
+	// create the factories
+	objs.teamFactory = reaper; MOVETOWORLD(objs.teamFactory, POINT3D(5565,2809,-3), MAP(Felucca)); ADDSCRIPT(objs.teamFactory, "fun\\dota\\mobFactory.us"); SETTEAM(objs.teamFactory, Team1)
+	objs.teamFactory.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.teamFactory); objs.teamFactory.xmlobjs.owner = THIS(); objs.teamFactory.xmlobjs.waypoint = xmlobjs.bottomLeftLane
+	objs.teamFactory = reaper; MOVETOWORLD(objs.teamFactory, POINT3D(5586,2793,1), MAP(Felucca)); ADDSCRIPT(objs.teamFactory, "fun\\dota\\mobFactory.us"); SETTEAM(objs.teamFactory, Team1)
+	objs.teamFactory.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.teamFactory); objs.teamFactory.xmlobjs.owner = THIS(); objs.teamFactory.xmlobjs.waypoint = xmlobjs.bottomMiddleLane
+	objs.teamFactory = reaper; MOVETOWORLD(objs.teamFactory, POINT3D(5606,2809,-2), MAP(Felucca)); ADDSCRIPT(objs.teamFactory, "fun\\dota\\mobFactory.us"); SETTEAM(objs.teamFactory, Team1)
+	objs.teamFactory.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.teamFactory); objs.teamFactory.xmlobjs.owner = THIS(); objs.teamFactory.xmlobjs.waypoint = xmlobjs.bottomRightLane
+	
+	objs.teamFactory = reaper; MOVETOWORLD(objs.teamFactory, POINT3D(5482,2565,-4), MAP(Felucca)); ADDSCRIPT(objs.teamFactory, "fun\\dota\\mobFactory.us"); SETTEAM(objs.teamFactory, Team2)
+	objs.teamFactory.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.teamFactory); objs.teamFactory.xmlobjs.owner = THIS(); objs.teamFactory.xmlobjs.waypoint = xmlobjs.topLeftLane
+	objs.teamFactory = reaper; MOVETOWORLD(objs.teamFactory, POINT3D(5531,2556,0), MAP(Felucca)); ADDSCRIPT(objs.teamFactory, "fun\\dota\\mobFactory.us"); SETTEAM(objs.teamFactory, Team2)
+	objs.teamFactory.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.teamFactory); objs.teamFactory.xmlobjs.owner = THIS(); objs.teamFactory.xmlobjs.waypoint = xmlobjs.topRightLane
+	objs.teamFactory = reaper; MOVETOWORLD(objs.teamFactory, POINT3D(5520,2596,-7), MAP(Felucca)); ADDSCRIPT(objs.teamFactory, "fun\\dota\\mobFactory.us"); SETTEAM(objs.teamFactory, Team2)
+	objs.teamFactory.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.teamFactory); objs.teamFactory.xmlobjs.owner = THIS(); objs.teamFactory.xmlobjs.waypoint = xmlobjs.topMiddleLane
+	
+	// create the turrets
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5503,2813,-2), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team1)
+	objs.turret.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5423,2808,-8), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team1)
+	objs.turret.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5563,2739,-6), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team1)
+	objs.turret.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5536,2727,-7), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team1)
+	objs.turret.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5626,2766,2), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team1)
+	objs.turret.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5630,2714,1), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team1)
+	objs.turret.Hue = THIS().xmlints.team1Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5627,2634,0), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team2)
+	objs.turret.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5571,2556,-2), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team2)
+	objs.turret.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5550,2639,-5), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team2)
+	objs.turret.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5511,2672,-3), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team2)
+	objs.turret.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5451,2617,-5), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team2)
+	objs.turret.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+	objs.turret = reaper; MOVETOWORLD(objs.turret, POINT3D(5411,2671,-7), MAP(Felucca)); ADDSCRIPT(objs.turret, "fun\\dota\\turret.us"); SETTEAM(objs.turret, Team2)
+	objs.turret.Hue = THIS().xmlints.team2Hue; ADDTOLIST(xmlobjs.Spawned, objs.turret);
+}
+function cleanup()
+{
+	DELETEACCOUNTTAGS(xmlstrings.eventName)
+	objs.group = GETATTACHMENT(THIS(), XmlGroup, xmlstrings.eventName)
+	DELETE(objs.group)
+	objs.group = NEWATTACHMENT(xmlgroup, xmlstrings.eventName)
+	ATTACH(THIS(), objs.group)
+	objs.group.maxmembers = 10000
+	objs.group.maxparticipants = 10000
+	objs.group.eventtype = HighestScore
+	objs.group.eventname = xmlstrings.eventName
+	objs.group.eventinprogress = true
+	GLOBALDELATTACHMENTS(XmlObject, "dotaChar")
+	if (xmlobjs.Spawned != null)
+	{
+		foreach (objs.prevSpawn ; xmlobjs.Spawned)
+		{
+			DELETE(objs.prevSpawn)
+		}
+	}
+	CLEARLIST(xmlobjs.Spawned)
+	
+	if (xmlobjs.SpawnedPlayers != null)
+	{
+		foreach (objs.prevSpawn ; xmlobjs.SpawnedPlayers)
+		{
+			DELETE(objs.prevSpawn)
+		}
+	}
+}
+
+onCreate
+{
+	SCRIPT().name = "_dotaMAIN"
+	xmlints.secondsBetweenSpawn = 20
+	xmlints.team1Hue = 2002
+	xmlints.team2Hue = 1348
+	CantWalk = true
+	Blessed = true
+	name = "Event Master for the DOTU Event"
+	objs.robe = monkrobe
+	{
+		movable = false
+		hue = 1153
+	}
+	EQUIP(THIS(), objs.robe)
+	SETSKILL(THIS(), Anatomy, 0.0)
+	SETSKILL(THIS(), Macing, 0.0)
+	SETSKILL(THIS(), Swords, 0.0)
+	SETSKILL(THIS(), Archery, 0.0)
+	SETSKILL(THIS(), MagicResist, 0.0)
+	SETSKILL(THIS(), Wrestling, 0.0)
+	SETSKILL(THIS(), Fencing, 0.0)
+	SETSKILL(THIS(), Poisoning, 0.0)
+	SETSKILL(THIS(), ItemID, 0.0)
+	SETSKILL(THIS(), ArmsLore, 0.0)
+	SETSKILL(THIS(), Alchemy, 0.0)
+	SETSKILL(THIS(), Alchemy , 0.0)
+	SETSKILL(THIS(), Anatomy , 0.0)
+	SETSKILL(THIS(), ItemID , 0.0)
+	SETSKILL(THIS(), ArmsLore , 0.0)
+	SETSKILL(THIS(), Parry , 0.0)
+	SETSKILL(THIS(), Begging , 0.0)
+	SETSKILL(THIS(), Blacksmith , 0.0)
+	SETSKILL(THIS(), Fletching , 0.0)
+	SETSKILL(THIS(), Peacemaking , 0.0)
+	SETSKILL(THIS(), Camping , 0.0)
+	SETSKILL(THIS(), Carpentry , 0.0)
+	SETSKILL(THIS(), Cartography , 0.0)
+	SETSKILL(THIS(), Cooking , 0.0)
+	SETSKILL(THIS(), EvalInt , 0.0)
+	SETSKILL(THIS(), Healing , 0.0)
+	SETSKILL(THIS(), Forensics , 0.0)
+	SETSKILL(THIS(), Inscribe , 0.0)
+	SETSKILL(THIS(), Lockpicking , 0.0)
+	SETSKILL(THIS(), Magery , 0.0)
+	SETSKILL(THIS(), MagicResist , 0.0)
+	SETSKILL(THIS(), Tactics , 0.0)
+	SETSKILL(THIS(), Poisoning , 0.0)
+	SETSKILL(THIS(), Archery , 0.0)
+	SETSKILL(THIS(), Tailoring , 0.0)
+	SETSKILL(THIS(), TasteID , 0.0)
+	SETSKILL(THIS(), Tinkering , 50.0)
+	SETSKILL(THIS(), Swords , 0.0)
+	SETSKILL(THIS(), Macing , 0.0)
+	SETSKILL(THIS(), Fencing , 0.0)
+	SETSKILL(THIS(), Wrestling , 0.0)
+	SETSKILL(THIS(), Lumberjacking , 0.0)
+	SETSKILL(THIS(), Mining , 50.0)
+	SETSKILL(THIS(), Meditation , 0.0)
+	SETSKILL(THIS(), RemoveTrap , 0.0)
+	
+	xmlstrings.eventName = "DOTA"
+	objs.group = NEWATTACHMENT(xmlgroup, xmlstrings.eventName)
+	ATTACH(THIS(), objs.group)
+	objs.group.maxmembers = 10000
+	objs.group.maxparticipants = 10000
+	objs.group.eventtype = HighestScore
+	objs.group.eventname = xmlstrings.eventName
+	objs.group.eventinprogress = true
+	
+	xmlints.enabled = 0
+	xmlints.nextPlayerJoinTeam = 1
+}
+
+onUse
+{
+	if (STRING(TRIGMOB().accesslevel) != Counselor && STRING(TRIGMOB().accesslevel) != Player)
+	{
+		SENDGUMP(TRIGMOB(), "fun\\dota\\adminGump.xml")
+		return
+	}
+	
+	if (xmlints.enabled == 1)
+	{
+		SENDGUMP(TRIGMOB(), "fun\\dota\\JoinGump.xml")
+	}
+	else
+	{
+		SAYTO(THIS(), TRIGMOB(), "Sorry, this event is not running at this time.")
+	}
+}
+onGumpResponse
+{
+	if (GUMPID() == "fun\\dota\\adminGump.xml")
+	{
+		if (ints.resetEvent == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			if (xmlints.enabled == 0)
+			{
+				UNSUBSCRIBETIMER(OneMinute)
+				SENDMSG(TRIGMOB(), "The event isn't currently running! No action was taken.")
+				return
+			}
+			cleanup()
+			UNSUBSCRIBETIMER(OneMinute)
+			xmlints.enabled = 0
+		}
+		else if (ints.startEvent == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			xmlints.enabled = 1
+			objs.mobs = ONLINEMOBS()
+			foreach (objs.mob ; objs.mobs)
+			{
+				if (IS(objs.mob, PlayerMobile)) { SENDGUMP(objs.mob, "fun\\dota\\globalDOTAJoinGump.xml") }
+			}
+			xmlints.count = 0
+			UNSUBSCRIBETIMER(OneMinute)
+			SAY(THIS(), "Yes, master, right away.")
+			reboot()
+		}
+		else if (ints.tabulateScores == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			// TODO tabulate scores
+			SENDMSG(TRIGMOB(), "Attempting tabulate zombie event scores... they will show up in Logs/UberScript/DotaScoreReport... if you don't get a Success message soon, something went wrong.")
+			strings.fileName = "DotaScoreReport"
+			LOG(strings.fileName, NOW() + "==== DOTA SCORE REPORT ======")
+			objs.dotaChars = GLOBALGETATTACHMENTS(XmlObject, dotaChar)
+			strings.line = "Name\tEssence Damage\tTurret/Factory Damage\tElemental Damage\tPlayer Damage\tBlacksmith\tTinkering\tTailoring\tMining\tAlchemy\tTotal Crafting\tMagery\tSwords\tFencing\tMacing\tTactics\tAnatomy\tHealing\tWrestling\tEval Int\tResist\tPoisoning\tUnique Player Kills"
+			LOG(strings.fileName, strings.line)
+			
+			foreach (objs.attachment ; objs.dotaChars)
+			{
+				strings.line = ""
+				objs.mob = objs.attachment.Value
+				if (objs.mob == null) { continue }
+				
+				strings.line += objs.mob.RawName + "\t" + objs.mob.xmlints.dotaLifeEssenceDamage + "\t" + objs.mob.xmlints.dotaTurretDamage + "\t" + objs.mob.xmlints.dotaElementalDamage  + "\t" + objs.mob.xmlints.dotaPlayerDamage + "\t" + GETSKILL(objs.mob, Blacksmith) + "\t" + GETSKILL(objs.mob, Tinkering) + "\t" + GETSKILL(objs.mob, Tailoring) + "\t" + GETSKILL(objs.mob, Mining) + "\t" + GETSKILL(objs.mob, Alchemy) + "\t\t" + GETSKILL(objs.mob, Magery) + "\t" + GETSKILL(objs.mob, Swords) + "\t" + GETSKILL(objs.mob, Fencing) + "\t" + GETSKILL(objs.mob, Macing) + "\t" + GETSKILL(objs.mob, Tactics) + "\t" + GETSKILL(objs.mob, Anatomy) + "\t" + GETSKILL(objs.mob, Healing) + "\t" + GETSKILL(objs.mob, Wrestling) + "\t" + GETSKILL(objs.mob, EvalInt) + "\t" + GETSKILL(objs.mob, MagicResist) + "\t" + GETSKILL(objs.mob, Poisoning) + "\t";
+				foreach (objs.killed ; objs.mob.xmlobjs.dotaPlayerKills)
+				{
+					if (objs.killed == null) { continue; }
+					strings.line += objs.killed.RawName + ","
+				}
+				LOG(strings.fileName, strings.line)
+			}
+			SENDMSG(TRIGMOB(), "SUCCESS-the scores were successfully written to the log file.", 0x38)
+		}
+		return
+	}
+	
+	if (ints.instructionsOnly == 1)
+	{
+		ints.instructionsOnly = 0
+		SENDGUMP(TRIGMOB(), "fun\\dota\\instructionsGump.xml")
+	}
+	
+	if (xmlints.enabled != 1) { return }
+	if (ints.instructions == 1)
+	{
+		// TODO fix link - put in hyperlink
+		//OPENBROWSER(TRIGMOB(), "www.uoforever.com/forum/viewtopic.php?f=2&t=19504")
+		ints.instructions = 0
+		SENDGUMP(TRIGMOB(), "fun\\dota\\JoinGump.xml")
+	}
+	else if (ints.joinEvent == 1)
+	{
+		ints.joinEvent = 0
+		SENDGUMP(TRIGMOB(), "fun\\dota\\JoinGump2.xml")
+	}
+	else if (ints.joinEvent2 == 1)
+	{
+		ints.joinEvent2 = 0
+		SENDGUMP(TRIGMOB(), "fun\\dota\\JoinGump3.xml")
+	}
+	else if (ints.joinEventFinal == 1)
+	{
+		objs.group = GETATTACHMENT(THIS(), xmlgroup)
+		objs.groupMob = GETGROUPMOB(TRIGMOB(), objs.group)
+		if (objs.groupMob == null)
+		{
+			ADDTOGROUP(TRIGMOB(), xmlstrings.eventName, objs.group)
+			objs.spawn = humanmob
+			
+			if (xmlobjs.SpawnedPlayers == null)
+			{
+				xmlobjs.SpawnedPlayers = NEWLIST()
+			}
+			ADDTOLIST(xmlobjs.SpawnedPlayers, objs.spawn)
+			
+			objs.spawn.rawstr = 100
+			objs.spawn.rawint = 100
+			objs.spawn.rawdex = 75
+			objs.spawn.hitsmaxseed = 100
+			objs.spawn.hits = 100
+			objs.spawn.stammaxseed = 100
+			objs.spawn.stam = 75
+			objs.spawn.manamaxseed = 100
+			objs.spawn.mana = 100
+			objs.spawn.name = TRIGMOB().RawName
+			objs.spawn.hue = TRIGMOB().hue
+			objs.spawn.facialHairItemID = TRIGMOB().facialHairItemID
+			objs.spawn.facialHairHue = TRIGMOB().facialHairHue
+			objs.spawn.hairItemID =  TRIGMOB().hairItemID
+			objs.spawn.hairHue = TRIGMOB().hairHue
+			if (TRIGMOB().bodyvalue == 400 || TRIGMOB().bodyvalue == 401)
+			{ objs.spawn.bodyValue = TRIGMOB().bodyValue }
+			else
+			{
+				objs.spawn.bodyValue = 400 // just make them a guy
+			}
+			objs.spawn.name = TRIGMOB().RawName
+			RANDOMOUTFIT(objs.spawn)
+			objs.tinkertools = TinkerTools
+			objs.shovel = Shovel
+			objs.spellbook = FullSpellbook
+			{
+				Movable = false
+			}
+			ADDTOPACK(objs.spawn, objs.spellbook)
+			ADDTOPACK(objs.spawn, objs.tinkertools)
+			ADDTOPACK(objs.spawn, objs.shovel)
+			objs.cloak = Cloak
+			{
+				Movable = false
+			}
+			EQUIP(objs.spawn, objs.cloak)
+			
+			objs.skills = COPYSKILLS(THIS())
+			APPLYSKILLS(objs.spawn, objs.skills)
+			TRIGMOB().xmlobjs.dotaChar = objs.spawn
+			
+			if (xmlints.nextPlayerJoinTeam == 1)
+			{
+				xmlints.nextPlayerJoinTeam = 2
+				objs.spawn.xmlobjs.spawnLocation = POINT3D(5588, 2810, -3)
+				SETTEAM(objs.spawn, Team1)
+				objs.cloak.Hue = xmlints.team1Hue
+			}
+			else
+			{
+				xmlints.nextPlayerJoinTeam = 1
+				objs.spawn.xmlobjs.spawnLocation = POINT3D(5506, 2568, -4)
+				SETTEAM(objs.spawn, Team2)
+				objs.cloak.Hue = xmlints.team2Hue
+			}
+			MOVETOWORLD(objs.spawn, objs.spawn.xmlobjs.spawnLocation, MAP(Felucca))
+			
+			ADDSCRIPT(objs.spawn, "fun\\dota\\char.us")
+			ADDSCRIPT(objs.spawn, "fun\\dota\\charRestrictedSpells.us")
+			
+			
+			INDIVIDUALFLASHEFFECT(TRIGMOB(), 3)
+			pause 1800
+			POSSESS(TRIGMOB(), objs.spawn)
+			objs.spawn.blessed = false
+			objs.spawn.hidden = false
+			objs.spawn.ignoremobiles = false
+			objs.spawn.cantwalk = false
+			// have to update their logout location b/c after 5 minutes
+			// when they officially log out, since their map is internal
+			// their logoutlocation isn't changed
+			TRIGMOB().logoutlocation = TRIGMOB().location
+			TRIGMOB().map = MAP(internal)
+			TRIGMOB().logoutmap = MAP(felucca)
+		}
+		else // they are already signed up
+		{
+			if (objs.groupMob.xmlobjs.dotaChar == null)
+			{
+				LOG("DOTAERROR", "GroupMob character is null! " + objs.groupMob)
+			}
+			else if (objs.groupMob.xmlobjs.dotaChar.deleted)
+			{
+				LOG("DOTAERROR", "GroupMob character was deleted! " + objs.groupMob)
+				REMOVEFROMGROUP(objs.groupMob, xmlstrings.eventName)
+			}
+			else
+			{
+				objs.spawn = objs.groupMob.xmlobjs.dotaChar
+				objs.spawn.blessed = false
+				objs.spawn.hidden = false
+				objs.spawn.ignoremobiles = false
+				objs.spawn.cantwalk = false
+				// else just possess the mob (they are still alive wherever they were)
+				
+				INDIVIDUALFLASHEFFECT(TRIGMOB(), 3)
+				pause 1800
+				POSSESS(TRIGMOB(), objs.groupMob.xmlobjs.dotaChar)
+				// have to update their logout location b/c after 5 minutes
+				// when they officially log out, since their map is internal
+				// their logoutlocation isn't changed
+				TRIGMOB().logoutlocation = TRIGMOB().location
+				TRIGMOB().map = MAP(internal)
+				TRIGMOB().logoutmap = MAP(felucca)
+			}
+		}
+	}
+}
+
+onSpeech
+{
+	if (TRIGMOB().rawname == Alan || TRIGMOB().rawname == Carl || TRIGMOB().rawname == Shane || TRIGMOB().rawname == Adam || TRIGMOB().rawname == Lee)
+	{
+		if (SAID("start it up"))
+		{
+			SAY(THIS(), "Yes, master.")
+			xmlints.enabled = 0
+			objs.mobs = ONLINEMOBS()
+			foreach (objs.mob ; objs.mobs)
+			{
+				if (IS(objs.mob, PlayerMobile)) { SENDGUMP(objs.mob, "fun\\dota\\globalDOTAInstructionGump.xml") }
+			}
+			xmlints.count = 0
+			SUBSCRIBETIMER(OneMinute)
+		}
+		else if (SAID("start it immediately"))
+		{
+			xmlints.enabled = 1
+			objs.mobs = ONLINEMOBS()
+			foreach (objs.mob ; objs.mobs)
+			{
+				if (IS(objs.mob, PlayerMobile)) { SENDGUMP(objs.mob, "fun\\dota\\globalDOTAJoinGump.xml") }
+			}
+			xmlints.count = 0
+			UNSUBSCRIBETIMER(OneMinute)
+			SAY(THIS(), "Yes, master, right away.")
+			reboot()
+		}
+		else if (SAID("clear it all up"))
+		{
+			cleanup()
+			SAY(THIS(), "It has been cleared.")
+		}
+	}
+}
+onOneMinute
+{
+	xmlints.count += 1
+	if (xmlints.count == 5)
+	{
+		xmlints.enabled = 1
+		objs.mobs = ONLINEMOBS()
+		foreach (objs.mob ; objs.mobs)
+		{
+			if (IS(objs.mob, PlayerMobile)) { SENDGUMP(objs.mob, "fun\\dota\\globalDOTAJoinGump.xml") }
+		}
+		
+		xmlints.count = 0
+		UNSUBSCRIBETIMER(OneMinute)
+		reboot()
+	}
+}

@@ -1,0 +1,39 @@
+onUse
+{
+	if (THIS().rootparententity != TRIGMOB())
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it!")
+		return
+	}
+	SENDTARGET(TRIGMOB(), false)
+	SENDMSG(TRIGMOB(), "Target an empty treasure map chest to recycle.")
+}
+onTarget
+{
+	if (IS(TARGETED(), treasuremapchest) && TARGETED().items.count == 0)
+	{
+		SENDMSG(TRIGMOB(), "You wave your magic wand over the chest...")
+		objs.location = TARGETED().location
+		TARGETED().z -= 1
+		pause 250
+		TARGETED().z -= 1
+		pause 250
+		TARGETED().z -= 1
+		pause 250
+		TARGETED().z -= 1
+		pause 250
+		TARGETED().z -= 1
+		pause 250
+		TARGETED().z -= 1
+		objs.ingots = ironingot
+		{
+			amount = RANDOMMINMAX(2,50)
+			MOVETOWORLD(SPAWNED(), objs.location)
+		}
+		DELETE(TARGETED())
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is not an empty treasure map chest!")
+	}
+}

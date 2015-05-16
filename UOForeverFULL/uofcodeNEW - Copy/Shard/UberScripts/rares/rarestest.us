@@ -1,0 +1,5 @@
+onUse
+{
+     objs.toDrop = RARE("rares.txt")
+     ADDTOCONTAINER(TRIGMOB().Backpack, objs.toDrop )
+}

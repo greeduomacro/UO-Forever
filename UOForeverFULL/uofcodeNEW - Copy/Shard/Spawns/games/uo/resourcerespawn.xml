@@ -1,0 +1,81 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>UOResourceRespawn</Name>
+    <UniqueId>ccf14231-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>0</X>
+    <Y>0</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>30</MinDelay>
+    <MaxDelay>30</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=COMMAND/refreshresources 5505 3188:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5505 3180:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5505 3172:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5505 3164:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5505 3156:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5505 3148:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5516 3188:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5516 3180:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5516 3172:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5516 3164:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5516 3156:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5516 3148:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5569 3188:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5569 3180:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5569 3172:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5569 3164:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5569 3156:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5569 3148:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5578 3188:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5578 3180:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5578 3172:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5578 3164:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5578 3156:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5578 3148:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5565 3131:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5559 3150:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5559 3142:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5496 3150:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5496 3142:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5547 3206:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5537 3206:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5541 3206:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5547 3214:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5537 3214:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5541 3214:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5547 3222:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5537 3222:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=COMMAND/refreshresources 5541 3222:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

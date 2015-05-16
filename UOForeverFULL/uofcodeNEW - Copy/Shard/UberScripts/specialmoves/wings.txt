@@ -1,0 +1,34 @@
+onSay
+{
+	if (SAID("flapwings") == false) { return }
+	if (xmlints.specialMoveDelay == null)
+	{
+		xmlints.specialMoveDelay = 1
+		xmlints.specialMoveDelay.Expiration = 0:0:5
+		pause 50
+		SAY(TRIGMOB(),".")
+		SAY(TRIGMOB(),".")
+		SAY(TRIGMOB(),"*beats wings*")
+		ANIMATE(TRIGMOB(), 4, 0, 1, true, false, 0)
+		blessed = true
+		frozen = true
+		CONCUSSION(TRIGMOB(), 2, 9, TwoFiftyMS)
+		pause 500
+		ANIMATE(TRIGMOB(), 4, 0, 1, true, false, 0)
+		pause 500
+		ANIMATE(TRIGMOB(), 4, 0, 1, true, false, 0)
+		pause 500
+		ANIMATE(TRIGMOB(), 4, 0, 1, true, false, 0)
+		pause 500
+		ANIMATE(TRIGMOB(), 4, 0, 1, true, false, 0)
+		pause 900
+		blessed = false
+		frozen = false
+		return override
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You aren't ready to use another special move!", 38)
+		return override
+	}
+}

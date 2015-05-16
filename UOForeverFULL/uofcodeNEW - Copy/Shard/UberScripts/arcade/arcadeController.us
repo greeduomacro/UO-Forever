@@ -1,0 +1,1051 @@
+function moveToRandomPlace()
+{
+	// expects objs.spawn to have something to move
+	objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+	// try up to 4 times
+	if (objs.spawnLoc == POINT3D(0,0,0))
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+			}
+		}
+	}
+	MOVETOWORLD(objs.spawn, objs.spawnLoc, MAP(Trammel))
+}
+
+function spawn20Corpses()
+{
+	for (ints.i = 0; ints.i < 20; ints.i += 1)
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+		// try up to 4 times
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+				}
+			}
+		}
+		//SAY(TRIGMOB(), objs.spawnLoc)
+		objs.mob = humanmob { hidden = true }
+		objs.mob.direction = RANDOMDIRECTION()
+		MOVETOWORLD(objs.mob, objs.spawnLoc, MAP(Trammel))
+		//RANDOMOUTFIT(objs.mob)
+		objs.corpse = CREATECORPSE(objs.mob)
+		if (objs.corpse.proxycorpse != null) 
+		{ 
+			objs.corpse = objs.corpse.proxycorpse 
+		}
+		ADDSCRIPT(objs.corpse, "arcade\\items.us") // one for the zombie state
+		
+		DELETE(objs.mob)
+	}
+}
+
+function spawn100Birds()
+{
+	for (ints.i = 0; ints.i < 100; ints.i += 1)
+	{
+		//SAY(TRIGMOB(), objs.spawnLoc)
+		objs.spawn = bird
+		objs.spawn.xmlobjs.owner = THIS()
+		ADDSCRIPT(objs.spawn, "arcade\\bird.us")
+		moveToRandomPlace()
+	}
+}
+
+function spawnZombies()
+{
+	// expects ints.spawnPer to be SETACCOUNTTAG
+	for (ints.i = 0; ints.i < ints.spawnPer; ints.i += 1)
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+		// try up to 4 times
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(xmlobjs.possible, xmlobjs.weights)
+				}
+			}
+		}
+		//SAY(TRIGMOB(), objs.spawnLoc)
+		objs.spawned = CustomMob
+		{
+			RawName = "a zombie"
+			BodyValue = 3
+			CurrentSpeed = 0.6
+			PassiveSpeed = 0.6
+			ActiveSpeed = 0.16
+			BaseSoundId = 471
+			RangePerception = 20
+			WeaponDamage = false
+			HitsMaxSeed = 50
+			Hits = 50
+			DamageMin = 10
+			DamageMax = 26
+		}
+		objs.spawned.ReduceSpeedWithDamageCustom = true
+		objs.spawned.xmlobjs.owner = THIS()
+		objs.spawnLoc.Z -= 11
+		MOVETOWORLD(objs.spawned, objs.spawnLoc, MAP(Trammel))
+		ADDSCRIPT(objs.spawned, "arcade\\hallow.us", "hallBase")
+		ADDSCRIPT(objs.spawned, "arcade\\items.us", "items")
+		objs.spawnLoc.Z += 11
+		objs.spawned.home = objs.spawnLoc
+		objs.spawned.rangehome = 20
+	}
+}
+function spawnZombiesSectional()
+{
+	// expects objs.possible
+	
+	objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+	// try up to 4 times
+	if (objs.spawnLoc == POINT3D(0,0,0))
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			}
+		}
+	}
+	//SAY(TRIGMOB(), objs.spawnLoc)
+	objs.spawn = CustomMob
+	{
+		RawName = "a zombie"
+		BodyValue = 3
+		CurrentSpeed = 0.6
+		PassiveSpeed = 0.6
+		ActiveSpeed = 0.16
+		BaseSoundId = 471
+		RangePerception = 20
+		WeaponDamage = false
+		HitsMaxSeed = 50
+		Hits = 50
+		DamageMin = 10
+		DamageMax = 26
+	}
+	objs.spawn.ReduceSpeedWithDamageCustom = true
+	objs.spawn.xmlobjs.owner = THIS()
+	objs.spawnLoc.Z -= 11
+	MOVETOWORLD(objs.spawn, objs.spawnLoc, MAP(Trammel))
+	ADDSCRIPT(objs.spawn, "arcade\\items.us", "items")
+	objs.spawnLoc.Z += 11
+	objs.spawn.home = objs.spawnLoc
+	objs.spawn.rangehome = 20
+}
+
+function addClueMob()
+{
+	// expects objs.spawnLoc and ints.clueNumber
+	objs.spawn = humanmob
+	objs.spawn.xmlints.stepNumber = xmlints.stepNumber
+	ADDSCRIPT(objs.spawn, "arcade\\clues\\cluegiver.us")
+	MOVETOWORLD(objs.spawn, objs.spawnLoc, MAP(Trammel))
+	objs.robe = monkrobe
+	{
+		movable = false
+		hue = 1153
+	}
+	EQUIP(objs.spawn, objs.robe)
+	
+	xmlints.stepNumber += 1
+}
+onCreate
+{
+	SCRIPT().name = "_arcadeMAIN"
+	CantWalk = true
+	Blessed = true
+	name = "Event Master for the Survival Event"
+	objs.robe = monkrobe
+	{
+		movable = false
+		hue = 1153
+	}
+	EQUIP(THIS(), objs.robe)
+	SETSKILL(THIS(), Anatomy, 80.0)
+	SETSKILL(THIS(), Macing, 80.0)
+	SETSKILL(THIS(), Swords, 80.0)
+	SETSKILL(THIS(), Archery, 80.0)
+	SETSKILL(THIS(), MagicResist, 80.0)
+	SETSKILL(THIS(), Wrestling, 80.0)
+	SETSKILL(THIS(), Fencing, 80.0)
+	SETSKILL(THIS(), Poisoning, 45.0)
+	SETSKILL(THIS(), ItemID, 45.0)
+	SETSKILL(THIS(), ArmsLore, 45.0)
+	SETSKILL(THIS(), Alchemy, 45.0)
+	SETSKILL(THIS(), Alchemy , 45.0)
+	SETSKILL(THIS(), Anatomy , 45.0)
+	SETSKILL(THIS(), ItemID , 45.0)
+	SETSKILL(THIS(), ArmsLore , 45.0)
+	SETSKILL(THIS(), Parry , 60.0)
+	SETSKILL(THIS(), Begging , 45.0)
+	SETSKILL(THIS(), Blacksmith , 45.0)
+	SETSKILL(THIS(), Fletching , 45.0)
+	SETSKILL(THIS(), Peacemaking , 45.0)
+	SETSKILL(THIS(), Camping , 45.0)
+	SETSKILL(THIS(), Carpentry , 45.0)
+	SETSKILL(THIS(), Cartography , 45.0)
+	SETSKILL(THIS(), Cooking , 45.0)
+	SETSKILL(THIS(), EvalInt , 80.0)
+	SETSKILL(THIS(), Healing , 80.0)
+	SETSKILL(THIS(), Forensics , 45.0)
+	SETSKILL(THIS(), Inscribe , 45.0)
+	SETSKILL(THIS(), Lockpicking , 45.0)
+	SETSKILL(THIS(), Magery , 80.0)
+	SETSKILL(THIS(), MagicResist , 80.0)
+	SETSKILL(THIS(), Tactics , 80.0)
+	SETSKILL(THIS(), Poisoning , 45.0)
+	SETSKILL(THIS(), Archery , 80.0)
+	SETSKILL(THIS(), Tailoring , 45.0)
+	SETSKILL(THIS(), TasteID , 45.0)
+	SETSKILL(THIS(), Tinkering , 45.0)
+	SETSKILL(THIS(), Swords , 80.0)
+	SETSKILL(THIS(), Macing , 80.0)
+	SETSKILL(THIS(), Fencing , 80.0)
+	SETSKILL(THIS(), Wrestling , 80.0)
+	SETSKILL(THIS(), Lumberjacking , 45.0)
+	SETSKILL(THIS(), Mining , 45.0)
+	SETSKILL(THIS(), Meditation , 80.0)
+	SETSKILL(THIS(), RemoveTrap , 45.0)
+	
+	xmlints.spawnRefreshMinutes = 5
+	xmlints.count = 0
+	
+	xmlobjs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	xmlobjs.weights = [6, 2, 2, 1]
+	SUBSCRIBETIMER(OneMinute)
+	
+	xmlstrings.eventName = "Survival"
+	objs.group = NEWATTACHMENT(xmlgroup, xmlstrings.eventName)
+	ATTACH(THIS(), objs.group)
+	objs.group.maxmembers = 10000
+	objs.group.maxparticipants = 10000
+	objs.group.eventtype = HighestScore
+	objs.group.eventname = xmlstrings.eventName
+	objs.group.eventinprogress = true
+	
+	xmlints.zombieCount = 0
+	xmlints.zombieCountMax = 6000
+	xmlints.birdCount = 0
+	xmlints.zombieCountMax = 6000
+	xmlints.zombieCountRespawn = 3000
+	
+	ints.spawnPer = 6000
+	// ADD INITIAL ZOMBIES
+	spawnZombies()
+	
+	pause 2000
+	spawn100Birds(); pause 200
+	spawn100Birds(); pause 200
+	spawn100Birds(); pause 200
+	spawn100Birds(); pause 200
+	
+	xmlints.daemonCount = 0
+	xmlints.paroxymusCount = 0
+	xmlints.swampTentacleCount = 0
+	xmlints.spiderCount = 0
+	xmlints.feyCount = 0
+	xmlints.treeFellowCount = 0
+	
+	// have different zones so that all areas always have zombies (so they don't all get redistributed into the desert)
+	//[6, 2, 2, 1]
+	xmlints.area1Zombies = 0
+	xmlints.area1ZombiesMax = 2400
+	xmlobjs.area1Bounds = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061))]
+	xmlints.area2Zombies = 0
+	xmlints.area2ZombiesMax = 800
+	xmlobjs.area2Bounds = [RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086))]
+	xmlints.area3Zombies = 0
+	xmlints.area3ZombiesMax = 800
+	xmlobjs.area3Bounds = [RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130))]
+	xmlints.area4Zombies = 0
+	xmlints.area4ZombiesMax = 400
+	xmlobjs.area4Bounds = [RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	
+	xmlints.stepNumber = 1
+	objs.spawnLoc = POINT3D(5729, 3195, 9); addClueMob() // reg shop
+	objs.spawnLoc = POINT3D(5198, 3141, 91); addClueMob() //(spiral)
+	objs.spawnLoc = POINT3D(5548, 2636, -4); addClueMob()
+	objs.spawnLoc = POINT3D(5906, 4069, 26); addClueMob() // southern platform
+	objs.spawnLoc = POINT3D(5779, 2615, 66); addClueMob() // ophidian  // 
+	objs.spawnLoc = POINT3D(5680, 2400, 59); addClueMob() // lighthouse
+	objs.spawnLoc = POINT3D(5451, 3142, -60); addClueMob() // terathan // IN FRONT 5493 3223 -1
+	objs.spawnLoc = POINT3D(5385, 3229, 0); addClueMob() // ruined building
+	objs.spawnLoc = POINT3D(5580, 3021, 28); addClueMob() // ant hole
+}
+onOneMinute
+{
+	xmlints.count += 1
+	if (xmlints.count >= xmlints.spawnRefreshMinutes)
+	{
+		xmlints.count = 0
+		// Can't use pauses inside of a for loop, but don't want to spawn all at once (lags)
+		// therefore put pauses between
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		spawn20Corpses(); pause 200
+		
+		// check for zombie updates
+		if (xmlints.zombieCount < xmlints.zombieCountRespawn)
+		{
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+		}
+		
+		if (xmlints.birdCount < 1000)
+		{
+			spawn100Birds()
+		}
+		pause 1000
+		if (xmlints.birdCount < 1000)
+		{
+			spawn100Birds()
+		}
+		// respawn special reagent mobs
+		
+	}
+	
+	// now spawn specific area mobs and all the special mobs
+	SAY(THIS(), "Mmmhmm")
+	
+	if (xmlints.area1Zombies < xmlints.area1ZombiesMax)
+	{
+		objs.possible = xmlobjs.area1Bounds
+		for (ints.i = 0; xmlints.area1Zombies < xmlints.area1ZombiesMax; ints.i += 1)
+		{
+			spawnZombiesSectional()
+			objs.spawn.xmlobjs.owner = THIS()
+			xmlints.area1Zombies += 1
+			objs.spawn.xmlints.area = 1
+			ADDSCRIPT(objs.spawn, "arcade\\hallow2.us", "hallBase2")
+		}
+	}
+	pause 1000
+	
+	if (xmlints.area2Zombies < xmlints.area2ZombiesMax)
+	{
+		objs.possible = xmlobjs.area2Bounds
+		for (ints.i = 0; xmlints.area2Zombies < xmlints.area2ZombiesMax; ints.i += 1)
+		{
+			spawnZombiesSectional()
+			objs.spawn.xmlobjs.owner = THIS()
+			xmlints.area2Zombies += 1
+			objs.spawn.xmlints.area = 2
+			ADDSCRIPT(objs.spawn, "arcade\\hallow2.us", "hallBase2")
+		}
+	}
+	pause 1000
+	
+	if (xmlints.area3Zombies < xmlints.area3ZombiesMax)
+	{
+		objs.possible = xmlobjs.area3Bounds
+		for (ints.i = 0; xmlints.area3Zombies < xmlints.area3ZombiesMax; ints.i += 1)
+		{
+			spawnZombiesSectional()
+			objs.spawn.xmlobjs.owner = THIS()
+			xmlints.area3Zombies += 1
+			objs.spawn.xmlints.area = 3
+			ADDSCRIPT(objs.spawn, "arcade\\hallow2.us", "hallBase2")
+		}
+	}
+	pause 1000
+	
+	if (xmlints.area4Zombies < xmlints.area4ZombiesMax)
+	{
+		objs.possible = xmlobjs.area4Bounds
+		for (ints.i = 0; xmlints.area4Zombies < xmlints.area4ZombiesMax; ints.i += 1)
+		{
+			spawnZombiesSectional()
+			objs.spawn.xmlobjs.owner = THIS()
+			xmlints.area4Zombies += 1
+			objs.spawn.xmlints.area = 4
+			ADDSCRIPT(objs.spawn, "arcade\\hallow2.us", "hallBase2")
+		}
+	}
+	pause 1000
+	
+	pause 1000
+	if (xmlints.daemonCount < 170)
+	{
+		for (ints.i = 0; xmlints.daemonCount < 170; ints.i += 1)
+		{
+			objs.spawn = daemon
+			objs.spawn.xmlobjs.owner = THIS()
+			ADDSCRIPT(objs.spawn, "arcade\\mobs\\daemon.us")
+			objs.spawn.home = objs.spawn.location
+		}
+	}
+	pause 1000
+	if (xmlints.paroxymusCount < 150)
+	{
+		for (ints.i = 0; xmlints.paroxymusCount < 150; ints.i += 1)
+		{
+			objs.spawn = dragon
+			objs.spawn.xmlobjs.owner = THIS()
+			ADDSCRIPT(objs.spawn, "arcade\\mobs\\vitriolMob.us")
+			objs.spawn.home = objs.spawn.location
+		}
+	}
+	pause 1000
+	if (xmlints.swampTentacleCount < 100)
+	{
+		for (ints.i = 0; xmlints.swampTentacleCount < 100; ints.i += 1)
+		{
+			objs.spawn = orcbrute
+			objs.spawn.xmlobjs.owner = THIS()
+			ADDSCRIPT(objs.spawn, "arcade\\mobs\\swampTentacle.us")
+			objs.spawn.home = objs.spawn.location
+		}
+	}
+	pause 1000
+	if (xmlints.spiderCount < 50)
+	{
+		for (ints.i = 0; xmlints.spiderCount < 50; ints.i += 1)
+		{
+			objs.spawn = dreadspider
+			objs.spawn.xmlobjs.owner = THIS()
+			ADDSCRIPT(objs.spawn, "arcade\\mobs\\spider.us")
+			objs.spawn.home = objs.spawn.location
+		}
+	}
+	pause 1000
+	if (xmlints.feyCount < 100)
+	{
+		for (ints.i = 0; xmlints.feyCount < 100; ints.i += 1)
+		{
+			objs.spawn = etherealwarrior
+			objs.spawn.xmlobjs.owner = THIS()
+			ADDSCRIPT(objs.spawn, "arcade\\mobs\\fey.us")
+			objs.spawn.home = objs.spawn.location
+		}
+	}
+	pause 1000
+	if (xmlints.treeFellowCount < 100)
+	{
+		for (ints.i = 0; xmlints.treeFellowCount < 100; ints.i += 1)
+		{
+			objs.spawn = bloodelemental
+			objs.spawn.xmlobjs.owner = THIS()
+			ADDSCRIPT(objs.spawn, "arcade\\mobs\\seedOfRenewalMob.us")
+			objs.spawn.home = objs.spawn.location
+		}
+	}
+	pause 1000
+	// 2nd zombie event bosses
+	if (xmlints.bosses == null)
+	{
+		xmlints.bosses = 0
+	}
+	if (xmlints.bosses < 4)
+	{
+		objs.spawn = balron
+		objs.spawn.xmlobjs.owner = THIS()
+		ADDSCRIPT(objs.spawn, "arcade\\mobs\\dragonBoss.us")
+		objs.spawn.home = objs.spawn.location
+	}
+}
+
+onUse
+{
+	if (STRING(TRIGMOB().accesslevel) != Counselor && STRING(TRIGMOB().accesslevel) != Player)
+	{
+		SENDGUMP(TRIGMOB(), "arcade\\adminGump.xml")
+		return
+	}
+	
+	if (xmlints.enabled == 1)
+	{
+		SENDGUMP(TRIGMOB(), "arcade\\JoinGump.xml")
+	}
+	else
+	{
+		SAYTO(THIS(), TRIGMOB(), "Deepest apologies, sire, but this event is not currently available at this time.")
+	}
+}
+onGumpResponse
+{
+	if (GUMPID() == "arcade\\adminGump.xml")
+	{
+		if (ints.resetEvent == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			objs.mobs = GETMOBSINBOUNDS(POINT2D(5120, 2437), POINT2D(6142, 4094), MAP(Trammel))
+			xmlints.zombieCount = 0
+			xmlints.birdCount = 0
+			xmlints.daemonCount = 0
+			xmlints.paroxymusCount = 0
+			xmlints.swampTentacleCount = 0
+			xmlints.spiderCount = 0
+			xmlints.feyCount = 0
+			xmlints.treeFellowCount = 0
+			xmlints.area1Zombies = 0
+			xmlints.area2Zombies = 0
+			xmlints.area3Zombies = 0
+			xmlints.area4Zombies = 0
+			xmlints.bosses = 0
+			GLOBALDELATTACHMENTS(XmlObject, "survivalChar")
+			DELETEACCOUNTTAGS(xmlstrings.eventName)
+			objs.group = GETATTACHMENT(THIS(), XmlGroup)
+			if (objs.group != null)
+			{
+				DELETE(objs.group)
+			}
+			objs.group = NEWATTACHMENT(xmlgroup, xmlstrings.eventName)
+			ATTACH(THIS(), objs.group)
+			objs.group.maxmembers = 10000
+			objs.group.maxparticipants = 10000
+			objs.group.eventtype = HighestScore
+			objs.group.eventname = xmlstrings.eventName
+			objs.group.eventinprogress = true
+			
+			foreach (objs.mob ; objs.mobs)
+			{
+				if (objs.mob.Title != "the Sage" && IS(objs.mob, PlayerMobile) == false)
+				{
+					DELETE(objs.mob)
+				}
+			}
+			pause 1000
+			objs.items = GETITEMSINBOUNDS(POINT2D(5120, 2437), POINT2D(6142, 4094), MAP(Trammel))
+			foreach (objs.item ; objs.items)
+			{
+				if (objs.item.Movable || IS(objs.item, Corpse))
+				{
+					DELETE(objs.item)
+				}
+			}
+			xmlints.enabled = 0
+			UNSUBSCRIBETIMER(OneMinute)
+		}
+		else if (ints.startEvent == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			xmlints.enabled = 1
+			SUBSCRIBETIMER(OneMinute)
+			SENDMSG(TRIGMOB(), "Signups are now allowed.")
+		}
+		else if (ints.stopEvent == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			// go through and disconnect all players who have zombiekills
+			xmlints.enabled = 0
+			UNSUBSCRIBETIMER(OneMinute)
+			SENDMSG(TRIGMOB(), "Attempting to boot players from the game and freeze their characters... If you don't see a success message, then there was a problem...")
+			objs.attachments = GLOBALGETATTACHMENTS(XmlValue, "zombieKills")
+			foreach (objs.attachment ; objs.attachments)
+			{
+				LOCALMSG(objs.attachment.AttachedTo, "The event has been temporarily suspended. Unless staff decides to reset the event, your character's state and score will be preserved.")
+				DISCONNECT(objs.attachment.AttachedTo)
+				objs.attachment.AttachedTo.Blessed = true
+				objs.attachment.AttachedTo.Cantwalk = true
+			}
+			SENDMSG(TRIGMOB(), "Successfully saved the game state! Players will be able to rejoin if you start the event again (unless you reset the event)", 0x38)
+		}
+		else if (ints.tabulateScores == 1)
+		{
+			if (STRING(TRIGMOB().AccessLevel) == "Player") { return }
+			// TODO tabulate scores
+			SENDMSG(TRIGMOB(), "Attempting tabulate zombie event scores... they will show up in Logs/UberScript/survival... if you don't get a Success message soon, something went wrong.")
+			objs.attachments = GLOBALGETATTACHMENTS(XmlValue, "zombieKills")
+			objs.regionmobs = NEWLIST()
+			foreach (objs.attachment ; objs.attachments)
+			{
+				ADDTOLIST(objs.regionmobs, objs.attachment.AttachedTo)
+			}
+			LOG("survival",  "Name\tFoundCure\tFoundCureTime\tBoss Damage\tBoss Kills\tZombieKills\tUniquePlayerKills\tBlacksmithing\tCarpentry\tTinkering\tFletching\tTactics\tFencing\tSwords\tMacing\tArchery\tWrestling\tMagery\tResist\tAnatomy\tArmsLore\tHiding\tStealth\tMining\tLumberjacking\tStealing\tSnooping\tPlayersKilled")	
+			foreach (objs.mob ; objs.regionmobs)
+			{
+				if (IS(objs.mob, humanmob))
+				{
+					strings.toLog = objs.mob.RawName
+					if (objs.mob.xmlints.foundCure == 1)
+					{
+						strings.toLog += "\t" + objs.mob.xmlints.foundCure
+						strings.toLog += "\t" + objs.mob.xmlobjs.foundCureTime
+					}
+					else
+					{
+						strings.toLog += "\t\t"
+					}
+					
+					if (objs.mob.xmlints.zombieBossHits != null)
+					{
+						strings.toLog += "\t" + objs.mob.xmlints.zombieBossHits
+					}
+					else
+					{
+						strings.toLog += "\t0"
+					}
+					
+					if (objs.mob.xmlints.zombieBossKills != null)
+					{
+						strings.toLog += "\t" + objs.mob.xmlints.zombieBossKills
+					}
+					else
+					{
+						strings.toLog += "\t0"
+					}
+					
+					strings.toLog += "\t" + objs.mob.xmlints.zombieKills
+					if (objs.mob.xmlobjs.killList != null)
+					{
+						strings.toLog += "\t" + objs.mob.xmlobjs.killList.count
+					}
+					else
+					{
+						strings.toLog += "\t0"
+					}
+					strings.toLog += "\t" + GETSKILL(objs.mob, Blacksmith)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Carpentry)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Tinkering)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Fletching)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Tactics)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Fencing)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Swords)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Macing)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Archery)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Wrestling)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Magery)
+					strings.toLog += "\t" + GETSKILL(objs.mob, MagicResist)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Anatomy)
+					strings.toLog += "\t" + GETSKILL(objs.mob, ArmsLore)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Hiding)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Stealth)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Mining)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Lumberjacking)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Stealing)
+					strings.toLog += "\t" + GETSKILL(objs.mob, Snooping) + "\t"
+					if (objs.mob.xmlobjs.killList != null)
+					{
+						foreach (objs.killed; objs.mob.xmlobjs.killList)
+						{
+							strings.toLog += objs.killed.rawname + ", "
+						}
+					}
+					
+					LOG("survival", strings.toLog)
+				}
+			}
+			SENDMSG(TRIGMOB(), "SUCCESS-the scores were successfully written to the log file.", 0x38)
+		}
+		return
+	}
+	
+	if (ints.instructions == 1)
+	{
+		OPENBROWSER(TRIGMOB(), "http://www.uoforum.com/threads/zombie-survival-event-deja-vu-1-27-starting-at-9pm-est.26788/")
+	}
+	else if (ints.joinEvent == 1)
+	{
+		ints.joinEvent = 0
+		SENDGUMP(TRIGMOB(), "arcade\\JoinGump2.xml")
+	}
+	else if (ints.joinEvent2 == 1)
+	{
+		ints.joinEvent2 = 0
+		SENDGUMP(TRIGMOB(), "arcade\\JoinGump3.xml")
+	}
+	else if (ints.joinEventFinal == 1)
+	{
+		objs.group = GETATTACHMENT(THIS(), xmlgroup)
+		objs.groupMob = GETGROUPMOB(TRIGMOB(), objs.group)
+		if (objs.groupMob == null)
+		{
+			ADDTOGROUP(TRIGMOB(), xmlstrings.eventName, objs.group)
+			objs.spawn = humanmob
+			objs.spawn.rawstr = 100
+			objs.spawn.rawint = 100
+			objs.spawn.rawdex = 75
+			objs.spawn.hitsmaxseed = 100
+			objs.spawn.hits = 100
+			objs.spawn.stammaxseed = 75
+			objs.spawn.stam = 75
+			objs.spawn.manamaxseed = 100
+			objs.spawn.mana = 100
+			objs.spawn.name = TRIGMOB().RawName
+			objs.spawn.hue = TRIGMOB().hue
+			objs.spawn.facialHairItemID = TRIGMOB().facialHairItemID
+			objs.spawn.facialHairHue = TRIGMOB().facialHairHue
+			objs.spawn.hairItemID =  TRIGMOB().hairItemID
+			objs.spawn.hairHue = TRIGMOB().hairHue
+			objs.spawn.bodyValue = TRIGMOB().bodyValue
+			objs.spawn.name = TRIGMOB().RawName
+			RANDOMOUTFIT(objs.spawn)
+			moveToRandomPlace()
+			objs.dagger = dagger { speed = FLOAT(1.0) }
+			objs.bandages = bandage, 7
+			ADDTOPACK(objs.spawn, objs.dagger)
+			ADDTOPACK(objs.spawn, objs.bandages)
+			
+			objs.skills = COPYSKILLS(THIS())
+			APPLYSKILLS(objs.spawn, objs.skills)
+			TRIGMOB().xmlobjs.survivalChar = objs.spawn
+			ADDSCRIPT(objs.spawn, "arcade\\arcade.us")
+			
+			INDIVIDUALFLASHEFFECT(TRIGMOB(), 3)
+			pause 1800
+			POSSESS(TRIGMOB(), objs.spawn)
+			objs.spawn.blessed = false
+			objs.spawn.hidden = false
+			objs.spawn.ignoremobiles = false
+			objs.spawn.cantwalk = false
+			// have to update their logout location b/c after 5 minutes
+			// when they officially log out, since their map is internal
+			// their logoutlocation isn't changed
+			TRIGMOB().logoutlocation = TRIGMOB().location
+			TRIGMOB().map = MAP(internal)
+			TRIGMOB().logoutmap = MAP(felucca)
+		}
+		else // they are already signed up
+		{
+			if (objs.groupMob.xmlobjs.survivalChar == null)
+			{
+				LOG("ArcadeError.txt", "GroupMob character is null! " + objs.groupMob)
+			}
+			else if (objs.groupMob.xmlobjs.survivalChar.deleted)
+			{
+				LOG("ArcadeError.txt", "GroupMob character was deleted! " + objs.groupMob)
+				REMOVEFROMGROUP(objs.groupMob, xmlstrings.eventName)
+			}
+			else
+			{
+				objs.spawn = objs.groupMob.xmlobjs.survivalChar
+				objs.spawn.blessed = false
+				objs.spawn.hidden = false
+				objs.spawn.ignoremobiles = false
+				objs.spawn.cantwalk = false
+				if (objs.spawn.location == POINT3D(5980, 2983, 12))
+				{
+					// they were logged out
+					// move to random place
+					moveToRandomPlace()
+				}
+				// else just possess the mob (they are still alive wherever they were)
+				
+				INDIVIDUALFLASHEFFECT(TRIGMOB(), 3)
+				pause 1800
+				POSSESS(TRIGMOB(), objs.groupMob.xmlobjs.survivalChar)
+				// have to update their logout location b/c after 5 minutes
+				// when they officially log out, since their map is internal
+				// their logoutlocation isn't changed
+				TRIGMOB().logoutlocation = TRIGMOB().location
+				TRIGMOB().map = MAP(internal)
+				TRIGMOB().logoutmap = MAP(felucca)
+			}
+		}
+	}
+}
+
+onSpeech
+{
+	if (TRIGMOB().rawname == Alan)
+	{
+		if (SAID("reset"))
+		{
+			xmlobjs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	xmlobjs.weights = [6, 2, 2, 1]
+		SAY(THIS(), k)
+		}
+		if (SAID("more birds"))
+		{
+			if (xmlints.birdCount < 1000)
+			{
+				spawn100Birds()
+				SAY(THIS(), Spawning)
+				pause 200
+			}
+			if (xmlints.birdCount < 1000)
+			{
+				spawn100Birds()
+				SAY(THIS(), Spawning)
+				pause 200
+			}
+			if (xmlints.birdCount < 1000)
+			{
+				spawn100Birds()
+				SAY(THIS(), Spawning)
+				pause 200
+			}
+			if (xmlints.birdCount < 1000)
+			{
+				spawn100Birds()
+				SAY(THIS(), Spawning)
+				pause 200
+			}
+			if (xmlints.birdCount < 1000)
+			{
+				spawn100Birds()
+				SAY(THIS(), Spawning)
+				pause 200
+			}
+			SAY(THIS(), Done)
+		}
+		if (SAID("more zombies"))
+		{
+			SAY(THIS(), "Yes, Master")
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+			ints.spawnPer = 20; spawnZombies(); pause 200
+		}
+	}
+}

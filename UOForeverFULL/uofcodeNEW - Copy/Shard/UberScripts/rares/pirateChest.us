@@ -1,0 +1,42 @@
+onCreate
+{
+	ItemID = 16646 
+	GumpID = 73
+	xmlints.opening = true
+}
+onUse
+{
+	SUBSCRIBETIMER(TwoFiftyMS)
+}
+onTwoFiftyMS
+{
+	if (xmlints.opening == null)
+	{
+		
+		if (THIS().ItemID > 16646)
+		{
+			THIS().ItemID -= 1
+		}
+		else
+		{
+			UNSUBSCRIBETIMER(TwoFiftyMS)
+			xmlints.opening = 1
+		}
+	}
+	else
+	{
+		if (THIS().ItemID < 16649)
+		{
+			THIS().ItemID += 1
+		}
+		else
+		{
+			UNSUBSCRIBETIMER(TwoFiftyMS)
+			xmlints.opening = null
+		}
+	}
+}
+
+// 15716 dead orc captain
+// 15717 dead orc
+// 15718 bones from human

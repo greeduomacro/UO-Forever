@@ -1,0 +1,25 @@
+onUse
+{
+	if (TRIGMOB() != rootparententity) { return }
+	SENDTARGET(TRIGMOB())
+	LOCALMSG(TRIGMOB(), "What do you want to combine that with or use that on?")
+}
+onTarget
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TARGETED(), MortarPestle))
+	{
+		if (TARGETED().xmlints.spiderCarapace == null && TARGETED().xmlints.feyWings == null)
+		{
+			LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+			return
+		}
+		LOCALMSG(TRIGMOB(), "You place the vial of vitriol in with the mixture and mix it up.")
+		TARGETED().xmlints.vialOfVitriol = 1
+		DELETE(THIS())
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+	}
+}

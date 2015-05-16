@@ -1,0 +1,38 @@
+onCreate
+{
+	itemid = 4846
+	movable = false
+}
+onMoveOver
+{
+	if (xmlobjs.killType != null)
+	{
+		if (IS(TRIGMOB(), xmlobjs.killType)) // can target specific mob types
+		{
+			KILL(TRIGMOB())
+			pause 100
+						
+			objs.group = GETATTACHMENT(TRIGMOB().xmlobjs.owner, xmlgroup, SCRIPT().name)
+			// WHY CAN'T I DO if (TRIGMOB().xmlobjs.owner != null)
+		
+			if (objs.group != null)
+			{
+				MOVETOWORLD(TRIGMOB(), XMLOBJS(TRIGMOB().xmlobjs.owner, objs.group.captain.rawName + "_StartLoc"), objs.group.captain.rawName + "_CrawlMap")
+				TRIGMOB().hidden = true
+			}
+			
+		}
+	}
+	else
+	{
+		KILL(TRIGMOB())
+		pause 100
+
+		objs.group = GETATTACHMENT(TRIGMOB().xmlobjs.owner, xmlgroup, SCRIPT().name)
+		if (objs.group != null)
+		{
+			MOVETOWORLD(TRIGMOB(), XMLOBJS(TRIGMOB().xmlobjs.owner, objs.group.captain.rawName + "_StartLoc"), objs.group.captain.rawName + "_CrawlMap")
+			TRIGMOB().hidden = true
+		}
+	}
+}

@@ -1,0 +1,27 @@
+onUse
+{
+	objs.nameList = ["U M A", "blind man", "TriXa", "Yub'Yub", "CoCe", "Crono", "Some One", "Lucivix", "Always Strapped", "Krixxus", "Chatelaine", "Drake Roberts", "Ansem", "Ronald Trump", "Naykor", "Fayette", "Wenturo", "dave the minion", "Bhallo", "Sweet Jesus", "Taffy", "Akillah", "The Azn", "Sexy Whisper", "Bromista", "Slice N Dice", "Spydee", "RagingLunatic", "Berticus", "Flea GoD", "Raynan", "Guttersnipe", "StrangerWitCandy", "Dyno", "NoObs-", "Serva", "Violence", "Southpaw", "Babethoven", "Mire", "Bloodbeard", "StarBaby", "Michael Caso", "piingui", "Mokitoki", "Dorcha", "Olivier", "CLM", "Illusion", "Kessler", "Kynk", "Cens", "skala", "Xombie", "PlzNoWhyMe", "Draco Nightshade", "Mooki", "Enguhl"]
+	
+	objs.type = TYPE(playermobile)
+	foreach (objs.mobName ; objs.nameList)
+	{
+		SENDMSG(TRIGMOB(), "trying " + objs.mobName)
+		objs.reward = static, 5020
+		{
+			movable = true
+			hue = 74
+			name = "2014 Custom House Design Competition Participant"
+		}
+		objs.mob = GETMOB(objs.mobName, objs.type)
+		if (objs.mob != null)
+		{
+			ADDTOCONTAINER(objs.mob.bankbox, objs.reward)
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "failed")
+		}
+	}
+	SENDMSG(TRIGMOB(),"it is done")
+	//5020 and hue 74 and message "2014 Custom House Design Competition Participant"
+}

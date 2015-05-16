@@ -1,0 +1,40 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+  <VBox padding="15" backgroundID="0" fitToContents="false">
+    <Box fitToContents="false" x="0" y="0" width="200" height="200" backgroundID="0">
+	  <Image gumpID="76"/>
+	  
+      <Button x="ints.x1+17" y="ints.y1+2" name="1" normalID="22150" pressedID="22150" />
+      <Item x="ints.x1" y="ints.y1" itemID="3553" width="0" height="0" hue="ints.hue1" />
+	  <Item x="ints.x1+2" y="ints.y1+7" itemID="3553" width="0" height="0" hue="ints.hue1" />
+	  
+      <Button x="ints.x2+17" y="ints.y2+2" name="2" normalID="22150" pressedID="22150" />
+      <Item x="ints.x2" y="ints.y2" itemID="3553" width="0" height="0" hue="ints.hue2" />
+	  <Item x="ints.x2+2" y="ints.y2+7" itemID="3553" width="0" height="0" hue="ints.hue2" />
+	  
+	  <Button x="ints.x3+17" y="ints.y3+2" name="3" normalID="22150" pressedID="22150" />
+      <Item x="ints.x3" y="ints.y3" itemID="3553" width="0" height="0" hue="ints.hue3" />
+	  <Item x="ints.x3+2" y="ints.y3+7" itemID="3553" width="0" height="0" hue="ints.hue3" />
+	  
+	  <Button x="ints.x4+17" y="ints.y4+2" name="4" normalID="22150" pressedID="22150" />
+      <Item x="ints.x4" y="ints.y4" itemID="3553" width="0" height="0" hue="ints.hue4" />
+	  <Item x="ints.x4+2" y="ints.y4+7" itemID="3553" width="0" height="0" hue="ints.hue4" />
+	  
+	  <Button x="ints.x5+17" y="ints.y5+2" name="5" normalID="22150" pressedID="22150" />
+      <Item x="ints.x5" y="ints.y5" itemID="3553" width="0" height="0" hue="ints.hue5" />
+	  <Item x="ints.x5+2" y="ints.y5+7" itemID="3553" width="0" height="0" hue="ints.hue5" />
+	  
+	  <Button x="ints.x6+17" y="ints.y6+2" name="6" normalID="22150" pressedID="22150" />
+      <Item x="ints.x6" y="ints.y6" itemID="3553" width="0" height="0" hue="ints.hue6" />
+	  <Item x="ints.x6+2" y="ints.y6+7" itemID="3553" width="0" height="0" hue="ints.hue6" />
+	  
+	  <Button x="ints.x7+17" y="ints.y7+2" name="7" normalID="22150" pressedID="22150" />
+      <Item x="ints.x7" y="ints.y7" itemID="3553" width="0" height="0" hue="ints.hue7" />
+	  <Item x="ints.x7+2" y="ints.y7+7" itemID="3553" width="0" height="0" hue="ints.hue7" />
+	  
+	  <Button x="88" y="190" normalID="7003" pressedID="7003" name="repair"/>
+	  <Label x="100" y="215" hue="100">"REPAIR"</Label>
+	  <Button x="15" y="185" name="empty" normalID="22150" pressedID="22152" />
+	  <Button x="215" y="185" name="help" normalID="22153" pressedID="22155" />
+    </Box>
+  </VBox>
+</Gump>

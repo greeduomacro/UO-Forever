@@ -1,0 +1,9 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<Label hue="1153" x="200" y="100">"Treatise on Water and Illusion"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>As you glance over the ancient scroll, nothing intriguing catches your eye until the very bottom of the scroll.  At the bottom are several glyphs depicitng Uus Mani Quas.  The author details how they had succesfully combined the element of water, giver of life and the power of illusion to hide something of great importance...</p>
+		</HTML>	
+	</Box> 
+</Gump>

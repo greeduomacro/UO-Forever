@@ -1,0 +1,106 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DemergoAlch_DoorBlowUp</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-a51055afe321</UniqueId>
+    <Map>Felucca</Map>
+    <X>5816</X>
+    <Y>387</Y>
+    <Width>1</Width>
+    <Height>1</Height>
+    <CentreX>5816</CentreX>
+    <CentreY>387</CentreY>
+    <CentreZ>25</CentreZ>
+    <Range>5</Range>
+    <MaxCount>20</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>100</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>GETONNEARBY,range,name[,type][,searchcontainers],property
+    <Objects2>WAITUNTIL/GETONNEARBY,2,an unstable powder keg,static,,visible=true/2:MX=1:RT=0:TO=0:KL=0:SB=1
+	:OBJ=SETONNEARBY,3,an unstable powder keg/movable/false:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONSPAWN,DemergoAlch_Start,1/ATTACHMENT,xmldialog,,configfile/demergo_door_blow/ATTACHMENT,xmldialog,,loadconfig/true:MX=1:RT=0:TO=0:KL=0:SB=3
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,11,1,1,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=4
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,11,1,1,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=5
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,12,1,1,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=6
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=7
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=8
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=9
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=9
+	:OBJ=SETONNEARBY,3,an unstable powder keg/DAMAGE,20,30,2/EFFECT,14000,25/SOUND,519/DELETE:MX=1:RT=0:TO=0:KL=0:SB=20
+	:OBJ=SETONNEARBY,3,*,static/EFFECT,14000,25/DELETE:MX=1:RT=0:TO=0:KL=0:SB=21
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/blessed/false/currentwaypoint/{GETONSPAWN,DemergoAlch_Waypoints,1,serial}/teamflags/1/frozen/false:MX=1:RT=0:TO=0:KL=0:SB=30
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Now, take me to my lab, there isss no time to wassste!  You mussst protect me from my brothersss, who will surely try to ssslay me!  I mussst prepare the counter sssspell!:MX=1:RT=0:TO=0:KL=0:SB=31
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/You must protect me from my brethren, for they will surely attempt to ssslay me!:MX=1:RT=0:TO=0:KL=0:SB=32
+	:OBJ=IF/GETONMOB,an ophidian alchemist,ophidianmage,hits&lt;150/38/39:MX=1:RT=0:TO=0:KL=0:SB=33
+	:OBJ=GOTO/40:MX=1:RT=0:TO=0:KL=0:SB=38
+	:OBJ=GOTO/50:MX=1:RT=0:TO=0:KL=0:SB=39
+	
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/I mussst go back and heal myself.  We mussst try again sssoon!/EFFECT,4411,10/blessed/true:MX=1:RT=0:TO=0:KL=0:SB=40
+	:OBJ=WAITUNTIL,0.05:MX=1:RT=0:TO=0:KL=0:SB=41
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/location/(5816,387,25)/hits/400:MX=1:RT=0:TO=0:KL=0:SB=42
+	:OBJ=WAITUNTIL/PLAYERSINRANGE,16&gt;0:MX=1:RT=0:TO=0:KL=0:SB=43
+	:OBJ=WAITUNTIL,0.1:MX=1:RT=0:TO=0:KL=0:SB=44
+	:OBJ=GOTO/30:MX=1:RT=0:TO=0:KL=0:SB=45
+	
+	:OBJ=IF/GETONMOB,an ophidian alchemist,z=53/55/59:MX=1:RT=0:TO=0:KL=0:SB=50
+	:OBJ=IF/{GETONMOB,an ophidian alchemist,ophidianmage,x}&gt;5704 &amp; {GETONMOB,an ophidian alchemist,ophidianmage,y}&gt;391 &amp; {GETONMOB,an ophidian alchemist,ophidianmage,x}&lt;5709 &amp; {GETONMOB,an ophidian alchemist,ophidianmage,y}&lt;395/56/59:MX=1:RT=0:TO=0:KL=0:SB=55
+	:OBJ=GOTO/60:MX=1:RT=0:TO=0:KL=0:SB=56
+	:OBJ=GOTO/33:MX=1:RT=0:TO=0:KL=0:SB=59
+	
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/direction/North/blessed/true/SAY/We made it, human!  Well done!:MX=1:RT=0:TO=0:KL=0:SB=60
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ATTACH/&lt;xmldialog/configfile/demergo_alchy1/loadconfig/true&gt;:MX=1:RT=0:TO=0:KL=0:SB=61
+	:OBJ=needtoturnonrottingcorpsespawners:MX=1:RT=0:TO=0:KL=0:SB=62
+	:OBJ=SETONTHIS/running/false:MX=1:RT=0:TO=0:KL=0:SB=65
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=66
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/*Mumbles words of power*:MX=1:RT=0:TO=0:KL=0:SB=66
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=67
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=68
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0/EFFECT,4518,25/EFFECT,14170,25:MX=1:RT=0:TO=0:KL=0:SB=69
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/blessed/false/frozen/false/currentwaypoint/{GET,demway11,waypoint,serial}:MX=1:RT=0:TO=0:KL=0:SB=70
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Come, friend! We must go together to the sssummoning cccircle to put an end to their madnessss!:MX=1:RT=0:TO=0:KL=0:SB=71
+	
+	:OBJ=IF/GETONMOB,an ophidian alchemist,ophidianmage,hits&lt;150/76/77:MX=1:RT=0:TO=0:KL=0:SB=75
+	:OBJ=GOTO/80:MX=1:RT=0:TO=0:KL=0:SB=76
+	:OBJ=GOTO/88:MX=1:RT=0:TO=0:KL=0:SB=77
+	
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/I mussst go back and heal myself.  We mussst try again sssoon!/EFFECT,4411,10/blessed/true:MX=1:RT=0:TO=0:KL=0:SB=80
+	:OBJ=WAITUNTIL,0.05:MX=1:RT=0:TO=0:KL=0:SB=81
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/location/(5706,393,53)/hits/400:MX=1:RT=0:TO=0:KL=0:SB=82
+	:OBJ=WAITUNTIL/PLAYERSINRANGE,8&gt;0:MX=1:RT=0:TO=0:KL=0:SB=83
+	:OBJ=WAITUNTIL,0.1:MX=1:RT=0:TO=0:KL=0:SB=84
+	:OBJ=GOTO/71:MX=1:RT=0:TO=0:KL=0:SB=85
+	
+	:OBJ=IF/{GETONMOB,an ophidian alchemist,ophidianmage,x}&gt;5733 &amp; {GETONMOB,an ophidian alchemist,ophidianmage,y}&gt;355 &amp; {GETONMOB,an ophidian alchemist,ophidianmage,x}&lt;5738 &amp; {GETONMOB,an ophidian alchemist,ophidianmage,y}&lt;359/89/90:MX=1:RT=0:TO=0:KL=0:SB=88
+	:OBJ=GOTO/92:MX=1:RT=0:TO=0:KL=0:SB=89
+	:OBJ=GOTO/75:MX=1:RT=0:TO=0:KL=0:SB=90
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/blessed/false/frozen/true/direction/west/SAY/We are here! You mussst protect me until I have time to finish the ssspell!:MX=1:RT=0:TO=0:KL=0:SB=92
+	:OBJ=SET,DemergoAlch_Summoning,xmlspawner/running/true:MX=1:RT=0:TO=0:KL=0:SB=92
+	:OBJ=SETONTHIS/running/false  :MX=1:RT=0:TO=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>
+<!-- 
+:OBJ=:MX=1:RT=0:TO=0:KL=0:SB=6
+-->

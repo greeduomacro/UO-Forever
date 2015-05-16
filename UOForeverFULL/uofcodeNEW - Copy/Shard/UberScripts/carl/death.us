@@ -1,0 +1,18 @@
+onUse
+{
+ if (TRIGMOB() == THIS().rootparententity)
+ {
+  if (xmlints.warned == null)
+  {
+   xmlints.warned = 1
+   xmlints.warned.expiration = TIMESPANSECONDS(30.0)
+   LOCALMSG(TRIGMOB(), "Are you sure you want to reset your kill count? Those kill counts cannot be recovered!")
+  }
+  else
+  {
+   TRIGMOB().kills = 0
+   SENDMSG(TRIGMOB(), "Your kills have been set to 0!")
+   DELETE(THIS())
+  }
+ }
+}

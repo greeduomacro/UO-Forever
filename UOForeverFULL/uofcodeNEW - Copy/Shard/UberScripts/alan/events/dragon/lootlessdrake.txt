@@ -1,0 +1,28 @@
+onCreate
+{
+	Name = "dragon spawn (NO loot/points)"
+	Hue = 38
+	if (THIS().backpack != null)
+	{
+		objs.loot = GETITEMSINCONTAINER(THIS().backpack)
+		foreach (objs.item ; objs.loot)
+		{
+			DELETE(objs.item)
+		}
+	}
+	Tamable = false
+	GuardImmune = true
+	IsScaryToPetsCustom = true
+	AutoDispelCustom = true
+	PoisonCustomImmune = Lethal
+	SUBSCRIBETIMER(OneMinute)
+	BreathDamageCustom = 25
+	HitsMaxSeed = 10000
+	Hits = 10000
+	PassiveSpeed = 0.20
+	ActiveSpeed = 0.20
+}
+onOneMinute
+{
+	THIS().location = THIS().home
+}

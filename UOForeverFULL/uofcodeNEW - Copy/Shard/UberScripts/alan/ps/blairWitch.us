@@ -1,0 +1,89 @@
+onCreate
+{
+	SCRIPT().name = blairWitch
+	THIS().rawstr = 100
+	THIS().rawint = 100
+	THIS().rawdex = 100
+	THIS().hitsmaxseed = 420
+	THIS().hits = 420
+	THIS().stammaxseed = 100
+	THIS().stam = 100
+	THIS().manamaxseed = 400
+	THIS().mana = 400
+
+	rawname = "Blair Sea Witch"
+	hue = 33823
+	hairItemID = 8252
+	hairHue = 1149
+	bodyValue = 401
+	pseu_eqplayerallowed = true
+	Pseu_AllowInterrupts = false
+	
+	SETSKILL(THIS(), "Archery", 120.0)
+	SETSKILL(THIS(), "Wrestling", 120.0)
+	SETSKILL(THIS(), "Poisoning", 120.0)
+	SETSKILL(THIS(), "AnimalTaming", 120.0)
+	SETSKILL(THIS(), "AnimalLore", 120.0)
+	SETSKILL(THIS(), "Meditation", 120.0)
+	SETSKILL(THIS(), "Tactics", 100.0)
+	SETSKILL(THIS(), "Anatomy", 100.0)
+	SETSKILL(THIS(), "Healing", 100.0)
+	SETSKILL(THIS(), "Magery", 120.0)
+	SETSKILL(THIS(), "Fishing", 120.0)
+	SETSKILL(THIS(), "MagicResist", 200.0)
+	SETSKILL(THIS(), "EvalInt", 120.0)
+	SETSKILL(THIS(), "Veterinary", 120.0)
+	objs.fancyDressVar = FancyDress	{ hue = 1157 } EQUIP(THIS(), objs.fancyDressVar)
+	objs.fancyDressVar.movable = false
+	objs.armor = tricornehat { hue = 1626 } EQUIP(THIS(), objs.armor)
+	objs.armor = tunic { hue = 1626 } EQUIP(THIS(), objs.armor)
+	objs.armor = leathergorget { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = leatherchest { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = leatherlegs { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = leatherarms { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = leathergloves { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.weapon = arrow { amount = 20 } ADDTOPACK(THIS(), objs.weapon)
+	objs.weapon = bow { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	objs.bandage = bandage, 100 { movable = false } ADDTOPACK(THIS(), objs.bandage)
+	objs.fullspellbook = fullspellbook { movable = false }; ADDTOPACK(THIS(), objs.fullspellbook)
+	objs.thighboots = thighboots; EQUIP(THIS(), objs.thighboots)
+	for (ints.i = 0; ints.i < 10; ints.i += 1)
+	{
+		objs.potion = totalrefreshpotion
+		ADDTOPACK(THIS(), objs.potion)
+		if (ints.i % 2 == 0)
+		{
+			objs.potion = greatercurepotion
+			ADDTOPACK(THIS(), objs.potion)
+			objs.potion = greaterhealpotion
+			ADDTOPACK(THIS(), objs.potion)
+			objs.tpouch = tpouch
+			ADDTOPACK(THIS(), objs.tpouch)
+		}
+	}
+	objs.horse = horse
+	objs.horse.xmlobjs.masterVar = THIS()
+	ADDSCRIPT(THIS(), "alan\\ps\\go.txt", "psGo")
+	ADDSCRIPT(THIS(), "alan\\ps\\witchCrew.us", "psWitchCrew")
+	ADDSCRIPT(objs.horse, "alan\\ps\\go.txt", "psGo")
+	ADDSCRIPT(objs.horse, "alan\\ps\\herSeaHorse.us", "herSeaHorse")
+}
+
+onBeforeDeath
+{
+	if (THIS().mount != null)
+	{
+		objs.mount = THIS().mount
+		THIS().mount.rider = null
+		POSSESS(THIS(), objs.mount)
+	}
+}
+
+onDeath
+{
+	for (ints.i = 0; ints.i < 30; ints.i += 1)
+	{
+		objs.plat = platinum, 6
+		ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	}
+}

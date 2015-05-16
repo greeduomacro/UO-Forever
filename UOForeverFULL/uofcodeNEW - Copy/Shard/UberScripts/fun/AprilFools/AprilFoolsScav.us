@@ -1,0 +1,27 @@
+onCreate
+{
+	xmlints.active = 0
+	xmlobjs.location = THIS().Location
+	THIS().Movable = true
+	THIS().Name = "Forever 7x GM skill ball"
+	THIS().ItemID = 3699
+	THIS().Hue = 38
+}
+onDragLift
+{
+	if (xmlints.active == 0)
+	{
+		xmlints.active = 1
+		SUBSCRIBETIMER(FiveSeconds)
+	}
+}
+onFiveSeconds
+{
+		xmlints.active = 0
+		UNSUBSCRIBETIMER(FiveSeconds)
+		MOVETOWORLD(THIS(), xmlobjs.location)
+}
+onUse
+{
+	SENDMSG(TRIGMOB(), "You must wait 30 seconds before using this.")
+}

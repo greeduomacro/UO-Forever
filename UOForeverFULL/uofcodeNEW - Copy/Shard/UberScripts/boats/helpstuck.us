@@ -1,0 +1,14 @@
+onSay
+{
+	if (Alive == false)
+	{
+		if (SAID("i wish to go home"))
+		{
+			if (ISINHOUSEORBOAT(THIS()))
+			{
+				MOVETOWORLD(THIS(), POINT3D(1438,1690,0), MAP(felucca))
+			}
+			SENDMSG(THIS(), "Home, eh?")
+		}
+	}
+}

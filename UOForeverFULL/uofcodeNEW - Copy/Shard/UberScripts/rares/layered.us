@@ -1,0 +1,35 @@
+onCreate
+{
+	THIS().Layer = "Earrings"
+}
+onSingleClick
+{
+	if (THIS().Layer == "Earrings")
+	{
+		ITEMCLICKMSG(TRIGMOB(), THIS(), "[Layered]")
+	}
+}
+onUse
+{
+	if (THIS().RootParentEntity != TRIGMOB()) { return }
+	
+	if (THIS().Parent != TRIGMOB().Backpack)
+	{
+		SENDMSG(TRIGMOB(), "That must be in your backpack to use it.")
+		return
+	}
+	
+	if (IS(THIS(), BaseHat) || THIS().ItemID == 0x1451 || THIS().ItemID == 0x1456)
+	{
+		if (THIS().Layer == "Earrings")
+		{
+			THIS().Layer = "Helm"
+			SENDMSG(TRIGMOB(), "It is no longer layered (you can use it again to re-layer it")
+		}
+		else
+		{
+			THIS().Layer = "Earrings"
+			SENDMSG(TRIGMOB(), "It is now layered (you can use it again to undo this)")
+		}	
+	}
+}

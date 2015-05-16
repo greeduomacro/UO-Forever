@@ -1,0 +1,65 @@
+onUse
+{
+	SENDTARGET(TRIGMOB())
+}
+onTarget
+{
+	objs.mob = TARGETED()
+		
+	if (objs.mob.xmlints.buyIn == null)
+	{
+		// do nothing
+	}
+	elif (objs.mob.xmlints.buyIn >= 7)
+	{
+		objs.mob.xmlints.buyIn -= 7
+		// join the game
+		objs.balron = balron
+		{
+			name = objs.mob.Name
+			Pseu_KeepKillCredit = false
+		}
+		
+		// so we can reconnect if disconnected
+		objs.mob.xmlints.gameMob = INT(objs.balron.serial)
+		objs.mob.xmlints.gameMob.expiration = 4:0:0
+		objs.balron.xmlints.gameMob = INT(objs.mob.serial)
+		objs.balron.xmlints.gameMob.expiration = 4:0:0
+		objs.spellbook = fullspellbook
+		{
+			movable = false
+		}
+		ADDTOPACK(objs.balron, objs.spellbook)
+		objs.tpouch = tpouch
+		ADDTOPACK(objs.balron, objs.tpouch)
+		objs.tpouch = tpouch
+		ADDTOPACK(objs.balron, objs.tpouch)
+		objs.tpouch = tpouch
+		ADDTOPACK(objs.balron, objs.tpouch)
+		objs.tpouch = tpouch
+		ADDTOPACK(objs.balron, objs.tpouch)
+		objs.tpouch = tpouch
+		ADDTOPACK(objs.balron, objs.tpouch)
+		
+		if (THIS().xmlints.totalPlayers % 2 == 1)
+		{
+			MOVETOWORLD(objs.balron, POINT3D(5338,1443,0))
+			SETTEAM(objs.balron, Team1)
+			objs.mob.xmlints.gameTeam = 1
+			objs.balron.hue = 1157
+		}
+		else
+		{
+			MOVETOWORLD(objs.balron, POINT3D(5155,1459,0))
+			SETTEAM(objs.balron, Team2)
+			objs.mob.xmlints.gameTeam = 2
+			objs.balron.hue = 2019
+		}
+		objs.teamattachment = GETATTACHMENT(objs.balron, xmlteam)
+		ADDSCRIPT(objs.balron, "alan\\games\\playermob.txt", "balronplayer")
+		
+		THIS().xmlints.totalPlayers += 1
+		POSSESS(objs.mob, objs.balron)
+		objs.mob.map = internal
+	}
+}

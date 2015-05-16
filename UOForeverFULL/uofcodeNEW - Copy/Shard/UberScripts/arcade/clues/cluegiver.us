@@ -1,0 +1,54 @@
+onCreate
+{
+	cantwalk = true
+	blessed = true
+	title = "the Sage"
+	bodyvalue = 400
+	name = RANDOMNAME(male)
+	hairitemid = 0
+	facialhairitemid = 0
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) > 4)
+	{
+		SENDMSG(TRIGMOB(), "That is too far away.")
+		return
+	}
+	
+	if (xmlints.stepNumber == null)
+	{
+		SAY(THIS(), "I have no clues to provide, I'm afraid!")
+		return
+	}
+	
+	if (TRIGMOB().xmlints.gotClue == null)
+	{
+		TRIGMOB().xmlints.gotClue = 1
+		TRIGMOB().xmlints.gotClue.expiration = TIMESPANSECONDS(2.0)
+		SENDGUMP(TRIGMOB(), "arcade\\clues\\step" + xmlints.stepNumber + ".xml")
+	}
+	else
+	{
+		SAYTO(THIS(), TRIGMOB(), "I can't talk to you too much, give me a moment before I repeat myself.")
+	}
+}
+onTargeted
+{
+	if (IS(SPELL(),invisibilityspell))
+	{
+		pause 100
+		THIS().hidden = false
+		SAY(THIS(), "You'll regret casting invisibility on me, dirtbag!")
+		ANIMATE(THIS(), 17, 7, 1, true, false, 0 )
+		pause 1000
+		THIS().hidden = false
+		SAY(THIS(), "Game over for you!")
+		if (TRIGMOB().alive && TRIGMOB().blessed == false)
+		{
+			EFFECT(14089,30,TRIGMOB())
+			SOUND(TRIGMOB(),0x208)
+			KILL(TRIGMOB())
+		}
+	}
+}

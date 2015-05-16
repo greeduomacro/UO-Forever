@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>Template</Name>
+    <!--<UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>5893</X>
+    <Y>824</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>5893</CentreX>
+    <CentreY>824</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>1000</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=CustomMob/ATTACH/&lt;XmlScript,Portals\TerMurTreasure\gargoylemage.us&gt;:MX=11:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=CustomMob/ATTACH/&lt;XmlScript,Portals\TerMurTreasure\treasureguardian.us&gt;:MX=1:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=CustomMob/ATTACH/&lt;XmlScript,Portals\TerMurTreasure\salamander.us&gt;:MX=11:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=HarrowerTentacles/ATTACH/&lt;XmlScript,Portals\TerMurTreasure\HarrowerTentacles.us&gt;:MX=2:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=static,100/ATTACH/&lt;XmlScript,Portals\TerMurTreasure\crystals.us&gt;:MX=4:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+  <!-- Sample standard mob (standardmob.us should only move to spawn location with rectangles):
+  :OBJ=LichLord/ATTACH/&lt;XmlScript,Portals\IlshenarCrypt\standardmob.us&gt;:MX=2:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1-->
+</Spawns>

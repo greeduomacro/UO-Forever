@@ -1,0 +1,88 @@
+onSay
+{
+	if (SAID("britain")) { MOVETOWORLD(THIS(), POINT3D(1419, 1693, 0)); return override	}
+	elif (SAID("covetous1")) { MOVETOWORLD(THIS(), POINT3D(5456, 1863, 0)); return override }
+	elif (SAID("covetous2")) { MOVETOWORLD(THIS(), POINT3D(5614, 1997, 0)); return override }
+	elif (SAID("covetous3")) { MOVETOWORLD(THIS(), POINT3D(5579, 1924, 0)); return override }
+	elif (SAID("deceit1")) { MOVETOWORLD(THIS(), POINT3D(5188, 638, 0)); return override }
+	elif (SAID("deceit2")) { MOVETOWORLD(THIS(), POINT3D(5305, 533, 2)); return override }
+	elif (SAID("deceit3")) { MOVETOWORLD(THIS(), POINT3D(5137, 650, 5)); return override }
+	elif (SAID("deceit4")) { MOVETOWORLD(THIS(), POINT3D(5306, 652, 2)); return override }
+	elif (SAID("despise1")) { MOVETOWORLD(THIS(), POINT3D(5501, 570, 59)); return override }
+	elif (SAID("despise2")) { MOVETOWORLD(THIS(), POINT3D(5519, 673, 20)); return override }
+	elif (SAID("despise3")) { MOVETOWORLD(THIS(), POINT3D(5407, 859, 45)); return override }
+	elif (SAID("destard1")) { MOVETOWORLD(THIS(), POINT3D(5243, 1006, 0)); return override }
+	elif (SAID("destard2")) { MOVETOWORLD(THIS(), POINT3D(5143, 801, 4)); return override }
+	elif (SAID("destard3")) { MOVETOWORLD(THIS(), POINT3D(5137, 986, 5)); return override }
+	elif (SAID("hythloth1")) { MOVETOWORLD(THIS(), POINT3D(5905, 20, 46)); return override }
+	elif (SAID("hythloth2")) { MOVETOWORLD(THIS(), POINT3D(5976, 169, 0)); return override }
+	elif (SAID("hythloth3")) { MOVETOWORLD(THIS(), POINT3D(6083, 145, -20)); return override }
+	elif (SAID("hythloth4")) { MOVETOWORLD(THIS(), POINT3D(6059, 89, 24)); return override }
+	elif (SAID("shame1")) { MOVETOWORLD(THIS(), POINT3D(5395, 126, 0)); return override }
+	elif (SAID("shame2")) { MOVETOWORLD(THIS(), POINT3D(5515, 11, 5)); return override }
+	elif (SAID("shame3")) { MOVETOWORLD(THIS(), POINT3D(5514, 148, 25)); return override }
+	elif (SAID("shame4")) { MOVETOWORLD(THIS(), POINT3D(5875, 20, -5)); return override }
+	elif (SAID("wrong1")) { MOVETOWORLD(THIS(), POINT3D(5825, 630, 0)); return override }
+	elif (SAID("wrong2")) { MOVETOWORLD(THIS(), POINT3D(5690, 569, 25)); return override }
+	elif (SAID("wrong3")) { MOVETOWORLD(THIS(), POINT3D(5703, 639, 0)); return override }
+	elif (SAID("terathan")) { MOVETOWORLD(THIS(), POINT3D(5334, 1590, 0)); return override }
+	elif (SAID("orccave")) { MOVETOWORLD(THIS(), POINT3D(5137, 2013, 0)); return override }
+	elif (SAID("ice1")) { MOVETOWORLD(THIS(), POINT3D(5877, 242, -5)); return override }
+	elif (SAID("ice2")) { MOVETOWORLD(THIS(), POINT3D(5700, 304, 0)); return override }
+	elif (SAID("khaldun1")) { MOVETOWORLD(THIS(), POINT3D(5568, 1306, 0)); return override }
+	elif (SAID("britvirtue")) { MOVETOWORLD(THIS(), POINT3D(1538, 1599, 15)); return override }
+	elif (SAID("britcemetery")) { MOVETOWORLD(THIS(), POINT3D(1371, 1463, 10)); return override }
+	elif (SAID("britwarriorguild")) { MOVETOWORLD(THIS(), POINT3D(1318, 1711, 17)); return override }
+	elif (SAID("specialmobs")) { MOVETOWORLD(THIS(), POINT3D(6039, 407, 0)); return override }
+	elif (SAID("target1")) { SENDTARGET(TRIGMOB()); return override; }
+	elif (SAID("treasurechest1")) 
+	{
+		if (xmlints.treasurespawned == null)
+		{
+			xmlints.treasurespawned = 1
+			xmlints.treasurespawned.expiration = 23:0:0
+			objs.newChest = treasuremapchest,4
+			{
+				locked = false
+				traptype = none
+			}
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You must wait " + TIMESPANSTRING(xmlints.treasurespawned.expiration ) + " before another chest can be spawned.")
+		}
+		return override
+	}
+	elif (SAID("invulnerablenow")) 
+	{ 
+		if (IS(TRIGMOB(), basecreature)) 
+		{ 
+			if (TRIGMOB().blessed == true)
+			{
+				TRIGMOB().blessed = false
+			}
+			else
+			{
+				TRIGMOB().blessed = true
+			}
+			return override
+		} 
+	}
+		
+}
+onTarget
+{
+	if (IS(TARGETED(),basecreature) && TARGETED().controlled == false)
+	{
+		SENDMSG(TRIGMOB(), "You have given them teleport abilities.")
+		objs.script = NEWATTACHMENT(xmlscript, pseudoseerTeleport)
+		objs.script.ScriptFile = "alan\\ps\\go.txt"
+		ATTACH(TARGETED(), objs.script)
+		objs.script.expiration = 4:0:0
+		TARGETED().freelylootable = true
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You can only do that to untamed creatures!")
+	}
+}

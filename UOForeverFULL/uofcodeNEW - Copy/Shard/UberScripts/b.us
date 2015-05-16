@@ -1,0 +1,39 @@
+if (xmlobjs.target == null) { xmlobjs.target = TARGETED().Location }
+objs.nearby = GETNEARBYMOBS(THIS(), 0)
+foreach (objs.mob ; objs.nearby)
+{
+	if (objs.mob.RawName == "British")
+	{
+		if (TRIGMOB().RawName != "British")
+		{
+			// hurt the TRIGMOB
+			EFFECT(14089, 30, TRIGMOB())
+			SOUND(TRIGMOB(), 0x208)
+			LOCALMSG(TRIGMOB(), "Careful, you hit Lord British!")
+			DODAMAGE(TRIGMOB(), 75)
+			DELETE(THIS())
+		}
+	}
+	else if (objs.mob.RawName == "Yancey-Hausman")
+	{
+		// score points!
+		if (TRIGMOB().xmlints.yanceyScore == null)
+		{
+			TRIGMOB().xmlints.yanceyScore = 1
+		}
+		else
+		{
+			TRIGMOB().xmlints.yanceyScore += 1
+		}
+		SENDMSG(TRIGMOB(), "Direct hit!", 68)
+		SOUND(THIS(), RANDOMMINMAX(0x154,0x159))
+		ANIMATE(objs.mob, 20, 10, 1, true, false, 0)
+		DELETE(THIS())
+	}
+}
+
+if (THIS().X == xmlobjs.target.X && THIS().Y == xmlobjs.target.Y)
+{
+	SENDMSG(TRIGMOB(), "Whiff!")
+	DELETE(THIS())
+}

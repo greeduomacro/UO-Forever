@@ -1,0 +1,264 @@
+onCreate
+{
+	hairitemid = 8261
+	hairhue = 1135
+	hue = 33778
+	blessed = true
+	cantwalk = true
+	name = "Sam the Donation Raffle Ticket Vendor"
+	bodyvalue = 400
+	xmlints.price = 200
+	xmlints.totalSold = 0
+	xmlstrings.moderator = "Alan"
+	xmlints.active = 0
+	
+	SCRIPT().name = "Donation Raffle Vendor"
+	SUBSCRIBETIMER(OneMinute)
+}
+
+function finishRaffle()
+{
+	xmlints.active = 0
+	objs.now = NOW()
+	LOG("LOG_RaffleDonations.txt", "====== Raffle ending " + STRING(objs.now) + " ======")
+	objs.raffleTicketAttachments = GLOBALGETATTACHMENTS("xmlvalue", "raffletickets", true)
+	ints.totalNumTickets = GETATTACHMENTINTSUM("raffletickets", true)
+	LOG("LOG_RaffleDonations.txt", "==> total number of tickets: " + ints.totalNumTickets)
+	if (ints.totalNumTickets == 0)
+	{
+		BCAST("The raffle has ended but no tickets were sold so there was no winner this time!", 38)
+		return
+	}
+	BCAST("The raffle has ended!", 38)
+	ints.winningDraw = RANDOM(ints.totalNumTickets)
+	LOG("LOG_RaffleDonations.txt", "==> winning draw: " + ints.winningDraw)
+	
+	foreach (objs.raffleTicketAttachment ; objs.raffleTicketAttachments)
+	{
+		LOG("LOG_RaffleDonations.txt", objs.raffleTicketAttachment.AttachedTo + " " + objs.raffleTicketAttachment.Value) 
+		if (xmlstrings.winner == null)
+		{
+			ints.winningDraw -= objs.raffleTicketAttachment.value
+			if (ints.winningDraw < 0)
+			{
+				xmlstrings.winner = objs.raffleTicketAttachment.AttachedTo.name
+				BCAST("Congratulations to " + xmlstrings.winner + " for winning " + xmlstrings.currentPrize + "! Thanks to all others who participated - better luck next time!", 38)
+				
+				if (xmlstrings.bookName != null)
+				{
+					objs.award = redbook
+					{
+						hue = 1161
+						name = THIS().xmlstrings.bookName
+						title = THIS().xmlstrings.bookName
+						author = "Carl"
+						writable = false
+						loottype = blessed
+					}
+				}
+				else
+				{
+					objs.award = SPAWN(xmlstrings.itemType)
+					if (xmlstrings.itemPath != null)
+					{
+						ADDSCRIPT(objs.award, xmlstrings.itemPath)
+					}
+				}
+				LOG("LOG_RaffleDonations.txt", objs.raffleTicketAttachment.AttachedTo + " IS THE WINNER OF THE " + objs.award + " " + xmlstrings.currentPrize)
+				ADDTOPACK(objs.raffleTicketAttachment.AttachedTo, objs.award)
+			}
+		}
+	}
+	if (xmlstrings.winner != null)
+	{
+		xmlstrings.winner.dodelete = true
+	}
+	GLOBALDELATTACHMENTS("xmlvalue", "raffletickets", true)
+	xmlints.totalSold = 0
+}
+
+onOneMinute
+{
+	if (xmlints.active == 0)
+	{
+		SAY(THIS(), "Our next 5 day raffle will be coming soon!")
+		return
+	}
+	
+	objs.now = NOW()	
+	if (STRING(GETDAY(objs.now)) == xmlstrings.endDate && STRING(GETHOUR(objs.now)) == xmlstrings.endHour && STRING(GETDAYOFWEEK(objs.now)) == xmlstrings.endDayOfWeek) // don't check the month, that's just for announcing purposes
+	{
+		finishRaffle()
+	}
+	else
+	{
+		SAY(THIS(), "Buy raffle tickets here for a chance at " + xmlstrings.announcedItemName + "! Say \"info\" for directions! Raffle ends " + xmlstrings.endDayOfWeek + " " + xmlstrings.endMonth + " " + xmlstrings.endDate + " at " + xmlstrings.endHour + ":00 EST!")
+	}
+	
+}
+onSpeech
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 5)
+	{
+		if (xmlints.active == 0)
+		{
+			if (SAID("info") || SAID("buy raffle ticket") || SAID("buy 5 raffle tickets") || SAID("buy 10 raffle tickets"))
+			{
+				SENDMSG(TRIGMOB(), "There is currently no Donation Coin raffle running - check back another time!", 0x38)
+			}
+			return
+		}
+		
+		
+		if (SAID("info"))
+		{
+			SENDMSG(TRIGMOB(), "The current prize is: " + xmlstrings.currentPrize + " ... buying ends at " + xmlstrings.endDayOfWeek + " " + xmlstrings.endMonth + " " + xmlstrings.endDate + " at " + xmlstrings.endHour + ":00 EST! ... Tickets cost " + xmlints.price + " Donation Coins EACH and to buy tickets, say 'buy raffle ticket', 'buy 5 raffle tickets', or 'buy 10 raffle tickets'.", 0x38)
+			if (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor)
+			{
+				SENDMSG(TRIGMOB(), "Staff Message: So far " + xmlints.totalSold + " tickets have been sold in total during this raffle!", 38)
+			}
+		}
+		elif (SAID("buy raffle ticket"))
+		{
+			if (GETAMOUNTINCONTAINER(TRIGMOB().bankbox, donationcoin) >= xmlints.price)
+			{
+				DELETEFROMCONTAINER(TRIGMOB().bankbox, donationcoin, xmlints.price)
+				if (TRIGMOB().xmlints.raffletickets == null) { TRIGMOB().xmlints.raffletickets = 1; xmlints.totalSold += 1 }
+				else { TRIGMOB().xmlints.raffletickets += 1; xmlints.totalSold += 1 }
+				LOCALMSG(TRIGMOB(), "You spent " + xmlints.price + " Donation Coins and now have " + TRIGMOB().xmlints.raffletickets + " raffle tickets!")
+			}
+			else
+			{
+				SAY(THIS(), "I'm sorry, " + TRIGMOB().name + ", but you can't afford that!")
+			}
+		}
+		elif (SAID("buy 5 raffle tickets"))
+		{
+			if (GETAMOUNTINCONTAINER(TRIGMOB().bankbox, donationcoin) >= xmlints.price * 5)
+			{
+				DELETEFROMCONTAINER(TRIGMOB().bankbox, donationcoin, xmlints.price * 5)
+				if (TRIGMOB().xmlints.raffletickets == null) { TRIGMOB().xmlints.raffletickets = 5; xmlints.totalSold += 5 }
+				else { TRIGMOB().xmlints.raffletickets += 5; xmlints.totalSold += 5 }
+				LOCALMSG(TRIGMOB(), "You spent " + (xmlints.price * 5) + " Donation Coins and now have " + TRIGMOB().xmlints.raffletickets + " raffle tickets!")
+			}
+			else
+			{
+				SAY(THIS(), "I'm sorry, " + TRIGMOB().name + ", but you can't afford that!")
+			}
+		}
+		elif (SAID("buy 10 raffle tickets"))
+		{
+			if (GETAMOUNTINCONTAINER(TRIGMOB().bankbox, donationcoin) >= xmlints.price * 10)
+			{
+				DELETEFROMCONTAINER(TRIGMOB().bankbox, donationcoin, xmlints.price * 10)
+				if (TRIGMOB().xmlints.raffletickets == null) { TRIGMOB().xmlints.raffletickets = 10; xmlints.totalSold += 10 }
+				else { TRIGMOB().xmlints.raffletickets += 10; xmlints.totalSold += 10 }
+				LOCALMSG(TRIGMOB(), "You spent " + (xmlints.price * 10) + " Donation Coins and now have " + TRIGMOB().xmlints.raffletickets + " raffle tickets!")
+			}
+			else
+			{
+				SAY(THIS(), "I'm sorry, " + TRIGMOB().name + ", but you can't afford that!")
+			}
+		}
+		elif (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor && TRIGMOB().name == xmlstrings.moderator)
+		{
+			if (SAID("finish raffle"))
+			{
+				finishRaffle()
+			}
+		}
+	}
+}
+onUse
+{
+	if (xmlints.active == 0)
+	{
+		SENDMSG(TRIGMOB(), "There is currently no Donation Coin raffle running - check back another time!", 0x38)
+		if (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor)
+		{
+			SENDGUMP(TRIGMOB(), "alan\\raffle\\rafflecontrol.xml")
+		}
+		return override
+	}
+	
+	if (TRIGMOB().xmlints.raffletickets == null)
+	{
+		LOCALMSG(TRIGMOB(), "You don't have any raffle tickets. Say 'info' for directions on buying some!")
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You have " + TRIGMOB().xmlints.raffletickets + " raffle tickets! Say 'info' for directions on buying more!")
+	}
+	if (STRING(TRIGMOB().accesslevel) != Player && STRING(TRIGMOB().accesslevel) != Counselor)
+	{
+		SENDMSG(TRIGMOB(), "Staff Message: So far " + xmlints.totalSold + " tickets have been sold in total during this raffle!", 38)
+		SENDGUMP(TRIGMOB(), "alan\\raffle\\rafflecontrol.xml")
+	}
+	return override
+}
+onGumpResponse
+{
+	if (strings.buttonPressed == "submit")
+	{
+		if (strings.bookName == EMPTYSTRING())
+		{
+			if (strings.itemType == EMPTYSTRING() && strings.itemPath == EMPTYSTRING())
+			{
+				LOCALMSG(TRIGMOB(), "You have to either enter a book name, an itemtype, or an itemPath (you can do itemtype and itemPath together)", 38)
+				return
+			}
+			else
+			{
+				xmlstrings.bookName = null
+				if (strings.itemType == EMPTYSTRING()) { xmlstrings.itemType = "UberScriptItem" }
+				else { xmlstrings.itemType = TRIM(strings.itemType) }
+				if (strings.itemPath == EMPTYSTRING()) { xmlstrings.itemPath = null }
+				else { xmlstrings.itemPath = TRIM(strings.itemPath) }
+				
+			}
+		}
+		else
+		{
+			xmlstrings.bookName = TRIM(strings.bookName)
+			xmlstrings.itemType = null
+			xmlstrings.itemPath = null
+		}
+		
+		// if (strings.endHour == null) { SENDMSG(TRIGMOB(), "null endhour") }
+		xmlstrings.endMonth = TRIM(strings.endMonth)
+		xmlstrings.endDate = TRIM(strings.endDate)
+		xmlstrings.endDayOfWeek = TRIM(strings.endDayOfWeek)
+		xmlstrings.endHour = TRIM(strings.endHour)
+		xmlstrings.announcedItemName = TRIM(strings.announcedItemName)
+		
+		xmlints.active = 1
+		
+		// give a copy to the staff member who made it
+		if (xmlstrings.bookName != null)
+		{
+			objs.award = redbook
+			{
+				hue = 1161
+				name = THIS().xmlstrings.bookName
+				title = THIS().xmlstrings.bookName
+				author = "Carl"
+				writable = false
+				loottype = blessed
+			}
+		}
+		else
+		{
+			objs.award = SPAWN(xmlstrings.itemType)
+			if (xmlstrings.itemPath != null)
+			{
+				ADDSCRIPT(objs.award, xmlstrings.itemPath)
+			}
+		}
+		ADDTOPACK(TRIGMOB(), objs.award)
+		LOCALMSG(TRIGMOB(), "A copy of the award has been placed in your backpack (perhaps for display purposes). BE CAREFUL if it has a script with onUse triggers, as players could possibly use the item while locked down on the pedestal!")
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You decide not to change the settings.")
+	}
+}

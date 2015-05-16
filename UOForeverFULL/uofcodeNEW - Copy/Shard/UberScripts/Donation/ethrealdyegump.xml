@@ -1,0 +1,32 @@
+<Gump closable="true" disposable="true" dragable="true" resizable="true">
+	<VBox padding="24">
+		<Label hue="1153">"UO Forever Ethreal Color Changer"</Label>
+		<Box>
+			<Item hue="xmlints.gumphue+1" x = "85" itemid="0x2D9C"/>
+		</Box>
+		<Label hue="1153">"Pick a color to see a preview, and"</Label>
+		<Label hue="1153">"then Accept Color change when ready."</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="removecolor"/>
+			<Label hue="1301">"Remove Color"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="purewhite"/>
+			<Label hue="1152">"Pure White"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="black"/>
+			<Label hue="802">"Shadow"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="blaze"/>
+			<Label hue="1258">"Blaze"</Label>
+		</HBox>
+		<HBox height="15" fittocontents="false"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="accept"/>
+			<Label hue="1153">"Accept Color Change"</Label>
+		</HBox>
+		<Label hue="1153">"(you can change color every 24 hours)"</Label>
+	</VBox>
+</Gump>

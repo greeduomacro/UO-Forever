@@ -1,0 +1,92 @@
+onCreate
+{
+	SUBSCRIBETIMER(OneSecond)
+}
+onOneSecond
+{
+	if (THIS().netstate == null) { return }
+	objs.possessor = GETPOSSESSOR(THIS())
+	if (objs.possessor == null) { return }
+	objs.possessor.xmlints.mob = INT(THIS().serial)
+}
+onTakenHit
+{
+	
+	if (TRIGMOB() == THIS()) { return }
+	if (TRIGMOB().netstate == null) { return }
+	
+	
+	objs.possessor = GETPOSSESSOR(TRIGMOB())
+if (IS(TRIGMOB(),playermobile) != true)
+{
+	if (objs.possessor == null) { return }
+	if (objs.possessor.xmlints.mob != INT(TRIGMOB().serial)) { return }
+}
+	
+	if (IS(SPELL(),earthquakespell)) { return }
+	if (objs.possessor.xmlints.hitsScore == null)
+	{
+		objs.possessor.xmlints.hitsScore = DAMAGE()
+	}
+	else
+	{
+		objs.possessor.xmlints.hitsScore += DAMAGE()
+	}
+}
+onDeath
+{
+	if (TRIGMOB() == THIS()) { return }
+	if (TRIGMOB().netstate != null) { objs.possessor = GETPOSSESSOR(TRIGMOB()) }
+	
+	if (objs.possessor != null)
+	{
+		if (IS(TRIGMOB(),playermobile) != true)
+{
+		if (objs.possessor.xmlints.mob != INT(TRIGMOB().serial)) { return }
+}
+		ints.Points = ROUND(THIS().hitsmaxseed / 75)
+		if (ints.Points > 10)
+		{
+			ints.Points = 10
+		}
+		else if (ints.Points < 1)
+		{
+			ints.Points = 1
+		}
+		if (objs.possessor.xmlints.killScore == null)
+		{
+			objs.possessor.xmlints.killScore = ints.Points
+		}
+		else
+		{
+			objs.possessor.xmlints.killScore += ints.Points
+		}
+	}
+	elif (IS(TRIGMOB(),basecreature) && TRIGMOB().controlmaster != null && IS(TRIGMOB().controlmaster, playermobile))
+	{
+		objs.possessor = TRIGMOB().controlmaster
+				
+		ints.Points = ROUND(THIS().hitsmaxseed / 75)
+		if (ints.Points > 10)
+		{
+			ints.Points = 10
+		}
+		else if (ints.Points < 1)
+		{
+			ints.Points = 1
+		}
+		// possessor only gets half the points
+		if ([ints.Points > 2)
+		{
+			ints.Points /= 2
+		}
+		if (objs.possessor.xmlints.killScore == null)
+		{
+			objs.possessor.xmlints.killScore = ints.Points
+		}
+		else
+		{
+			objs.possessor.xmlints.killScore += ints.Points
+		}
+	}
+}

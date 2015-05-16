@@ -1,0 +1,46 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DragonsLevel2</Name>
+    <!--<UniqueId>ccf17d7d-aa2a-4671-9c91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>5143</X>
+    <Y>809</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>5143</CentreX>
+    <CentreY>809</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>1000</MaxCount>
+    <MinDelay>30</MinDelay>
+    <MaxDelay>30</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>	
+	:OBJ=greaterdragon/isparagon/false/ATTACH/&lt;xmlscript/name/dragon/scriptfile/alan\events\dragon\dragon.txt&gt;:MX=30:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	:OBJ=dragon/ATTACH/&lt;xmlscript/name/dragon/scriptfile/alan\events\dragon\dragon.txt&gt;:MX=30:SP=2:RT=0:TO=0:CA=0:KL=0:SB=1
+	:OBJ=drake/ATTACH/&lt;xmlscript/name/dragon/scriptfile/alan\events\dragon\dragon.txt&gt;:MX=30:SP=2:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

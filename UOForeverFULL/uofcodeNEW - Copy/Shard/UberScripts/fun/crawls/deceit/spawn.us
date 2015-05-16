@@ -1,0 +1,235 @@
+onCreate
+{
+	SUBSCRIBETIMER(FiveSeconds)
+}
+onFiveSeconds
+{
+	if (THIS().netstate == null)
+	{
+		DELETE(THIS())
+	}
+}
+onDelete
+{
+	objs.group = GETATTACHMENT(xmlobjs.owner, xmlgroup, SCRIPT().name)
+	REMOVEFROMLIST(objs.group.participants, xmlobjs.contoller)
+	INDIVIDUALFLASHEFFECT(xmlobjs.contoller, 2)
+}
+onBeginCast
+{
+	if (IS(SPELL(), MeteorSwarmSpell) || IS(SPELL(), ChainLightningSpell) || IS(SPELL(),EnergyVortexSpell) || IS(SPELL(),SummonDaemonSpell) || IS(SPELL(),WaterElementalSpell) || IS(SPELL(),AirElementalSpell) || IS(SPELL(),FireElementalSpell) || IS(SPELL(),EarthElementalSpell) || IS(SPELL(),SummonCreatureSpell) || IS(SPELL(),BladeSpiritsSpell))
+	{
+		SENDMSG(TRIGMOB(), "It appears some dark energy is preventing you from casting that here!")
+		return override
+	}
+}
+onBeforeDeath
+{
+	DEATHANIMATION(THIS())
+	DEATHSOUND(THIS())
+	INDIVIDUALFLASHEFFECT(THIS(), 3)
+	objs.group = GETATTACHMENT(xmlobjs.owner, xmlgroup, SCRIPT().name)
+	MOVETOWORLD(THIS(), XMLOBJS(xmlobjs.owner, objs.group.captain.rawName + "_StartLoc"), objs.group.captain.rawName + "_CrawlMap")
+	
+	hits = 100
+	CURE(THIS())
+	RESETMOB(THIS())
+	hidden = true
+	cantwalk = true
+	blessed = true
+	THIS().combatant = null
+	SENDGUMP(THIS(),"fun\\crawls\\deceit\\dungeoncrawl_RejoinGump.xml")
+	return override
+}
+onGumpResponse
+{
+	blessed = false
+	cantwalk = false
+	CURE(THIS())
+	if (ints.fencer == 1)
+	{
+		THIS().rawstr = 100
+		THIS().rawint = 25
+		THIS().rawdex = 100
+		THIS().hitsmaxseed = 100
+		THIS().hits = 100
+		THIS().stammaxseed = 100
+		THIS().stam = 100
+		THIS().manamaxseed = 25
+		THIS().mana = 25
+		SETSKILL(THIS(), "Fencing", 100.0)
+		SETSKILL(THIS(), "Tactics", 100.0)
+		SETSKILL(THIS(), "Anatomy", 100.0)
+		SETSKILL(THIS(), "Healing", 100.0)
+		SETSKILL(THIS(), "Magery", 100.0)
+		SETSKILL(THIS(), "MagicResist", 100.0)
+		SETSKILL(THIS(), "Parry", 100.0)
+		pause 100
+		objs.armor = closehelm { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = plategorget { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainchest { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainlegs { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailarms { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailgloves { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.shield = metalkiteshield { quality = exceptional } ADDTOPACK(THIS(), objs.shield);
+		objs.shield.maxhitpoints = 10000
+		objs.shield.hitpoints = 10000
+		objs.weapon = warfork { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+		objs.weapon = shortspear { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+	}
+	elif (ints.macer == 1)
+	{
+		THIS().rawstr = 100
+		THIS().rawint = 25
+		THIS().rawdex = 100
+		THIS().hitsmaxseed = 100
+		THIS().hits = 100
+		THIS().stammaxseed = 100
+		THIS().stam = 100
+		THIS().manamaxseed = 25
+		THIS().mana = 25
+		SETSKILL(THIS(), "Macing", 100.0)
+		SETSKILL(THIS(), "Tactics", 100.0)
+		SETSKILL(THIS(), "Anatomy", 100.0)
+		SETSKILL(THIS(), "Healing", 100.0)
+		SETSKILL(THIS(), "Magery", 100.0)
+		SETSKILL(THIS(), "MagicResist", 100.0)
+		SETSKILL(THIS(), "Parry", 100.0)
+		pause 100
+		objs.armor = closehelm { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = plategorget { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainchest { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainlegs { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailarms { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailgloves { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.shield = metalkiteshield { quality = exceptional } ADDTOPACK(THIS(), objs.shield);
+		objs.shield.maxhitpoints = 10000
+		objs.shield.hitpoints = 10000
+		objs.weapon = waraxe { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+		objs.weapon = warhammer { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+	}
+	elif (ints.archer == 1)
+	{
+		THIS().rawstr = 100
+		THIS().rawint = 25
+		THIS().rawdex = 100
+		THIS().hitsmaxseed = 100
+		THIS().hits = 100
+		THIS().stammaxseed = 100
+		THIS().stam = 100
+		THIS().manamaxseed = 25
+		THIS().mana = 25
+		SETSKILL(THIS(), "Archery", 100.0)
+		SETSKILL(THIS(), "Tactics", 100.0)
+		SETSKILL(THIS(), "Anatomy", 100.0)
+		SETSKILL(THIS(), "Healing", 100.0)
+		SETSKILL(THIS(), "Magery", 100.0)
+		SETSKILL(THIS(), "MagicResist", 100.0)
+		SETSKILL(THIS(), "Hiding", 100.0)
+		objs.armor = closehelm { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = plategorget { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainchest { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainlegs { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailarms { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailgloves { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.weapon = bow { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+		objs.weapon = heavycrossbow { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+	}
+	elif (ints.lumberjack == 1)
+	{
+		THIS().rawstr = 250
+		THIS().rawint = 25
+		THIS().rawdex = 100
+		THIS().hitsmaxseed = 100
+		THIS().hits = 100
+		THIS().stammaxseed = 100
+		THIS().stam = 100
+		THIS().manamaxseed = 25
+		THIS().mana = 25
+		SETSKILL(THIS(), "Swords", 100.0)
+		SETSKILL(THIS(), "Tactics", 100.0)
+		SETSKILL(THIS(), "Anatomy", 100.0)
+		SETSKILL(THIS(), "Healing", 100.0)
+		SETSKILL(THIS(), "Magery", 100.0)
+		SETSKILL(THIS(), "MagicResist", 100.0)
+		SETSKILL(THIS(), "Lumberjacking", 100.0)
+		objs.armor = closehelm { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = plategorget { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainchest { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = chainlegs { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailarms { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = ringmailgloves { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.weapon = twohandedaxe { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+		objs.weapon = doubleaxe { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+		objs.weapon = halberd { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+		objs.weapon = katana { slayer = "silver"; identified = true } ADDTOPACK(THIS(), objs.weapon);
+	}
+	elif (ints.mage == 1)
+	{
+		THIS().rawstr = 100
+		THIS().rawint = 100
+		THIS().rawdex = 25
+		THIS().hitsmaxseed = 100
+		THIS().hits = 100
+		THIS().stammaxseed = 25
+		THIS().stam = 25
+		THIS().manamaxseed = 100
+		THIS().mana = 100
+		SETSKILL(THIS(), "Inscribe", 100.0)
+		SETSKILL(THIS(), "Wrestling", 100.0)
+		SETSKILL(THIS(), "EvalInt", 100.0)
+		SETSKILL(THIS(), "Meditation", 100.0)
+		SETSKILL(THIS(), "Magery", 100.0)
+		SETSKILL(THIS(), "MagicResist", 100.0)
+		SETSKILL(THIS(), "Poisoning", 100.0)
+		SETSKILL(THIS(), "Alchemy", 100.0)
+		pause 100
+		objs.armor = leatherchest { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = leathergorget { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = leatherarms { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = leatherlegs { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = leathercap { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.armor = leathergloves { quality = exceptional } EQUIP(THIS(), objs.armor);
+		objs.bottles = bottle, 50
+		ADDTOPACK(THIS(), objs.bottles)
+		objs.mortarPestle = mortarpestle
+		{
+			usesremaining = 200
+		}
+		ADDTOPACK(THIS(), objs.mortarPestle)
+		objs.regs = bagofreagents; ADDTOPACK(THIS(), objs.regs)
+		objs.regs = bagofreagents; ADDTOPACK(THIS(), objs.regs)
+		objs.regs = bagofreagents; ADDTOPACK(THIS(), objs.regs)
+	}
+	else
+	{
+		SENDGUMP(THIS(),"fun\\crawls\\deceit\\dungeoncrawl_RejoinGump.xml")
+		return
+	}
+	
+	objs.group = GETATTACHMENT(xmlobjs.owner, xmlgroup, SCRIPT().name)
+	objs.group.score += 1 // keeps track of the "lives used"
+	
+	objs.bandage = bandage, 800
+	ADDTOPACK(THIS(), objs.bandage)
+	objs.robe = robe
+	{
+		hue = 38
+	}
+	EQUIP(THIS(), objs.robe)
+	objs.fullspellbook = fullspellbook
+	ADDTOPACK(THIS(), objs.fullspellbook)
+	objs.sandals = sandals
+	EQUIP(THIS(), objs.sandals)
+	
+	for (ints.i = 0; ints.i < 8; ints.i += 1)
+	{
+		objs.potion = refreshpotion
+		ADDTOPACK(THIS(), objs.potion)
+		if (ints.i % 2 == 0)
+		{
+			objs.potion = lessercurepotion
+			ADDTOPACK(THIS(), objs.potion)
+		}
+	}
+}

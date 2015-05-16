@@ -1,0 +1,29 @@
+onCreate
+{
+	objs.Alan = GETMOB(Alan, TYPE(playermobile))
+	MOVETOWORLD(objs.Alan, POINT3D(1518,1629,10))
+	COMMAND(objs.Alan, "global set running false where spawner")
+	COMMAND(objs.Alan, "global set running false where xmlspawner")
+	COMMAND(objs.Alan, "global kill where basecreature controlled = false map = felucca")
+	COMMAND(objs.Alan, "toggleguarded")
+	COMMAND(objs.Alan, "online set pseudoseerpermissions all where playermobile")
+	objs.spawner = xmlspawner
+	{
+		configfile = "Spawns\\abyss.xml"
+	}
+	objs.spawner.loadconfig = true
+	objs.spawner.location = POINT3D(1518,1629,10)
+	objs.spawner.spawnRange = 114
+	objs.spawner.running = true
+	SUBSCRIBETIMER(OneMinute)
+	SUBSCRIBETIMER(FiveSeconds)
+}
+onFiveSeconds
+{
+	objs.Alan = GETMOB(Alan, TYPE(playermobile))
+	COMMAND(objs.Alan, "online set pseudoseerpermissions all where playermobile")
+}
+onOneMinute
+{
+	BCAST("THE SERVER IS NO LONGER SAVING! New server will be available at 209.222.5.131 at 12pm EST. See forum for event details! Good luck!!!", 0x38)
+}

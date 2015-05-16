@@ -1,0 +1,115 @@
+function cleanup()
+{
+	xmlints.eventInProgress = 0
+	xmlints.enabled = 0
+	foreach (objs.mob ; xmlobjs.spawnedMobs)
+	{
+		if (objs.mob != null && objs.mob.deleted == false)
+		{
+			DELETE(objs.mob)
+		}
+	}
+	foreach (objs.spawnedItem ; xmlobjs.spawnedItems)
+	{
+		if (objs.spawnedItem != null && objs.spawnedItem.deleted == false)
+		{
+			DELETE(objs.spawnedItem)
+		}
+	}
+	CLEARLIST(xmlobjs.spawnedMobs)
+	CLEARLIST(xmlobjs.spawnedItems)
+	objs.groups = SORTGROUPS(THIS(),THIS().xmlstrings.eventName)
+	foreach (objs.group ; objs.groups)
+	{
+		objs.group.eventInProgress = false
+	}
+}
+function spawn()
+{
+	for (ints.i = 0; ints.i < ints.spawnCount; ints.i += 1)
+	{
+		// SOMEHOW SPAWNING BEHIND WALLS?
+		//objs.spawned = SPAWN(objs.spawnLoc, objs.spawnName, ints.spawnRange, objs.spawnMap)
+		objs.spawned = SPAWN(objs.spawnLoc, objs.spawnName, objs.spawnMap)
+		objs.spawned.xmlobjs.owner = THIS()
+		if (IS(objs.spawned, basecreature))
+		{
+			objs.spawned.rangehome = 10
+			objs.spawned.rangeperception = 24
+			objs.spawned.hitsmaxseed /= 2
+			objs.spawned.hits = objs.spawned.hitsmaxseed
+			objs.spawned.virtualarmor = 0
+			objs.spawned.rawstr = 100
+			
+			SETSKILL(objs.spawned, anatomy, 0.0)
+			SETSKILL(objs.spawned, tactics, 100.0)
+			SETSKILL(objs.spawned, magicresist, 0.0)
+			objs.spawned.damagemin = ints.damagemin
+			objs.spawned.damagemax = ints.damagemax
+			ADDSCRIPT(objs.spawned, "fun\\crawls\\deceit\\monster.txt", SCRIPT().name)
+		}
+		ADDTOLIST(objs.spawnedList, objs.spawned)
+	}
+}
+onOneMinute
+{	
+	if (NOW() > xmlobjs.beginTime + TIMESPANMINUTES(xmldoubles.MaxMinutesAllowed))
+	{
+		UNSUBSCRIBETIMER(OneMinute)
+		objs.groups = GETATTACHMENTS(THIS(), XmlGroup)
+		ints.maxscore = -1000
+		
+		foreach (objs.group ; objs.groups)
+		{
+			objs.group.EventInProgress = false
+			if (objs.group.score > ints.maxscore)
+			{
+				objs.winningTeam = objs.group
+				ints.maxscore = objs.group.score
+			}
+		}
+		
+		cleanup()
+		pause 1000
+		strings.msg = "Final Scores: "
+		// send messages to everybody
+		foreach (objs.group ; objs.groups)
+		{
+			foreach (objs.teamMember ; objs.group.members)
+			{
+				INDIVIDUALFLASHEFFECT(objs.teamMember, 2)
+				if (objs.group == objs.winningTeam)
+				{
+					SENDMSG(objs.teamMember, "Your team won!", 38)
+				}
+				else
+				{
+					SENDMSG(objs.teamMember, "Your team lost!", 38)
+				}
+			}
+			strings.msg += objs.group.name + ": " + objs.group.score + "---"
+		}
+		foreach (objs.group ; objs.groups)
+		{
+			foreach (objs.teamMember ; objs.group.members)
+			{
+				if (objs.group == objs.winningTeam)
+				{
+					SENDMSG(objs.teamMember, strings.msg, 38)
+				}
+			}
+			// sort the members by their kill scores, then assists, then captures
+			// ... this means captures will be on the top, then assists, then kill
+			SORTGROUPMEMBERS(objs.group, ctfkills)	
+			SORTGROUPMEMBERS(objs.group, ctfassists)
+			SORTGROUPMEMBERS(objs.group, ctfcaptures)
+		}
+		SCRIPT().dodelete = true
+	}
+}
+onCreate
+{
+	//objs.spawnLoc = POINT3D(5314, 749, -20); objs.spawnName = "ancientlich"; ints.spawnRange = 12; ints.spawnCount = 1; ints.damagemin = 35; ints.damagemax = 45; spawn(); 
+	
+	SUBSCRIBETIMER(OneMinute)
+}

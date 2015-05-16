@@ -1,0 +1,8 @@
+onCreate
+{
+	THIS().Layer = "Ring"
+}
+onSingleClick
+{
+	ITEMCLICKMSG(TRIGMOB(), THIS(), "[Layered]")
+}

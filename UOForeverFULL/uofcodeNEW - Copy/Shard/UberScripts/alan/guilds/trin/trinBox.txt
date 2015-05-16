@@ -1,0 +1,16 @@
+onUse
+{
+	if (TRIGMOB().guildabbreviation != "Trin")
+	{
+		SENDMSG(TRIGMOB(), "An enchantment of some sort prevents you from touching the chest!", 0x38)
+		return override
+	}
+}
+onDragLift
+{
+	if (TRIGMOB().guildabbreviation != "Trin")
+	{
+		SENDMSG("You cannot pick that up.")
+		return override
+	}
+}

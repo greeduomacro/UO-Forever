@@ -1,0 +1,52 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>Demergo_RottingCorpse10</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-a58061afe321</UniqueId>
+    <Map>Felucca</Map>
+    <X>5800</X>
+    <Y>434</Y>
+    <Width>3</Width>
+    <Height>3</Height>
+    <CentreX>5800</CentreX>
+    <CentreY>413</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>20</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>False</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>5</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+	<ItemTriggerName>ATTACHMENT,demergo,xmlvalue</ItemTriggerName>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>100</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>SETONTHIS/freerun/true/X1_Y1/(5795,429,0)/X2_Y2/(5805,439,0):MX=1:RT=0:TO=0:KL=0:SB=1
+		:OBJ=rottingcorpse/frozen/true/teamflags/0x8000000000000001/ANIMATE,8,1,3,false,false,0/ADD/noxcrystal:MX=3:SP=3:PE=2:RT=0:TO=0:KL=0:SB=2
+		:OBJ=SETONNEARBY,10,*,rottingcorpse/frozen/false/teamflags/0x8000000000000000:MX=1:RT=0:TO=0:KL=0:SB=3
+		:OBJ=WAITUNTIL,3:MX=1:RT=0:TO=0:KL=0:SB=4
+		:OBJ=SETONTHIS/freerun/false:MX=1:RT=0:TO=0:KL=0:SB=4
+	</Objects2>
+  </Points>
+</Spawns>
+<!-- 
+:OBJ=:MX=1:SB=6:RT=0:TO=0:KL=0
+-->

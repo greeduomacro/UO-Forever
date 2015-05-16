@@ -1,0 +1,119 @@
+onCreate
+{
+	xmlints.pylonsLeft = 5
+	name = "Britannian Demolition Expert"
+	blessed = true
+	location = POINT3D(1699, 2672, 8)
+	cantwalk = true
+	
+	
+	BCAST("The supplies for the demolitions expert have arrived at the guard tower UP THE ROAD FROM TRINSIC. Bring him a KEG FULL OF GREATER EXPLOSION POTIONS in order to get a box of dynamite. Only you can drag it, and the first person to blow open the way into the front entrance of Trinsic will be rewarded (double click it to use!)",38)
+	
+	exteventmoongate
+	{
+		target = POINT3D(1695, 2672, 5)
+		location = POINT3D(1421, 1702, 5)
+		targetmap = Felucca
+	}
+	
+	exteventmoongate
+	{
+		location = POINT3D(1695, 2672, 5)
+		target = POINT3D(1421, 1702, 5)
+		targetmap = Felucca
+	}
+	
+	// revealer in front of trinsic
+	objs.revealerPoint = POINT3D(1749, 2751, 10)
+	RUNSCRIPT(objs.revealerPoint,autorevealerlarge.txt)
+	
+	// add pylons
+	objs.revealerPoint = POINT3D(1914, 2720, 20)
+	RUNSCRIPT(objs.revealerPoint,autorevealersmall.txt)
+	objs.wisp = wisp
+	{
+		blessed = true; name = "an energy pylon"; hitsmaxseed = 10000; hits = 10000; bodyvalue = 261; cantwalk = true
+	}
+	objs.wisp.location = objs.revealerPoint
+	
+	objs.revealerPoint = POINT3D(2043, 2817, 0)
+	RUNSCRIPT(objs.revealerPoint,autorevealersmall.txt)
+	objs.wisp = wisp
+	{
+		blessed = true; name = "an energy pylon"; hitsmaxseed = 10000; hits = 10000; bodyvalue = 261; cantwalk = true
+	}
+	objs.wisp.location = objs.revealerPoint
+	
+	objs.revealerPoint = POINT3D(1914, 2851, 20)
+	RUNSCRIPT(objs.revealerPoint,autorevealersmall.txt)
+	objs.wisp = wisp
+	{
+		blessed = true; name = "an energy pylon"; hitsmaxseed = 10000; hits = 10000; bodyvalue = 261; cantwalk = true
+	}
+	objs.wisp.location = objs.revealerPoint
+	
+	objs.revealerPoint = POINT3D(1868, 2668, -10)
+	RUNSCRIPT(objs.revealerPoint,autorevealersmall.txt)
+	objs.wisp = wisp
+	{
+		blessed = true; name = "an energy pylon"; hitsmaxseed = 10000; hits = 10000; bodyvalue = 261; cantwalk = true
+	}
+	objs.wisp.location = objs.revealerPoint
+	
+	objs.revealerPoint = POINT3D(1955, 2739, 10)
+	RUNSCRIPT(objs.revealerPoint,autorevealersmall.txt)
+	objs.wisp = wisp
+	{
+		blessed = true; name = "an energy pylon"; hitsmaxseed = 10000; hits = 10000; bodyvalue = 261; cantwalk = true
+	}
+	objs.wisp.location = objs.revealerPoint
+	
+}
+onDragDrop 
+{ 
+	if (IS(TRIGITEM(),potionkeg))
+	{
+		if (TRIGITEM().held == 100)
+		{
+			if (TRIGITEM().type == ExplosionGreater)
+			{
+				// SUCCESS
+				objs.dynamite = static, 3644
+				{
+					hue = 38
+					name = TRIGMOB().name + "'s box of dynamite"
+					weight = DOUBLE(9999)
+					movable = true
+					breakable = false
+					doesnotdecay = true
+					association = 100
+				}
+				objs.script = NEWATTACHMENT(xmlscript,dynamiteScript)
+				objs.script.ScriptFile = "dynamite.txt"
+				ATTACH(objs.dynamite, objs.script)
+				DELETE(TRIGITEM())
+				if (THIS().xmlstrings.winner == null)
+				{
+					SAY(THIS(),"Here is your box of dynamite, carry it to the entrance and use it there as fast as you can! Whoever blows open a path first will be rewarded!")
+				}
+				else
+				{
+					SAY(THIS(),"Here is your box of dynamite, take it to an energy Pylon in trinsic and use it there! We must take out the pylons to remove the magical barrier protecting him!")
+				}
+				objs.dynamite.xmlstrings.owner = TRIGMOB().name
+			}
+			else
+			{
+				SAY(THIS(),"What is this? You need to give me explosion potions, not " + TRIGITEM().type + " potions!")
+			}
+		}
+		else
+		{
+			SAY(THIS(),"I need the keg to be full!")
+		}
+	}
+	else
+	{
+		SAY(THIS(),"Give me a potion keg full of greater explosion potions and I can give you a box of dynamite")
+	}
+}

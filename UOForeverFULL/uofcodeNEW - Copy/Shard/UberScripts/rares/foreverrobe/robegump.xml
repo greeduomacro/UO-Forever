@@ -1,0 +1,29 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="24">
+		<Label hue="1153">"UO Forever Robe Color Change"</Label>
+		<Box>
+			<PaperDoll mob="TRIGMOB()"/>
+			<Image hue="xmlints.gumphue" gumpid="0xc6d2"/>
+		</Box>
+		<Label hue="1153">"Pick a color to see a preview, and"</Label>
+		<Label hue="1153">"then Accept Color change when ready."</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="charcoal"/>
+			<Label hue="2051">"Charcoal"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="brown"/>
+			<Label hue="1551">"Brown"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="blue"/>
+			<Label hue="100">"Blue"</Label>
+		</HBox>
+		<HBox height="15" fittocontents="false"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="accept"/>
+			<Label hue="1153">"Accept Color Change"</Label>
+		</HBox>
+		<Label hue="1153">"(you can change color every 24 hours)"</Label>
+	</VBox>
+</Gump>

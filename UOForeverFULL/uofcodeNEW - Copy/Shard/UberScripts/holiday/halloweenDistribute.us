@@ -1,0 +1,14 @@
+onUse
+{
+	objs.types = [LizardmanCostume, MummyCostume, OphidianMatriarchCostume, ShadowWyrmCostume, SkeletonCostume, EvilWispCostume, GazerCostume, GiantPixieCostume, LichCostume, CyclopsCostume, ZombieCostume]
+	objs.onlineMobs = ONLINEMOBS()
+	foreach (objs.mob ; objs.onlineMobs)
+	{
+		objs.mask = SPAWN(RANDOMFROMLIST(objs.types))
+		objs.mask.weight = 12.0
+		objs.bag = candybag
+		ADDTOCONTAINER(objs.mob.backpack, objs.mask)
+		ADDTOCONTAINER(objs.mob.backpack, objs.bag)
+		LOCALMSG(objs.mob, "You have received some halloween goodies in your backpack! Be careful, don't let the bullies take them away from you!", 0x38)
+	}
+}

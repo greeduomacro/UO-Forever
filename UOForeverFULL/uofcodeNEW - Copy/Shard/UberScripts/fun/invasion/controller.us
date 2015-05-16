@@ -1,0 +1,103 @@
+onCreate
+{
+	xmlints.useCount = 0
+	xmlobjs.spawned = NEWLIST()
+	Hue = 1719
+	Name = "Orc Invasion Controller"
+}
+onUse
+{
+	if (TRIGMOB() != THIS().RootParentEntity) { SENDMSG(TRIGMOB(), "That must be in your pack to use it!") } 
+	
+	if (xmlints.useCount == 0)
+	{
+		// get everything going!
+		objs.riftController = plate
+		ADDSCRIPT(objs.riftController, "fun\\invasion\\riftMaker.us", "riftMaker")
+		ADDTOPACK(TRIGMOB(), objs.riftController)
+		ADDTOLIST(xmlobjs.spawned, objs.riftController)
+		
+		objs.psStones = ALLITEMSOFTYPE(TYPE(PseudoSeerStone))
+		if (objs.psStones.Count == 0) { SENDMSG(TRIGMOB(), "No pseudoseer stone found... cannot continue."); return }
+		objs.psStone = objs.psStones[0]
+		
+		objs.psStone.___OnPlayerDeathUberScript = "fun\\invasion\\playerRes.us"
+		objs.psStone._AllowAllPossessedMobsSpeedBoost = true
+		objs.psStone._CreaturesStealthLikePlayers = false
+		
+		
+		objs.points = [POINT3D(1428, 1550, 30), POINT3D(1421, 1579, 30), POINT3D(1458, 1550, 30), POINT3D(1412, 1599, 30), POINT3D(1434, 1595, 20), POINT3D(1453, 1585, 20), POINT3D(1472, 1578, 20), POINT3D(1482, 1587, 20), POINT3D(1474, 1595, 20), POINT3D(1454, 1612, 20), POINT3D(1433, 1611, 20), POINT3D(1491, 1551, 30), POINT3D(1467, 1516, 20), POINT3D(1503, 1516, 40), POINT3D(1517, 1547, 25), POINT3D(1509, 1568, 20), POINT3D(1509, 1596, 10), POINT3D(1496, 1608, 21), POINT3D(1476, 1611, 20), POINT3D(1425, 1656, 10), POINT3D(1443, 1650, 10), POINT3D(1434, 1687, 0), POINT3D(1453, 1687, 0), POINT3D(1471, 1687, 0), POINT3D(1468, 1667, 0), POINT3D(1500, 1661, 27), POINT3D(1495, 1681, 20), POINT3D(1495, 1718, 7), POINT3D(1478, 1723, 0), POINT3D(1476, 1739, 0), POINT3D(1450, 1722, 6), POINT3D(1428, 1726, 20), POINT3D(1410, 1715, 20), POINT3D(1417, 1751, 10), POINT3D(1547, 1746, 15), POINT3D(1546, 1763, 10), POINT3D(1571, 1742, 15), POINT3D(1571, 1708, 35), POINT3D(1543, 1714, 20), POINT3D(1548, 1684, 30), POINT3D(1556, 1657, 26), POINT3D(1594, 1590, 20), POINT3D(1582, 1561, 20), POINT3D(1618, 1584, 0), POINT3D(1659, 1603, 20), POINT3D(1675, 1596, 8), POINT3D(1650, 1642, 0), POINT3D(1635, 1696, 37), POINT3D(1606, 1708, 20), POINT3D(1591, 1655, 10), POINT3D(2259, 1219, 0), POINT3D(2244, 1229, 0), POINT3D(2242, 1202, 0), POINT3D(2227, 1214, 0), POINT3D(2226, 1198, 0), POINT3D(2236, 1185, 0), POINT3D(2216, 1188, 0), POINT3D(2215, 1166, 0), POINT3D(2731, 2188, 0), POINT3D(2707, 2179, 0), POINT3D(2705, 2144, 0), POINT3D(2715, 2099, 0), POINT3D(2668, 2131, 0), POINT3D(2669, 2090, 5), POINT3D(2635, 2085, 10), POINT3D(2627, 2099, 10), POINT3D(2675, 2155, 0), POINT3D(2658, 2195, 4), POINT3D(2680, 2236, 2), POINT3D(2715, 2211, 0), POINT3D(2735, 2251, 0), POINT3D(2755, 2219, 0), POINT3D(1317, 3773, 0), POINT3D(1330, 3752, 0), POINT3D(1358, 3757, 0), POINT3D(1363, 3733, 0), POINT3D(1364, 3709, 0), POINT3D(1395, 3706, 0), POINT3D(1424, 3699, 0), POINT3D(1440, 3720, 0), POINT3D(1436, 3738, 0), POINT3D(1452, 3740, 0), POINT3D(1449, 3775, 0), POINT3D(1439, 3793, 0), POINT3D(1431, 3818, 0), POINT3D(1399, 3807, 0), POINT3D(1394, 3826, 0), POINT3D(1369, 3815, 0), POINT3D(1357, 3782, 0), POINT3D(1412, 3779, 0), POINT3D(1392, 3772, 0), POINT3D(1392, 3826, 0), POINT3D(1421, 3852, 0), POINT3D(1439, 3873, 0), POINT3D(1457, 3853, 0), POINT3D(1478, 3857, 0), POINT3D(3794, 2248, 20), POINT3D(3688, 2256, 27), POINT3D(3669, 2258, 26), POINT3D(2441, 412, 15), POINT3D(2476, 399, 15), POINT3D(2498, 383, 0), POINT3D(2528, 376, 23), POINT3D(2502, 430, 15), POINT3D(2483, 433, 15), POINT3D(2450, 428, 15), POINT3D(2433, 435, 15), POINT3D(2465, 454, 15), POINT3D(2491, 474, 15), POINT3D(2512, 476, 15), POINT3D(2451, 488, 15), POINT3D(2426, 530, 0), POINT3D(2424, 556, 0), POINT3D(2475, 563, 5), POINT3D(2506, 550, 0), POINT3D(2530, 551, 0), POINT3D(2534, 572, 0), POINT3D(2523, 525, 0), POINT3D(2577, 599, 0), POINT3D(4396, 1163, 0), POINT3D(4394, 1138, 0), POINT3D(4412, 1133, 0), POINT3D(4419, 1112, 0), POINT3D(4393, 1116, 0), POINT3D(4394, 1083, 0), POINT3D(4413, 1082, 0), POINT3D(4413, 1065, 0), POINT3D(4394, 1068, 0), POINT3D(4460, 1065, 0), POINT3D(4483, 1064, 0), POINT3D(4479, 1085, 0), POINT3D(4460, 1081, 0), POINT3D(4479, 1125, 0), POINT3D(4471, 1166, 0), POINT3D(4546, 858, 30), POINT3D(3763, 1316, 0), POINT3D(3734, 1315, 0), POINT3D(3773, 1265, 0), POINT3D(3772, 1228, 0), POINT3D(3771, 1189, 0), POINT3D(3774, 1171, 0), POINT3D(3739, 1196, 0), POINT3D(3617, 2475, 0), POINT3D(3610, 2506, 0), POINT3D(3651, 2471, 0), POINT3D(3644, 2503, 0), POINT3D(3658, 2506, 0), POINT3D(3676, 2475, 0), POINT3D(3692, 2512, 0), POINT3D(3662, 2531, 0), POINT3D(3627, 2540, 0), POINT3D(3634, 2573, 0), POINT3D(3604, 2576, 0), POINT3D(3602, 2612, 0), POINT3D(3627, 2607, 0), POINT3D(3643, 2595, 0), POINT3D(3667, 2586, 0), POINT3D(3668, 2619, 0), POINT3D(3636, 2641, 0), POINT3D(3667, 2643, 0), POINT3D(2957, 3356, 15), POINT3D(2974, 3353, 15), POINT3D(3003, 3355, 15), POINT3D(3027, 3353, 15), POINT3D(3063, 3342, 15), POINT3D(3051, 3368, 15), POINT3D(3053, 3396, 15), POINT3D(3008, 3388, 15), POINT3D(3006, 3406, 15), POINT3D(3051, 3419, 15), POINT3D(3034, 3427, 15), POINT3D(3014, 3456, 15), POINT3D(3017, 3431, 15), POINT3D(2995, 3431, 15), POINT3D(2971, 3422, 15), POINT3D(2939, 3499, 10), POINT3D(2903, 3513, 10), POINT3D(2907, 3485, 10), POINT3D(2883, 3504, 10), POINT3D(574, 2124, 0), POINT3D(565, 2148, 0), POINT3D(591, 2146, 0), POINT3D(618, 2137, 0), POINT3D(667, 2139, 0), POINT3D(654, 2161, 0), POINT3D(633, 2158, 0), POINT3D(612, 2158, 0), POINT3D(595, 2164, 0), POINT3D(592, 2145, 0), POINT3D(569, 2147, 0), POINT3D(559, 2178, 0), POINT3D(584, 2189, 0), POINT3D(603, 2186, 0), POINT3D(628, 2187, 0), POINT3D(650, 2178, 0), POINT3D(623, 2218, 0), POINT3D(606, 2242, 0), POINT3D(603, 2277, 0), POINT3D(584, 2226, 0), POINT3D(589, 2207, 0), POINT3D(570, 2211, 0), POINT3D(1992, 2910, 0), POINT3D(1995, 2885, 5), POINT3D(2026, 2862, 0), POINT3D(2030, 2807, 10), POINT3D(2050, 2777, 0), POINT3D(1990, 2869, 20), POINT3D(1987, 2840, 15), POINT3D(1892, 2835, 31), POINT3D(1932, 2792, 0), POINT3D(1934, 2771, 10), POINT3D(1938, 2738, 10), POINT3D(1961, 2689, 20), POINT3D(1949, 2687, 30), POINT3D(1936, 2688, 20), POINT3D(1935, 2706, 30), POINT3D(2002, 2724, 30), POINT3D(2022, 2746, 30), POINT3D(1911, 2808, 0), POINT3D(1897, 2806, 0), POINT3D(1884, 2807, 10), POINT3D(1852, 2832, 10), POINT3D(1813, 2821, 0), POINT3D(1812, 2808, 0), POINT3D(1853, 2792, -8), POINT3D(1851, 2770, 0), POINT3D(1844, 2736, 0), POINT3D(1824, 2738, 0), POINT3D(1846, 2705, 10), POINT3D(1843, 2678, 0), POINT3D(1895, 2652, 10), POINT3D(1896, 2689, 10), POINT3D(1893, 2716, 20), POINT3D(2886, 650, 0), POINT3D(2889, 675, 0), POINT3D(2915, 671, 0), POINT3D(2879, 723, 0), POINT3D(2907, 710, 0), POINT3D(2856, 731, 0), POINT3D(2958, 707, 0), POINT3D(2999, 764, 0), POINT3D(2991, 779, 0), POINT3D(3010, 777, 0), POINT3D(3022, 764, 0), POINT3D(2966, 819, 0), POINT3D(2994, 817, 0), POINT3D(2993, 834, 0), POINT3D(2922, 853, 0), POINT3D(2967, 878, 0), POINT3D(2947, 935, 0), POINT3D(2907, 907, 0), POINT3D(2916, 966, 0), POINT3D(2859, 993, 0), POINT3D(2844, 908, 0), POINT3D(2835, 874, 0), POINT3D(2866, 851, 0), POINT3D(2857, 803, 0), POINT3D(2836, 804, 0), POINT3D(2892, 741, 0), POINT3D(633, 818, 0), POINT3D(620, 881, 0), POINT3D(532, 1010, 0), POINT3D(516, 991, 0), POINT3D(536, 970, 0), POINT3D(567, 968, 0), POINT3D(554, 991, 0), POINT3D(565, 1010, 0)]
+		
+		objs.guardSpawnLocations = [POINT3D(1419, 1697, 0), POINT3D(1659, 1612, 20), POINT3D(2720, 2182, 0), POINT3D(2233, 1207, 0), POINT3D(1331, 3779, 0), POINT3D(2504, 563, 0), POINT3D(4463, 1178, 0), POINT3D(3769, 1307, 0), POINT3D(3683, 2521, 0), POINT3D(2879, 3471, 15), POINT3D(2887, 3414, 35), POINT3D(602, 2155, 0), POINT3D(1915, 2687, 2), POINT3D(1824, 2822, 0), POINT3D(2902, 675, 0), POINT3D(635, 861, 0)]
+	
+		foreach (objs.point ; objs.points)
+		{
+			objs.spawn = Reaper
+			ADDSCRIPT(objs.spawn, "fun\\invasion\\tree.us", "invasionTree")
+			ADDTOLIST(xmlobjs.spawned, objs.spawn)
+			MOVETOWORLD(objs.spawn, objs.point, MAP(Felucca))
+			objs.region = GETREGION(objs.point, "townregion", true)
+			if (objs.region.Name != null)
+			{
+				LOG("regionNames", objs.region.Name)
+				if (XMLOBJS(THIS(), objs.region.Name) == null)
+				{
+					XMLOBJS(THIS(), objs.region.Name, NEWLIST())
+				}
+				ADDTOLIST(XMLOBJS(THIS(), objs.region.Name), objs.spawn)
+			}
+			objs.spawn.xmlobjs.owner = THIS()
+		}
+		
+		// add the guards where players can join the team from
+		foreach (objs.point ; objs.guardSpawnLocations)
+		{
+			objs.spawn = HumanMob
+			ADDSCRIPT(objs.spawn, "fun\\invasion\\guard.us", "invasionGuard")
+			ADDTOLIST(xmlobjs.spawned, objs.spawn)
+			MOVETOWORLD(objs.spawn, POINT3D(objs.point.X, objs.point.Y + 2, objs.point.Z), MAP(Felucca)) // offset a bit b/c those are the town gate spots
+		}
+		
+		// add the totem pole
+		objs.totem = static, 130
+		MOVETOWORLD(objs.totem, POINT3D(1497, 1632, 10), MAP(Felucca))
+		ADDSCRIPT(objs.totem, "fun\\invasion\\orctotem.us", "orcTotem")
+		ADDTOLIST(xmlobjs.spawned, objs.totem)
+	}
+	else if (xmlints.useCount < 10)
+	{
+		SENDMSG(TRIGMOB(), "Use it " + (10 - xmlints.useCount) + " more times to delete all the trees.")
+	}
+	else
+	{
+		// delete everything
+		foreach (objs.tree ; xmlobjs.spawned)
+		{
+			if (objs.tree.Deleted)
+			{
+				continue
+			}
+			LOG("invasiontrees", objs.tree.Location + " " + objs.tree + " still remains in " + GETREGION(objs.tree.Location, "townregion", true))
+			DELETE(objs.tree)
+		}
+		objs.attachments = GETATTACHMENTS(THIS(), XmlObject)
+		foreach (objs.attachment; objs.attachments)
+		{
+			if (objs.attachment != xmlobjs.spawned.xmlobject)
+			{
+				DELETE(objs.attachment)
+			}
+		}
+		
+		objs.psStones = ALLITEMSOFTYPE(TYPE(PseudoSeerStone))
+		if (objs.psStones.Count == 0) { SENDMSG(TRIGMOB(), "No pseudoseer stone found... cannot continue."); return }
+		objs.psStone = objs.psStones[0]
+		
+		objs.psStone.___OnPlayerDeathUberScript = null
+		objs.psStone._AllowAllPossessedMobsSpeedBoost = false
+		SENDMSG(TRIGMOB(), "Spawn has been reset.")
+		xmlints.useCount = -1
+	}
+	
+	xmlints.useCount += 1
+}

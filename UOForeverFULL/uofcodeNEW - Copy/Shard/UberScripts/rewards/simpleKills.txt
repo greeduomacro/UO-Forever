@@ -1,0 +1,23 @@
+onDeath
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		ints.Points = ROUND(THIS().hitsmaxseed / 75)
+		if (ints.Points > 10)
+		{
+			ints.Points = 10
+		}
+		else if (ints.Points < 1)
+		{
+			ints.Points = 1
+		}
+		if (TRIGMOB().xmlints.killScore == null)
+		{
+			TRIGMOB().xmlints.killScore = ints.Points
+		}
+		else
+		{
+			TRIGMOB().xmlints.killScore += ints.Points
+		}
+	}
+}

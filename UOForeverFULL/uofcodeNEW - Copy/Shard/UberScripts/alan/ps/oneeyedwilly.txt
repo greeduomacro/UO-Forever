@@ -1,0 +1,85 @@
+onCreate
+{
+	SCRIPT().name = oneEyedWilly
+	THIS().rawstr = 120
+	THIS().rawint = 40
+	THIS().rawdex = 120
+	THIS().hitsmaxseed = 120
+	THIS().hits = 120
+	THIS().stammaxseed = 120
+	THIS().stam = 120
+	THIS().manamaxseed = 40
+	THIS().mana = 40
+
+	rawname = "One Eyed Willy"
+	hue = 33823
+	facialHairItemID = 8268
+	facialHairHue = 1149
+	hairItemID = 8252
+	hairHue = 1149
+	bodyValue = 400
+	pseu_eqplayerallowed = true
+	
+	SETSKILL(THIS(), "Archery", 120.0)
+	SETSKILL(THIS(), "AnimalTaming", 120.0)
+	SETSKILL(THIS(), "AnimalLore", 120.0)
+	SETSKILL(THIS(), "Parry", 120.0)
+	SETSKILL(THIS(), "Fencing", 120.0)
+	SETSKILL(THIS(), "Tactics", 100.0)
+	SETSKILL(THIS(), "Anatomy", 100.0)
+	SETSKILL(THIS(), "Healing", 100.0)
+	SETSKILL(THIS(), "Magery", 100.0)
+	SETSKILL(THIS(), "MagicResist", 100.0)
+	objs.armor = tricornehat { hue = 1626 } EQUIP(THIS(), objs.armor)
+	objs.armor = tunic { hue = 1626 } EQUIP(THIS(), objs.armor)
+	objs.armor = studdedgorget { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmailchest { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmaillegs { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmailarms { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmailgloves { quality = exceptional } EQUIP(THIS(), objs.armor)
+	objs.weapon = arrow { amount = 20 } ADDTOPACK(THIS(), objs.weapon)
+	objs.weapon = bow { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	objs.weapon = spear { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	objs.bandage = bandage, 300 { movable = false } ADDTOPACK(THIS(), objs.bandage)
+	objs.fullspellbook = fullspellbook { movable = false }; ADDTOPACK(THIS(), objs.fullspellbook)
+	objs.thighboots = thighboots; EQUIP(THIS(), objs.thighboots)
+	for (ints.i = 0; ints.i < 10; ints.i += 1)
+	{
+		objs.potion = totalrefreshpotion
+		ADDTOPACK(THIS(), objs.potion)
+		if (ints.i % 2 == 0)
+		{
+			objs.potion = greatercurepotion
+			ADDTOPACK(THIS(), objs.potion)
+			objs.potion = greaterhealpotion
+			ADDTOPACK(THIS(), objs.potion)
+			objs.tpouch = tpouch
+			ADDTOPACK(THIS(), objs.tpouch)
+		}
+	}
+	objs.horse = horse
+	objs.horse.xmlobjs.masterVar = THIS()
+	ADDSCRIPT(THIS(), "alan\\ps\\go.txt", "psGo")
+	ADDSCRIPT(THIS(), "alan\\ps\\willyCrew.us", "psCallCrew")
+	ADDSCRIPT(objs.horse, "alan\\ps\\go.txt", "psGo")
+	ADDSCRIPT(objs.horse, "alan\\ps\\wonderHorse.us", "wonderHorse")
+}
+
+onBeforeDeath
+{
+	if (THIS().mount != null)
+	{
+		objs.mount = THIS().mount
+		THIS().mount.rider = null
+		POSSESS(THIS(), objs.mount)
+	}
+}
+
+onDeath
+{
+	for (ints.i = 0; ints.i < 30; ints.i += 1)
+	{
+		objs.plat = platinum, 6
+		ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	}
+}

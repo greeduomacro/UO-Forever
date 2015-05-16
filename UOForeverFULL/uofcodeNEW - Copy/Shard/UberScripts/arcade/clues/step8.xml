@@ -1,0 +1,10 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<Box backgroundID="3600" padding="16" FitToContents="false" width="500" height="500"> 
+		<PaperDoll mob="THIS()" x="0" y="0"/>
+		<Label hue="1153" x="200" y="100">"To Make the Cure (Step 8)"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" x="35" y="125" width="400" height="310">
+			<p>Place a whole daemon claw into the bowl mixture and cook it again!</p>
+		</HTML>	
+	</Box> 
+</Gump>

@@ -1,0 +1,43 @@
+onCreate
+{
+	xmlints.state = 0
+	THIS().hue = 0
+}
+
+onSingleClick
+{
+	MSG(THIS(), "There is something strange about this tapestry..", 1287) 
+}
+onUse
+{
+	if (DISTANCE(THIS(), TRIGMOB()) < 5)
+	{
+		if (xmlints.state == 0)
+		{
+			xmlints.state = 1
+			THIS().visible = false
+		}
+		if (xmlobjs.hideobject != null && xmlobjs.hideobject.visible == false && xmlints.state == 1)
+		{
+			xmlobjs.hideobject.visible = true
+			SUBSCRIBETIMER(OneMinute)
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You are too far away to do that.")
+	}
+}
+
+onOneMinute
+{
+	if (xmlints.state == 1 && xmlobjs.hideobject != null)
+	{
+		xmlints.state = 0
+		THIS().visible = true
+		xmlobjs.hideobject.visible = false
+		UNSUBSCRIBETIMER(OneMinute)
+	}
+}
+
+

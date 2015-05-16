@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>BlackthornInvasionBoss</Name>
+    <!--<UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>1345</X>
+    <Y>1497</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1345</CentreX>
+    <CentreY>1497</CentreY>
+    <CentreZ>25</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=Neira/hitsmaxseed/50000/hits/50000/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/ADD/sandals&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONSPAWN,1/ADD/&lt;plate/hue/38/movable/false/name/meteor strike/movable/false/ATTACH/&lt;xmluse/targetingenabled/true/successaction/@xmlspawner/configfile/Spawns\common\meteorstrike.xml/loadconfig/true/location/${GETONTHIS,location$}/running/true&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONSPAWN,1/ADD/&lt;plate/hue/60/movable/false/name/stink bomb/movable/false/ATTACH/&lt;xmluse/targetingenabled/true/successaction/@xmlspawner/configfile/Spawns\common\stinkbomb.xml/loadconfig/true/location/${GETONTHIS,location$}/running/true&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONSPAWN,1/ADD/&lt;plate/hue/1152/movable/false/name/freeze bomb/movable/false/ATTACH/&lt;xmluse/targetingenabled/true/successaction/@xmlspawner/configfile/Spawns\common\mobfreezebomb.xml/loadconfig/true/location/${GETONTHIS,location$}/running/true&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONSPAWN,1/ADD/&lt;plate/hue/100/movable/false/name/bone knight/movable/false/ATTACH/&lt;xmluse/successaction/@boneknight&gt;&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONSPAWN,1/ATTACH/&lt;xmlonhit/name/hit1/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,neiraDamage,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,neiraDamage,0&gt;&gt;/ATTACH/&lt;xmlonhit/name/hit2/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,neiraDamage,value/INC,${GETONTHIS,lastdamageamount$}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+	</Objects2>
+  </Points>
+</Spawns>

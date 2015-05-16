@@ -1,0 +1,93 @@
+onCreate
+{
+	SUBSCRIBETIMER(OneSecond)
+	THIS().Sunk = true
+}
+onOneSecond
+{
+	THIS().z -= 1
+	objs.sounds = [0x25, 0x26, 0x5af, 0x5af, 0x5af]
+	SOUND(THIS(), RANDOMFROMLIST(objs.sounds))
+	ints.target = THIS().MarkOffset.Z * -1 - 5 // 4 if you want them to still be able to walk around
+	
+	// if (THIS().z < -20) // doesn't work, NEED TO FIX IN UBERSCRIPT
+	if (THIS().z < ints.target)
+	{
+		UNSUBSCRIBETIMER(OneSecond)
+		//DELETE(THIS())
+		//objs.ghostsOnBoard = BOATMOBILES(THIS(), true) // get ghosts on-board
+		objs.allOnBoard = BOATMOBILES(THIS()) // get everybody on-board (for sending the gump telling them what happens)
+
+		foreach (objs.onBoard ; objs.allOnBoard)
+		{
+			SENDGUMP(objs.onBoard, "boats\\ransomNotification.xml")
+			objs.onBoard.xmlints.strandedChance = 1
+			objs.onBoard.xmlints.strandedChance.Expiration = TIMESPANMINUTES(2.0)
+		}
+		BOATREMOVECANNONS(THIS())
+		
+		if (THIS().Owner != null)
+		{
+			objs.ransomNote = BoatRansomNote
+			{
+				Boat = THIS()
+			}
+			if (THIS().Name != null)
+			{
+				objs.ransomNote.Name += " for the " + THIS().Name
+			}
+			ADDTOCONTAINER(THIS().Owner.Backpack, objs.ransomNote)
+			ADDSCRIPT(objs.ransomNote, "boats\\ransomNote.us", "boatransom")
+			LOCALMSG(THIS().Owner, "A boat ransom note has been placed in your bank! You have 15 minutes to respond!")
+			xmlints.minutes = 0
+			xmlobjs.sinkTime = NOW()
+			SUBSCRIBETIMER(OneMinute)
+		}
+		else
+		{
+			xmlints.repairableByAll = 1
+			SENDMSGBOATSINKERS(THIS(), "There was no owner to that boat, so it is capturable now, just repair it!")
+		}
+	}
+}
+onGumpResponse
+{
+	if (ints.takeToStranded == 1)
+	{
+		if (TRIGMOB().xmlints.strandedChance == null)
+		{
+			SENDMSG(TRIGMOB(), "Too late, you only have a short while to decide to use that.")
+		}
+		else
+		{
+			STRANDED(TRIGMOB())
+			TRIGMOB().xmlints.strandedChance = null
+		}
+	}
+}
+onOneMinute
+{
+	if (xmlints.minutes == null) { xmlints.minutes = 0 }
+	xmlints.minutes += 1
+	if (xmlints.ownerRepairOpportunity == null)
+	{
+		if (xmlints.minutes >= 15)
+		{
+			xmlints.repairableByAll = 1
+			SENDMSGBOATSINKERS(THIS(), THIS().Owner.RawName + " has decided to ignore your ransom offer! You can now capture the boat by being the one to repair it up to full life!")
+			SENDMSG(THIS().Owner, "You failed to repair the boat for an hour! Anybody can now repair it and capture it by being the one to repair it up to full life!")
+			UNSUBSCRIBETIMER(OneMinute)
+		}
+	}
+	else
+	{
+		if (xmlints.minutes >= 60)
+		{
+			xmlints.ownerRepairOpportunity = null
+			xmlints.repairableByAll = 1
+			SENDMSGBOATSINKERS(THIS(), THIS().Owner.RawName + " failed to repair the boat for an hour! You can now capture the boat by being the one to repair it up to full life!")
+			SENDMSG(THIS().Owner, "You failed to repair the boat for an hour! Anybody can now repair it and capture it by being the one to repair it up to full life!")
+			UNSUBSCRIBETIMER(OneMinute)
+		}
+	}
+}

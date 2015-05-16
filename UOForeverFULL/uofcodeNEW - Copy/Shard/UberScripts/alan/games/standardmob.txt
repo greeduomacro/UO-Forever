@@ -1,0 +1,42 @@
+onTakenHit
+{
+	if (TRIGMOB().netstate != null && TRIGMOB().xmlints.gameMob != null)
+	{
+		objs.mob = GETMOB(TRIGMOB().xmlints.gameMob)
+		if (objs.mob.xmlints.standardHitsScore == null)
+		{
+			objs.mob.xmlints.standardHitsScore = DAMAGE()
+		}
+		else
+		{
+			objs.mob.xmlints.standardHitsScore += DAMAGE()
+		}
+	}
+}
+onDeath
+{
+	if (TRIGMOB() == null) { return }
+	if (TRIGMOB().netstate != null && TRIGMOB().xmlints.gameMob != null)
+	{
+		// attach it to the player, not the player controlled mob
+		objs.mob = GETMOB(TRIGMOB().xmlints.gameMob)
+		if (objs.mob == null) { return }
+		ints.Points = ROUND(THIS().hitsmaxseed / 75)
+		if (ints.Points > 10)
+		{
+			ints.Points = 10
+		}
+		else if (ints.Points < 1)
+		{
+			ints.Points = 1
+		}
+		if (objs.mob.xmlints.standardKillScore == null)
+		{
+			objs.mob.xmlints.standardKillScore = ints.Points
+		}
+		else
+		{
+			objs.mob.xmlints.standardKillScore += ints.Points
+		}
+	}
+}

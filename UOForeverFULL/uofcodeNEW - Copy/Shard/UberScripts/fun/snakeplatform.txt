@@ -1,0 +1,136 @@
+onCreate
+{
+	// can change the itemid to change the growing itemids
+	itemid = 1928
+	movable = false
+	xmlints.count = 0
+	xmlobjs.spawnedPlatforms = NEWLIST()
+	xmlints.numTiles = 3
+	
+	if (xmlints.targetY == null || xmlints.startY == null)
+	{
+		// have to wait until these variables are defined before timer can start
+		return
+	}
+	SUBSCRIBETIMER(TwoFiftyMS)
+}
+onTwoFiftyMS
+{
+	xmlints.count += 1
+	if (xmlints.count == 3) 
+	{ 
+		xmlints.count = 0
+	} 
+	else
+	{
+		return
+	}
+	
+	objs.possibleMoves = NEWLIST()
+	
+	objs.west = POINT3D(THIS().x - 1, THIS().y, THIS().z)
+	if (CANFITMOB(objs.west.x, objs.west.y, objs.west.z, 16, false, true, true, null))
+	{
+		foreach (objs.tile ; xmlobjs.spawnedPlatforms)
+		{
+			if (objs.tile.x != objs.west.x && objs.tile.y != objs.west.y)
+			{
+				ADDTOLIST(objs.possibleMoves, objs.west)
+			}
+		}
+	}
+	objs.east = POINT3D(THIS().x + 1, THIS().y, THIS().z)
+	if (CANFITMOB(objs.east.x, objs.east.y, objs.east.z, 16, false, true, true, null))
+	{ 
+		foreach (objs.tile ; xmlobjs.spawnedPlatforms)
+		{
+			if (objs.tile.x != objs.east.x && objs.tile.y != objs.east.y)
+			{
+				ADDTOLIST(objs.possibleMoves, objs.east)
+			}
+		}
+	}
+	
+	if (THIS().y + 1 < xmlints.targetY) // don't let it go through
+	{
+		objs.southeast = POINT3D(THIS().x + 1, THIS().y + 1, THIS().z)
+		if (CANFITMOB(objs.southeast.x, objs.southeast.y, objs.southeast.z, 16, false, true, true, null))
+		{ 
+			foreach (objs.tile ; xmlobjs.spawnedPlatforms)
+			{
+				if (objs.tile.x != objs.southeast.x && objs.tile.y != objs.southeast.y)
+				{
+					ADDTOLIST(objs.possibleMoves, objs.southeast)
+				}
+			}
+		}
+		
+		objs.southwest = POINT3D(THIS().x - 1, THIS().y + 1, THIS().z)
+		if (CANFITMOB(objs.southwest.x, objs.southwest.y, objs.southwest.z, 16, false, true, true, null))
+		{ 
+			foreach (objs.tile ; xmlobjs.spawnedPlatforms)
+			{
+				if (objs.tile.x != objs.southwest.x && objs.tile.y != objs.southwest.y)
+				{
+					ADDTOLIST(objs.possibleMoves, objs.southwest)
+				}
+			}
+		}
+	}
+	
+	objs.south = POINT3D(THIS().x, THIS().y + 1, THIS().z)
+	if (objs.south.y == xmlints.targetY)
+	{
+		objs.south.y = xmlints.startY
+	}
+	// can always move forward
+	ADDTOLIST(objs.possibleMoves, objs.south)
+	
+	objs.newTile = static, 4534
+	{
+		itemid = THIS().itemid
+		map = THIS().map
+		location = THIS().location
+	}
+	ADDTOLIST(xmlobjs.spawnedPlatforms, objs.newTile)
+	
+	if (xmlobjs.spawnedPlatforms.count > xmlints.numTiles)
+	{
+		objs.toRemove = xmlobjs.spawnedPlatforms[0]
+		REMOVEFROMLISTAT(xmlobjs.spawnedPlatforms, 0)
+		objs.kill = true
+		foreach (objs.tile ; xmlobjs.spawnedPlatforms)
+		{
+			// don't kill if another tile exists under it
+			if (objs.toRemove.x == objs.tile.x && objs.toRemove.y == objs.tile.y)
+			{
+				objs.kill = false
+				break
+			}
+		}
+		if (objs.kill)
+		{
+			objs.mobsOnRemovedTile = GETNEARBYMOBS(objs.toRemove, 0)
+			foreach (objs.mob ; objs.mobsOnRemovedTile)
+			{
+				objs.mob.z = GETAVERAGEZ(objs.mob)
+				if (xmlobjs.killType != null)
+				{
+					if (IS(TRIGMOB(), xmlobjs.killType)) // can target specific mob types
+					{
+						KILL(objs.mob)
+					}
+				}
+				else
+				{
+					KILL(objs.mob)
+				}
+			}
+		}
+		DELETE(objs.toRemove)
+	}
+	ints.nextMove = RANDOM(objs.possibleMoves.count)
+	// IMPORTANT... can't do the following... uberscript implementation error (splits on .)
+	//THIS().location = objs.possibleMoves[RANDOM(objs.possibleMoves.count)]
+	THIS().location = objs.possibleMoves[ints.nextMove]
+}

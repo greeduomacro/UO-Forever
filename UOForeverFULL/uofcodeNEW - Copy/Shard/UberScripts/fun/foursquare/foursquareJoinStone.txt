@@ -1,0 +1,67 @@
+onCreate
+{
+	THIS().xmlints.totalPlayers = 0
+	THIS().movable = false
+	
+	THIS().xmlstrings.Moderator = "Alan"
+	THIS().itemid = 13920
+	objs.holder = static, 13911
+	THIS().z = objs.holder.z
+}
+
+onUse
+{
+	if(TRIGMOB().name == THIS().xmlstrings.Moderator)
+	{
+		if (THIS().xmlints.totalPlayers < 4)
+		{
+			SENDTARGET(TRIGMOB())
+			LOCALMSG(TRIGMOB(), "Select a player that you want to add to the game!")
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(),"Sorry, there are already 4 players in the game!")
+		}
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You don't have permission to assign players!")
+	}
+}
+onTarget
+{
+	if (DISTANCE(THIS(), TARGETED()) < 10)
+	{
+		if (IS(TARGETED(),playermobile))
+		{
+			objs.NewPlayer = humanmob
+			{
+				name = TARGETED().name
+				hue = TARGETED().hue
+				facialHairItemID = TARGETED().facialHairItemID
+				facialHairHue = TARGETED().facialHairHue
+				hairItemID =  TARGETED().hairItemID
+				hairHue = TARGETED().hairHue
+				bodyValue = TARGETED().bodyValue
+				ignoreMobiles = true
+				xmlints.stoneSerial = INT(THIS().serial)
+				
+				onDeath
+				{
+					objs.originalStone = GETITEM(xmlints.stoneSerial)
+					objs.originalStone.xmlints.totalPlayers -= 1
+				}
+			}
+			POSSESS(TARGETED(), objs.NewPlayer)
+			THIS().xmlints.totalPlayers += 1
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(),"You must select a player!")
+		}
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(),"That is too far away from the join stone!")
+	}
+}

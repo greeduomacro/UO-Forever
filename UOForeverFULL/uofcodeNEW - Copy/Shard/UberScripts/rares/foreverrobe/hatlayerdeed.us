@@ -1,0 +1,35 @@
+onUse
+{
+	if (THIS().RootParentEntity != TRIGMOB())
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it.")
+		return
+	}
+	SENDTARGET(TRIGMOB())
+	SENDMSG(TRIGMOB(), "Select a hat to layer. This reassigns the layer to the Earring, which allows it to be displayed even with a forever robe on.")
+}
+onTarget
+{
+	if (THIS().RootParentEntity != TRIGMOB())
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it.")
+		return
+	}
+	if (IS(TARGETED(), BaseHat) || IS(TARGETED(), BoneHelm))
+	{
+		if (STRING(TARGETED().Layer) != Earrings)
+		{
+			ADDSCRIPT(TARGETED(), "rares\\layered.us", "layered")
+			SENDMSG(TRIGMOB(), "You layer the object. It is now considered to be on the earring layer.")
+			DELETE(THIS())
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "That item is already layered.")
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must select a hat object.")
+	}
+}

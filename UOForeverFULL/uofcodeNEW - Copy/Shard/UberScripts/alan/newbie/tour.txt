@@ -1,0 +1,207 @@
+onCreate
+{
+	THIS().speaks = false
+	THIS().frozen = true
+	THIS().currentwaypoint = GETITEM(0x4009c4ee)
+	THIS().currentspeed = 0.20
+	THIS().passivespeed = 0.20
+	THIS().activespeed = 0.20
+	THIS().xmlints.stage = 0
+	THIS().ignoremobiles = true
+	THIS().forcewaypoint = true
+	THIS().blessed = true
+	THIS().speechhue = 0x3a
+	THIS().name = "Young Player Tour Guide"
+	EFFECT(14089,30,THIS())
+	SOUND(THIS(),0x208)
+	SAY(THIS(),"Greetings, young one! Welcome to Britannia, please follow me for a very brief tour!")
+	pause 8000
+	SAY(THIS(),"It can be overwhelming to get started in this world. It is a dangerous place, but a wondrous place too!")	
+	pause 8000
+	SAY(THIS(),"This tour will guide you to the Young player dungeon, and will go over some of the basics along the way.")
+	pause 8000
+	SAY(THIS(),"Come this way, please!")
+	pause 2000
+	THIS().frozen = false
+	SUBSCRIBETIMER(OneSecond)	
+}
+
+onOneSecond
+{
+	THIS().forcewaypoint = true
+	if (THIS().xmlints.stage == 0)
+	{
+		if (THIS().x > 1473 && THIS().x < 1478 && THIS().y > 1657 && THIS().y < 1662)
+		{
+			THIS().xmlints.stage = 1			
+			THIS().frozen = true
+			SAY(THIS(), "These stones are faction stones. Each faction wars the others over control of Britannia.")
+			pause 7000
+			SAY(THIS(), "You use these stones to join, but beware! You should wait until you are trained up a bit! You will want friends to assist you, too!")
+			pause 10000
+			SAY(THIS(), "Most people make a warrior for their first character. Let me show you where to buy some weapons!")
+			pause 9000
+			SAY(THIS(), "The weapons we buy from NPC weaponsmiths are pretty low quality, but they are inexpensive.")
+			pause 9000
+			SAY(THIS(), "Other players often sell 'exceptional' quality or magical weapons too! If you are interested in becoming a blacksmith yourself, you can also make weapons and armor!")
+			pause 11000
+			SAY(THIS(), "HOWEVER, be aware that you must 'specialize' each character. You can only use 700 skill points per character!")
+			pause 10000
+			SAY(THIS(), "This means you can't be a powerful warrior and a crafter and a bard and a tamer all at the same time!... well actually you could, but you wouldn't be very good at any of those roles.")
+			pause 14000
+			SAY(THIS(), "To see or use skills, press Alt-K. There are many different categories of skills. Click the arrow by 'Combat', for example.")
+			pause 15000
+			SAY(THIS(), "You can see you actually have some skill already, but that comes from a bonus from your Strength, Intelligence, and/or Dexterity.")
+			pause 13000
+			SAY(THIS(), "NOTE that only 'Real' skill counts towards your 700 skill points, so press the red button in the bottom right corner labelled 'Show Real' to see your true skill point count.")
+			pause 16000
+			SAY(THIS(), "Real skill is gained by practicing that skill. In general, you can only gain in a skill if you don't have 100% chance to fail OR a 100% chance to succeed.")
+			pause 16000
+			SAY(THIS(), "You can set the arrows next to each skill to up, down, or locked... in this way, you can customize your build and even change it later if you want.")
+			pause 15000
+			SAY(THIS(), "If you have 700 real skill and all your skills are on up arrow, you won't be able to gain anything!  You must choose a skill with points to put on a down arrow.")
+			pause 15000
+			SAY(THIS(), "You get a skill gain bonus if you are in a dungeon (like the Young dungeon I am going to show you).")
+			pause 9000
+			SAY(THIS(), "You also gain in Strength, Intelligence, and Dexterity by practicing associated skills (e.g. swordsmaship for Strength). Press Alt-S to open your status window.")
+			pause 14500
+			SAY(THIS(), "You can only have a total of 225 points across Str, Int, and Dex. Most players do a 90, 90, 45 distribution (90 Int for mages, 90 Dex for warriors).")
+			pause 13000
+			SAY(THIS(), "As a side note, if you are a mage you can buy reagents in the building to our right. Be aware that it is usually harder to get started as a mage than a warrior.")
+			pause 12000
+			SAY(THIS(), "Many players create a warrior first to make gold in dungeons in order to buy supplies for a mage, but it's up to you how you would like to play!")
+			pause 12000
+			SAY(THIS(), "Note that you can have 2 accounts on UOForever, with up to 3 characters per account...")
+			pause 8000
+			SAY(THIS(), "You can even open UOForever twice and run both accounts at the same time (hard to do, but especially helpful for training faster!)")
+			pause 11000
+			SAY(THIS(), "Off we go!")
+			pause 3000
+			THIS().frozen = false
+		}
+	}
+	if (THIS().xmlints.stage == 1)
+	{
+		if (THIS().x > 1445 && THIS().x < 1451 && THIS().y > 1649 && THIS().y < 1653)
+		{
+			THIS().xmlints.stage = 2			
+			THIS().frozen = true
+			pause 3000
+			SAY(THIS(), "This is the blacksmith shop. There are many throughout Britannia. You can buy from the shopkeepers by saying \"vendor buy\" to them.")
+			pause 9000
+			SAY(THIS(), "You should give it a try! There's no obligation!")
+			pause 7000
+			SAY(THIS(), "If you don't see the trade window appear, try walking closer to the vendor.")
+			pause 15000
+			SAY(THIS(), "In a moment, we will head towards the bank. This is where most people hang out, but beware of thieves! They can steal from your backpack!")
+			pause 7000
+			SAY(THIS(), "Don't worry just yet, though. Everything you started with is unstealable. But most things you acquire henceforth are stealable!")
+			pause 7000
+			THIS().frozen = false
+			pause 18000
+			THIS().frozen = true
+			SAY(THIS(), "You will only want to carry what you need most of the time! To store the other belongings say \"bank\" nearby this building to the left. If nothing happens, step closer to it!")
+			pause 15000
+			THIS().frozen = false
+			THIS().forcewaypoint = true
+		}
+	}
+	if (THIS().xmlints.stage == 2)
+	{
+		if (THIS().x > 1443 && THIS().x < 1447 && THIS().y > 1669 && THIS().y < 1674)
+		{
+			THIS().xmlints.stage = 3			
+			THIS().frozen = true
+			SAY(THIS(), "This is the elder's hall. The elders are other players like you who volunteer time to help. If you see them, feel free to ask them for some assistance.")
+			pause 12000
+			SAY(THIS(), "This way, please!")
+			THIS().frozen = false
+			pause 10000
+			THIS().frozen = true
+			SAY(THIS(), "Other Britannians can be very helpful-especially if you find a good guild. But beware! Don't trust everybody!")
+			pause 9000
+			SAY(THIS(), "This way to the young player dungeon!")
+			pause 4000
+			SAY(THIS(), "Do NOT go into the sparkling portal just yet, though. I have other very important things to tell you!")
+			pause 7000
+			THIS().frozen = false
+
+		}
+	}	
+	if (THIS().xmlints.stage == 3)
+	{
+		if (THIS().x > 1408 && THIS().x < 1414 && THIS().y > 1712 && THIS().y < 1719)
+		{
+			UNSUBSCRIBETIMER(OneSecond)
+			THIS().xmlints.stage = 4
+			THIS().frozen = true
+			pause 1000
+			SAY(THIS(), "Some basic things you need to know:")
+			pause 3500
+			SAY(THIS(), "Alt-C to enter combat mode (double click your enemy). Alt-P opens your paperdoll, where you can equip a weapon.")
+			pause 12000
+			SAY(THIS(), "Press Alt-I to open your backpack.  Double click a bandage and target yourself to heal yourself when you are damaged!")
+			pause 11000
+			SAY(THIS(), "If you run out of bandages, you can buy cloth and scissors from the tailor (east of the bank) and use the scissors to cut the cloth into more bandages.")
+			pause 12000
+			SAY(THIS(), "If you are a mage, you will need reagents to cast heal on yourself. You started with 50 of each reagent, and can buy more at the reagent shops with the gold you make!")
+			pause 12000
+			SAY(THIS(), "The new player dungeon is a great place to earn some initial gold, gain skill, and learn the ropes.")
+			pause 10000
+			SAY(THIS(), "Getting to know Razor (the assistant program--double click the little red and grey icon by your system clock) is very important as it will help you a lot.")
+			pause 18000
+			SAY(THIS(), "Take time to explore the different Tabs in Razor. You can set Hotkeys to help you do many things.")
+			pause 10000
+			SAY(THIS(), "For example LastObject re-uses the last object you double clicked. LastTarget targets the last thing you targeted. OpenDoor opens the door in front of you. etc. etc.")
+			pause 15000
+			SAY(THIS(), "You can also set a hotkey to do things like target the closest enemy, cast a spell, or bandage yourself. Take time to learn it, it pays to do so!")
+			pause 14000
+			SAY(THIS(), "You can even record custom macros to help you train skills while you are away from your computer!")
+			pause 11000
+			SAY(THIS(), "But beware, it is a bannable offense to run a resource-gathering (wood / ore) macro UNATTENDED!")
+			pause 11000
+			SAY(THIS(), "Also, be aware that the only 3rd party programs allowed on UOForever are Razor and AssistUO.")
+			pause 10000
+			SAY(THIS(), "Please come to the uoforever forums if you have any questions, or ask another player! They are often very helpful.")
+			pause 11000
+			SAY(THIS(), "If you still can't find the information you need, open your paperdoll (Alt-P) and press the HELP button to contact staff.")
+			pause 10000
+			SAY(THIS(), "Please search the forums or ask other players first before doing so, however, because the staff all have day jobs ;)!")
+			pause 10000
+			SAY(THIS(), "NOTE: You can press Alt-J to see your journal and review what I said if you missed anything!")
+			pause 11000
+			SAY(THIS(), "This concludes the tour, here is your 500gp reward!")
+			pause 2000
+			objs.nearby = GETNEARBYMOBS(THIS(),6)
+			foreach (objs.mob ; objs.nearby)
+			{
+				if (objs.mob.xmlints.gotTourReward == null)
+				{
+					if (objs.mob.xmlints.gotTour != null)
+					{
+						objs.mob.xmlints.gotTourReward = 1
+						objs.mob.xmlints.gotTourReward.expiration = 12:0:0
+						objs.gold = gold,500
+						ADDTOPACK(objs.mob, objs.gold)
+						SOUND(objs.mob, 0x32)
+					}
+					// player who said "help" but a tour was in session and they hopped in with the other tour
+					elif (objs.mob.xmlints.tourPossibleReward != null)
+					{
+						objs.mob.xmlints.gotTour = 1
+						objs.mob.xmlints.gotTour.expiration = 12:0:0
+						objs.mob.xmlints.gotTourReward = 1
+						objs.mob.xmlints.gotTourReward.expiration = 12:0:0
+						objs.gold = gold,500
+						ADDTOPACK(objs.mob, objs.gold)
+						SOUND(objs.mob, 0x32)
+					}
+				}
+			}
+			SAY(THIS(), "Good luck, and welcome to UO Forever!!!")	
+			pause 7000
+			THIS().frozen = true
+			DELETE(THIS())
+		}
+	}
+}

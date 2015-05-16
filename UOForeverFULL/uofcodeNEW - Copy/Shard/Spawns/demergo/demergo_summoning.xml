@@ -1,0 +1,105 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DemergoAlch_Summoning</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-a51055afe321</UniqueId>
+    <Map>Felucca</Map>
+    <X>5735</X>
+    <Y>356</Y>
+    <Width>1</Width>
+    <Height>1</Height>
+    <CentreX>5735</CentreX>
+    <CentreY>356</CentreY>
+    <CentreZ>31</CentreZ>
+    <Range>5</Range>
+    <MaxCount>20</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>100</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>SETONTHIS/ATTACH/&lt;xmlvalue,summoncount,0&gt;:MX=1:RT=0:TO=0:KL=0:SB=1
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,{GETONMOB,an ophidian alchemist,ophidianmage,x},{GETONMOB,an ophidian alchemist,ophidianmage,y},100:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5735,353,100:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5737,355,110:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5735,357,100:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5733,355,90:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5736,350,100:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5733,355,120:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5731,360,130:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/frozen/true/MEFFECT,14036,1,5730,352,95:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/ANIMATE,14,6,3,true,true,0:MX=1:RT=0:TO=0:KL=0:SB=2
+	:OBJ=IF/GETONMOB,an ophidian alchemist,ophidianmage,hits&lt;150/4/5:MX=1:RT=0:TO=0:KL=0:SB=3
+	:OBJ=GOTO/7:MX=1:RT=0:TO=0:KL=0:SB=4
+	:OBJ=GOTO/10:MX=1:RT=0:TO=0:KL=0:SB=5
+	
+	:OBJ=SET,DemergoAlch_DoorBlowUp,xmlspawner/sequentialspawn/80/running/true:MX=1:RT=0:TO=0:KL=0:SB=7
+	:OBJ=SETONTHIS/doreset/true:MX=1:RT=0:TO=0:KL=0:SB=7
+	
+	:OBJ=SETONTHIS/ATTACHMENT,xmlvalue,summoncount,value/INC,1:MX=1:RT=0:TO=0:KL=0:SB=10
+	:OBJ=IF/GETONTHIS,[ATTACHMENT,xmlvalue,summoncount,value]&gt;25/12/13:MX=1:RT=0:TO=0:KL=0:SB=11
+	:OBJ=GOTO/90:MX=1:RT=0:TO=0:KL=0:SB=12
+	:OBJ=GOTO/20:MX=1:RT=0:TO=0:KL=0:SB=13
+	
+	:OBJ=SETVAR,test/{RND,1,15}:MX=1:RT=0:TO=0:KL=0:SB=20
+	:OBJ=IF/{GETVAR,test}=1/22/23:MX=1:RT=0:TO=0:KL=0:SB=21
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/*Mumbles power words*:MX=1:RT=0:TO=0:KL=0:SB=22
+	:OBJ=GOTO/2 :MX=1:RT=0:TO=0:KL=0:SB=22
+	:OBJ=IF/{GETVAR,test}=2/24/25:MX=1:RT=0:TO=0:KL=0:SB=23
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Protect me, humansss! I need more time!:MX=1:RT=0:TO=0:KL=0:SB=24
+	:OBJ=GOTO/2  :MX=1:RT=0:TO=0:KL=0:SB=24
+	:OBJ=IF/{GETVAR,test}=3/26/27:MX=1:RT=0:TO=0:KL=0:SB=25
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Almost there!:MX=1:RT=0:TO=0:KL=0:SB=26
+	:OBJ=GOTO/2   :MX=1:RT=0:TO=0:KL=0:SB=26
+	:OBJ=IF/{GETVAR,test}=4/28/29:MX=1:RT=0:TO=0:KL=0:SB=27
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Almost there1!:MX=1:RT=0:TO=0:KL=0:SB=28
+	:OBJ=GOTO/2    :MX=1:RT=0:TO=0:KL=0:SB=28
+	:OBJ=IF/{GETVAR,test}=5/30/31:MX=1:RT=0:TO=0:KL=0:SB=29
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Almost there2!:MX=1:RT=0:TO=0:KL=0:SB=30
+	:OBJ=GOTO/2     :MX=1:RT=0:TO=0:KL=0:SB=30
+	:OBJ=IF/{GETVAR,test}=6/32/33:MX=1:RT=0:TO=0:KL=0:SB=31
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Almost there3!:MX=1:RT=0:TO=0:KL=0:SB=32
+	:OBJ=GOTO/2      :MX=1:RT=0:TO=0:KL=0:SB=32
+	:OBJ=IF/{GETVAR,test}=7/34/35:MX=1:RT=0:TO=0:KL=0:SB=33
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Almost there4!:MX=1:RT=0:TO=0:KL=0:SB=34
+	:OBJ=GOTO/2       :MX=1:RT=0:TO=0:KL=0:SB=34
+	:OBJ=SETONMOB,an ophidian alchemist,ophidianmage/SAY/Almost there5!:MX=1:RT=0:TO=0:KL=0:SB=35
+	:OBJ=GOTO/2        :MX=1:RT=0:TO=0:KL=0:SB=35
+	
+	:OBJ=#XY,
+	:OBJ=#XY,5751,358,26 ; teleporter/pointdest/(5621,378,6)/mapdest/felucca:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5751,358,26 ; static,14170:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5621,378,6 ; teleporter/pointdest/(5751,358,26)/mapdest/felucca:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5621,378,6 ; static,14170:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5751,357,26 ; teleporter/pointdest/(5621,377,6)/mapdest/felucca:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5751,357,26 ; static,14170:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5621,377,6 ; teleporter/pointdest/(5751,357,26)/mapdest/felucca:MX=1:RT=0:TO=0:KL=0:SB=98
+	:OBJ=#XY,5621,377,6 ; static,14170:MX=1:RT=0:TO=0:KL=0:SB=98
+	
+	:OBJ=SETONTHIS/running/false :MX=1:RT=0:TO=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>
+<!-- 
+:OBJ=:MX=1:RT=0:TO=0:KL=0:SB=6
+-->

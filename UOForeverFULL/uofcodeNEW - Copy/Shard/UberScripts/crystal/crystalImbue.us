@@ -1,0 +1,86 @@
+function effect() // expecting objs.loc
+{
+	MEFFECT(RANDOMMINMAX(0x483B, 0x4883), 1, objs.loc, POINT3D(objs.loc.X, objs.loc.Y, 100), true, false)
+	EFFECT(14089, 30, objs.loc)
+}
+onCreate
+{
+	objs.loc = POINT3D(0,0,0)
+	objs.center = xmlobjs.runeSpinStart
+	xmlobjs.runeSpinStart = null
+	objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y + 8; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 5; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 6; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 6; objs.loc.Y = objs.center.Y -5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 5; objs.loc.Y = objs.center.Y -6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y -5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -5; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -5; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+	objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+	SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+	DELETE(SCRIPT())
+}

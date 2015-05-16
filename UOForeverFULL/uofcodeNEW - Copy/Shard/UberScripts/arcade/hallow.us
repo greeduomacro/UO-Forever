@@ -1,0 +1,50 @@
+// TO DO
+
+// TRAMMEL T2A REGION CONTROL: 5430,2831,84
+// named: Survival Region
+//covers 5120, 2437, 96 through 6142 4094 47
+
+// Locations of special mobs:
+// 5198 3141 91 (spiral)
+// 5548 2636 -4
+// 5906 4069 26 southern platform
+// 5779 2615 66 // ophidian
+// 5680 2400 59 // lighthouse
+// 5452 3121 -55 // terathan // IN FRONT 5493 3223 -1
+// 5385 3229 0 // ruined building
+// 5580, 3021, 28 // ant hole
+
+
+onCreate
+{	
+	SCRIPT().name = "hallBase"
+	SUBSCRIBETIMER(OneSecond)
+	AI = AI_Arcade
+	FreelyLootable = true
+	xmlints.count = 0
+	if (xmlobjs.owner != null)
+	{
+		xmlobjs.owner.xmlints.zombieCount += 1
+	}
+}
+onOneSecond
+{
+	THIS().z += 1
+	xmlints.count += 1
+	if (xmlints.count == 11)
+	{
+		UNSUBSCRIBETIMER(OneSecond)
+		xmlints.count = null
+	}
+}
+onBeforeDeath
+{
+	if (xmlobjs.owner != null)
+	{
+		xmlobjs.owner.xmlints.zombieCount -= 1
+	}
+	if (TRIGMOB().xmlints.zombieKills != null)
+	{
+		TRIGMOB().xmlints.zombieKills += 1
+	}
+}

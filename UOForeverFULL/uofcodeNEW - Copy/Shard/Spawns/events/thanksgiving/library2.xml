@@ -1,0 +1,66 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DemergoAlch_Keg3</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29b523a10522</UniqueId>
+    <Map>Felucca</Map>
+    <X>5699</X>
+    <Y>391</Y>
+    <Width>11</Width>
+    <Height>11</Height>
+    <CentreX>5329</CentreX>
+    <CentreY>3785</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>#XY,5324,3799,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You found a powerword clue: First comes Negate.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3799,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3798,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3798,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3797,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3797,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3796,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3796,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3795,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3795,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You found a powerword clue: Fifth comes Change&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3794,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3794,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3793,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3793,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3792,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3792,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3791,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3791,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3790,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3790,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3789,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3789,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3788,12 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=#XY,5324,3788,0 ; *static,2713/ATTACH/&lt;xmluse/successaction/@SETONTRIGMOB/SENDMSG/You search through the books but find nothing pertinent.&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

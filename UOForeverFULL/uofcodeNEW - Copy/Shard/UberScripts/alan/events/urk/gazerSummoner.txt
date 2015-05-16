@@ -1,0 +1,21 @@
+onCreate
+{
+	movable = false
+	hue = 38
+	name = "Gazer Summoner"
+}
+onUse
+{
+	SENDTARGET(TRIGMOB())
+}
+onTarget
+{
+	if (DISTANCE(TARGETED(), TRIGMOB()) < 20)
+	{
+		RUNSCRIPT(TARGETED(), "alan\\events\\urk\\gazerSummon.txt")
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is too far away!")
+	}
+}

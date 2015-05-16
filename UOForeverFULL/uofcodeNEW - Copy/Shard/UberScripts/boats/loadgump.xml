@@ -1,0 +1,28 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+  <VBox padding="15" backgroundID="0" fitToContents="false">
+    <Box fitToContents="false" x="0" y="0" width="200" height="200" backgroundID="0">
+	  <Image gumpID="62"/>
+	  
+      <Button x="ints.x1+17" y="ints.y1+2" name="1" normalID="22150" pressedID="22150" />
+      <Item x="ints.x1" y="ints.y1" itemID="16954" width="0" height="0" hue="ints.hue1" />
+	  
+      <Button x="ints.x2+17" y="ints.y2+2" name="2" normalID="22150" pressedID="22150" />
+      <Item x="ints.x2" y="ints.y2" itemID="16954" width="0" height="0" hue="ints.hue2" />
+	  
+	  <Button x="ints.x3+17" y="ints.y3+2" name="3" normalID="22150" pressedID="22150" />
+      <Item x="ints.x3" y="ints.y3" itemID="16954" width="0" height="0" hue="ints.hue3" />
+	  <Button x="ints.x4+17" y="ints.y4+2" name="4" normalID="22150" pressedID="22150" />
+      <Item x="ints.x4" y="ints.y4" itemID="16954" width="0" height="0" hue="ints.hue4" />
+	  <Button x="ints.x5+17" y="ints.y5+2" name="5" normalID="22150" pressedID="22150" />
+      <Item x="ints.x5" y="ints.y5" itemID="16954" width="0" height="0" hue="ints.hue5" />
+	  <Button x="ints.x6+17" y="ints.y6+2" name="6" normalID="22150" pressedID="22150" />
+      <Item x="ints.x6" y="ints.y6" itemID="16954" width="0" height="0" hue="ints.hue6" />
+	  <Button x="ints.x7+17" y="ints.y7+2" name="7" normalID="22150" pressedID="22150" />
+      <Item x="ints.x7" y="ints.y7" itemID="16954" width="0" height="0" hue="ints.hue7" />
+	  <Button x="50" y="150" normalID="7042" pressedID="7042" name="fire"/>
+	  <Label x="70" y="175" hue="37">"FIRE!"</Label>
+	  <Button x="10" y="175" name="empty" normalID="22150" pressedID="22152" />
+	  <Button x="150" y="175" name="help" normalID="22153" pressedID="22155" />
+    </Box>
+  </VBox>
+</Gump>

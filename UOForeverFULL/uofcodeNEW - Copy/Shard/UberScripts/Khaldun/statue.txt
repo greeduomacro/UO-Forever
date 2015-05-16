@@ -1,0 +1,21 @@
+onUse
+{
+	if (TRIGMOB().xmlints.KhaldunStatue == null)
+	{
+		TRIGMOB().xmlints.KhaldunStatue = 1
+		
+		objs.toGive = static,5360
+		{
+			hue = 1157
+			name = "In memorium of my escape from the infernal depths. 120o 35'E. 27o 33'E - Michael Angelo of the Britain Miner's Guild"
+			movable = true
+			loottype = blessed
+		}
+		LOCALMSG(TRIGMOB(),"You scribble down a copy of the statue's inscription.")
+		ADDTOPACK(TRIGMOB(),objs.toGive)
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(),"You have already inscribed the coordinates on a note!")
+	}
+}

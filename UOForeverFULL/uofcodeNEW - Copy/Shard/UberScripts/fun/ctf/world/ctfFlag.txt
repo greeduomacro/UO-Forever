@@ -1,0 +1,85 @@
+onCreate
+{
+	itemid = 0x1627
+	movable = false
+}
+onNearbyMove
+{
+	// SCRIPT().name will hold the name of the owner team
+	if (DISTANCE(THIS(),TRIGMOB()) < 2)
+	{
+		// check if they are on this team
+		objs.team = GETATTACHMENT(TRIGMOB(), XmlTeam)
+		if (objs.team == null)
+		{
+			return
+		}
+		if (TRIGMOB().xmlstrings.hasFlag == null) // doesn't have any flag already (in case there are more than 2 teams)
+		{
+			if (objs.team.name != SCRIPT().name) // on enemy team
+			{
+				// steal the flag
+				TRIGMOB().xmlobjs.assists = NEWLIST()
+				TRIGMOB().xmlstrings.hasFlag = SCRIPT().name
+				TRIGMOB().SolidHueOverride = THIS().hue
+				TRIGMOB().xmlobjs.flagReturnLoc = THIS().location
+				EVENTMESSAGE(TRIGMOB().xmlobjs.owner, TRIGMOB().xmlobjs.owner.xmlstrings.eventName, SCRIPT().name + "'s flag has been stolen!", THIS().hue)
+				DELETE(THIS())
+			}
+		}
+		else
+		{
+			// they have a flag
+			if (objs.team.name == SCRIPT().name)
+			{
+				// they captured the flag
+				// return the flag
+				objs.flag = UberScriptItem, 0x1627
+				// add flag to spawnedItems so it is cleaned up at the end
+				if (TRIGMOB().xmlobjs.owner != null && TRIGMOB().xmlobjs.owner.xmlobjs.spawnedItems != null)
+				{
+					ADDTOLIST(TRIGMOB().xmlobjs.owner.xmlobjs.spawnedItems, objs.flag)
+				}
+				ADDSCRIPT(objs.flag, "fun\\ctf\\world\\ctfFlag.txt", TRIGMOB().xmlstrings.hasFlag)
+				objs.flag.location = TRIGMOB().xmlobjs.flagReturnLoc
+				objs.flag.hue = TRIGMOB().solidhueoverride
+				TRIGMOB().xmlobjs.flagReturnLoc = null
+				TRIGMOB().xmlstrings.hasFlag = null
+				TRIGMOB().xmlints.ctfcaptures += 1
+				if (TRIGMOB().xmlobjs.assists != null)
+				{
+					foreach (objs.assistant ; TRIGMOB().xmlobjs.assists)
+					{
+						if (objs.assistant.xmlints.ctfassists != null)
+						{
+							objs.assistant.xmlints.ctfassists += 1
+							SENDMSG(objs.assistant, "You got a flag assist! You now have " + objs.assistant.xmlints.ctfassists + " assists.", 0x38)
+						}
+					}
+					TRIGMOB().xmlobjs.assists = null
+				}
+				TRIGMOB().solidhueoverride = -1
+				objs.group = GETGROUP(TRIGMOB(), TRIGMOB().xmlobjs.owner.xmlstrings.eventName)
+				if (objs.group != null)
+				{
+					objs.group.score += 1
+					
+					objs.groups = GETATTACHMENTS(TRIGMOB().xmlobjs.owner, XmlGroup)
+					strings.message = objs.group.name + " has captured the flag! New scores... "
+					foreach (objs.oneGroup ; objs.groups)
+					{
+						if (objs.oneGroup.EventInProgress)
+						{
+							strings.message += " " + objs.oneGroup.name + ": " + objs.oneGroup.Score
+						}
+					}
+					EVENTMESSAGE(TRIGMOB().xmlobjs.owner, TRIGMOB().xmlobjs.owner.xmlstrings.eventName, strings.message, 0x38)
+				}
+				else
+				{
+					SENDMSG(TRIGMOB(), "Nice job... but there was an error. Contact staff!")
+				}
+			}
+		}
+	}
+}

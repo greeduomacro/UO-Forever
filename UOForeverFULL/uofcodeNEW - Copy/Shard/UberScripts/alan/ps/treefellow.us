@@ -1,0 +1,115 @@
+onCreate
+{
+	xmlints.spawnLeft = 100
+	name = "a treant"
+	bodyvalue = 301
+	basesoundid = 0x1ba
+	hairitemid = 0
+	facialhairitemid = 0
+	SCRIPT().name = "treant"
+	rawstr = 120
+	rawint = 40
+	rawdex = 120
+	hitsmaxseed = 999
+	hits = 999
+	stammaxseed = 120
+	stam = 120
+	manamaxseed = 40
+	mana = 40
+	FreelyLootable = true
+	GuardImmune = true
+	BardImmuneCustom = true
+	Pseu_AllowInterrupts = false
+	PowerWords = false
+	SETSKILL(THIS(), "Archery", 120.0)
+	SETSKILL(THIS(), "Macing", 120.0)
+	SETSKILL(THIS(), "Tactics", 100.0)
+	SETSKILL(THIS(), "Anatomy", 100.0)
+	SETSKILL(THIS(), "Healing", 100.0)
+	SETSKILL(THIS(), "Veterinary", 100.0)
+	SETSKILL(THIS(), "AnimalLore", 100.0)
+	SETSKILL(THIS(), "Magery", 100.0)
+	SETSKILL(THIS(), "EvalInt", 100.0)
+	SETSKILL(THIS(), "MagicResist", 100.0)
+	objs.weapon = bow { quality = exceptional; association = 1; } ADDTOPACK(THIS(), objs.weapon)
+	objs.weapon = warhammer { quality = exceptional; association = 1; } ADDTOPACK(THIS(), objs.weapon)
+	objs.bandage = bandage, 300 { movable = false } ADDTOPACK(THIS(), objs.bandage)
+	objs.fullspellbook = fullspellbook { movable = false }; ADDTOPACK(THIS(), objs.fullspellbook)
+	for (ints.i = 0; ints.i < 10; ints.i += 1)
+	{
+		objs.potion = totalrefreshpotion
+		objs.potion.association = 1
+		ADDTOPACK(THIS(), objs.potion)
+		if (ints.i % 2 == 0)
+		{
+			objs.potion = greatercurepotion
+			objs.potion.association = 1
+			ADDTOPACK(THIS(), objs.potion)
+			objs.potion = greaterhealpotion
+			objs.potion.association = 1
+			ADDTOPACK(THIS(), objs.potion)
+			objs.tpouch = tpouch
+			objs.tpouch.association = 1
+			ADDTOPACK(THIS(), objs.tpouch)
+		}
+	}
+}
+onDeath
+{
+	for (ints.i = 0; ints.i < 30; ints.i += 1)
+	{
+		objs.plat = platinum, 6
+		ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	}
+}
+onSay
+{
+	if (xmlints.spawnLeft <= 0) { return }
+	if (SAID("nature rises!") || SAID("let the earth speak forth its fury") || SAID("come forth, my friends!"))
+	{
+		xmlints.spawnLeft -= 1
+		if (xmlints.spawnLeft <= 0)
+		{
+			LOG("treefellow", THIS().account + " ran out of spawn")
+			return
+		}
+		
+		objs.spawn = reaper
+		{
+			hitsmaxseed = 600
+			hits = 600
+			onDeath
+			{
+				objs.plat = platinum, 6
+				{
+					amount = RANDOMMINMAX(6, 10)
+				}
+				ADDTOCONTAINER(TRIGITEM(), objs.plat)
+			}
+			hidden = true
+		}
+		LOG("treefellow", NOW() + " " + THIS().account + " spawned reaper at " + objs.spawn.location)
+		objs.spawn.z -= 10
+		objs.spawn.hidden = false
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+		pause 250
+		objs.spawn.z += 1
+	}
+}

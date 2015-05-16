@@ -1,0 +1,50 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DotaBegin</Name>
+    <UniqueId>cce2795d-a536-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1468</X>
+    <Y>1469</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1468</CentreX>
+    <CentreY>1469</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>SETONNEARBY,100,*,spawner/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=SETONNEARBY,100,*,basecreature/DAMAGE,1500,1500:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#XY,1405,1477,0 ; MULTIADDON,dotaorcbasewall.txt:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=#XY,1481,1444,20 ; MULTIADDON,dotahumanbasewall.txt:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=BCAST/The dota game has begun! Double click the join stone to randomly be assigned to a team.  Each base has a healer and a red supply stone in it. You cannot leave your base for 3 minutes-take advantage of that time to plan! Your mission: Destroy the enemy commander. Commanders cannot be healed, but can be cured. All participants will BE TELEPORTED OUTSIDE OF GALVEN as soon as the event is completed.:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=WAITUNTIL,3:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+:OBJ=BCAST/The walls have dropped, good luck!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+:OBJ=SETONTHIS/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

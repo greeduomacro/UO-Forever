@@ -1,0 +1,8 @@
+onDeath
+{
+	if (xmlobjs.owner != null)
+	{
+		xmlobjs.owner.location = THIS().location
+		xmlobjs.owner.map = THIS().map
+	}
+}

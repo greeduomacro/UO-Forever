@@ -1,0 +1,37 @@
+onCreate
+{
+	SUBSCRIBETIMER(FiftyMS)
+}
+onTargeted
+{
+	if (SPELL() != null && IS(SPELL(), ResurrectionSpell) && THIS().xmlints.dead == 3)
+	{
+		ANIMATE(THIS(), 22, 6, 1, false, false, 0)
+		SOUND(THIS(), 0x214)
+		EFFECT(14186, 16, THIS())
+		THIS().Squelched = false
+		THIS().Frozen = false
+		UNSUBSCRIBETIMER(FiftyMS)
+		xmlints.dead = null
+		return override
+	}
+}
+onFiftyMS
+{
+	if (xmlints.dead == 1)
+	{
+		// need animations
+		THIS().Squelched = true
+		THIS().Frozen = true
+		ANIMATE(THIS(), 22, 5, 1, true, false, 0)
+		xmlints.dead = 2
+		pause 700
+		ANIMATE(THIS(), 22, 6, 1, false, false, 100)
+		DEATHSOUND(THIS())
+		xmlints.dead = 3
+	}
+	else if (xmlints.dead == 3)
+	{
+		ANIMATE(THIS(), 22, 6, 1, false, false, 100)
+	}
+}

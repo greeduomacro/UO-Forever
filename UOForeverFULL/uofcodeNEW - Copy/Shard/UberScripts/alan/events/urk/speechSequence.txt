@@ -1,0 +1,54 @@
+onCreate
+{
+	movable = false
+	hue = 0x38
+	name = "Quest Sequence"
+}
+onUse
+{
+	if (TRIGMOB() == THIS().rootparententity)
+	{
+		NEXTSTAGE()
+	}
+}
+
+//==== FIRST stages: at britain, pseudoseers should follow the conjurer
+
+1 { SAY(TRIGMOB(), "The time has come to investigate this "rift". I must give you all fair warning,") }
+2 { SAY(TRIGMOB(), "we embark on a quest from which we may never return!") }
+3 { SAY(TRIGMOB(), "I get kind of nervous in situations like this..."); COMMAND(TRIGMOB(),"emote puke") }
+4 { SAY(TRIGMOB(), "I must warn you as well that the magics in which I delve have changed me in odd ways...") }
+5 { COMMAND(TRIGMOB(), "emote sigh") }
+6 { SAY(TRIGMOB(), "The conjuring arts are all about summoning magical creatures to you and bending them") }
+7 { SAY(TRIGMOB(), "to your will. I have found that since practicing conjuration, dark creatures have a") }
+8 { SAY(TRIGMOB(), "keen sense of where I am and a great desire to see me destroyed!  Be on your guard!") }
+9 { SAY(TRIGMOB(), "I will now answer a few questions that you may have before we embark...") }
+10 { SAY(TRIGMOB(), "Come then, brave citizens! Let us embark to Cove and investigate this rift!") }
+11 { COMMAND(TRIGMOB(), "emote puke") }
+
+//==== SECOND stages: while walking through the swamp, I make a bunch of elder gazers appear - pseudoseers possess them and attack players
+
+20 { COMMAND(TRIGMOB(),"emote shush"); SAY(TRIGMOB(), "Be on your guard!  I can feel that dark creatures of great intelligence ") }
+21 { SAY(TRIGMOB(), "have detected my presence! They could appear at a moment's notice!") }
+
+22 { COMMAND(TRIGMOB(),"emote whistle"); SAY(TRIGMOB(), "Ack, gazers are upon us! We must waste no time dispatching these beasts!") }
+23 { SAY(TRIGMOB(), "There's no telling what they would do with the knowledge that I possess!") }
+
+//==== THIRD stage: Conjurer chants power words and make meteors fall from the sky on the rift and then it starts shooting out flamestrikes
+// 
+30 { SAY(TRIGMOB(), "We have made it, my friends!") }
+31 { SAY(TRIGMOB(), "Now, let me see what is going on here...") }
+// I inspect the rift
+32 { SAY(TRIGMOB(), "No... this cannot be right...") }
+33 { COMMAND(TRIGMOB(), "emote gasp") }
+34 { SAY(TRIGMOB(), "This must be stopped immediately before... ") }
+35 
+{
+	COMMAND(TRIGMOB(), "emote yell") 
+	SAY(TRIGMOB(), "Back away you fools!")
+}
+36 
+{ 
+	BCAST("Therald the conjurer: We must divert the inter-dimensional rift to another location immediately or the Abyss itself will become one with Britannia! The ritual requires orc blood be gathered and placed within 2 tiles of the center of the rift. Ask me for a 'basin' to use for gathering orc blood!", 0x38)
+	SCRIPT().stage = 35	
+}

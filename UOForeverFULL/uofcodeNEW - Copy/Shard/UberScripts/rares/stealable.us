@@ -1,0 +1,24 @@
+onCreate
+{
+	Movable = false
+	SETSTEALABLE(THIS(), true)
+}
+onTargeted
+{
+	if (DISTANCE(TRIGMOB(), THIS()) < 2)
+	{
+		if (STRING(SKILLNAME()) == "Stealing")
+		{
+			// they got it, take it away
+			xmlobjs.owner.xmlints.rares -= 1
+			xmlobjs.owner = null
+			LOG("RareStealable", TRIGMOB().Account + "\t" + TRIGMOB().Name + "\tgot\t" + THIS().Name + "\tItemID: " + THIS().ItemID + "\tSerial: " + THIS().Serial)
+			DELETE(SCRIPT())
+		}
+	}
+}
+onDelete
+{
+	xmlobjs.owner.xmlints.rares -= 1
+	LOG("RareStealable", THIS().Name + "\t" + THIS().ItemID + "\tDeleted")
+}

@@ -1,0 +1,42 @@
+<Gump closable="false" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"You have died!"</Label>
+		<Label hue="1153">"REJOIN NOW BY SELECTING A TEMPLATE!"</Label>
+		<Label hue="1153">"If you are giving up, just log out..."</Label>
+		<Label hue="1153">"So long as the crawl is still running,"</Label>
+		<Label hue="1153">"you can rejoin by double-clicking the"</Label>
+		<Label hue="1153">"Event Master..."</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="fencer"/>
+			<Label hue ="1553">"Fencer"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="macer"/>
+			<Label hue ="1553">"Mace Fighter"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="archer"/>
+			<Label hue ="1553">"Archer"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="lumberjack"/>
+			<Label hue ="1553">"Lumberjack"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="scribemage"/>
+			<Label hue ="1553">"Scribe-Stun Mage"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="tankmage"/>
+			<Label hue ="1553">"Tank Mage"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="noxmage"/>
+			<Label hue ="1553">"Nox Mage"</Label>
+		</HBox>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="stunmage"/>
+			<Label hue ="1553">"Stun-Heal Mage"</Label>
+		</HBox>
+	</VBox>
+</Gump>

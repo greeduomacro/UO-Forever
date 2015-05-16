@@ -1,0 +1,62 @@
+onCreate
+{
+	blessed = true
+	cantwalk = true
+	bodyvalue = 400
+	name = "Event Master"
+	objs.robe = monkrobe
+	{
+		movable = false
+		hue = 1153
+	}
+	EQUIP(THIS(), objs.robe)
+	xmlints.enabled = 1
+}
+onTargeted
+{
+	if (IS(SPELL(),invisibilityspell))
+	{
+		pause 100
+		THIS().hidden = false
+		SAY(THIS(), "You'll regret casting invisibility on me, dirtbag!")
+		ANIMATE(THIS(), 17, 7, 1, true, false, 0 )
+		pause 1000
+		THIS().hidden = false
+		SAY(THIS(), "Game over for you!")
+		if (TRIGMOB().alive && TRIGMOB().blessed == false)
+		{
+			EFFECT(14089,30,TRIGMOB())
+			SOUND(TRIGMOB(),0x208)
+			KILL(TRIGMOB())
+		}
+	}
+}
+onUse
+{
+	if (TRIGMOB().xmlints.gotBoat != null)
+	{
+		LOCALMSG(TRIGMOB(), "You can't get another boat so soon! You must wait " + TIMESPANSTRING(TRIGMOB().xmlints.gotBoat.expiration))
+		return
+	}
+	
+	for (ints.i = 0; ints.i < 7; ints.i += 1)
+	{
+		objs.cannondeed = SmallShipCannonDeed
+		ADDTOPACK(TRIGMOB(), objs.cannondeed)
+	}
+	objs.boatdeed = GargoyleBoatDeed
+	objs.boatdeed.loottype = Blessed
+	ADDTOPACK(TRIGMOB(), objs.boatdeed)
+	objs.boatdeed.hue = 38
+	
+	objs.repairkit = UberScriptItem
+	{
+		name = "a boat repair kit"
+		movable = true
+	}
+	ADDSCRIPT(objs.repairkit, "boats\\repairtools.us")
+	ADDTOPACK(TRIGMOB(), objs.repairkit)
+	
+	TRIGMOB().xmlints.gotBoat = 1
+	TRIGMOB().xmlints.gotBoat.expiration = TIMESPANMINUTES(10.0)
+}

@@ -1,0 +1,24 @@
+onUse
+{
+	if (TRIGMOB() != rootparententity) { return }
+	SENDTARGET(TRIGMOB())
+	LOCALMSG(TRIGMOB(), "What do you want to combine that with or use that on?")
+}
+onTarget
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TARGETED(), MortarPestle))
+	{
+		LOCALMSG(TRIGMOB(), "You place the spider carapace in the Mortar and mash it up into dust.")
+		TARGETED().xmlints.spiderCarapace = 1
+		if (GETATTACHMENT(TARGETED(), xmlscript) == null)
+		{
+			ADDSCRIPT(TARGETED(), "arcade\\regs\\mortarPestle.us")
+		}
+		DELETE(THIS())
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+	}
+}

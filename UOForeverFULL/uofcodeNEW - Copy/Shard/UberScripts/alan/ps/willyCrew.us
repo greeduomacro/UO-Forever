@@ -1,0 +1,74 @@
+onSay
+{
+    if (SAID("All hands on deck!"))
+    {
+		// I changed the bodyvaluesVar to only female 401, to get male back change on entry to 400
+        objs.bodyvaluesVar = [401, 401]
+        
+        for (ints.i = 0; ints.i < 2; ints.i +=1)
+        {
+            objs.mySpawnedVar = RatmanArcher
+            {
+                FreelyLootable = true
+                AlwaysMurdererCustom = true
+                BodyValue = RANDOMFROMLIST(objs.bodyvaluesVar) 
+                Hue = RANDOMSKINHUE()
+                if (BodyValue == 400)
+                {
+                    Name = RANDOMNAME("male")
+                }
+                else
+                {
+                    Name = RANDOMNAME("female")
+                }
+                Title = "the buccaneer"
+                Speaks = false
+                BaseSoundID = 0
+				
+				//color is rare so make so items here do not drop on death
+                objs.skullcapVar = SkullCap
+				objs.skullcapVar.hue = 1157
+                EQUIP(SPAWNED(), objs.skullcapVar)
+				objs.skullcapVar.movable = false
+
+				//this will put pants and shirt on underneath the dress
+				RANDOMOUTFIT(SPAWNED())
+
+				objs.fancyDressVar = FancyDress
+				objs.fancyDressVar.hue = 1157
+                EQUIP(SPAWNED(), objs.fancyDressVar)
+				objs.fancyDressVar.movable = false
+
+            }
+        }
+    }
+	elif (SAID("Here be me chest!")) 
+	{
+		if (xmlints.treasurespawned == null)
+		{
+			xmlints.treasurespawned = 1
+			xmlints.treasurespawned.expiration = 0:10:0
+			objs.newChest = treasuremapchest,4
+			{
+				locked = true
+				traptype = ExplosionTrap
+				traplevel = 9
+				trappower = 100
+			}
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You must wait " + TIMESPANSTRING(xmlints.treasurespawned.expiration ) + " before another chest can be spawned.")
+		}
+	}
+	elif (SAID("Run up the Jolly Rodger!")) 
+	{
+		AlwaysMurdererCustom = true
+	}
+	elif (SAID("Me forsakes me evil fer now!"))
+	{
+		AlwaysMurdererCustom = false
+	}
+
+}
+

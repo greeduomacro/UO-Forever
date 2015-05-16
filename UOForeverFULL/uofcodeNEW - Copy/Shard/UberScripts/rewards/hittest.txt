@@ -1,0 +1,14 @@
+onTakenHit
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (TRIGMOB().xmlints.numHits == null)
+		{
+			TRIGMOB().xmlints.numHits = 1
+		}
+		else
+		{
+			TRIGMOB().xmlints.numHits += 1
+		}
+	}
+}

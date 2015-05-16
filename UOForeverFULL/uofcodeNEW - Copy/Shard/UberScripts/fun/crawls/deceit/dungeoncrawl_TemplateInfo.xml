@@ -1,0 +1,33 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		
+		<Label hue="1153">"Dungeon Crawl Available Templates"</Label>
+		<Label hue="1153">"Be sure to SCROLL DOWN to see them all!"</Label>
+		
+		<HTML hasbackground="true" scrollbar="true" width="400" height="400">
+			<basefont color="#000000">
+				<p>NOTE: Dexxers all have SILVER WEAPONS.</p>
+				<p>NOTE: Mages have GM Alchemy, a mortar and pestle, and 150 of each reagent. Beware, explosion potions can hurt allies.</p>
+				<p>
+				<basefont color="#ff0000">Fencer:<basefont color="#000000">
+				Grandmaster Fencing, Tactics, Anatomy, Healing, Magery, Magic Resist, Parry
+				Str:100 - Dex: 100 - Int: 25
+				<basefont color="#ff0000">Macer:<basefont color="#000000">
+				Grandmaster Mace Fighting, Tactics, Anatomy, Healing, Magery, Magic Resist, Parry
+				Str:100 - Dex: 100 - Int: 25
+				<basefont color="#ff0000">Archer:<basefont color="#000000">
+				Grandmaster Archery, Tactics, Anatomy, Healing, Magery, Magic Resist, Hiding
+				Str:100 - Dex: 100 - Int: 25
+				<basefont color="#ff0000">Lumberjack:<basefont color="#000000">
+				100 Tactics, Grandmaster Swords, Anatomy, Healing, Magery, Magic Resist, Lumberjacking
+				Str:250 - Dex: 100 - Int: 25
+				NOTE: 250 Str but STILL only 100 hit points! (i.e. the lumberjack gets another 30% extra damage from this +150 Str)
+				<basefont color="#ff0000">Mage:<basefont color="#000000">
+				Grandmaster Inscription, Wrestling, EvalInt, Meditation, Magery, Magic Resist, Poisoning, Alchemy
+				Str:100 - Dex: 25 - Int: 100
+				</basefont></basefont></basefont></basefont></basefont></basefont></basefont></basefont></basefont></basefont>
+				</p>
+			</basefont>
+		</HTML>
+	</VBox>
+</Gump>

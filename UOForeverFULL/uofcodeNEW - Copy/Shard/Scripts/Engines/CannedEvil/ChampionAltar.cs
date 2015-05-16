@@ -1,0 +1,68 @@
+// **********
+// RunUO Shard - ChampionAltar.cs
+// **********
+
+#region References
+
+using Server.Items;
+
+#endregion
+
+namespace Server.Engines.CannedEvil
+{
+    public class ChampionAltar : PentagramAddon
+    {
+        private ChampionSpawn m_Spawn;
+
+        public ChampionSpawn Spawn
+        {
+            get { return m_Spawn; }
+        }
+
+        public ChampionAltar(ChampionSpawn spawn)
+        {
+            m_Spawn = spawn;
+        }
+
+        public override void OnAfterDelete()
+        {
+            base.OnAfterDelete();
+
+            if (m_Spawn != null)
+                m_Spawn.Delete();
+        }
+
+        public ChampionAltar(Serial serial) : base(serial)
+        {
+        }
+
+        public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0); // version
+
+            writer.Write(m_Spawn);
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            var version = reader.ReadInt();
+
+            switch (version)
+            {
+                case 0:
+                {
+                    m_Spawn = reader.ReadItem() as ChampionSpawn;
+
+                    if (m_Spawn == null)
+                        Delete();
+
+                    break;
+                }
+            }
+        }
+    }
+}

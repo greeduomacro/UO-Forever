@@ -1,0 +1,8 @@
+onDeath
+{
+	for (ints.i = 0; ints.i < 200; ints.i += 1)
+	{
+		objs.plat = platinum, 6
+		ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	}
+}

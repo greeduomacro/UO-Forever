@@ -1,0 +1,56 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>MorthunaBoss2</Name>
+    <UniqueId>ccf5887d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>5251</X>
+    <Y>3612</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>5251</CentreX>
+    <CentreY>3612</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>2</MinDelay>
+    <MaxDelay>2</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>	
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=balron/hitsmaxseed/15000/hits/15000/damagemin/60/damagemax/90/SKILL,wrestling/100/poisoncustomimmune/lethal/ATTACH/&lt;xmldeathaction/action/@BCAST/The west side wins! All players in the East side have been given a point. ; SETONNEARBY,300,*,playermobile,,teamflags=4/ATTACH/&lt;xmlvalue,morthunawin,1&gt;; xmlspawner/configfile/Spawns\morthuna\gameover.xml/loadconfig/true/x/5201/y/3612/running/true&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-24,24},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-23,24},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-23,23},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-24,23},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=5
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-22,24},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=6
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-24,22},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=7
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-23,22},{RND,-24,24}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=8
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-24,24},{RND,-24,23}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=9
+		:OBJ=xmlspawner/configfile/Spawns\common\meteorstrikefireelemental.xml/loadconfig/true/x/{GETONTHIS,x}/y/{GETONTHIS,y}/OFFSET,{RND,-24,24},{RND,-23,23}/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		
+		:OBJ=GOTO/2:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=11
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

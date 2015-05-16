@@ -1,0 +1,47 @@
+onTakenHit
+{
+	if (xmlstrings.hitsScoreName != null)
+	{
+		if (IS(TRIGMOB(),playermobile))
+		{
+			if (IS(SPELL(), EarthquakeSpell)) { return }
+			if (XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName) == null)
+			{
+				XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName, DAMAGE())
+			}
+			else
+			{
+				ints.newScore = XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName) + DAMAGE()
+				XMLINTS(TRIGMOB(), xmlstrings.hitsScoreName, ints.newScore)
+			}
+		}
+	}
+}
+onDeath
+{
+	if (xmlstrings.killScoreName != null)
+	{
+		if (IS(TRIGMOB(),playermobile))
+		{
+			ints.Points = ROUND(THIS().hitsmaxseed / 75)
+			if (ints.Points > 10)
+			{
+				ints.Points = 10
+			}
+			else if (ints.Points < 1)
+			{
+				ints.Points = 1
+			}
+			
+			if (XMLINTS(TRIGMOB(), xmlstrings.killScoreName) == null)
+			{
+				XMLINTS(TRIGMOB(), xmlstrings.killScoreName, ints.Points)
+			}
+			else
+			{
+				ints.newScore = XMLINTS(TRIGMOB(), xmlstrings.killScoreName) + ints.Points
+				XMLINTS(TRIGMOB(), xmlstrings.killScoreName, ints.newScore)
+			}
+		}
+	}
+}

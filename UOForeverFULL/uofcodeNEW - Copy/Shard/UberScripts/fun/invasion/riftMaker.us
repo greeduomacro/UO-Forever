@@ -1,0 +1,44 @@
+onCreate
+{
+	Hue = 1645
+	Name = "Move Bloodclan Rift"
+	xmlints.makeVisible = 0
+}
+onUse
+{
+	if (TRIGMOB() == THIS().RootParentEntity)
+	{
+		if (xmlints.makeVisible == 0)
+		{
+			global_objs.riftLocation = TRIGMOB().Location
+			OVERHEADBCAST("The rift has changed locations!")
+			if (xmlobjs.riftObject != null) // move it
+			{
+				MOVETOWORLD(xmlobjs.riftObject, global_objs.riftLocation, MAP(Felucca))
+				MOVETOWORLD(xmlobjs.riftObject.xmlobjs.Animation1, global_objs.riftLocation, MAP(Felucca))
+				MOVETOWORLD(xmlobjs.riftObject.xmlobjs.Animation2, global_objs.riftLocation, MAP(Felucca))
+			}
+		}
+		else
+		{
+			if (xmlobjs.riftObject == null) // spawn it
+			{
+				xmlobjs.riftObject = FireElemental
+				ADDSCRIPT(xmlobjs.riftObject, "fun\\invasion\\rift.us", "riftBusiness")
+				MOVETOWORLD(xmlobjs.riftObject, global_objs.riftLocation, MAP(Felucca))
+				MOVETOWORLD(xmlobjs.riftObject.xmlobjs.Animation1, global_objs.riftLocation, MAP(Felucca))
+				MOVETOWORLD(xmlobjs.riftObject.xmlobjs.Animation2, global_objs.riftLocation, MAP(Felucca))
+				OVERHEADBCAST("The rift is now visible and can be destroyed!")
+			}
+		}
+	}
+}
+onDelete
+{
+	if (xmlobjs.riftObject != null)
+	{
+		DELETE(xmlobjs.riftObject.xmlobjs.Animation1)
+		DELETE(xmlobjs.riftObject.xmlobjs.Animation2)
+		DELETE(xmlobjs.riftObject)
+	}
+}

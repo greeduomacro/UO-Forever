@@ -1,0 +1,461 @@
+onCreate
+{
+	GuardImmune = true
+	FreelyLootable = true
+	Speaks = false
+	xmlobjs.spawnedItems = NEWLIST()
+	SETTEAM(THIS(), Chaos)
+	xmlints.playerDamage = 0
+	xmlobjs.humanKillList = NEWLIST()
+}
+onLogin
+{
+	if (THIS().blessed && xmlints.spawning != 1)
+	{
+		pause 500
+		SENDGUMP(THIS(),"fun\\invasion\\orc_RejoinGump.xml")
+	}
+}
+onGivenHit
+{
+	if (IS(TRIGMOB(), PlayerMobile))
+	{
+		if (DAMAGE() > TRIGMOB().Hits)
+		{
+			// kill shot
+			if (LISTCONTAINS(xmlobjs.humanKillList, TRIGMOB()) == false)
+			{
+				ADDTOLIST(xmlobjs.humanKillList, TRIGMOB())
+			}
+		}
+		xmlints.playerDamage += DAMAGE()
+	}
+}
+onTakenHit
+{
+	if (IS(TRIGMOB(), PlayerMobile))
+	{
+		if (TRIGMOB().xmlints.orcDamage == null)
+		{
+			TRIGMOB().xmlints.orcDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.orcDamage += DAMAGE()
+		}
+	}
+	else if (IS(TRIGMOB(), BaseCreature))
+	{
+		if (TRIGMOB().BardMaster != null)
+		{
+			if (IS(TRIGMOB().BardMaster, PlayerMobile))
+			{
+				if (TRIGMOB().BardMaster.xmlints.orcDamage == null)
+				{
+					TRIGMOB().BardMaster.xmlints.orcDamage = DAMAGE()
+				}
+				else
+				{
+					TRIGMOB().BardMaster.xmlints.orcDamage += DAMAGE()
+				}
+			}
+		}
+		else if (TRIGMOB().ControlMaster != null)
+		{
+			if (IS(TRIGMOB().ControlMaster, PlayerMobile))
+			{
+				if (TRIGMOB().ControlMaster.xmlints.orcDamage == null)
+				{
+					TRIGMOB().ControlMaster.xmlints.orcDamage = DAMAGE() / 3
+				}
+				else
+				{
+					TRIGMOB().ControlMaster.xmlints.orcDamage += DAMAGE() / 3
+				}
+			}
+		}
+	}
+}
+onBeforeDeath
+{
+	if (THIS().netstate != null)
+	{
+		DROPHOLDING(THIS())
+		INDIVIDUALFLASHEFFECT(THIS())
+	}
+	if (global_objs.riftLocation == null) { global_objs.riftLocation = POINT3D(2582, 1118, 0) }
+	objs.spawnLoc = global_objs.riftLocation
+	objs.plat = platinum, 10; ADDTOPACK(THIS(), objs.plat)
+	objs.corpse = CREATECORPSE(THIS())
+	DEATHANIMATION(THIS())
+	DEATHSOUND(THIS())
+	MOVETOWORLD(THIS(), objs.spawnLoc, THIS().Map)
+	LOG("invasionOrcDeaths", THIS() + " killed by " + TRIGMOB())
+	
+	hits = 100
+	CURE(THIS())
+	//RESETMOB(THIS())
+	hidden = true
+	cantwalk = true
+	frozen = true
+	blessed = true
+	squelched = true
+	THIS().combatant = null
+	SENDGUMP(THIS(),"fun\\invasion\\orc_RejoinGump.xml")
+	
+	foreach (objs.item ; xmlobjs.spawnedItems)
+	{
+		if (objs.item != null)
+		{
+			DELETE(objs.item)
+		}
+	}
+	CLEARLIST(xmlobjs.spawnedItems)
+	
+	if (TRIGMOB() != null)
+	{
+		if (IS(TRIGMOB(), PlayerMobile))
+		{
+			if (TRIGMOB().xmlobjs.orcKillList == null)
+			{
+				TRIGMOB().xmlobjs.orcKillList = NEWLIST()
+			}
+			if (LISTCONTAINS(TRIGMOB().xmlobjs.orcKillList, THIS()) == false)
+			{
+				ADDTOLIST(TRIGMOB().xmlobjs.orcKillList, THIS())
+			}
+		}
+	}
+	else if (IS(TRIGMOB(), BaseCreature))
+	{
+		if (TRIGMOB().BardMaster != null)
+		{
+			if (IS(TRIGMOB().BardMaster, PlayerMobile))
+			{
+				if (TRIGMOB().BardMaster.xmlobjs.orcKillList == null)
+				{
+					TRIGMOB().BardMaster.xmlobjs.orcKillList = NEWLIST()
+				}
+				if (LISTCONTAINS(TRIGMOB().BardMaster.xmlobjs.orcKillList, THIS()) == false)
+				{
+					ADDTOLIST(TRIGMOB().BardMaster.xmlobjs.orcKillList, THIS())
+				}
+			}
+		}
+		else if (TRIGMOB().ControlMaster != null)
+		{
+			if (IS(TRIGMOB().ControlMaster, PlayerMobile))
+			{
+				if (TRIGMOB().ControlMaster.xmlobjs.orcKillList == null)
+				{
+					TRIGMOB().ControlMaster.xmlobjs.orcKillList = NEWLIST()
+				}
+				if (LISTCONTAINS(TRIGMOB().ControlMaster.xmlobjs.orcKillList, THIS()) == false)
+				{
+					ADDTOLIST(TRIGMOB().ControlMaster.xmlobjs.orcKillList, THIS())
+				}
+			}
+		}
+	}
+	return override	
+}
+onDelete
+{
+	LOG("OrcInvasion.txt", THIS() + " WAS DELETED SHOULD NOT BE POSSIBLE!")
+}
+onBeginCast
+{
+	if (IS(SPELL(),IncognitoSpell) || IS(SPELL(),PolymorphSpell) || IS(SPELL(),InvisibilitySpell))
+	{
+		SENDMSG(TRIGMOB(), "Sorry, but you are not allowed to cast that spell!")
+		return override
+	}
+}
+onGumpResponse
+{
+	if (xmlobjs.spawnedItems == null) { xmlobjs.spawnedItems = NEWLIST() }
+	objs.spawned = THIS()
+	CLEARSKILLS(objs.spawned)
+	if (ints.fencer == 1)
+	{
+		objs.spawned.rawstr = 100
+		objs.spawned.rawint = 25
+		objs.spawned.rawdex = 100
+		objs.spawned.hitsmaxseed = 100
+		objs.spawned.hits = 100
+		objs.spawned.stammaxseed = 100
+		objs.spawned.stam = 100
+		objs.spawned.manamaxseed = 25
+		objs.spawned.mana = 25
+		SETSKILL(objs.spawned, "Fencing", 100.0)
+		SETSKILL(objs.spawned, "Tactics", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "Healing", 100.0)
+		SETSKILL(objs.spawned, "Veterinary", 100.0)
+		SETSKILL(objs.spawned, "AnimalLore", 100.0)
+		SETSKILL(objs.spawned, "Hiding", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Poisoning", 100.0)
+		
+		objs.equipment = orchelm { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = studdedgorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmaillegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailgloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = warfork { quality = exceptional; identified = true; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = shortspear { quality = exceptional; identified = true; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = spear { quality = exceptional; identified = true; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.spawned.BodyValue = 140
+		objs.equipment = GreaterPoisonPotion; ADDTOPACK(objs.spawned, objs.equipment);
+		objs.equipment = GreaterPoisonPotion; ADDTOPACK(objs.spawned, objs.equipment);
+		objs.equipment = GreaterPoisonPotion; ADDTOPACK(objs.spawned, objs.equipment);
+	}
+	elif (ints.macer == 1)
+	{
+		
+		objs.spawned.rawstr = 100
+		objs.spawned.rawint = 25
+		objs.spawned.rawdex = 100
+		objs.spawned.hitsmaxseed = 100
+		objs.spawned.hits = 100
+		objs.spawned.stammaxseed = 100
+		objs.spawned.stam = 100
+		objs.spawned.manamaxseed = 25
+		objs.spawned.mana = 25
+		SETSKILL(objs.spawned, "Macing", 100.0)
+		SETSKILL(objs.spawned, "Tactics", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "Healing", 100.0)
+		SETSKILL(objs.spawned, "Veterinary", 100.0)
+		SETSKILL(objs.spawned, "AnimalLore", 100.0)
+		SETSKILL(objs.spawned, "Hiding", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Parry", 100.0)
+		objs.equipment = orchelm { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = studdedgorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmaillegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailgloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = woodenshield { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = club { quality = exceptional; identified = true; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = warhammer { quality = exceptional; identified = true; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = quarterstaff { quality = exceptional; identified = true; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.spawned.BodyValue = 41 // club
+	}
+	elif (ints.archer == 1)
+	{
+		objs.spawned.rawstr = 100
+		objs.spawned.rawint = 25
+		objs.spawned.rawdex = 100
+		objs.spawned.hitsmaxseed = 100
+		objs.spawned.hits = 100
+		objs.spawned.stammaxseed = 100
+		objs.spawned.stam = 100
+		objs.spawned.manamaxseed = 25
+		objs.spawned.mana = 25
+		SETSKILL(objs.spawned, "Archery", 100.0)
+		SETSKILL(objs.spawned, "Tactics", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "Healing", 100.0)
+		SETSKILL(objs.spawned, "Veterinary", 100.0)
+		SETSKILL(objs.spawned, "AnimalLore", 100.0)
+		SETSKILL(objs.spawned, "Stealth", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Hiding", 100.0)
+		objs.equipment = orchelm { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = studdedgorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmaillegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailgloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = bow { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = crossbow { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.spawned.BodyValue = 181 // scout
+	}
+	elif (ints.lumberjack == 1)
+	{
+		
+		objs.spawned.rawstr = 100
+		objs.spawned.rawint = 25
+		objs.spawned.rawdex = 100
+		objs.spawned.hitsmaxseed = 100
+		objs.spawned.hits = 100
+		objs.spawned.stammaxseed = 100
+		objs.spawned.stam = 100
+		objs.spawned.manamaxseed = 25
+		objs.spawned.mana = 25
+		SETSKILL(objs.spawned, "Swords", 100.0)
+		SETSKILL(objs.spawned, "Tactics", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "Healing", 100.0)
+		SETSKILL(objs.spawned, "Veterinary", 100.0)
+		SETSKILL(objs.spawned, "AnimalLore", 100.0)
+		SETSKILL(objs.spawned, "Hiding", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Lumberjacking", 100.0)
+		objs.equipment = orchelm { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = studdedgorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmaillegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = ringmailgloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = twohandedaxe { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = doubleaxe { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = battleaxe { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		BodyValue = 140
+		objs.spawned.BodyValue = 138 // orcish lord
+	}
+	elif (ints.scribemage == 1)
+	{
+		
+		objs.spawned.rawstr = 100
+		objs.spawned.rawint = 100
+		objs.spawned.rawdex = 25
+		objs.spawned.hitsmaxseed = 100
+		objs.spawned.hits = 100
+		objs.spawned.stammaxseed = 35
+		objs.spawned.stam = 35
+		objs.spawned.manamaxseed = 90
+		objs.spawned.mana = 90
+		SETSKILL(objs.spawned, "Inscribe", 100.0)
+		SETSKILL(objs.spawned, "Wrestling", 100.0)
+		SETSKILL(objs.spawned, "EvalInt", 100.0)
+		SETSKILL(objs.spawned, "Meditation", 100.0)
+		SETSKILL(objs.spawned, "Magery", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		objs.equipment = leatherchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherlegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathercap { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.spawned.BodyValue = 182 // orcish bomber
+	}
+	elif (ints.tankmage == 1)
+	{
+		
+		objs.spawned.rawstr = 90
+		objs.spawned.rawint = 90
+		objs.spawned.rawdex = 45
+		objs.spawned.hitsmaxseed = 95
+		objs.spawned.hits = 95
+		objs.spawned.stammaxseed = 45
+		objs.spawned.stam = 45
+		objs.spawned.manamaxseed = 90
+		objs.spawned.mana = 90
+		SETSKILL(objs.spawned, "Swords", 100.0)
+		SETSKILL(objs.spawned, "Tactics", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "EvalInt", 100.0)
+		SETSKILL(objs.spawned, "Magery", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Meditation", 100.0)
+		
+		objs.equipment = leatherchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherlegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathercap { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = halberd { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.equipment = katana { quality = exceptional; association = 51 } ADDTOPACK(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment)
+		objs.spawned.BodyValue = 182 // orcish bomber
+	}
+	elif (ints.noxmage == 1)
+	{
+		
+		objs.spawned.rawstr = 100
+		objs.spawned.rawint = 100
+		objs.spawned.rawdex = 25
+		objs.spawned.hitsmaxseed = 100
+		objs.spawned.hits = 100
+		objs.spawned.stammaxseed = 25
+		objs.spawned.stam = 25
+		objs.spawned.manamaxseed = 100
+		objs.spawned.mana = 100
+		SETSKILL(objs.spawned, "Poisoning", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "Wrestling", 100.0)
+		SETSKILL(objs.spawned, "EvalInt", 100.0)
+		SETSKILL(objs.spawned, "Magery", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Meditation", 100.0)
+		
+		objs.equipment = leatherchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherlegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathercap { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.spawned.BodyValue = 182 // orcish bomber
+	}
+	elif (ints.stunmage == 1)
+	{
+		
+		objs.spawned.rawstr = 95
+		objs.spawned.rawint = 95
+		objs.spawned.rawdex = 35
+		objs.spawned.hitsmaxseed = 98
+		objs.spawned.hits = 98
+		objs.spawned.stammaxseed = 35
+		objs.spawned.stam = 35
+		objs.spawned.manamaxseed = 95
+		objs.spawned.mana = 95
+		SETSKILL(objs.spawned, "Healing", 100.0)
+		SETSKILL(objs.spawned, "Anatomy", 100.0)
+		SETSKILL(objs.spawned, "Veterinary", 100.0)
+		SETSKILL(objs.spawned, "AnimalLore", 100.0)
+		SETSKILL(objs.spawned, "Wrestling", 100.0)
+		SETSKILL(objs.spawned, "EvalInt", 100.0)
+		SETSKILL(objs.spawned, "Magery", 100.0)
+		SETSKILL(objs.spawned, "MagicResist", 100.0)
+		SETSKILL(objs.spawned, "Meditation", 100.0)
+		
+		objs.equipment = leatherchest { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergorget { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherarms { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leatherlegs { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathercap { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.equipment = leathergloves { quality = exceptional; association = 51 } EQUIP(objs.spawned, objs.equipment); ADDTOLIST(objs.spawned.xmlobjs.spawnedItems, objs.equipment);
+		objs.spawned.BodyValue = 182 // orcish bomber
+	}
+	else
+	{
+		SENDGUMP(THIS(),"fun\\ctf\\world\\ctf_RejoinGump.xml")
+		return
+	}
+	
+	for (ints.i = 0; ints.i < 2; ints.i += 1)
+	{
+		objs.equipment = GreaterCurePotion; ADDTOPACK(objs.spawned, objs.equipment)
+		objs.equipment = GreaterHealPotion; ADDTOPACK(objs.spawned, objs.equipment)
+		objs.equipment = TotalRefreshPotion; ADDTOPACK(objs.spawned, objs.equipment)
+		objs.equipment = TPouch; ADDTOPACK(objs.spawned, objs.equipment)
+		objs.equipment = TPouch; ADDTOPACK(objs.spawned, objs.equipment)
+	}
+	objs.equipment = Bandage, 100; ADDTOPACK(objs.spawned, objs.equipment)
+	
+	xmlints.spawning = 1
+	xmlints.spawning.Expiration = TIMESPANMINUTES(2.1)
+	LOCALMSG(THIS(), "You rejoin the game in 90 seconds.", 0x38)
+	
+	pause 30000
+	LOCALMSG(THIS(), "60 seconds left")
+	pause 30000
+	LOCALMSG(THIS(), "30 seconds left")
+	pause 30000
+	LOCALMSG(THIS(), "Start clompin'! Don't forget about using the '[speedboost' command, or '[speedboost x' to turn it off!")
+	// pause 1000
+	
+	if (THIS().deleted) { return }
+	
+	hidden = false
+	cantwalk = false
+	frozen = false
+	blessed = false
+	squelched = false
+	CURE(THIS())
+}

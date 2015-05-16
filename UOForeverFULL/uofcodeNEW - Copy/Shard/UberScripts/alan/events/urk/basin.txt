@@ -1,0 +1,62 @@
+onCreate
+{
+	name = "a basin for gathering orc blood"
+	xmlobjs.types = [TYPE(orc),TYPE(orcishlord),TYPE(orcishmage),TYPE(orc),TYPE(orcbrute),TYPE(orcbomber),TYPE(leader)]
+}
+onDragLift
+{
+	xmlobjs.owner = TRIGMOB()
+}
+onUse
+{
+	if (THIS().itemid == 3619)
+	{
+		SENDMSG(TRIGMOB(), "According to Therald the conjurer's instructions, you must place this basin of orc blood within 2 tiles of the center of the rift so it will be consumed!", 38)
+	}
+	else 
+	{
+		SENDMSG(TRIGMOB(), "Select a carved orc corpse to gather blood from.")
+		SENDTARGET(TRIGMOB())
+	}
+}
+onTarget
+{
+	if (DISTANCE(TARGETED(), TRIGMOB()) < 2)
+	{
+		if (IS(TARGETED(),corpse) && TARGETED().carved)
+		{
+			objs.owner = TARGETED().owner
+			ints.found = 0
+			foreach (objs.testtype ; xmlobjs.types)
+			{
+				if (IS(objs.owner, objs.testtype))
+				{
+					if (TARGETED().xmlints.gathered == 1)
+					{
+						LOCALMSG(TRIGMOB(), "That corpse has no blood left!")
+					}
+					else
+					{
+						THIS().itemid = 3619
+						ints.found = 1
+						LOCALMSG(TRIGMOB(),"You gather some orc blood.")
+						TARGETED().xmlints.gathered = 1
+						break
+					}
+				}
+			}
+			if (objs.ints.found == 0)
+			{
+				LOCALMSG(TRIGMOB(),"You cannot gather blood from that!")
+			}
+		} 
+		else
+		{
+			SENDMSG(TRIGMOB(), "You must target a CARVED ORCISH corpse to gather blood from!", 0x38)
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "That is too far away!")
+	}
+}

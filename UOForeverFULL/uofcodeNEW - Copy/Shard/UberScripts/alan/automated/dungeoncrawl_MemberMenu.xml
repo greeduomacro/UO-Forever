@@ -1,0 +1,34 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"You are currently on "+TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.RawName+"'s team."</Label>
+		
+		<HBox width="10" height="5" FitToContents="false"/>
+		<Label hue ="1553">"Your Team:"</Label>
+		<List list="TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.xmlobjs.dungeonCrawlTeam" objs="tempTeamMob">
+			<HBox>
+				<Image x="5" gumpID="5032"/>
+				<Label hue="1153">objs.tempTeamMob.rawname</Label>
+			</HBox>
+		</List>
+		<HTML hasbackground="true" scrollbar="true" width="400" height="350">
+			<p><b><u>Now what?</u></b></p>
+			<p>When all the team is nearby and ready, your team captain can then begin the Crawl (if no other team is currently crawling). At that time, double-click the Event Master again and you will be presented a button for each template that you can join as. Just press the button and you are taken to the dungeon crawl.</p>
+			
+			<p><u>DON'T FORGET: AssistUO is not compatible with this event, so use Razor!</u></p>
+			
+			<p>If you die, come back as your player character and you can double-click again to rejoin (you can switch templates if you want)</p>
+						
+			<p>You can still the other instructions by saying "help".</p>
+		</HTML>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="templateShowScreen"/>
+			<Label hue ="1553">"Show me the available templates."</Label>
+		</HBox>
+		<HBox width="10" height="20" FitToContents="false"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="quitTeam"/>
+			<Label hue ="1553">"Quit Team"</Label>
+		</HBox>
+		
+	</VBox>
+</Gump>

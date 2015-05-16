@@ -1,0 +1,15 @@
+onBeforeDeath
+{
+	objs.rune = GargoyleRune
+	ADDTOCONTAINER(THIS().Backpack, objs.rune)
+	if (RANDOMDOUBLE() < 0.5)
+	{
+		objs.rune = GargoyleRune
+		ADDTOCONTAINER(THIS().Backpack, objs.rune)
+	}
+	if (RANDOMDOUBLE() < 0.1)
+	{
+		objs.rune = GargoyleRune
+		ADDTOCONTAINER(THIS().Backpack, objs.rune)
+	}
+}

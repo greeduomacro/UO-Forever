@@ -1,0 +1,22 @@
+onUse
+{
+	if (THIS().rootparententity == TRIGMOB())
+	{
+		if (TRIGMOB().xmlints.petrificationimmune != 1)
+		{ 
+			SENDMSG(TRIGMOB(), "You are now immune to the petrification curse placed upon the Crippled King's demense.", 2049)
+			TRIGMOB().Hits = 1
+			TRIGMOB().xmlints.petrificationimmune = 1
+			INDIVIDUALFLASHEFFECT(TRIGMOB())
+			DELETE(THIS())
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You are already immune to the petrification curse.", 2049)
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "This must be in your backpack for you to use it.", 2049)		
+	}
+}

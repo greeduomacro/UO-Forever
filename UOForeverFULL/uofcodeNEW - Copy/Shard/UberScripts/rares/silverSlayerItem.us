@@ -1,0 +1,42 @@
+onCreate
+{
+    movable = true
+    itemID = 6193
+}
+
+onAdded
+{
+    if (TRIGMOB() != null)
+    {
+        if (ISPARENT(TRIGMOB().BankBox, THIS()) == false)
+		{
+			LOCALMSG(TRIGMOB(), "You feel as if you have power over the undead.")
+			objs.attachment = NEWATTACHMENT(xmlslayer, silverSlayer)
+			objs.attachment.slayer = "Silver"
+			ATTACH(TRIGMOB(), objs.attachment)
+		}
+    }
+}
+onRemove
+{
+    if (TRIGMOB() != null)
+    {
+        objs.attachment = GETATTACHMENT(TRIGMOB(), xmlslayer, silverSlayer)
+		if (objs.attachment != null)
+		{
+			LOCALMSG(TRIGMOB(), "You feel your power over the undead fade.")
+			DELETE(objs.attachment)
+		}
+    }
+}
+onDelete
+{
+    if (TRIGMOB() != null)
+    {
+        objs.attachment = GETATTACHMENT(TRIGMOB(), xmlslayer, silverSlayer)
+        if (objs.attachment != null)
+        {
+            DELETE(objs.attachment)
+        }
+    }
+}

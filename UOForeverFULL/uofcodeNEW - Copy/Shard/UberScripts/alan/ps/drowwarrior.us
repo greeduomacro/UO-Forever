@@ -1,0 +1,62 @@
+onCreate
+{
+	name = "a drow warrior"
+	bodyvalue = 605
+	hue = 1175
+	hairitemid = 0
+	facialhairitemid = 0
+	SCRIPT().name = "drowwarrior"
+	rawstr = 120
+	rawint = 40
+	rawdex = 120
+	hitsmaxseed = 999
+	hits = 999
+	stammaxseed = 120
+	stam = 120
+	manamaxseed = 40
+	mana = 40
+	FreelyLootable = true
+	GuardImmune = true
+	BardImmuneCustom = true
+	AlwaysMurdererCustom = true
+	Pseu_AllowInterrupts = false
+	SETSKILL(THIS(), "Archery", 120.0)
+	SETSKILL(THIS(), "Fencing", 120.0)
+	SETSKILL(THIS(), "Tactics", 100.0)
+	SETSKILL(THIS(), "Anatomy", 100.0)
+	SETSKILL(THIS(), "Healing", 100.0)
+	SETSKILL(THIS(), "Magery", 100.0)
+	SETSKILL(THIS(), "MagicResist", 100.0)
+	objs.armor = studdedgorget { quality = exceptional; resource = shadowiron } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmailchest { quality = exceptional; resource = shadowiron } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmaillegs { quality = exceptional; resource = shadowiron } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmailarms { quality = exceptional; resource = shadowiron } EQUIP(THIS(), objs.armor)
+	objs.armor = ringmailgloves { quality = exceptional; resource = shadowiron } EQUIP(THIS(), objs.armor)
+	objs.weapon = arrow { amount = 20 } ADDTOPACK(THIS(), objs.weapon)
+	objs.weapon = bow { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	objs.weapon = spear { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	objs.bandage = bandage, 300 { movable = false } ADDTOPACK(THIS(), objs.bandage)
+	objs.fullspellbook = fullspellbook { movable = false }; ADDTOPACK(THIS(), objs.fullspellbook)
+	for (ints.i = 0; ints.i < 10; ints.i += 1)
+	{
+		objs.potion = totalrefreshpotion
+		ADDTOPACK(THIS(), objs.potion)
+		if (ints.i % 2 == 0)
+		{
+			objs.potion = greatercurepotion
+			ADDTOPACK(THIS(), objs.potion)
+			objs.potion = greaterhealpotion
+			ADDTOPACK(THIS(), objs.potion)
+			objs.tpouch = tpouch
+			ADDTOPACK(THIS(), objs.tpouch)
+		}
+	}
+}
+onDeath
+{
+	for (ints.i = 0; ints.i < 20; ints.i += 1)
+	{
+		objs.plat = platinum, 6
+		ADDTOCONTAINER(TRIGITEM(), objs.plat)
+	}
+}

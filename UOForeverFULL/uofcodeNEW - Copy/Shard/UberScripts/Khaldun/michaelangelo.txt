@@ -1,0 +1,28 @@
+// blunder ends 16:47
+onSpeech
+{
+	if (DISTANCE(THIS(),TRIGMOB()) < 3)
+	{
+		if (STRINGCONTAINSIGNORECASE(SPEECH(),"fallax") || STRINGCONTAINSIGNORECASE(SPEECH(),"avidus") || STRINGCONTAINS(SPEECH(),"malum"))
+		{
+			SAY(THIS(),"Fool! Do not say those evil words of power!")
+			return override
+		}
+		if (STRINGCONTAINSIGNORECASE(SPEECH(),"hello") || STRINGCONTAINSIGNORECASE(SPEECH(),"hi") || STRINGCONTAINSIGNORECASE(SPEECH(),"hey"))
+		{
+			SAY(THIS(),"Greetings. I am Michael Angelo. What can I do for you?")
+			return override
+		}
+		if ((STRINGCONTAINSIGNORECASE(SPEECH(),"statue") || STRINGCONTAINSIGNORECASE(SPEECH(),"cave") || STRINGCONTAINSIGNORECASE(SPEECH(),"khaldun") || STRINGCONTAINSIGNORECASE(SPEECH(),"dungeon") || STRINGCONTAINSIGNORECASE(SPEECH(),"escaped") || STRINGCONTAINSIGNORECASE(SPEECH(),"escape")) )
+		{
+			if (TRIGMOB().xmlints.mikeTalk == null)
+			{
+				SAY(THIS(),"Yes, I escaped from the dungeon Khaldun and sculpted a statue in Trinsic in memorium. I snuck in behind some cultists in my foolish quest for treasure... They spoke some THREE words - a sort of evil incantation - to enter. Perhaps the mage shops and libraries of britannia have more information about it.  However, I say stay as far away as possible - simply entering the dungeon twists the mind!")
+				TRIGMOB().xmlints.mikeTalk = 1
+				TRIGMOB().xmlints.mikeTalk.expiration = 0:0:15
+				return override
+			}
+		}
+		
+	}
+}

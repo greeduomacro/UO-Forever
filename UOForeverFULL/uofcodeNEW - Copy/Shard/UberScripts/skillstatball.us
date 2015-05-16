@@ -1,0 +1,22 @@
+onCreate
+{
+	THIS().ItemID = 3796
+	THIS().Hue = 1170
+	THIS().Name = "A skill/stat/kill remover stone"
+	THIS().movable = false
+	SUBSCRIBETIMER(OneMinute)
+}
+
+onUse
+{
+	objs.item1 = skillball7x
+	objs.item2 = statball
+	ADDTOPACK(TRIGMOB(), objs.item1)
+	ADDTOPACK(TRIGMOB(), objs.item2)
+	TRIGMOB().Kills = 0
+}
+
+onOneMinute
+{
+        	MSG(THIS(), "Click me to remove kills/7x skills/statball.", 1287) 
+}

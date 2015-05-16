@@ -1,0 +1,158 @@
+onDragLift
+{
+	if (THIS().xmlstrings.owner != TRIGMOB().name)
+	{
+		return override
+	}
+}
+onUse
+{
+	if (THIS().xmlints.used != null)
+	{
+		SENDMSG(TRIGMOB(),"It's already gonna blow, get away from there!")
+		return
+	}
+	if (DISTANCE(THIS(),TRIGMOB()) < 3)
+	{
+		if (THIS().xmlstrings.owner == TRIGMOB().name)
+		{
+			objs.mob = GETMOB("Britannian Demolition Expert")
+			if (THIS().X > 1825 && THIS().X < 1832 && THIS().Y > 2774 && THIS().Y < 2783)
+			{
+				objs.mob = GETMOB("Britannian Demolition Expert")
+				if (objs.mob.xmlstrings.winner != null)
+				{
+					SENDMSG(TRIGMOB(),"Somebody beat you to it!")
+					return
+				}
+				// blow up dynamite
+				THIS().xmlints.used = 1
+				THIS().movable = false;
+				MSG(THIS(),"She's gonna blow! Back away you fools!")
+				pause 2000
+				MSG(THIS(),"3")
+				pause 2000
+				MSG(THIS(),"2")
+				pause 2000
+				MSG(THIS(),"1")
+				pause 2000
+				SUBSCRIBETIMER(FiftyMS)
+				objs.mob = GETMOB("Britannian Demolition Expert")
+				if (objs.mob.xmlstrings.winner == null)
+				{
+					objs.mob.xmlstrings.winner = TRIGMOB().name
+					BCAST(TRIGMOB().name + " has successfully blown open the entrance to Trinsic! We must stop Lord Blackthorn!",38)
+				}
+				BSOUND(41); BSOUND(245); BSOUND(246); BSOUND(247); BSOUND(248); BSOUND(249); BSOUND(250); BSOUND(251); BSOUND(252); BSOUND(253); BSOUND(254); BSOUND(255); BSOUND(256); BSOUND(257); BSOUND(258); BSOUND(259); BSOUND(260); BSOUND(261); BSOUND(262); BSOUND(263); BSOUND(284); BSOUND(285); BSOUND(286); BSOUND(287); BSOUND(351); BSOUND(352); BSOUND(353); BSOUND(477); BSOUND(520); BSOUND(778); BSOUND(1487)
+			}
+			elif (objs.mob.xmlstrings.winner == null)
+			{
+				// haven't gotten through the entrance
+				LOCALMSG(TRIGMOB(),"This isn't close enough to the blockade in the Trinsic entrance to light it!")
+			}
+			else
+			{
+				// get nearby mobs, if a pylon is within 4 squares, then blow it up
+				objs.nearbyMobs = GETNEARBYMOBS(THIS(),4)
+				foreach (objs.nearbyMob ; objs.nearbyMobs)
+				{
+					if (objs.nearbyMob.bodyvalue == 261)
+					{
+						// they successfully blew it up!
+						// blow up dynamite
+						if (objs.nearbyMob.xmlints.destroyed == null)
+						{
+							THIS().xmlobjs.pylonToDestroy = objs.nearbyMob
+							break
+						}
+					}
+				}
+				if (xmlObjs.pylonToDestroy != null)
+				{
+					THIS().xmlints.used = 1
+					
+					if (TRIGMOB().xmlints.destroyedPylonsScore == null)
+					{
+						TRIGMOB().xmlints.destroyedPylonsScore = 1
+					}
+					else
+					{
+						TRIGMOB().xmlints.destroyedPylonsScore += 1
+					}
+					xmlObjs.pylonToDestroy.xmlints.destroyed = 1
+					THIS().movable = false;
+					MSG(THIS(),"She's gonna blow! Back away you fools!")
+					pause 2000
+					MSG(THIS(),"3")
+					pause 2000
+					MSG(THIS(),"2")
+					pause 2000
+					MSG(THIS(),"1")
+					pause 2000
+					SUBSCRIBETIMER(FiftyMS)
+					BSOUND(41); BSOUND(245); BSOUND(246); BSOUND(247); BSOUND(248); BSOUND(249); BSOUND(250); BSOUND(251); BSOUND(252); BSOUND(253); BSOUND(254); BSOUND(255); BSOUND(256); BSOUND(257); BSOUND(258); BSOUND(259); BSOUND(260); BSOUND(261); BSOUND(262); BSOUND(263); BSOUND(284); BSOUND(285); BSOUND(286); BSOUND(287); BSOUND(351); BSOUND(352); BSOUND(353); BSOUND(477); BSOUND(520); BSOUND(778); BSOUND(1487)
+				}
+				else
+				{
+					SENDMSG(TRIGMOB(),"It is not close enough to a pylon to be of any use!")
+				}
+			}
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(),"You can't use somebody else's dynamite!")
+		}
+	} else
+	{
+		SENDMSG(TRIGMOB(),"That is too far away.")
+	}
+}
+onFiftyMS
+{
+	if (xmlints.count == null)
+	{
+		xmlints.count = 0
+	}
+	xmlints.count += 1
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-8,8), THIS().y + RANDOMMINMAX(-8,8), THIS().z)
+	EFFECT(14000,25,objs.target)
+	DODAMAGE(objs.target, RANDOMMINMAX(2,20), 1)
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-8,8), THIS().y + RANDOMMINMAX(-8,8), THIS().z)
+	EFFECT(14000,25,objs.target)
+	DODAMAGE(objs.target, RANDOMMINMAX(2,20), 1)
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-5,5), THIS().y + RANDOMMINMAX(-5,5), THIS().z + 7)
+	EFFECT(14000,25,objs.target)
+	DODAMAGE(objs.target, RANDOMMINMAX(2,20), 1)
+	objs.target = POINT3D(THIS().x + RANDOMMINMAX(-5,5), THIS().y + RANDOMMINMAX(-5,5), THIS().z + 7)
+	EFFECT(14089,30,objs.target)
+	DODAMAGE(objs.target, RANDOMMINMAX(2,20), 1)
+	
+	if (xmlints.count > 80)
+	{
+		UNSUBSCRIBETIMER(SCRIPT(),FiftyMS)
+		if (THIS().xmlobjs.pylonToDestroy == null)
+		{
+			// blowing up the entrance into trinsic
+			objs.nearbyItems = GETNEARBYITEMS(THIS(),10)
+			foreach (objs.item ; objs.nearbyItems)
+			{
+				if (IS(objs.item, addoncomponent))
+				{
+					DELETE(objs.item)
+				}
+			}
+		}
+		else // blowing up pylon
+		{
+			RUNSCRIPT(THIS().xmlobjs.pylonToDestroy.location, dyingPylon.txt)
+			DELETE(THIS().xmlobjs.pylonToDestroy)
+			BSOUND(40)
+			BSOUND(41)
+			objs.mob = GETMOB("Britannian Demolition Expert")
+			objs.mob.xmlints.pylonsLeft -= 1
+			BCAST("Another pylon has been destroyed!",38)
+			BCAST(objs.mob.xmlints.pylonsLeft + " pylons remain! Take them out!",38)
+		}
+		DELETE(THIS())
+	}
+}

@@ -1,0 +1,4 @@
+onUse
+{
+	SENDGUMP(TRIGMOB(), "Quests\\CrippledKing\\walkway.xml")
+}

@@ -1,0 +1,175 @@
+using Server.Engines.XmlSpawner2;
+using System;
+using Server;
+using Server.Gumps;
+using Server.Items;
+using Server.Mobiles;
+using Server.Network;
+using Server.Accounting;
+using Server.Multis.Deeds;
+using Server.Misc;
+
+/*using System;
+using Server;
+using Server.Network;
+using Server.Mobiles;
+using Server.Items;
+using Server.Gumps;
+using Server.Misc;
+using Server.Engines.XmlSpawner2;*/
+// COPYRIGHT BY ROMANTHEBRAIN
+namespace Server.Mobiles
+{
+	public class HousePickGump : Gump
+	{
+
+
+		private int switches = 1;
+        private HouseBall2  m_HouseBall;
+        private double val = 100;
+
+
+		public HousePickGump( HouseBall2 ball )
+			: base( 0, 0 )
+		{
+			this.Closable=true;
+			this.Disposable=true;
+			this.Dragable=true;
+			this.Resizable=true;
+            m_HouseBall = ball;
+           	this.AddPage(0);
+			this.AddBackground(39, 33, 560, 500, 9200);
+			this.AddLabel(67, 41, 1153, @"Please select your house");
+			this.AddButton(80, 500, 2071, 2072, (int)Buttons.Close, GumpButtonType.Reply, 0);
+			this.AddBackground(52, 60, 530, 430, 9350);
+			this.AddPage(1);
+            this.AddButton(500, 500, 2311, 2312, (int)Buttons.FinishButton, GumpButtonType.Reply, 0);
+			this.AddCheck(55, 65, 210, 211, false, 1);
+			this.AddCheck(55, 90, 210, 211, false, 2);
+			this.AddCheck(55, 115, 210, 211, false, 3);
+			this.AddLabel(80, 65, 0, @"Wood & Plaster");          //40
+			this.AddLabel(80, 90, 0, @"Brick");          //2
+			this.AddLabel(80, 115, 0, @"Wood");   //39
+				
+			
+			
+			
+		}
+		
+		public enum Buttons
+		{
+			Close,
+			FinishButton,
+			
+		}
+		public override void OnResponse( NetState state, RelayInfo info )
+		{
+			Mobile m = state.Mobile;
+			
+			switch( info.ButtonID )
+			{
+				case 0: {break;}
+				case 1:
+				{
+                    
+					if ( info.Switches.Length < switches )
+					{
+						m.SendGump( new HousePickGump(m_HouseBall) );
+						m.SendMessage( 0, "You must pick 1 house.", switches - info.Switches.Length );
+						break;
+					}
+					else if ( info.Switches.Length > switches )
+					{
+						m.SendGump( new HousePickGump(m_HouseBall) );
+						m.SendMessage( 0, "Sorry, limit of 1 house per customer.  Limited time offer only.  Please see in store for details", info.Switches.Length - switches);
+						break;
+                     
+                    }
+                   
+                    
+                        
+                    
+                    else
+                    {
+
+                        
+                        //Server.Items skills = m.Skills;
+
+                        //for (int i = 0; i < skills.Length; ++i)
+                        //    skills[i].Base = 0;
+                        if (info.IsSwitched(1))
+                            m.AddToBackpack( new WoodPlasterHouseDeed() );
+                        else if (info.IsSwitched(2))
+                            m.AddToBackpack( new SmallBrickHouseDeed() );
+                        else if (info.IsSwitched(3))
+                            m.AddToBackpack( new WoodHouseDeed() );
+                        m_HouseBall.Delete();
+
+                    }
+                    
+					break;
+				}
+                
+			}
+            
+		}
+        
+	}
+
+	public class HouseBall2 : Item
+	{ 
+		[Constructable] 
+		public HouseBall2() :  base( 0x14F0) // 0xE73
+		{ 
+			Weight = 1.0; 
+			Hue = 1161; 
+			Name = "House Deed Ball"; 
+			Movable =  true;
+		}
+
+		public override void OnDoubleClick( Mobile m ) 
+		
+		
+		
+		{
+
+            if (m.Backpack != null && m.Backpack.GetAmount(typeof(HouseBall2)) > 0)
+            {
+                m.SendMessage("Please choose  your starter home");
+                m.CloseGump(typeof(HousePickGump));
+                m.SendGump(new HousePickGump(this));
+            }
+            else
+                m.SendMessage(" You need to have the ball in your backpack.");
+			
+		} 
+    
+       
+    
+ 
+        
+        
+        
+        public HouseBall2( Serial serial ) : base( serial ) C:\uo client
+		{ 
+		} 
+       
+		public override void Serialize( GenericWriter writer ) 
+		{ 
+			base.Serialize( writer ); 
+			writer.Write( (int) 1 ); // version 
+		}
+
+		public override void Deserialize( GenericReader reader ) 
+		{ 
+			base.Deserialize( reader ); 
+			int version = reader.ReadInt();
+            
+        
+        } 
+       
+	}
+   
+               
+}
+

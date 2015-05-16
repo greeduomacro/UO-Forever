@@ -1,0 +1,561 @@
+onCreate
+{
+	blessed = true
+	cantwalk = true
+	bodyvalue = 400
+	name = "Event Master"
+	xmlints.teamRegistrationCost = 20000
+	xmldoubles.MaxMinutesAllowed = 120.0
+}
+onTargeted
+{
+	if (IS(SPELL(),invisibilityspell))
+	{
+		pause 100
+		THIS().hidden = false
+		SAY(THIS(), "You'll regret casting invisibility on me, dirtbag!")
+		ANIMATE(THIS(), 17, 7, 1, true, false, 0 )
+		pause 1000
+		THIS().hidden = false
+		SAY(THIS(), "Game over for you!")
+		if (TRIGMOB().alive && TRIGMOB().blessed == false)
+		{
+			EFFECT(14089,30,TRIGMOB())
+			SOUND(TRIGMOB(),0x208)
+			KILL(TRIGMOB())
+		}
+	}
+}
+
+onUse
+{
+	if (IS(TRIGMOB(),playermobile) == false) { return override }
+	
+	// team captain names of in-process dungeon crawls
+	if (TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain != null && XMLOBJS(THIS(), TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.rawName + "_Captain") != null)
+	{
+		// member of the team in progress
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_JoinGump.xml", true)
+		return override
+	}
+	
+	if (GETACCOUNTTAG(TRIGMOB(),"dungeonCrawlCompleted") != null)
+	{
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_CrawlReport.xml", true)
+		return override
+	}
+	
+	// mob has been invited to a team
+	if (TRIGMOB().xmlobjs.dungeonCrawlInvitedBy != null)
+	{
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_Invited.xml", true)
+	}
+	// team captain
+	elif (TRIGMOB().xmlobjs.dungeonCrawlTeam != null)
+	{
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_CaptainMenu.xml", true)
+	}
+	// team member
+	elif (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlTeamCaptain") != null && TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain != null)
+	{
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_MemberMenu.xml", true)
+	}
+	else 
+	{
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_CreateTeam.xml", true)
+	}
+	return override
+}
+
+onGumpResponse
+{
+	// NOTE I technically should be careful sending gumps from inside the gump response
+	// since it will carry over ints.templateShowScreen BUT it's only important
+	// if from the gump you send it can travel to another gump that uses ints.templateShowScreen
+	// ... in this case the TemplateInfo gump doesn't navigate anywhere, so there is no way
+	// that ints.templateShowScreen will be encountered without it being reset
+	if (ints.templateShowScreen == 1)
+	{
+		ints.templateShowScreen = 0 // I'm going to reset it just in case hehe
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_TemplateInfo.xml", true)
+		return
+	}
+	
+	if (GUMPID() == "alan\\automated\\dungeoncrawl_Help.xml")
+	{
+		// there's really nothing to do here since templateShowScreen is handled above
+		return
+	} // ==== END Help response =============
+	
+	if (GUMPID() == "alan\\automated\\dungeoncrawl_CaptainMenu.xml")
+	{
+		if (TRIGMOB().xmlobjs.dungeonCrawlTeam == null)
+		{
+			// shouldn't be possible to get here!
+			LOCALMSG(TRIGMOB(), "ERROR #2: Contact the staff please!")
+			return
+		}
+		if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlCompleted") != null)
+		{
+			LOCALMSG(TRIGMOB(), "Because your team has already participated, you can no longer make any changes here!")
+			return
+		}
+		
+		if (ints.addTeamMember == 1)
+		{
+			if (TRIGMOB().xmlints.inviteBlock != 1)
+			{
+				SENDTARGET(TRIGMOB())
+				SENDMSG(TRIGMOB(), "Select the player you wish to add to your team.", 0x38)
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(),"You must wait a few moments before inviting somebody else.")
+			}
+		}
+		elif (ints.begincrawl == 1)
+		{			
+			if (TRIGMOB().xmlobjs.dungeonCrawlTeam != null) // i.e. are they a team captain?
+			{
+				if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlCompleted") == null)
+				{
+					// start the game
+					XMLOBJS(THIS(), TRIGMOB().rawName + "_Captain", TRIGMOB())
+					XMLOBJS(THIS(), TRIGMOB().rawName + "_InProgress", NOW())  // store the starting time
+					TRIGMOB().xmlobjs.dungeonCrawlTime = TIMESPANDAYS(10) // default score is 10 days
+					foreach (objs.teamMember ; TRIGMOB().xmlobjs.dungeonCrawlTeam)
+					{
+						SETACCOUNTTAG(objs.teamMember, "dungeonCrawlCompleted", "begun")
+						LOCALMSG(objs.teamMember, "Your team captain has begun the crawl! You can now join the event double-clicking the Event Master. Say 'help' to the Event Master for complete instructions.", 38)
+					}
+					
+					// spawn all the mobs and start the timer
+					objs.RunningScript = NEWATTACHMENT(xmlscript, TRIGMOB().rawName) // store the name of the team captain on the script
+					objs.RunningScript.scriptfile = "alan\\automated\\dungeoncrawlRunning.txt"
+					ATTACH(THIS(), objs.RunningScript)
+				}
+				else
+				{
+					LOCALMSG(TRIGMOB(), "Your team is participating or has already participated in the dungeon crawl!")
+				}
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "Only a team captain can initiate the dungeon crawl!.", 38)
+			}
+		}
+		// objs.gumpMatchingListObjects contains the selected object in the list as well as the list itself
+		if (objs.gumpMatchingListObjects.Count > 0)
+		{
+			objs.teamMemberToRemove = objs.gumpMatchingListObjects[0].obj
+			if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlCompleted") != null)
+			{
+				LOCALMSG(TRIGMOB(), "You have already been on a team that has participated in the dungeon crawl and therefore cannot quit or remove team members!", 38)
+			}
+			if (objs.teamMemberToRemove == TRIGMOB() && TRIGMOB().xmlobjs.dungeonCrawlTeam != null)
+			{
+				// team captain quitting: remove all members of the team
+				objs.toRemove = NEWLIST()
+				foreach (objs.mob ; TRIGMOB().xmlobjs.dungeonCrawlTeam)
+				{
+					LOCALMSG(objs.mob, TRIGMOB().RawName + "'s dungeon crawl team has been disbanded (you are no longer on that team)!", 38)
+					LOCALMSG(TRIGMOB(), "You have removed " + objs.mob.RawName + " from the dungeon crawl team.", 0x38)
+					SETACCOUNTTAG(objs.mob, "dungeonCrawlTeamCaptain", null)
+					ADDTOLIST(objs.toRemove, objs.mob)
+					objs.mob.xmlobjs.dungeonCrawlTeamCaptain.xmlobject.dodelete = true
+				}
+				// have to remove outside of the foreach loop (can't change the collection while iterating
+				foreach (objs.mob ; objs.toRemove)
+				{
+					REMOVEFROMLIST(TRIGMOB().xmlobjs.dungeonCrawlTeam, objs.mob)
+				}
+				
+				TRIGMOB().xmlobjs.dungeonCrawlTeam.xmlobject.dodelete = true
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), objs.teamMemberToRemove.RawName + " has been removed from the dungeon crawl team!", 38)
+				LOCALMSG(objs.teamMemberToRemove, "You have been removed from your dungeon crawl team!", 38)
+				SETACCOUNTTAG(objs.teamMemberToRemove, "dungeonCrawlTeamCaptain", null)
+				REMOVEFROMLIST(TRIGMOB().xmlobjs.dungeonCrawlTeam, objs.teamMemberToRemove)
+				objs.teamMemberToRemove.xmlobjs.dungeonCrawlTeamCaptain.xmlobject.dodelete = true
+			}
+		}
+	}
+	
+	elif (GUMPID() == "alan\\automated\\dungeoncrawl_CreateTeam.xml")
+	{		
+		if (ints.registerTeam == 1)
+		{
+			if (TRIGMOB().xmlobjs.dungeonCrawlInvitedBy != null) { TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.xmlobject.dodelete = true } // if invited, remove the invitation
+			if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlTeamCaptain") == null)
+			{
+				if (TAKEGOLDFROM(TRIGMOB(), xmlints.teamRegistrationCost))
+				{
+					TRIGMOB().xmlobjs.dungeonCrawlTeam = NEWLIST()
+					TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain = TRIGMOB()
+					SETACCOUNTTAG(TRIGMOB(), dungeonCrawlTeamCaptain, TRIGMOB().RawName)
+					ADDTOLIST(TRIGMOB().xmlobjs.dungeonCrawlTeam, TRIGMOB())
+					LOCALMSG(TRIGMOB(), "Your team has been registered", 0x38)
+					SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_CaptainMenu.xml", true)
+				}
+				else
+				{
+					LOCALMSG(TRIGMOB(), "You can't afford the registration fee of " + xmlints.teamRegistrationCost + "!", 38)
+				}
+			}
+			else
+			{
+				// shouldn't be possible to get here!
+				LOCALMSG(TRIGMOB(), "ERROR #1: Contact the staff please!")
+				return
+			}
+		}
+		
+	} // ==== END CreateTeam response ==============
+	
+	elif (GUMPID() == "alan\\automated\\dungeoncrawl_Invited.xml")
+	{
+		if (TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.RawName == strings.buttonPressed)
+		{
+			if (TRIGMOB().xmlobjs.dungeonCrawlInvitedBy != null )
+			{
+				if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlCompleted") != null)
+				{
+					LOCALMSG(TRIGMOB(), "You are already on a team that is participating / has participated and cannot join another!", 38)
+					return
+				}
+				if (TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain != null)
+				{
+					LOCALMSG(TRIGMOB(), "You are already on a team led by " + TRIGMOB().dungeonCrawlTeamCaptain.RawName + "!", 38)
+					return
+				}
+				if (TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.xmlobjs.dungeoncrawlTeam == null || TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.xmlobjs.dungeoncrawlTeam.Count < 5)
+				{
+					SETACCOUNTTAG(TRIGMOB(), "dungeonCrawlTeamCaptain", TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.RawName)
+					TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain = TRIGMOB().xmlobjs.dungeonCrawlInvitedBy
+					ADDTOLIST(TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.xmlobjs.dungeonCrawlTeam, TRIGMOB())
+					LOCALMSG(TRIGMOB(), "You have joined " + TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.RawName + "'s dungeon crawl team.", 0x38)
+					LOCALMSG(TRIGMOB().xmlobjs.dungeonCrawlInvitedBy, TRIGMOB().RawName + " has joined your dungeon crawl team.", 0x38)
+					TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.xmlobject.dodelete = true
+				}
+				else
+				{
+					LOCALMSG(TRIGMOB(), "Either that team no longer exists or it is full!", 38)
+				}
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "Somebody else invited you in the meantime, try again!", 38)
+			}
+		}
+		elif (ints.declineInvite == 1)
+		{
+			if (TRIGMOB().xmlobjs.dungeonCrawlInvitedBy != null)
+			{
+				LOCALMSG(TRIGMOB(), "You decline the invitation.", 0x38)
+				LOCALMSG(TRIGMOB().xmlobjs.dungeonCrawlInvitedBy, TRIGMOB().RawName + " has declined your invitation!", 38)
+				TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.xmlobject.dodelete = true
+			}
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "You decide not to join their team at this time (NOTE the invitation expires in 5 minutes!)", 0x38)
+		}
+	} // ==== END Invited response ==============
+	
+	elif (GUMPID() == "alan\\automated\\dungeoncrawl_MemberMenu.xml")
+	{
+		if (ints.quitTeam == 1)
+		{
+			if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlTeamCaptain") == null)
+			{
+				LOCALMSG(TRIGMOB(), "You are not on a team!", 38)
+				return
+			}
+			
+			if (GETACCOUNTTAG(TRIGMOB(), "dungeonCrawlCompleted") == null)
+			{
+				LOCALMSG(TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain, TRIGMOB().RawName + " has quit the dungeon crawl team!", 38)
+				LOCALMSG(TRIGMOB(), "You have quit your dungeon crawl team.", 0x38)
+				SETACCOUNTTAG(TRIGMOB(), "dungeonCrawlTeamCaptain", null)
+				REMOVEFROMLIST(TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.xmlobjs.dungeonCrawlTeam, TRIGMOB())
+				TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.xmlobject.dodelete = true
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You have already been on a team that has participated in the dungeon crawl and therefore cannot quit your team!", 38)
+			}
+		}
+	} // ==== END MemberMenu response ==============
+	
+	elif (GUMPID() == "alan\\automated\\dungeoncrawl_JoinGump.xml")
+	{
+		if (TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain != null && XMLOBJS(THIS(), TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.rawName + "_Captain") != null)
+		{
+			objs.spawned = null
+			if (ints.fencer == 1)
+			{
+				objs.spawned = humanmob
+				objs.spawned.str = 100
+				objs.spawned.int = 25
+				objs.spawned.dex = 100
+				objs.spawned.hitsmaxseed = 100
+				objs.spawned.hits = 100
+				objs.spawned.stammaxseed = 100
+				objs.spawned.stam = 100
+				objs.spawned.manamaxseed = 25
+				objs.spawned.mana = 25
+				SETSKILL(objs.spawned, "Fencing", 100.0)
+				SETSKILL(objs.spawned, "Tactics", 100.0)
+				SETSKILL(objs.spawned, "Anatomy", 100.0)
+				SETSKILL(objs.spawned, "Healing", 100.0)
+				SETSKILL(objs.spawned, "Magery", 100.0)
+				SETSKILL(objs.spawned, "MagicResist", 100.0)
+				SETSKILL(objs.spawned, "Parry", 100.0)
+				
+				objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.shield = metalkiteshield { quality = exceptional } ADDTOPACK(objs.spawned, objs.shield);
+				objs.weapon = warfork { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = shortspear { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+			}
+			elif (ints.macer == 1)
+			{
+				objs.spawned = humanmob
+				objs.spawned.str = 100
+				objs.spawned.int = 25
+				objs.spawned.dex = 100
+				objs.spawned.hitsmaxseed = 100
+				objs.spawned.hits = 100
+				objs.spawned.stammaxseed = 100
+				objs.spawned.stam = 100
+				objs.spawned.manamaxseed = 25
+				objs.spawned.mana = 25
+				SETSKILL(objs.spawned, "Macing", 100.0)
+				SETSKILL(objs.spawned, "Tactics", 100.0)
+				SETSKILL(objs.spawned, "Anatomy", 100.0)
+				SETSKILL(objs.spawned, "Healing", 100.0)
+				SETSKILL(objs.spawned, "Magery", 100.0)
+				SETSKILL(objs.spawned, "MagicResist", 100.0)
+				SETSKILL(objs.spawned, "Parry", 100.0)
+				objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.shield = metalkiteshield { quality = exceptional } ADDTOPACK(objs.spawned, objs.shield);
+				objs.weapon = waraxe { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = warhammer { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+			}
+			elif (ints.archer == 1)
+			{
+				objs.spawned = humanmob
+				objs.spawned.str = 100
+				objs.spawned.int = 25
+				objs.spawned.dex = 100
+				objs.spawned.hitsmaxseed = 100
+				objs.spawned.hits = 100
+				objs.spawned.stammaxseed = 100
+				objs.spawned.stam = 100
+				objs.spawned.manamaxseed = 25
+				objs.spawned.mana = 25
+				SETSKILL(objs.spawned, "Archery", 100.0)
+				SETSKILL(objs.spawned, "Tactics", 100.0)
+				SETSKILL(objs.spawned, "Anatomy", 100.0)
+				SETSKILL(objs.spawned, "Healing", 100.0)
+				SETSKILL(objs.spawned, "Magery", 100.0)
+				SETSKILL(objs.spawned, "MagicResist", 100.0)
+				SETSKILL(objs.spawned, "Hiding", 100.0)
+				objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.weapon = bow { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = heavycrossbow { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = bolt, 450; ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = arrow, 600; ADDTOPACK(objs.spawned, objs.weapon);
+			}
+			elif (ints.lumberjack == 1)
+			{
+				objs.spawned = humanmob
+				objs.spawned.str = 100
+				objs.spawned.int = 25
+				objs.spawned.dex = 100
+				objs.spawned.hitsmaxseed = 100
+				objs.spawned.hits = 100
+				objs.spawned.stammaxseed = 100
+				objs.spawned.stam = 100
+				objs.spawned.manamaxseed = 25
+				objs.spawned.mana = 25
+				SETSKILL(objs.spawned, "Swords", 100.0)
+				SETSKILL(objs.spawned, "Tactics", 100.0)
+				SETSKILL(objs.spawned, "Anatomy", 100.0)
+				SETSKILL(objs.spawned, "Healing", 100.0)
+				SETSKILL(objs.spawned, "Magery", 100.0)
+				SETSKILL(objs.spawned, "MagicResist", 100.0)
+				SETSKILL(objs.spawned, "Lumberjacking", 100.0)
+				objs.armor = closehelm { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = plategorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = chainlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = ringmailgloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.weapon = twohandedaxe { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = doubleaxe { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = halberd { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+				objs.weapon = katana { slayer = "silver"; identified = true } ADDTOPACK(objs.spawned, objs.weapon);
+			}
+			elif (ints.mage == 1)
+			{
+				objs.spawned = humanmob
+				objs.spawned.str = 100
+				objs.spawned.int = 100
+				objs.spawned.dex = 25
+				objs.spawned.hitsmaxseed = 100
+				objs.spawned.hits = 100
+				objs.spawned.stammaxseed = 25
+				objs.spawned.stam = 25
+				objs.spawned.manamaxseed = 100
+				objs.spawned.mana = 100
+				SETSKILL(objs.spawned, "Inscribe", 100.0)
+				SETSKILL(objs.spawned, "Wrestling", 100.0)
+				SETSKILL(objs.spawned, "EvalInt", 100.0)
+				SETSKILL(objs.spawned, "Meditation", 100.0)
+				SETSKILL(objs.spawned, "Magery", 100.0)
+				SETSKILL(objs.spawned, "MagicResist", 100.0)
+				SETSKILL(objs.spawned, "Poisoning", 100.0)
+				objs.armor = leatherchest { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = leathergorget { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = leatherarms { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = leatherlegs { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = leathercap { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+				objs.armor = leathergloves { quality = exceptional } EQUIP(objs.spawned, objs.armor);
+			}
+			
+			if (objs.spawned != null)
+			{
+				ADDTOLIST(XMLOBJS(THIS(), TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.rawName + "_Spawned"), objs.spawned)
+				objs.bandage = bandage, 150
+				ADDTOPACK(objs.spawned, objs.bandage)
+				objs.robe = robe
+				{
+					hue = 38
+				}
+				EQUIP(objs.spawned, objs.robe)
+				objs.fullspellbook = fullspellbook
+				{
+					movable = false
+				}
+				ADDTOPACK(objs.spawned, objs.fullspellbook)
+				objs.sandals = sandals
+				EQUIP(objs.spawned, objs.sandals)
+				
+				for (ints.i = 0; ints.i < 8; ints.i += 1)
+				{
+					objs.potion = refreshpotion
+					ADDTOPACK(objs.spawned, objs.potion)
+					if (ints.i % 2 == 0)
+					{
+						objs.potion = lessercurepotion
+						ADDTOPACK(objs.spawned, objs.potion)
+					}
+				}
+				
+				objs.spawned.fightmode = evil
+				objs.spawned.name = TRIGMOB().RawName
+				objs.spawned.hue = TRIGMOB().hue
+				objs.spawned.facialHairItemID = TRIGMOB().facialHairItemID
+				objs.spawned.facialHairHue = TRIGMOB().facialHairHue
+				objs.spawned.hairItemID =  TRIGMOB().hairItemID
+				objs.spawned.hairHue = TRIGMOB().hairHue
+				objs.spawned.bodyValue = TRIGMOB().bodyValue
+				objs.spawned.name = TRIGMOB().RawName
+				
+				objs.attachment = NEWATTACHMENT(xmlscript, automatedPlayerSpawn)
+				objs.attachment.scriptfile = "alan\\automated\\spawn.txt"
+				ATTACH(objs.spawned, objs.attachment)
+				
+				//objs.horse = horse
+				//{
+				//	controlled = true
+				//	controlmaster = objs.spawned
+				//	rider = objs.spawned
+				//}
+				MOVETOWORLD(objs.spawned, POINT3D(5188, 637, 0), TRIGMOB().xmlobjs.dungeonCrawlTeamCaptain.rawName + "_CrawlMap")
+				
+				POSSESS(TRIGMOB(), objs.spawned)
+				
+				// have to update their logout location b/c after 5 minutes
+				// when they officially log out, since their map is internal
+				// their logoutlocation isn't changed
+				TRIGMOB().logoutlocation = TRIGMOB().location
+				TRIGMOB().map = MAP(internal)
+				TRIGMOB().logoutmap = MAP(felucca)
+			}
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "Your team is no longer in the game.", 38)
+		}
+		
+	} // ====== end JoinGump Response ======================
+}
+
+onSpeech
+{	
+	if (SAID("help") || SAID("info"))
+	{
+		SENDGUMP(TRIGMOB(), "alan\\automated\\dungeoncrawl_Help.xml", true)
+	}
+}
+onTarget
+{
+	// this is an add team member target (nothing else)
+	if (DISTANCE(TARGETED(), THIS()) < 6)
+	{
+		if (TRIGMOB().xmlobjs.dungeonCrawlTeam == null)
+		{
+			LOCALMSG(TRIGMOB(), "Only a team captain can add team members!!", 38)
+			return
+		}
+		if (IS(TARGETED(), playermobile))
+		{
+			if (TARGETED().xmlobjs.dungeonCrawlInvitedBy != null)
+			{
+				LOCALMSG(TRIGMOB(), "That player has already been invited by someone. They must decline or accept the invitation first.", 38)
+				return
+			}
+			if (GETACCOUNTTAG(TARGETED(), "dungeonCrawlCompleted") == null && GETACCOUNTTAG(TARGETED(), "dungeonCrawlTeamCaptain") == null)
+			{
+				TARGETED().xmlobjs.dungeonCrawlInvitedBy = TRIGMOB()
+				TARGETED().xmlobjs.dungeonCrawlInvitedBy.xmlobject.expiration = 0:5:0
+				LOCALMSG(TARGETED(), "You have been invited to join " + TRIGMOB().RawName + "'s dungeon crawl team. To accept the invitation, double-click the event master. You have 5 minutes to accept. NOTE that you can only be on 1 team per account so DECIDE CAREFULLY!", 38)
+				LOCALMSG(TRIGMOB(), "You have sent them an invite. They have 5 minutes to accept your invite.", 0x38)
+				// can only invite once every 10 seconds
+				TRIGMOB().xmlints.inviteBlock = 1
+				TRIGMOB().xmlints.inviteBlock.expiration = 0:0:10
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "That player is already on a team.", 38)
+			}
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "You must target a player!", 38)
+		}
+
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "The targeted player must be within 5 squares of the Event Master!", 38)
+	}
+}

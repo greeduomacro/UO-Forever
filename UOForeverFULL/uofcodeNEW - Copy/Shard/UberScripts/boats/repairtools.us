@@ -1,0 +1,306 @@
+function initializeGump() 
+{
+	objs.list = [2213, 1891, 2418, 1]
+	ints.x1 = RANDOMMINMAX(35,165)
+	ints.y1 = RANDOMMINMAX(65,165)
+	ints.hue1 = RANDOMFROMLIST(objs.list)
+	ints.x2 = RANDOMMINMAX(35,165)
+	ints.y2 = RANDOMMINMAX(65,165)
+	ints.hue2 = RANDOMFROMLIST(objs.list)
+	ints.x3 = RANDOMMINMAX(35,165)
+	ints.y3 = RANDOMMINMAX(65,165)
+	ints.hue3 = RANDOMFROMLIST(objs.list)
+	ints.x4 = RANDOMMINMAX(35,165)
+	ints.y4 = RANDOMMINMAX(65,165)
+	ints.hue4 = RANDOMFROMLIST(objs.list)
+	ints.x5 = RANDOMMINMAX(35,165)
+	ints.y5 = RANDOMMINMAX(65,165)
+	ints.hue5 = RANDOMFROMLIST(objs.list)
+	ints.x6 = RANDOMMINMAX(35,165)
+	ints.y6 = RANDOMMINMAX(65,165)
+	ints.hue6 = RANDOMFROMLIST(objs.list)
+	ints.x7 = RANDOMMINMAX(35,165)
+	ints.y7 = RANDOMMINMAX(65,165)
+	ints.hue7 = RANDOMFROMLIST(objs.list)
+	SENDGUMP(TRIGMOB(), "boats\\repairgump.xml")
+}
+onCreate
+{
+	xmlints.loaded = 0
+}
+onUse
+{
+	if (TRIGMOB() != THIS().RootParentEntity)
+	{
+		SENDMSG(TRIGMOB(), "That must be in your pack to use it.")
+		return
+	}
+	
+	if (THIS().UsesRemaining <= 0)
+	{
+		SENDMSG(TRIGMOB(), "You have worn out your tool!")
+		DELETE(THIS())
+	}
+	
+	if (xmlints.cantUse != null) { SENDMSG(TRIGMOB(), "You are still trying to get that stripped screw out."); return }
+	
+	SENDMSG(TRIGMOB(), "Target the Mast or Tillerman of the ship you wish to repair.")
+	SENDTARGET(TRIGMOB(), false, false)
+}
+onTarget
+{
+	if (IS(TARGETED(), TillerMan)) { objs.boat = TARGETED().Boat }
+	else if (IS(TARGETED(), BaseBoat)) { objs.boat = TARGETED() }
+	if (xmlints.cantUse != null) { SENDMSG(TRIGMOB(), "You are still trying to get that stripped screw out."); return }
+	if (objs.boat != null)
+	{
+		if (xmlobjs.boat != null && xmlobjs.boat != objs.boat)
+		{
+			if (xmlints.loaded > 0)
+			{
+				xmlints.loaded = 0
+			}
+		}
+		xmlobjs.boat = objs.boat // only used to store the last boat repaired (so you can't store it up)
+		
+		if (objs.boat.Sunk)
+		{
+			if (objs.boat.xmlints.repairableByAll == 1)
+			{
+				initializeGump() 
+			}
+			else if (objs.boat.xmlints.ownerRepairOpportunity == 1 && TRIGMOB() == objs.boat.owner)
+			{
+				initializeGump() 
+				SENDMSG(TRIGMOB(), "You have 60 minutes from the sink time of " + objs.boat.xmlobjs.sinkTime + " to repair this!")
+				//SENDMSG(TRIGMOB(), "You have " + TIMESPANSTRING(TIMESPANMINUTES(60.0) + (objs.boat.xmlobjs.sinkTime - NOW())) + " left to repair the boat as the owner!")
+			}
+			else if (TRIGMOB() == objs.boat.owner)
+			{
+				initializeGump() 
+				SENDMSG(TRIGMOB(), "You have 15 minutes from the sink time of " + objs.boat.xmlobjs.sinkTime + " to decide on the ransom note!")
+				//SENDMSG(TRIGMOB(), "WARNING, you only have " + TIMESPANSTRING(TIMESPANMINUTES(15.0) + objs.boat.xmlobjs.sinkTime - NOW()) + " left to decide on the ransom!")
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "Only the owner can repair the boat during the 15 minute Ransom note response period!")
+			}
+			//
+		}
+		else
+		{
+			if (INBOAT(objs.boat, TRIGMOB()))
+			{
+				if (TARGETED().hits < 100)
+				{
+					initializeGump() 
+				}
+				else
+				{
+					SENDMSG(TRIGMOB(), "That does not need repair.")
+				}
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You can only repair the boat you are in or a sunken boat.")
+			}
+		}
+	}
+}
+onGumpResponse
+{
+	if (GUMPID() == "boats\\repairgump.xml")
+	{
+		if (objs.boat.Hits == 100)
+		{
+			SENDMSG(TRIGMOB(), "The boat is at full repair!")
+			return
+		}
+		
+		if (strings.buttonPressed == "1")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue1 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue1 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue1 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue1 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "2")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue2 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue2 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue2 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue2 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "3")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue3 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue3 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue3 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue3 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "4")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue4 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue4 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue4 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue4 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "5")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue5 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue5 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue5 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue5 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "6")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue6 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue6 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue6 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue6 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "7")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue7 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue7 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue7 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue7 == 1) { LOCALMSG(TRIGMOB(), "You messed up!", 38); SOUND(THIS(), 0x58c); THIS().UsesRemaining -= 1;  return }
+		}
+		else if (strings.buttonPressed == "help")
+		{
+			SENDGUMP(TRIGMOB(), "boats\\repairHelp.xml")
+			return
+		}
+		else if (strings.buttonPressed == "empty")
+		{
+			LOCALMSG(TRIGMOB(), "You decide start the repair over.")
+			xmlints.loaded = 0
+		}
+		else if (strings.buttonPressed == "repair")
+		{
+			if (xmlints.loaded > 0)
+			{
+				if (xmlints.loaded > 25)
+				{
+					LOCALMSG(TRIGMOB(), "You pushed too hard and stripped a screw! Dag' nabbit!", 38)
+					THIS().UsesRemaining -= 1
+					xmlints.cantUse = 1
+					xmlints.cantUse.Expiration = TIMESPANSECONDS(5.0)
+					xmlints.loaded = 0
+					return;
+				}
+				THIS().UsesRemaining -= 1
+				
+				if (xmlints.loaded == 25)
+				{
+					SENDMSG(TRIGMOB(), "You make spectacular repairs to the ship.")
+					ints.newDamage = 8
+				}
+				else if (xmlints.loaded > 22)
+				{
+					SENDMSG(TRIGMOB(), "The make excellent repairs to the ship.")
+					ints.newDamage = 6
+				}
+				else if (xmlints.loaded > 20)
+				{
+					SENDMSG(TRIGMOB(), "You make great repairs to the ship.")
+					ints.newDamage = 4
+				}
+				else if (xmlints.loaded > 15)
+				{
+					SENDMSG(TRIGMOB(), "You apply decent repairs to the ship.")
+					ints.newDamage = 3
+				}
+				else if (xmlints.loaded > 10)
+				{
+					SENDMSG(TRIGMOB(), "You were able to make a few repairs.")
+					ints.newDamage = 2
+				}
+				else if (xmlints.loaded > 5)
+				{
+					SENDMSG(TRIGMOB(), "You were barely able to repair anything.")
+						ints.newDamage = 1
+				}
+				else
+				{
+					if (RANDOMBOOL())
+					{
+						SENDMSG(TRIGMOB(), "You were barely able to repair anything.")
+						ints.newDamage = 1
+					}
+					else
+					{
+						ints.newDamage = 0
+						SENDMSG(TRIGMOB(), "Your repairs made no difference.")
+					}
+				}
+				
+				if (ints.newDamage > 0)
+				{
+					objs.boat.Hits += ints.newDamage
+					if (objs.boat.Hits >= 100)
+					{
+						if (objs.boat.Sunk) 
+						{
+							DRYDOCKBOAT(objs.boat, TRIGMOB())
+							LOCALMSG(TRIGMOB(), "Congratulations, you gained control of the boat! It is now in your backpack.", 0x38)
+							LOG("BoatCapture", TRIGMOB() + " captured " + objs.boat + " from " + objs.boat.Owner)
+						}
+						else 
+						{
+							objs.boat.Hits = 100
+						}
+						SENDMSG(TRIGMOB(), "You fully repaired the boat!")
+					}
+				}
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You haven't applied any work to it!")
+			}
+			if (THIS().UsesRemaining <= 0)
+			{
+				SENDMSG(TRIGMOB(), "You have worn out your tool!")
+				DELETE(THIS())
+			}
+			
+			xmlints.loaded = 0
+		}
+		else
+		{
+			return
+		}
+		
+		objs.list = [2213, 1891, 2418, 1]
+		ints.x1 = RANDOMMINMAX(35,165)
+		ints.y1 = RANDOMMINMAX(65,165)
+		ints.hue1 = RANDOMFROMLIST(objs.list)
+		ints.x2 = RANDOMMINMAX(35,165)
+		ints.y2 = RANDOMMINMAX(65,165)
+		ints.hue2 = RANDOMFROMLIST(objs.list)
+		ints.x3 = RANDOMMINMAX(35,165)
+		ints.y3 = RANDOMMINMAX(65,165)
+		ints.hue3 = RANDOMFROMLIST(objs.list)
+		ints.x4 = RANDOMMINMAX(35,165)
+		ints.y4 = RANDOMMINMAX(65,165)
+		ints.hue4 = RANDOMFROMLIST(objs.list)
+		ints.x5 = RANDOMMINMAX(35,165)
+		ints.y5 = RANDOMMINMAX(65,165)
+		ints.hue5 = RANDOMFROMLIST(objs.list)
+		ints.x6 = RANDOMMINMAX(35,165)
+		ints.y6 = RANDOMMINMAX(65,165)
+		ints.hue6 = RANDOMFROMLIST(objs.list)
+		ints.x7 = RANDOMMINMAX(35,165)
+		ints.y7 = RANDOMMINMAX(65,165)
+		ints.hue7 = RANDOMFROMLIST(objs.list)
+		pause 200
+		SENDGUMP(TRIGMOB(), "boats\\repairgump.xml")
+	}
+}

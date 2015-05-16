@@ -1,0 +1,26 @@
+onUse
+{
+	strings.fileName = "DotaScoreReport"
+	LOG(strings.fileName, NOW() + "==== DOTA SCORE REPORT ======")
+	objs.essenceDamage = GLOBALGETATTACHMENTS(XmlValue, dotaElementalDamage)
+	strings.line = "Name\tEssence Damage\tTurret/Factory Damage\tElemental Damage\tPlayer Damage\tBlacksmith\tTinkering\tTailoring\tMining\tAlchemy\tTotal Crafting\tMagery\tSwords\tFencing\tMacing\tTactics\tAnatomy\tHealing\tWrestling\tEval Int\tResist\tPoisoning\tUnique Player Kills"
+	LOG(strings.fileName, strings.line)
+	
+	foreach (objs.attachment ; objs.essenceDamage)
+	{
+		strings.line = ""
+		objs.mob = objs.attachment.AttachedTo
+		if (objs.mob == null) { continue }
+		
+		strings.line += objs.mob.RawName + "\t" + objs.mob.xmlints.dotaLifeEssenceDamage + "\t" + objs.mob.xmlints.dotaTurretDamage + "\t" + objs.mob.xmlints.dotaElementalDamage  + "\t" + objs.mob.xmlints.dotaPlayerDamage + "\t" + GETSKILL(objs.mob, Blacksmith) + "\t" + GETSKILL(objs.mob, Tinkering) + "\t" + GETSKILL(objs.mob, Tailoring) + "\t" + GETSKILL(objs.mob, Mining) + "\t" + GETSKILL(objs.mob, Alchemy) + "\t\t" + GETSKILL(objs.mob, Magery) + "\t" + GETSKILL(objs.mob, Swords) + "\t" + GETSKILL(objs.mob, Fencing) + "\t" + GETSKILL(objs.mob, Macing) + "\t" + GETSKILL(objs.mob, Tactics) + "\t" + GETSKILL(objs.mob, Anatomy) + "\t" + GETSKILL(objs.mob, Healing) + "\t" + GETSKILL(objs.mob, Wrestling) + "\t" + GETSKILL(objs.mob, EvalInt) + "\t" + GETSKILL(objs.mob, MagicResist) + "\t" + GETSKILL(objs.mob, Poisoning) + "\t";
+		foreach (objs.killed ; objs.mob.xmlobjs.dotaPlayerKills)
+		{
+			if (objs.killed == null) { continue; }
+			strings.line += objs.killed.RawName + ","
+		}
+		LOG(strings.fileName, strings.line)
+	}
+	
+	SENDMSG(TRIGMOB(), "Finished calculating score.")
+	DELETE(THIS())
+}

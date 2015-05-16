@@ -1,0 +1,33 @@
+<Gump dragable="false">
+  <VBox padding="10" backgroundID="9250">
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="startEvent"/>
+		<Label hue ="1553">"Start Event"</Label>
+	</HBox>
+	<Label hue ="1553">"Starting the event will allow players to sign up"</Label>
+	
+	<Spacer height="10"/>
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="stopEvent"/>
+		<Label hue ="1553">"Stop Event"</Label>
+	</HBox>
+	<Label hue ="1553">"Ending the event will make it so players cannot join."</Label>
+	<Label hue ="1553">"It will not boot players already in the event"</Label>
+	<Label hue ="1553">"Though they may not be able to rejoin if they lose connection."</Label>
+	
+	<Spacer height="10"/>
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="showScores"/>
+		<Label hue ="1553">"Show Scores"</Label>
+	</HBox>
+	<Label hue ="1553">"This will display the scoreboard to you."</Label>
+	
+	<Spacer height="30"/>
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="reset"/>
+		<Label hue ="1553">"Reset Groups"</Label>
+	</HBox>
+	<Label hue ="1553">"CAREFUL, this resets all the groups, so there is a clean slate!"</Label>
+	<Label hue ="1553">"All current scores will be lost!"</Label>
+  </VBox>
+</Gump>

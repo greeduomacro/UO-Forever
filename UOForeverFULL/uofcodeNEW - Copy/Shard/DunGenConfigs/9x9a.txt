@@ -1,0 +1,23 @@
+onewayprobability	0.9
+twowayprobability	1
+threewayprobability	0.2
+fourwayprobability	0.1
+turnprobability	1
+straightprobability	1
+tilesize 9
+# bitflags filename weighting
+1	Spawns\9x9Tiles\Catacombs01_S.txt	1
+2	Spawns\9x9Tiles\Catacombs01_E.txt	1
+3	Spawns\9x9Tiles\Catacombs01_SE.txt	1
+4	Spawns\9x9Tiles\Catacombs01_W.txt	1
+5	Spawns\9x9Tiles\Catacombs01_SW.txt	1
+6	Spawns\9x9Tiles\Catacombs01_WE.txt	1
+7	Spawns\9x9Tiles\Catacombs01_SWE.txt	1
+8	Spawns\9x9Tiles\Catacombs01_N.txt	1
+9	Spawns\9x9Tiles\Catacombs01_NS.txt	1
+10	Spawns\9x9Tiles\Catacombs01_NE.txt	1
+11	Spawns\9x9Tiles\Catacombs01_NSE.txt	1
+12	Spawns\9x9Tiles\Catacombs01_NW.txt	1
+13	Spawns\9x9Tiles\Catacombs01_NSW.txt	1
+14	Spawns\9x9Tiles\Catacombs01_NWE.txt	1
+15	Spawns\9x9Tiles\Catacombs01_NSWE.txt	1

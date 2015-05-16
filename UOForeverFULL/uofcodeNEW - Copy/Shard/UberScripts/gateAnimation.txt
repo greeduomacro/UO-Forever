@@ -1,0 +1,22 @@
+onUse
+{
+	objs.fire = fireelemental
+	{
+		ignoremobiles = true
+		cantwalk = true
+		blessed = true
+	}
+	objs.script = NEWATTACHMENT(xmlscript, gateTest)
+	objs.script.scriptfile = temp2.txt
+	ATTACH(objs.fire, objs.script)
+	
+	objs.fire = fireelemental
+	{
+		ignoremobiles = true
+		cantwalk = true
+		blessed = true
+	}
+	objs.script = NEWATTACHMENT(xmlscript, gateTest)
+	objs.script.scriptfile = temp3.txt
+	ATTACH(objs.fire, objs.script)
+}

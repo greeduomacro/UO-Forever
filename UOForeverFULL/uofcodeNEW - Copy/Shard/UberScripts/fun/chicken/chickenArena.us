@@ -1,0 +1,36 @@
+onCreate
+{
+	SUBSCRIBETIMER(FiveSeconds)
+}
+onFiveSeconds
+{
+	objs.mobs = GETNEARBYMOBS(THIS(), 2)
+	foreach (objs.mob ; objs.mobs)
+	{
+		if (IS(objs.mob,chicken) && objs.mob.Controlled)
+		{
+			objs.scripts = GETATTACHMENTS(objs.mob, xmlscript)
+			ints.hasScript = 0
+			if (objs.scripts != null)
+			{
+				foreach (objs.script ; objs.scripts)
+				{
+					if (objs.script.Name == "chickenFight")
+					{
+						ints.hasScript = 1
+					}
+				}
+				if (ints.hasScript == 0)
+				{
+					objs.script = ADDSCRIPT(objs.mob, "fun\\chicken\\chicken2.us", "chickenFight")
+					objs.script.Expiration = TIMESPANHOURS(0.5)
+				}
+			}
+			else
+			{
+				objs.script = ADDSCRIPT(objs.mob, "fun\\chicken\\chicken2.us", "chickenFight")
+				objs.script.Expiration = TIMESPANHOURS(0.5)
+			}
+		}
+	}
+}

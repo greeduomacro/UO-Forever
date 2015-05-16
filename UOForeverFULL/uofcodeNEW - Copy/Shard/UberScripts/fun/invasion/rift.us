@@ -1,0 +1,102 @@
+onCreate
+{
+	xmlobjs.Animation1 = FireElemental
+	{
+		CantWalk = true
+		Blessed = true
+		Direction = Mask
+		Name = ""
+	}
+	xmlobjs.Animation2 = FireElemental
+	{
+		CantWalk = true
+		Blessed = true
+		Direction = Mask
+		Name = ""
+	}
+	xmlints.count = 1
+	xmlints.count2 = 1
+	xmlints.count3 = 0
+	SUBSCRIBETIMER(OneSecond)
+	SUBSCRIBETIMER(TwoFiftyMS)
+	CantWalk = true
+	ManaMaxSeed = 60000
+	Mana = 60000
+	HitsMaxSeed = 30000
+	Hits = 30000
+	VirtualArmor = 0
+	Name = "the Rift"
+	BardImmuneCustom = true
+	IsScaryToPetsCustom = true
+	PoisonCustomImmune = Lethal
+	GuardImmune = true
+	DamageMin = 20
+	DamageMax = 40
+	AutoDispelCustom = true
+	FreelyLootable = true
+	Pseu_CanBeHealed = false
+	ADDSCRIPT(THIS(), "plat.txt", "platinumReward")
+}
+onOneSecond
+{
+	if (xmlints.count == 1)
+	{
+		xmlints.count = 0
+		ANIMATE(xmlobjs.Animation1, 12, 8, 1, false, false, 0)
+	}
+	else
+	{
+		xmlints.count = 1
+		ANIMATE(xmlobjs.Animation1, 12, 10, 0, true, false, 0)
+	}
+}
+onTwoFiftyMS
+{
+	xmlints.count3 += 1
+	if (xmlints.count3 > 1)
+	{
+		if (xmlints.count2 == 1)
+		{
+			xmlints.count2 = 0
+			ANIMATE(xmlobjs.Animation2, 3, 0, 1, true, false, 1)
+		}
+		else
+		{
+			xmlints.count2 = 1
+			ANIMATE(xmlobjs.Animation2, 3, 4, 1, false, false, 1)
+		}
+		xmlints.count3 = 0
+	}
+}
+onTakenHit
+{
+	if (IS(TRIGMOB(), PlayerMobile))
+	{
+		if (TRIGMOB().xmlints.riftDamage == null)
+		{
+			TRIGMOB().xmlints.riftDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.riftDamage += DAMAGE()
+		}
+	}
+	else
+	{
+		return override
+	}
+}
+onGivenHit
+{
+	if (IS(TRIGMOB(), BaseCreature) && TRIGMOB().Controlled)
+	{
+		KILL(TRIGMOB())
+	}
+}
+onBeforeDeath
+{
+	global_objs.riftLocation = POINT3D(6208, 184, -10)
+	DELETE(xmlobjs.Animation1)
+	DELETE(xmlobjs.Animation2)
+	OVERHEADBCAST("The rift has been destroyed! Send the remaining orcs back to the infernal pit!", 38)
+}

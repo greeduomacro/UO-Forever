@@ -1,0 +1,298 @@
+function initializeGump() 
+{
+	objs.list = [2213, 1891, 2418, 1]
+	ints.x1 = RANDOMMINMAX(20,120)
+	ints.y1 = RANDOMMINMAX(20,120)
+	ints.hue1 = RANDOMFROMLIST(objs.list)
+	ints.x2 = RANDOMMINMAX(20,120)
+	ints.y2 = RANDOMMINMAX(20,120)
+	ints.hue2 = RANDOMFROMLIST(objs.list)
+	ints.x3 = RANDOMMINMAX(20,120)
+	ints.y3 = RANDOMMINMAX(20,120)
+	ints.hue3 = RANDOMFROMLIST(objs.list)
+	ints.x4 = RANDOMMINMAX(20,120)
+	ints.y4 = RANDOMMINMAX(20,120)
+	ints.hue4 = RANDOMFROMLIST(objs.list)
+	ints.x5 = RANDOMMINMAX(20,120)
+	ints.y5 = RANDOMMINMAX(20,120)
+	ints.hue5 = RANDOMFROMLIST(objs.list)
+	ints.x6 = RANDOMMINMAX(20,120)
+	ints.y6 = RANDOMMINMAX(20,120)
+	ints.hue6 = RANDOMFROMLIST(objs.list)
+	ints.x7 = RANDOMMINMAX(20,120)
+	ints.y7 = RANDOMMINMAX(20,120)
+	ints.hue7 = RANDOMFROMLIST(objs.list)
+	SENDGUMP(TRIGMOB(), "boats\\loadgump.xml")
+}
+
+onCreate
+{
+	xmlints.loaded = 0
+}
+onUse
+{
+	if (TRIGMOB().Alive == false)
+	{
+		return
+	}
+	if (DISTANCE(THIS(), TRIGMOB()) < 2)
+	{
+		initializeGump() 
+	}
+	else
+	{
+		if (DISTANCE(THIS(), TRIGMOB()) < 3 && STRING(THIS().CannonDirection) == "Fore" && IS(THIS().Boat, TokunoBoat))
+		{
+			initializeGump() 
+		}		
+		else
+		{
+			SENDMSG(TRIGMOB(), "You are too far away!")
+		}
+	}
+}
+onGumpResponse
+{
+	if (GUMPID() == "boats\\loadgump.xml")
+	{
+		if (DISTANCE(THIS(), TRIGMOB()) > 2)
+		{
+			SENDMSG(TRIGMOB(), "You are too far away!")
+			return
+		}
+		else if (DISTANCE(THIS(), TRIGMOB()) > 1 && (STRING(THIS().CannonDirection) == "Fore" && IS(THIS().Boat, TokunoBoat)) == false)
+		{
+			SENDMSG(TRIGMOB(), "You are too far away!")
+			return
+		}
+		
+		if (strings.buttonPressed == "1")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue1 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue1 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue1 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue1 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "2")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue2 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue2 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue2 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue2 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "3")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue3 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue3 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue3 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue3 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "4")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue4 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue4 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue4 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue4 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "5")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue5 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue5 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue5 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue5 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "6")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue6 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue6 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue6 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue6 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "7")
+		{
+			LOCALSOUND(TRIGMOB(), 0x5ae)
+			if (ints.hue7 == 2213) { xmlints.loaded += 5 }
+			else if (ints.hue7 == 1891) { xmlints.loaded += 3 }
+			else if (ints.hue7 == 2418) { xmlints.loaded += 1 }
+			else if (ints.hue7 == 1) { LOCALMSG(TRIGMOB(), "Misfire!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,30)); return }
+		}
+		else if (strings.buttonPressed == "help")
+		{
+			SENDGUMP(TRIGMOB(), "boats\\cannonhelp.xml")
+			return
+		}
+		else if (strings.buttonPressed == "empty")
+		{
+			LOCALMSG(TRIGMOB(), "You empty the cannon.")
+			xmlints.loaded = 0
+		}
+		else if (strings.buttonPressed == "fire")
+		{
+			if (xmlints.loaded > 0)
+			{
+				if (xmlints.loaded > 25)
+				{
+					LOCALMSG(TRIGMOB(), "Misfire (too much powder)!", 38); SOUND(THIS(), 0x306); EFFECT(14000, 13, TRIGMOB()); DODAMAGE(TRIGMOB(), RANDOMMINMAX(10,xmlints.loaded))
+					xmlints.loaded = 0
+					return;
+				}
+				
+				ints.range = 16 // change this as needed
+				objs.explosionLoc = THIS().location
+				objs.cannonDirVector = THIS().CannonDirectionVector
+				objs.explosionLoc.X += objs.cannonDirVector.X
+				objs.explosionLoc.Y += objs.cannonDirVector.Y
+				objs.explosionLoc.Z -= 5;
+				objs.explosionList = [0x11b, 0x11c, 0x11d, 0x11e, 0x305, 0x306, 0x307, 0x308, 0x309]
+				
+				EFFECT(14000, 3, objs.explosionLoc)
+				SOUND(THIS(), RANDOMFROMLIST(objs.explosionList))
+				
+				objs.target = GETCANNONTARGET(THIS(), ints.range)
+				if (objs.target != null && IS(objs.target, BaseBoat) && objs.target.Sunk == false)
+				{
+					
+					//  ******************* REMOVE THIS FOR THE EXPANSION ******************
+					// if ((IS(objs.target, OrcBoat) || IS(objs.target, GargoyleBoat) || IS(objs.target, TokunoBoat)) == false)
+					// {
+						// SENDMSG(TRIGMOB(), "Old boats cannot be damaged before the expansion.")
+						// return
+					// }
+					//SENDMSG(TRIGMOB(), "HIT " + objs.target.hits)
+					ints.distanceToTarget = GETCANNONTARGETRANGE(THIS(), ints.range)
+					objs.endLoc = THIS().location
+					objs.endLoc.X += objs.cannonDirVector.X * ints.distanceToTarget
+					objs.endLoc.Y += objs.cannonDirVector.Y * ints.distanceToTarget
+					ints.newDamage = 0
+					if (xmlints.loaded == 25)
+					{
+						SENDMSG(TRIGMOB(), "Great shot! The cannonball did some massive damage.")
+						ints.newDamage = 12
+					}
+					else if (xmlints.loaded > 22)
+					{
+						SENDMSG(TRIGMOB(), "The cannonball does some serious damage.")
+						ints.newDamage = 8
+					}
+					else if (xmlints.loaded > 20)
+					{
+						SENDMSG(TRIGMOB(), "The cannonball does some serious damage.")
+						ints.newDamage = 5
+					}
+					else if (xmlints.loaded > 15)
+					{
+						SENDMSG(TRIGMOB(), "The cannonball does some decent damage.")
+						ints.newDamage = 3
+					}
+					else if (xmlints.loaded > 10)
+					{
+						SENDMSG(TRIGMOB(), "The cannonball does a little damage.")
+						ints.newDamage = 2
+					}
+					else if (xmlints.loaded > 5)
+					{
+						SENDMSG(TRIGMOB(), "The cannonball leaves a dent.")
+							ints.newDamage = 1
+					}
+					else
+					{
+						if (RANDOMBOOL())
+						{
+							SENDMSG(TRIGMOB(), "The cannonball leaves a dent.")
+							ints.newDamage = 1
+						}
+						else
+						{
+							SENDMSG(TRIGMOB(), "The ball bounces off the hull with no effect!")
+							ints.newDamage = 0
+						}
+					}
+					
+					if (ints.newDamage > 0 && TRIGMOB() != objs.target.Owner) // owner can't get points from this
+					{
+						ADDBOATDAMAGEENTRY(objs.target, TRIGMOB(), ints.newDamage)
+						objs.target.Hits -= ints.newDamage
+					}
+					
+					objs.target.xmlobjs.lastDamage = NOW()
+					if (objs.target.hits <= 0)
+					{
+						ADDSCRIPT(objs.target, "boats\\sinkingboat.us")
+					}
+					
+					// check if there are any criminals / murderers on-board... if not, then player becomes criminal
+					objs.onBoard = BOATMOBILES(objs.target)
+					ints.notCriminal = 0
+					foreach(objs.mob ; objs.onBoard)
+					{
+						if (IS(objs.mob, PlayerMobile))
+						{
+							if (ISHARMFULCRIMINAL(TRIGMOB(), objs.mob) == false)
+							{
+								ints.notCriminal = 1
+							}
+						}
+					}
+					if (ints.notCriminal == 0)
+					{
+						CRIMINALACTION(TRIGMOB())
+					}
+				}
+				else
+				{
+					SENDMSG(TRIGMOB(), "Whiff!")
+					objs.endLoc = THIS().location
+					objs.endLoc.X += objs.cannonDirVector.X * ints.range
+					objs.endLoc.Y += objs.cannonDirVector.Y * ints.range
+				}
+				
+				objs.explosionLoc.Z += 3
+				//MEFFECT(0x4224, 20, objs.explosionLoc, objs.endLoc, false, false)
+				MEFFECT(14000, 20, objs.explosionLoc, objs.endLoc, false, false)
+				//MEFFECT(130, 20, objs.explosionLoc, objs.endLoc, false, false)
+				
+				xmlints.loaded = 0
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "That cannon isn't loaded!")
+			}
+			return
+		}
+		else
+		{
+			return
+		}
+		
+		objs.list = [2213, 1891, 2418, 1]
+		ints.x1 = RANDOMMINMAX(20,120)
+		ints.y1 = RANDOMMINMAX(20,120)
+		ints.hue1 = RANDOMFROMLIST(objs.list)
+		ints.x2 = RANDOMMINMAX(20,120)
+		ints.y2 = RANDOMMINMAX(20,120)
+		ints.hue2 = RANDOMFROMLIST(objs.list)
+		ints.x3 = RANDOMMINMAX(20,120)
+		ints.y3 = RANDOMMINMAX(20,120)
+		ints.hue3 = RANDOMFROMLIST(objs.list)
+		ints.x4 = RANDOMMINMAX(20,120)
+		ints.y4 = RANDOMMINMAX(20,120)
+		ints.hue4 = RANDOMFROMLIST(objs.list)
+		ints.x5 = RANDOMMINMAX(20,120)
+		ints.y5 = RANDOMMINMAX(20,120)
+		ints.hue5 = RANDOMFROMLIST(objs.list)
+		ints.x6 = RANDOMMINMAX(20,120)
+		ints.y6 = RANDOMMINMAX(20,120)
+		ints.hue6 = RANDOMFROMLIST(objs.list)
+		ints.x7 = RANDOMMINMAX(20,120)
+		ints.y7 = RANDOMMINMAX(20,120)
+		ints.hue7 = RANDOMFROMLIST(objs.list)
+		pause 200
+		SENDGUMP(TRIGMOB(), "boats\\loadgump.xml")
+	}
+}

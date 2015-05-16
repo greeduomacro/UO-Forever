@@ -1,0 +1,82 @@
+onCreate
+{
+	//xmlobjs.CurrentGates = NEWLIST()
+	xmlobjs.GateSpots = [POINT3D(1419, 1697, 0), POINT3D(1659, 1612, 20), POINT3D(2720, 2182, 0), POINT3D(2233, 1207, 0), POINT3D(1331, 3779, 0), POINT3D(2504, 563, 0), POINT3D(4463, 1178, 0), POINT3D(3769, 1307, 0), POINT3D(3683, 2521, 0), POINT3D(2879, 3471, 15), POINT3D(2887, 3414, 35), POINT3D(602, 2155, 0), POINT3D(1915, 2687, 2), POINT3D(1824, 2822, 0), POINT3D(2902, 675, 0), POINT3D(635, 861, 0)]
+	xmlints.addReturnGate = 0
+	xmlints.beingUsed = 0
+}
+onUse
+{
+	
+	if (TRIGMOB() == THIS().RootParentEntity)
+	{		
+	
+		if (xmlints.beingUsed == 0)
+		{
+			foreach (objs.point ; xmlobjs.GateSpots)
+			{
+				if (xmlobjs.returnGate != null)
+				{
+					DELETE(xmlobjs.returnGate)
+					xmlobjs.returnGate = null
+				}
+				objs.nearby = GETNEARBYITEMS(objs.point, 0)
+				foreach (objs.oldGate ; objs.nearby)
+				{
+					if (IS(objs.oldGate, ExtEventMoongate))
+					{
+						DELETE(objs.oldGate)
+					}
+				}
+				
+				objs.gate = ExtEventMoongate
+				{
+					CannotFleeFromBattle = true
+					ResGhosts = false
+					TargetMap = TRIGMOB().Map
+					Target = TRIGMOB().Location
+				}
+				MOVETOWORLD(objs.gate, objs.point, MAP(Felucca))
+				
+				if (xmlints.addReturnGate == 1)
+				{
+					xmlobjs.returnGate = ExtEventMoongate
+					{
+						CannotFleeFromBattle = true
+						ResGhosts = false
+						TargetMap = MAP(Felucca)
+						Target = POINT3D(1419, 1697, 0)
+						Hue = 2498
+					}
+					MOVETOWORLD(xmlobjs.returnGate, TRIGMOB().Location, TRIGMOB().Map)
+				}
+			}
+			SENDMSG(TRIGMOB(), "Gates to your location from all banks have been opened. Use [getatt and change 'addReturnGate' to 1 if you want to add a gate back to Britain (or 0 to not add one).")
+			xmlints.beingUsed = 1
+		}
+		else
+		{
+			// just remove everything
+			foreach (objs.point ; xmlobjs.GateSpots)
+			{
+				if (xmlobjs.returnGate != null)
+				{
+					DELETE(xmlobjs.returnGate)
+					xmlobjs.returnGate = null
+				}
+				
+				objs.nearby = GETNEARBYITEMS(objs.point, 0)
+				foreach (objs.oldGate ; objs.nearby)
+				{
+					if (IS(objs.oldGate, ExtEventMoongate))
+					{
+						DELETE(objs.oldGate)
+					}
+				}
+			}
+			SENDMSG(TRIGMOB(), "Gates to your location HAVE BEEN REMOVED.", 38)
+			xmlints.beingUsed = 0
+		}
+	}
+	
+}

@@ -1,0 +1,12 @@
+onCreate
+{
+	objs.values = GLOBALGETATTACHMENTS(XmlObject, "dotaChar")
+	foreach (objs.value ; objs.values)
+	{
+		LOG("DotaCharDeletion", objs.value.AttachedTo.RawName + " deleted")
+		DELETE(objs.value)
+	}
+	GLOBALDELATTACHMENTS(XmlObject, "dotaChar")
+	pause 100
+	DELETE(SCRIPT())
+}

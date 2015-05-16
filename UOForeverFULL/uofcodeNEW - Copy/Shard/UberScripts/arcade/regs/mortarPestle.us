@@ -1,0 +1,71 @@
+onCreate
+{
+	xmlobjs.contents = NEWLIST()
+}
+onUse
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (xmlints.spiderCarapace == 1 || xmlints.vialOfVitriol == 1 || xmlints.feyWings == 1)
+	{
+		strings.contents = "The mortar contains "
+		if (xmlints.spiderCarapace == 1)
+		{
+			strings.contents += " spider carapace"
+		}
+		if (xmlints.vialOfVitriol == 1)
+		{
+			strings.contents += ", a vial of vitriol"
+		}
+		if (xmlints.feyWings == 1)
+		{
+			strings.contents += ", fey wings"
+		}
+		strings.contents += " that have been crushed."
+		LOCALMSG(TRIGMOB(), strings.contents)
+		LOCALMSG(TRIGMOB(), "Target a bowl to pour contents of the mortar and pestle.")
+		SENDTARGET(TRIGMOB())
+		return override
+	}
+}
+onTarget
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TARGETED(), EmptyPewterBowl))
+	{
+		if (TARGETED().xmlints.correctMixture == 1)
+		{
+			LOCALMSG(TRIGMOB(), "You think you have the mixture right, so you refrain from adding more of those ingredients.")
+			return
+		}
+		
+		TARGETED().itemid = 5633
+		TARGETED().name = "a bowl of reagents"
+		
+		if (xmlints.spiderCarapace == 1)
+		{
+			xmlints.spiderCarapace = null
+			TARGETED().xmlints.spiderCarapace = 1
+		}
+		if (xmlints.vialOfVitriol == 1)
+		{
+			xmlints.vialOfVitriol = null
+			TARGETED().xmlints.vialOfVitriol = 1
+		}
+		if (xmlints.feyWings == 1)
+		{
+			xmlints.feyWings = null
+			TARGETED().xmlints.feyWings = 1
+		}
+		
+		if (GETATTACHMENT(TARGETED(), xmlscript) == null)
+		{
+			ADDSCRIPT(TARGETED(), "arcade\\regs\\bowl.us")
+		}
+		LOCALMSG(TRIGMOB(), "You put it in the bowl.")
+		
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "That is not an empty bowl!")
+	}
+}

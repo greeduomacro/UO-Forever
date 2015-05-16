@@ -1,0 +1,91 @@
+onCreate
+{
+//	xmlobjs.contents = NEWLIST()
+	// NEED TO FIGURE OUT CLILOC STRINGS
+}
+onUse
+{
+	if (TRIGMOB() != this.rootparententity) { return }
+	if (xmlints.finalMixture == 1)
+	{
+		LOCALMSG(TRIGMOB(), "It looks like it needs one final ingredient!")
+		return
+	}
+	
+	if (xmlints.spiderCarapace == 1|| xmlints.vialOfVitriol == 1 || xmlints.feyWings == 1)
+	{
+		strings.contents = "The bowl contains "
+		if (xmlints.spiderCarapace == 1)
+		{
+			strings.contents += " spider carapace"
+		}
+		if (xmlints.vialOfVitriol == 1)
+		{
+			strings.contents += ", a vial of vitriol"
+		}
+		if (xmlints.feyWings == 1)
+		{
+			strings.contents += ", fey wings"
+		}
+		strings.contents += " that have been crushed."
+		if (xmlints.daemonClaw == 1 || xmlints.undyingFlesh == 1 || xmlints.tentacles == 1)
+		{
+			strings.contents += " It also has "
+			if (xmlints.daemonClaw == 1)
+			{
+				strings.contents += " daemon claw"
+			}
+			if (xmlints.undyingFlesh == 1)
+			{
+				strings.contents += ", undying flesh"
+			}
+			if (xmlints.tentacles == 1)
+			{
+				strings.contents += ", tentacles"
+			}
+			strings.contents += " mixed in."
+		}
+		SENDMSG(TRIGMOB(), strings.contents)
+		LOCALMSG(TRIGMOB(), "What would you like to cook that on?")
+		SENDTARGET(TRIGMOB())
+		return override
+	}
+}
+onTarget
+{
+	if (TRIGMOB() != this.rootparententity) { return }
+	if (ISHEATSOURCE(TARGETED()))
+	{
+		if (xmlints.correctMixture == null)
+		{
+			if (xmlints.spiderCarapace == 1 && xmlints.vialOfVitriol == 1 && xmlints.feyWings == 1)
+			{
+				THIS().itemid = 5630
+				LOCALMSG(TRIGMOB(), "Well done! It appears you have got the mixture just right!")
+				xmlints.correctMixture = 1
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "Apparently you had the wrong mixture! It went up in smoke!")
+				DELETE(THIS())
+			}
+		}
+		else
+		{
+			if (xmlints.daemonClaw == 1 && xmlints.undyingFlesh == 1 && xmlints.tentacles == 1)
+			{
+				LOCALMSG(TRIGMOB(), "Well done! It appears everything has cooked well!")
+				xmlints.finalMixture = 1
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "Apparently that was not the right thing to do! It went up in smoke!")
+				DELETE(THIS())
+			}
+		}
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "That is not a heat source!")
+	}
+}

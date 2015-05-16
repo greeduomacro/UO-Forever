@@ -1,0 +1,34 @@
+onCreate
+{
+	xmlints.rares = 0
+	xmlints.maxRaresAtOneTime = 10
+	SUBSCRIBETIMER(OneMinute)
+}
+onOneMinute
+{
+	if (xmlints.rares < xmlints.maxRaresAtOneTime)
+	{
+		objs.rare = RARE("stealablerares.txt")
+		
+		// try several times to get a random dungeon location
+		objs.spawnLocation = GETRANDOMDUNGEONLOCATION()
+		if (objs.spawnLocation == POINT3D(0,0,0))
+		{
+			objs.spawnLocation = GETRANDOMDUNGEONLOCATION()
+			if (objs.spawnLocation == POINT3D(0,0,0))
+			{
+				objs.spawnLocation = GETRANDOMDUNGEONLOCATION()
+				if (objs.spawnLocation == POINT3D(0,0,0))
+				{
+					DELETE(objs.rare) // should never happen lol
+					return
+				}
+			}
+		}
+		
+		objs.rare.xmlobjs.owner = THIS()
+		MOVETOWORLD(objs.rare, objs.spawnLocation, MAP(Felucca))
+		ADDSCRIPT(objs.rare, "rares\\stealable.us", "stealable")
+		xmlints.rares += 1
+	}
+}

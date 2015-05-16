@@ -1,0 +1,44 @@
+onUse
+{
+	objs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	objs.weights = [6, 2, 2, 1]
+	for (ints.i = 0; ints.i < 6000; ints.i += 1)
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+		// try up to 4 times
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible, objs.weights)
+				}
+			}
+		}
+		//SAY(TRIGMOB(), objs.spawnLoc)
+		objs.spawned = CustomMob
+		{
+			RawName = "a zombie"
+			BodyValue = 3
+			CurrentSpeed = 0.6
+			PassiveSpeed = 0.6
+			ActiveSpeed = 0.16
+			BaseSoundId = 471
+			RangePerception = 20
+			WeaponDamage = false
+			HitsMaxSeed = 50
+			Hits = 50
+			DamageMin = 10
+			DamageMax = 26
+		}
+		objs.spawnLoc.Z -= 11
+		MOVETOWORLD(objs.spawned, objs.spawnLoc, MAP(felucca))
+		ADDSCRIPT(objs.spawned, "hallow.us")
+		objs.spawnLoc.Z += 11
+		objs.spawned.home = objs.spawnLoc
+		objs.spawned.rangehome = 20
+	}
+}

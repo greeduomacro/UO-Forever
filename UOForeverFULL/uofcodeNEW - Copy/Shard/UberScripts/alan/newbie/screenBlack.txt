@@ -1,0 +1,29 @@
+onCreate
+{
+	SUBSCRIBETIMER(FiveSeconds)
+	xmlints.count = 1
+	name = "Screen All Black? Double click me!"
+	blessed = true
+	cantwalk = true
+}
+onFiveSeconds
+{
+	if (xmlints.count > 5)
+	{
+		xmlints.count = 0
+		SAY(THIS(), "Screen all black? Double click me!")
+	}
+	xmlints.count += 1
+}
+onUse
+{
+	if (DISTANCE(TRIGMOB(), THIS()) < 7)
+	{
+		MOVETOWORLD(TRIGMOB(), POINT3D(1413, 1715, 20), felucca)
+		SENDGUMP(TRIGMOB(), "alan\\newbie\\screenBlack.xml")
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You aren't close enough.")
+	}
+}

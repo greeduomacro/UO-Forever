@@ -1,0 +1,31 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"You have been invited to join "+TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.RawName+"'s dungeon crawl team."</Label>
+		<Label hue="1553">"BE CAREFUL to read the instructions!"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="400" height="550">
+			<basefont color="#000000">
+			<p>This is a timed dungeon crawl team competition. Each team will have up to 5 players. Please read the instructions carefully.</p>
+			<p>A player hosts a team of 5 by paying the registration fee. This host will be able to invite other people to his team (he is automatically added to the team)</p>
+			<p>You can ONLY be on one team per account! You can quit your team (if you do so as the team leader then the team is disbanded and the registration fee is lost), but ONLY up until the dungeon crawl has begun. After that, there is no swapping teams or quitting teams.</p>
+			<p>During the actual dungeon crawl, you will NOT actually be playing your own character. You will be given the option of choosing a character template. Reagents are not required to cast spells and basic supplies (exceptional armor, weapons, lesser cure and refresh potions) are provided to you. If you die, you can log into your player again and rejoin the event as another character template. Dexxers will have SILVER WEAPONS. <u>AssistUO DOES NOT WORK with this event, so use Razor!</u></p>
+			<p><basefont color="#ff0000">THE GOAL</basefont> is to KILL EVERY MONSTER in the dungeon as fast as you possibly can. Only one team may participate at a given time, and this event will be available for 2 weeks! Once starting, you have 120 minutes to finish all monsters!</p>
+			<p>Double click the event master to get started signing up.</p>
+			</basefont>
+		</HTML>
+		
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="templateShowScreen"/>
+			<Label hue ="1553">Show me the available templates.</Label>
+		</HBox>
+		<HBox width="10" height="10" FitToContents="false"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="declineInvite"/>
+			<Label hue ="1553">"Decline Invitation"</Label>
+		</HBox>
+		<HBox width="10" height="10" FitToContents="false"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.RawName"/>
+			<Label hue ="1553">"Join "+TRIGMOB().xmlobjs.dungeonCrawlInvitedBy.RawName+"'s Team"</Label>
+		</HBox>
+	</VBox>
+</Gump>

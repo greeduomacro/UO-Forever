@@ -1,0 +1,50 @@
+onUse
+{
+	objs.firstCure = GETMOB("Famara", TYPE(PlayerMobile))
+	objs.reward = Spellbook { Hue = 2498; Name = "Zombie Boss Slayer Number One"; Slayer = "Silver" } ADDTOCONTAINER(objs.firstCure.BankBox, objs.reward);
+	LOG("SurvivalReward", objs.firstCure.RawName + " received spellbook.")
+	objs.secondCure = GETMOB("Tonycakes", TYPE(PlayerMobile))
+	objs.reward = Spellbook { Hue = 2498; Name = "Zombie Boss Slayer Number Two"; Slayer = "Silver" } ADDTOCONTAINER(objs.secondCure.BankBox, objs.reward);
+	LOG("SurvivalReward", objs.secondCure.RawName + " received spellbook.")
+	objs.thirdCure = GETMOB("Babethoven", TYPE(PlayerMobile))
+	objs.reward = Spellbook { Hue = 2498; Name = "Zombie Boss Slayer Number Three"; Slayer = "Silver" } ADDTOCONTAINER(objs.thirdCure.BankBox, objs.reward);
+	LOG("SurvivalReward", objs.thirdCure.RawName + " received spellbook.")
+	
+	objs.cureAward = ["Famara", "Tonycakes", "Babethoven", "Gore", "Sync Bump", "Uncle Scrooge", "Ruby'", "Messremb", "STEEL PANTHER", "Infused", "Hiroshima", "Dugar", "Sunny Black", "Stanky Panky", "Ares The Goddess", "X-Raided", "a sneaky legolas", "Archangel", "Diamond'", "Ya Bish", "Brother Noah"]
+	
+	objs.zombieAward = ["Famara", "Babethoven", "Gore", "Ozark", "Tonycakes", "Jon Antillies", "Shinrah", "Infused", "X-Raided", "Alien Mode", "Stanky Panky", "Dugar", "Huckleberry Finn", "Uncle Scrooge", "Messremb", "Dr.Dre", "Testosterowned", "Licinius", "World War Z", "Teddy Bananas", "Mi Bella Dama", "I C U", "HawkeyeBC", "Chemdawg", "Shuri", "Alundra", "johnny kilroy.", "Indi Jones", "Obsidian.", "Rand Al'Thor", "Goldeneagle", "Enceladus", "Sync Bump", "Rip the Jacker", "Ronald Trump", "Yxven", "XxX Mega Man XxX", "Jean Tannen", "Dorcha Bhaile", "Ookla", "Ruby'", "Jonson", "STEEL PANTHER", "Death Walker", "DaMage-", "Kynk", "U-Haul", "Gangsta", "Ramtha Co", "LarryWang", "Markus", "Kinky", "Tobias Funke", "Red Legs Greaves", "Shaemus", "old school", "Melanie Martin", "CLMP", "OneEyed Willy", "Mr.Jesse", "racism", "Decon", "Caddy", "WulfPuff", "Kix-", "Tim", "HolyKrull", "Melusina", "Sunny Black", "Jagermeister", "Furies", "Nihilist", "ActionJackson", "RagingLunatic", "Decoy", "Skinsword", "Cuddly Embrace", "Darktyle", "Zurek", "Slanted Light", "Morgan McBrint", "Sathallrin", "Conor McGregor", "Joan Jett", "Redborn", "Angles", "Dread Pirate Ser", "Billy Ray Cyrus", "Kavu", "Cool Hand Luke", "thestever", "WhiteWolf", "Konrad", "Avix Lothram", "Pipkin", "Serum", "Schwarzenegger", "Daex", "Hiroshima", "Mendanbar", "Mose", "Moldy Milk", "G Money", "Drakken Payne", "flubentubes", "ebony princess", "NoDoubleDips", "Voltera", "Aventine", "Kazuto Kirigaya", "Virtual", "Dumb N"]
+	
+	objs.playermobiles = PLAYERMOBS()
+	foreach (objs.playerMob ; objs.playermobiles)
+	{
+		if (LISTCONTAINS(objs.cureAward, objs.playerMob.RawName))
+		{
+			LOG("SurvivalReward", objs.playerMob.RawName + " receiving cureAward.")
+			objs.cureAwardItem = UberScriptItem
+			{
+				ItemID = 6193
+				Name = "The Cure"
+			}
+			objs.cureAwardItem.Movable = true
+			ADDSCRIPT(objs.cureAwardItem, "rares\\silverSlayerItem.us", "silverSlayer")
+			ADDTOCONTAINER(objs.playerMob.BankBox, objs.cureAwardItem)
+			LOG("SurvivalReward", objs.playerMob.RawName + " received cureAward.")
+		}
+		
+		if (LISTCONTAINS(objs.zombieAward, objs.playerMob.RawName))
+		{
+			LOG("SurvivalReward", objs.playerMob.RawName + " receiving zombieAward.")
+			objs.zombieStatue = UberScriptItem
+			{
+				ItemID = 8428
+				Hue = 2498
+				Name = "Zombie Slayer - UO Forever Survival Feb. 2014"
+			}
+			objs.zombieStatue.Movable = true
+			ADDTOCONTAINER(objs.playerMob.BankBox, objs.zombieStatue)
+			LOG("SurvivalReward", objs.playerMob.RawName + " received zombieAward.")
+		}
+	}
+	
+	DELETE(THIS())
+}

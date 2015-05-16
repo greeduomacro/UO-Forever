@@ -1,0 +1,322 @@
+// need ANIMATE function
+function addRockStack()
+{
+	for (ints.z = objs.pileLoc.z; ints.z < objs.pileLoc.z + objs.height; ints.z += 2)
+	{
+		objs.rock = static,4962
+		MOVETOWORLD(objs.rock, POINT3D(objs.pileLoc.x, objs.pileLoc.y, ints.z))		
+		ADDTOLIST(xmlobjs.spawnedRocks, objs.rock);
+		objs.rock.xmlobjs.parent = THIS()
+		objs.script = NEWATTACHMENT(xmlscript,"rockpile")
+		objs.script.ScriptFile = "alan\\events\\dragon\\trashpile.txt"
+		ATTACH(objs.rock, objs.script)
+	}
+}
+onCreate
+{
+	// disable teleporters down to deepest level
+	objs.itemsByTeleporters = GETNEARBYITEMS(POINT3D(5152, 810, -19), 6)
+	foreach (objs.item ; objs.itemsByTeleporters)
+	{
+		if (IS(objs.item, teleporter))
+		{
+			objs.item.Active = false
+		}
+	}
+	
+	xmlobjs.spawnedWaypoints = NEWLIST()
+	xmlobjs.spawnedBlockers = NEWLIST()
+	xmlobjs.spawnedRocks = NEWLIST()
+	
+	//============ outside destard waypoints =================================
+	objs.current = waypoint; objs.current.location = POINT3D(1175,2655,5);
+	xmlobjs.trinsicStart = objs.current; ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(1202,2696,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1246,2734,5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1292,2711,5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1319,2739,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1389,2826,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1355,2888,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1503,3073,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1627,2945,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1604,2910,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1750,2789,1))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1801,2784,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1830,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1847,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1870,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1876,2779,10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1883,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1901,2780,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1924,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1933,2780,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1960,2779,10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1968,2779,20))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1977,2779,10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(2003,2779,20))
+	ADDTOLIST(objs.waypointLocations, POINT3D(2003,2753,30))
+	
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	}
+	
+	//========== inside destard Level 1 waypoints =======================================
+	objs.current = waypoint; objs.current.location = POINT3D(5236,888,0);
+	xmlobjs.destardStart1 = objs.current
+	ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5227,893,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5212,898,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5184,919,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5183,949,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5170,941,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5163,933,0))
+	// loop up around the mining spot
+	ADDTOLIST(objs.waypointLocations, POINT3D(5162,933,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5161,917,1))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5147,913,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5130,900,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5124,914,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5157,914,0))
+	// and back down
+	ADDTOLIST(objs.waypointLocations, POINT3D(5162,933,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5171,963,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5187,954,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5209,979,-10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5231,990,-2))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5252,899,-40))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5217,906,-40))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5210,918,-40))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5278,984,-1))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5192,942,-39))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5304,947,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5244,998,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5315,964,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5325,968,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5334,955,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5304,955,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5289,896,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5259,892,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5252,887,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5244,890,0))
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	}
+	objs.current.NextPoint = xmlobjs.destardStart1 	// make it a complete circle
+	
+	
+	//========== inside destard Level 2 waypoints =======================================
+	objs.current = waypoint; objs.current.location = POINT3D(5141,810,0);
+	xmlobjs.destardStart2 = objs.current
+	ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(5138,834,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5135,852,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5152,873,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5170,850,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5157,842,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5167,827,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(5155,805,0))
+	foreach (objs.waypointLocation ; objs.waypointLocations)
+	{
+		objs.next = waypoint
+		objs.next.location = objs.waypointLocation
+		objs.current.NextPoint = objs.next
+		objs.current = objs.next
+		ADDTOLIST(xmlobjs.spawnedWaypoints, objs.current);
+	}
+	objs.current.NextPoint = xmlobjs.destardStart2 	// make it a complete circle
+	
+
+	//======== piles of rock blocking the ramp from first to second floor =====================
+	objs.list = xmlobjs.spawnedRocks  // this is "passed" into the addRockStack function
+	
+	objs.height = 18
+	objs.pileLoc = POINT3D(5129,910,-20); addRockStack()
+	objs.pileLoc = POINT3D(5130,910,-20); addRockStack()
+	objs.pileLoc = POINT3D(5131,910,-20); addRockStack()
+	objs.pileLoc = POINT3D(5132,910,-20); addRockStack()
+	objs.height = 14
+	objs.pileLoc = POINT3D(5132,909,-28); addRockStack()
+	objs.pileLoc = POINT3D(5131,909,-28); addRockStack()
+	objs.pileLoc = POINT3D(5130,909,-28); addRockStack()
+	objs.pileLoc = POINT3D(5129,909,-28); addRockStack()
+	objs.height = 10
+	objs.pileLoc = POINT3D(5129,908,-23); addRockStack()
+	objs.pileLoc = POINT3D(5130,908,-23); addRockStack()
+	objs.pileLoc = POINT3D(5131,908,-23); addRockStack()
+	objs.pileLoc = POINT3D(5132,908,-23); addRockStack()
+	objs.height = 8
+	objs.pileLoc = POINT3D(5132,907,-18); addRockStack()
+	objs.pileLoc = POINT3D(5131,907,-18); addRockStack()
+	objs.pileLoc = POINT3D(5130,907,-18); addRockStack()
+	objs.pileLoc = POINT3D(5129,907,-15); addRockStack()
+	objs.height = 4
+	objs.pileLoc = POINT3D(5129,906,-13); addRockStack()
+	objs.pileLoc = POINT3D(5130,906,-13); addRockStack()
+	objs.pileLoc = POINT3D(5131,906,-13); addRockStack()
+	objs.pileLoc = POINT3D(5132,906,-13); addRockStack()
+	objs.pileLoc = POINT3D(5129,905,-7); addRockStack()
+	objs.pileLoc = POINT3D(5130,905,-7); addRockStack()
+	objs.pileLoc = POINT3D(5131,905,-8); addRockStack()
+	objs.pileLoc = POINT3D(5132,905,-8); addRockStack()
+	objs.pileLoc = POINT3D(5133,912,0); addRockStack()
+	objs.pileLoc = POINT3D(5132,912,0); addRockStack()
+	objs.pileLoc = POINT3D(5131,912,0); addRockStack()
+	objs.pileLoc = POINT3D(5130,912,0); addRockStack()
+	objs.pileLoc = POINT3D(5129,912,0); addRockStack()
+	objs.pileLoc = POINT3D(5134,912,0); addRockStack()
+	objs.pileLoc = POINT3D(5134,911,0); addRockStack()
+	objs.pileLoc = POINT3D(5134,910,0); addRockStack()
+	//5235,878,1
+	//5257,878,0
+	
+	objs.height = 18
+	objs.pileLoc = POINT3D(5153,808,-25); addRockStack()
+	objs.pileLoc = POINT3D(5153,809,-25); addRockStack()
+	objs.pileLoc = POINT3D(5153,810,-25); addRockStack()
+	objs.pileLoc = POINT3D(5153,811,-25); addRockStack()
+	objs.height = 14
+	objs.pileLoc = POINT3D(5152,808,-19); addRockStack()
+	objs.pileLoc = POINT3D(5152,809,-19); addRockStack()
+	objs.pileLoc = POINT3D(5152,810,-19); addRockStack()
+	objs.pileLoc = POINT3D(5152,811,-19); addRockStack()
+	objs.pileLoc = POINT3D(5151,808,-13); addRockStack()
+	objs.pileLoc = POINT3D(5151,809,-13); addRockStack()
+	objs.pileLoc = POINT3D(5151,810,-13); addRockStack()
+	objs.pileLoc = POINT3D(5151,811,-13); addRockStack()
+	objs.height = 10
+	objs.pileLoc = POINT3D(5150,808,-8); addRockStack()
+	objs.pileLoc = POINT3D(5150,809,-8); addRockStack()
+	objs.pileLoc = POINT3D(5150,810,-8); addRockStack()
+	objs.pileLoc = POINT3D(5150,811,-8); addRockStack()
+	objs.height = 8
+	objs.pileLoc = POINT3D(5149,808,-3); addRockStack()
+	objs.pileLoc = POINT3D(5149,809,-3); addRockStack()
+	objs.pileLoc = POINT3D(5149,810,-3); addRockStack()
+	objs.pileLoc = POINT3D(5149,811,-3); addRockStack()
+	objs.height = 4
+	objs.pileLoc = POINT3D(5155,812,0); addRockStack()
+	objs.pileLoc = POINT3D(5155,811,0); addRockStack()
+	objs.pileLoc = POINT3D(5155,810,0); addRockStack()
+	objs.pileLoc = POINT3D(5155,809,0); addRockStack()
+	objs.pileLoc = POINT3D(5156,812,0); addRockStack()
+	objs.pileLoc = POINT3D(5156,811,0); addRockStack()
+	objs.pileLoc = POINT3D(5156,810,0); addRockStack()
+	
+	
+	
+	
+	// spawn the ships / LOSblockers that block half of the Destard level 1
+	for (ints.i = 5235; ints.i < 5258; ints.i += 1)
+	{
+		objs.los = losblocker
+		MOVETOWORLD(objs.los, POINT3D(ints.i, 878, 0))
+		ADDTOLIST(xmlobjs.spawnedBlockers, objs.los);
+	}
+	for (ints.i = 5235; ints.i < 5258; ints.i += 3)
+	{
+		objs.trash = trashpileXlarge
+		MOVETOWORLD(objs.trash, POINT3D(ints.i, 881, 0))
+		ADDTOLIST(xmlobjs.spawnedBlockers, objs.trash);
+	}
+	
+	objs.boat = basemulti,69
+	MOVETOWORLD(objs.boat,POINT3D(5236,876,2))
+	ADDTOLIST(xmlobjs.spawnedBlockers, objs.boat);
+	objs.boat = basemulti,42
+	MOVETOWORLD(objs.boat,POINT3D(5244,872,0))
+	ADDTOLIST(xmlobjs.spawnedBlockers, objs.boat);
+	objs.boat = basemulti,59
+	MOVETOWORLD(objs.boat,POINT3D(5253,880,0))
+	ADDTOLIST(xmlobjs.spawnedBlockers, objs.boat);
+	
+	// Add xmlspawners and hook them up to the right waypoints
+	xmlobjs.outsideSpawner = xmlspawner
+	{
+		configfile = "Spawns\\events\\dragons\\outside.xml"
+	}
+	xmlobjs.outsideSpawner.loadconfig = true
+	xmlobjs.outsideSpawner.location = POINT3D(1176,2636,0)
+	xmlobjs.outsideSpawner.waypoint = xmlobjs.trinsicStart
+	xmlobjs.outsideSpawner.xmlints.spawnedCount = 0
+	xmlobjs.outsideSpawner.running = true
+	
+	xmlobjs.level1Spawner = xmlspawner
+	{
+		configfile = "Spawns\\events\\dragons\\level1.xml"
+	}
+	xmlobjs.level1Spawner.loadconfig = true
+	xmlobjs.level1Spawner.location = POINT3D(5236,886,0)
+	xmlobjs.level1Spawner.waypoint = xmlobjs.destardStart1
+	xmlobjs.level1Spawner.xmlints.spawnedCount = 0
+	xmlobjs.level1Spawner.running = true
+	
+	xmlobjs.level2Spawner = xmlspawner
+	{
+		configfile = "Spawns\\events\\dragons\\level2.xml"
+	}
+	xmlobjs.level2Spawner.loadconfig = true
+	xmlobjs.level2Spawner.location = POINT3D(5143,808,0)
+	xmlobjs.level2Spawner.waypoint = xmlobjs.destardStart2
+	xmlobjs.level2Spawner.xmlints.spawnedCount = 0
+	xmlobjs.level2Spawner.running = true
+}
+
+onSay
+{
+	if (SAID("game over"))
+	{
+		// delete all spawned items
+		foreach (objs.spawned ; xmlobjs.spawnedWaypoints)
+		{
+			DELETE(objs.spawned)
+		}
+		foreach (objs.spawned ; xmlobjs.spawnedBlockers)
+		{
+			DELETE(objs.spawned)
+		}
+		foreach (objs.spawned ; xmlobjs.spawnedRocks)
+		{
+			DELETE(objs.spawned)
+		}
+		
+		// re-enable teleporters
+		objs.itemsByTeleporters = GETNEARBYITEMS(POINT3D(5152, 810, -19), 6)
+		foreach (objs.item ; objs.itemsByTeleporters)
+		{
+			if (IS(objs.item, teleporter))
+			{
+				objs.item.Active = true
+			}
+		}
+		
+		xmlobjs.spawnedWaypoints.xmlobject.dodelete = true
+		xmlobjs.spawnedBlockers.xmlobject.dodelete = true
+		xmlobjs.spawnedRocks.xmlobject.dodelete = true
+		xmlobjs.destardStart1.xmlobject.dodelete = true
+		xmlobjs.trinsicStart.xmlobject.dodelete = true
+		xmlobjs.outsideSpawner.running = true
+		
+		xmlobjs.outsideSpawner.running = false
+		xmlobjs.level1Spawner. running = false
+		xmlobjs.level2Spawner. running = false
+		SCRIPT().dodelete = true
+	}
+}
+

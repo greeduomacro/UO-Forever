@@ -1,0 +1,208 @@
+
+xmlobjs.santaLoc = THIS().Location
+
+xmlobjs.sleighObjs = NEWLIST()
+xmlobjs.deerObjs = NEWLIST()
+xmlobjs.shadows = NEWLIST()
+xmlints.targetZ = THIS().Z
+xmlints.currentZ = 100;
+
+objs.sleigh = static, 2519 { ItemID = 14986 } MOVETOWORLD( objs.sleigh, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 12, 100), THIS().Map); ADDTOLIST(xmlobjs.sleighObjs, objs.sleigh)  // this is where santa will stay
+xmlobjs.sleigh = objs.sleigh // where santa is
+objs.sleigh = static, 2519 { ItemID = 14987 } MOVETOWORLD( objs.sleigh, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 13, 100), THIS().Map); ADDTOLIST(xmlobjs.sleighObjs, objs.sleigh)
+
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 10, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f ; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 10, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 9, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 9, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 8, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 8, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 7, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+objs.deer = static, 2519 ; MOVETOWORLD( objs.deer, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 7, 100), THIS().Map) ; objs.deer.ItemID = 0x3a6f; ADDTOLIST(xmlobjs.deerObjs, objs.deer)
+xmlobjs.deer = objs.deer
+xmlints.lastDeerPosition = 0x3a6f
+
+objs.shadow = static, 2519 {hue = 1} ; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 10, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 10))), THIS().Map) ; ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 10, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y - 10))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 9, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 9))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 9, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y - 9))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 8, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 8))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 8, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y - 8))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 7, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y - 7))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y - 7, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y - 7))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+
+SUBSCRIBETIMER(FiftyMS)
+
+onFiftyMS
+{
+	if (xmlints.currentZ > xmlints.targetZ) // come down from the sky
+	{
+		foreach (objs.sleigh; xmlobjs.sleighObjs) { objs.sleigh.Z -= 1 }
+		foreach (objs.deer; xmlobjs.deerObjs) { objs.deer.Z -= 1 }
+		
+		xmlints.currentZ -= 1
+		if (xmlints.currentZ == xmlints.targetZ)
+		{
+			foreach (objs.shadow; xmlobjs.shadows) { DELETE(objs.shadow) }
+			UNSUBSCRIBETIMER(FiftyMS)
+			SUBSCRIBETIMER(TwoFiftyMS)
+		}
+	}
+}
+
+onTwoFiftyMS
+{
+	
+	if (xmlobjs.santa == null)
+	{
+		// go forward
+		foreach (objs.sleigh; xmlobjs.sleighObjs) { objs.sleigh.Y += 1 }
+		ints.lastDeerPosition = xmlobjs.deer.ItemID
+		if (xmlobjs.deer.ItemID == 0x3a6f) 
+		{ 
+			foreach (objs.deer; xmlobjs.deerObjs) 
+			{ 
+				objs.deer.Y += 1 
+				//objs.deer.ItemID = 0x3a55
+				objs.deer.ItemID = 0x3a67
+				objs.mobs = if (GETNEARBYMOBS(objs.deer, 0))
+				foreach (objs.mob ; objs.mobs)
+				{
+					if (objs.mob.Z + 14 > objs.deer.Z && objs.mob.Z < objs.deer.Z + 14 && objs.mob.Name != "a drunken Santa Claus") { KILL(objs.mob) }
+				}
+			}
+		}
+		else if (xmlobjs.deer.ItemID == 0x3a55) 
+		{ 
+			foreach (objs.deer; xmlobjs.deerObjs) 
+			{ 
+				objs.deer.Y += 1 
+				if (xmlints.lastDeerPosition == 0x3a6f) { objs.deer.ItemID = 0x3a67 }
+				else { objs.deer.ItemID = 0x3a6f }
+				objs.mobs = if (GETNEARBYMOBS(objs.deer, 0))
+				foreach (objs.mob ; objs.mobs)
+				{
+					if (objs.mob.Z + 14 > objs.deer.Z && objs.mob.Z < objs.deer.Z + 14 && objs.mob.Name != "a drunken Santa Claus") { KILL(objs.mob) }
+				}
+			}
+		}
+		else if (xmlobjs.deer.ItemID == 0x3a67) 
+		{ 
+			foreach (objs.deer; xmlobjs.deerObjs) 
+			{ 
+				objs.deer.Y += 1 
+				//objs.deer.ItemID = 0x3a55
+				objs.deer.ItemID = 0x3a6f
+				objs.mobs = if (GETNEARBYMOBS(objs.deer, 0))
+				foreach (objs.mob ; objs.mobs)
+				{
+					if (objs.mob.Z + 14 > objs.deer.Z && objs.mob.Z < objs.deer.Z + 14 && objs.mob.Name != "a drunken Santa Claus") { KILL(objs.mob) }
+				}
+			}
+		}
+		xmlints.lastDeerPosition = ints.lastDeerPosition
+		
+		if (xmlobjs.sleigh.Location == xmlobjs.santaLoc)
+		{
+			objs.mobs = if (GETNEARBYMOBS(xmlobjs.sleigh, 0))
+			foreach (objs.mob ; objs.mobs)
+			{
+				if (objs.mob.Name == "a drunken Santa Claus") { xmlobjs.santa = objs.mob }
+				break
+			}
+			
+			xmlobjs.shadows = NEWLIST()
+			objs.shadow = static, 2519 {hue = 1} ; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 2 , GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 2))), THIS().Map) ; ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y + 2, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y + 2))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 3, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 3))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y + 3, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y + 3))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 4, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 4))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y + 4, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y + 4))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 5, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X, xmlobjs.santaLoc.Y + 5))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+			objs.shadow = static, 2519 {hue = 1}; MOVETOWORLD( objs.shadow, POINT3D(xmlobjs.santaLoc.X-1, xmlobjs.santaLoc.Y + 5, GETAVERAGEZ(POINT2D(xmlobjs.santaLoc.X - 1, xmlobjs.santaLoc.Y + 5))), THIS().Map) ;  ADDTOLIST(xmlobjs.shadows, objs.shadow)
+		}
+	}
+	else
+	{
+		xmlobjs.santa.blessed = true
+		xmlobjs.santa.Direction = South
+		xmlobjs.santa.Hidden = true
+		xmlobjs.santa.Y += 1; xmlobjs.santa.Z += 2;
+		foreach (objs.sleigh; xmlobjs.sleighObjs) { objs.sleigh.Y += 1; objs.sleigh.Z += 2 }
+		foreach (objs.shadow; xmlobjs.shadows) { objs.shadow.Y += 1; objs.shadow.Z = GETAVERAGEZ(objs.shadow) }
+		ints.lastDeerPosition = xmlobjs.deer.ItemID
+		if (xmlobjs.deer.ItemID == 0x3a6f) 
+		{ 
+			foreach (objs.deer; xmlobjs.deerObjs) 
+			{ 
+				objs.deer.Y += 1 
+				objs.deer.Z += 2
+				//objs.deer.ItemID = 0x3a55
+				objs.deer.ItemID = 0x3a67
+				objs.mobs = if (GETNEARBYMOBS(objs.deer, 0))
+				foreach (objs.mob ; objs.mobs)
+				{
+					if (objs.mob.Z + 14 > objs.deer.Z && objs.mob.Z < objs.deer.Z + 14 && objs.mob.Name != "a drunken Santa Claus") { KILL(objs.mob) }
+				}
+			}
+		}
+		else if (xmlobjs.deer.ItemID == 0x3a55) 
+		{ 
+			foreach (objs.deer; xmlobjs.deerObjs) 
+			{ 
+				objs.deer.Y += 1 
+				objs.deer.Z += 2
+				if (xmlints.lastDeerPosition == 0x3a6f) { objs.deer.ItemID = 0x3a67 }
+				else { objs.deer.ItemID = 0x3a6f }
+				objs.mobs = if (GETNEARBYMOBS(objs.deer, 0))
+				foreach (objs.mob ; objs.mobs)
+				{
+					if (objs.mob.Z + 14 > objs.deer.Z && objs.mob.Z < objs.deer.Z + 14 && objs.mob.Name != "a drunken Santa Claus") { KILL(objs.mob) }
+				}
+			}
+		}
+		else if (xmlobjs.deer.ItemID == 0x3a67) 
+		{ 
+			foreach (objs.deer; xmlobjs.deerObjs) 
+			{ 
+				objs.deer.Y += 1 
+				objs.deer.Z += 2
+				//objs.deer.ItemID = 0x3a55
+				objs.deer.ItemID = 0x3a6f
+				objs.mobs = if (GETNEARBYMOBS(objs.deer, 0))
+				foreach (objs.mob ; objs.mobs)
+				{
+					if (objs.mob.Z + 14 > objs.deer.Z && objs.mob.Z < objs.deer.Z + 14 && objs.mob.Name != "a drunken Santa Claus") { KILL(objs.mob) }
+				}
+			}
+		}
+		xmlints.lastDeerPosition = ints.lastDeerPosition
+		
+		xmlobjs.santa.Hidden = false
+		if (xmlobjs.santa.Z > 99)
+		{
+			// finish it
+			objs.next = GETRANDOMDUNGEONLOCATION()
+			if (objs.next == POINT3D(0,0,0))
+			{
+				objs.next = GETRANDOMDUNGEONLOCATION()
+				if (objs.next == POINT3D(0,0,0))
+				{
+					objs.next = GETRANDOMDUNGEONLOCATION()
+				}
+			}
+			MOVETOWORLD(xmlobjs.santa, objs.next, THIS().Map)
+			foreach (objs.sleigh; xmlobjs.sleighObjs) { DELETE(objs.sleigh) }
+			foreach (objs.shadow; xmlobjs.shadows) { DELETE(objs.shadow) }
+			foreach (objs.deer; xmlobjs.deerObjs) { DELETE(objs.deer) }
+			BCAST("Santa has arrived at a new dungeon location somewhere in the world!", 38)
+			xmlobjs.santa.Blessed = false
+			xmlobjs.santa.CantWalk = false
+			DELETE(THIS())
+		}
+	}
+	
+//0x3a55
+//0x3a67
+//0x3a6f
+}

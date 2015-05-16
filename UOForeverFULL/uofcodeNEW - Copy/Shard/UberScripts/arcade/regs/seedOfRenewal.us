@@ -1,0 +1,43 @@
+onUse
+{
+	if (TRIGMOB() != rootparententity) { return }
+	SENDTARGET(TRIGMOB())
+	LOCALMSG(TRIGMOB(), "What do you want to combine that with or use that on?")
+}
+onTarget
+{
+	if (TRIGMOB() != rootparententity) { return }
+	if (IS(TARGETED(), EmptyPewterBowl))
+	{
+		if (TARGETED().xmlints.finalMixture == 1)
+		{
+			LOCALMSG(TRIGMOB(), "Eureka! You successfully created the cure! You have been tagged as having completed the quest for a reward after the conclusion of the event. Feel free to continue participating in the event if you wish.")
+			TRIGMOB().xmlints.foundCure = 1
+			TRIGMOB().xmlobjs.foundCureTime = NOW()
+			DELETE(TARGETED())
+			DELETE(THIS())
+		}
+		else
+		{
+			if (TARGETED().xmlints.spiderCarapace == 1 || TARGETED().xmlints.vialOfVitriol == 1 || TARGETED().xmlints.feyWings == 1)
+			{
+				LOCALMSG(TRIGMOB(), "The mixture blows up in your face! Clearly that was not the right step to take!")
+				DELETE(TARGETED())
+				DELETE(THIS())
+			}
+			else
+			{
+				LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+			}
+		}
+	}
+	else if (IS(TARGETED(), MortarPestle))
+	{
+		LOCALMSG(TRIGMOB(), "You pound the seed into a pulp and realize it is ruined.")
+		DELETE(THIS())
+	}
+	else
+	{
+		LOCALMSG(TRIGMOB(), "You can't think of a way to combine it.")
+	}
+}

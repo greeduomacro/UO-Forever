@@ -1,0 +1,51 @@
+onSay
+{
+	if (TRIGMOB().guildabbreviation != null)
+	{
+		if (SAID("i wish to bless this item"))
+		{
+			SENDMSG(TRIGMOB(), "Target an item to protect for the " + TRIGMOB().guildabbreviation + " guild.")
+			SENDTARGET(TRIGMOB())
+		}
+	}
+}
+onTarget
+{
+	if (IS(TARGETED(), Item))
+	{
+		if (TARGETED().rootparententity != TRIGMOB())
+		{
+			SENDMSG(TRIGMOB(), "That item must be in your backpack to bless it!")
+			return
+		}
+		if (TARGETED().stackable == true)
+		{
+			SENDMSG(TRIGMOB(), "You cannot bless stackable items!")
+			return
+		}
+		objs.attachments = GETATTACHMENTS(TARGETED(), xmlscript)
+		if (objs.attachments != null)
+		{
+			foreach (objs.attachment ; objs.attachments)
+			{
+				if (objs.attachment.name == "guildQuest")
+				{
+					SENDMSG(TRIGMOB(), "That already has a blessing on it!")
+					return
+				}
+			}
+		}
+		
+		objs.script = ADDSCRIPT(TARGETED(), "alan\\guilds\\trin\\trinQuestItem.us", "guildQuest")
+		objs.script.expiration = TIMESPANDAYS(2.0)
+		LOG("TrinsicQuestItems", NOW() + " " + TARGETED())
+		SENDMSG(TRIGMOB(), "You have applied a blessing on the item. Only " + TRIGMOB().guildabbreviation + " guild members can use or move it. It is unbreakable and does not decay. This lasts 2 days or until it is picked up.")
+		MOVETOWORLD(TARGETED(), TRIGMOB(), TRIGMOB().Map)
+		TRIGMOB().xmlobjs.lastBlessed = TARGETED()
+		SENDGUMP(TRIGMOB(), "
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You can only target items in your backpack.")
+	}
+}

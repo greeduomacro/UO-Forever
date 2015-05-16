@@ -1,0 +1,10 @@
+onUse
+{
+	SENDTARGET(TRIGMOB())
+}
+onTarget
+{
+	//TARGETED().xmlobjs.weights =  [6, 2, 2, 1]
+	SAY(TRIGMOB(), TARGETED().xmlobjs.weights.count)
+	//DISCONNECT(TARGETED())
+}

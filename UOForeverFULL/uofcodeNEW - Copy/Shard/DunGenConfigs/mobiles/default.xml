@@ -1,0 +1,149 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DunGen_Drow</Name>
+    Comment out UniqueID to have one randomly assigned on load
+    <!--UniqueId>ccf1787d-a526-4376-9b91-31a523a10529</UniqueId-->
+    <Map>Felucca</Map>
+        
+
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    
+    <MaxCount>100</MaxCount>
+    <MinDelay>1</MinDelay>
+    <MaxDelay>1</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>500</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>100</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>false</IsGroup>
+    <IsRunning>false</IsRunning>
+    <Objects2>
+      :OBJ=giantspider/hue/RNDLIST,1908,1903,1900
+      :MX=1:SP=100:RT=0:TO=1:CA=0:KL=1:RK=0:SB=1
+
+      :OBJ=orc/bodyvalue/245
+      /name/Goblin Slave/race/goblin/hue/RNDLIST,2001,2002,2003,2012,2009,2010
+      :MX=4:SP=100:RT=0:TO=1:CA=0:KL=1:RK=0:SB=1
+
+      :OBJ=SETONTHIS/running/false:MX=1:SP=100:RT=0:TO=1:CA=0:KL=1:RK=0:SB=1
+
+
+
+
+      :OBJ=orcishmage/bodyvalue/253
+      /name/Goblin Mage/race/goblin/hue/RNDLIST,2001,2002,2003,2009,2010
+      :MX=1:SP=100:RT=0:TO=1:CA=0:KL=1:RK=0:SB=2
+
+      :OBJ=terathanwarrior/bodyvalue/605
+      /name/Drow Soldier/race/drow/hue/1908/hairitemid/12239/hairhue/1150/kills/99/SKILL,magicresist/100
+      /body/400/female/false
+      /AI/AI_Archer/SKILL,archery/100/SKILL,tactics/100/SKILL,anatomy/100
+      /EQUIP/&lt;robe/itemid/12218/hue/2000/movable/false&gt;
+      /EQUIP/&lt;crossbow/hue/1908/movable/false&gt;
+      :MX=1:SP=100:RT=0:TO=3:CA=0:KL=1:RK=0:SB=2
+
+      :OBJ=terathanwarrior/bodyvalue/605
+      /name/Drow Soldier/race/drow/hue/1908/hairitemid/12239/hairhue/1150/kills/99/SKILL,magicresist/100
+      /body/400/female/false
+      /SKILL,tactics/100/SKILL,anatomy/100/SKILL,fencing/100/SKILL,swords/100/SKILL,macing/100
+      /EQUIP/&lt;halberd/hue/1908/movable/false&gt;
+      /EQUIP/&lt;robe/itemid/12218/hue/2000/movable/false&gt;
+      :MX=1:SP=100:RT=0:TO=3:CA=0:KL=1:RK=0:SB=2
+
+      :OBJ=SETONTHIS/running/false :MX=1:SP=100:RT=0:TO=2:CA=0:KL=1:RK=0:SB=2
+
+
+
+      :OBJ=terathanavenger/bodyvalue/605
+      /name/Drow Mage/race/drow/hue/1908/hairitemid/12239/hairhue/1150/kills/99
+	  /SKILL,magicresist/100/SKILL,magery/100/SKILL,evalint/100/SKILL,wrestling/100/SKILL,meditation/100
+	  /SKILL,tasteid/100/SKILL,poisoning/100
+      /body/400/female/false
+      /EQUIP/spellbook/movable/false
+      /EQUIP/&lt;robe/itemid/12218/hue/RND,2,6/movable/false&gt;
+      :MX=1:SP=100:RT=0:TO=3:CA=0:KL=1:RK=0:SB=3
+
+      :OBJ=silverserpent/bodyvalue/605/basesoundid/589
+      /name/Drow Assassin/race/drow/hue/1908/hairitemid/12239/hairhue/1150/kills/99/SKILL,magicresist/100
+      /body/400/female/false
+      /hidden/true/isStealthing/true/allowedstealthsteps/65530/SKILL,hiding/100/SKILL,stealth/100/AI/AI_Theif/subgroup/assassin
+      /SKILL,tactics/100/SKILL,fencing/100/SKILL,swords/100/SKILL,macing/100
+      /EQUIP/&lt;robe/itemid/12218/hue/RNDLIST,2002,2003,2004,2005,2006/movable/false&gt;
+      /EQUIP/&lt;kryss/poison/lethal/poisoncharges/4/quality/exceptional/movable/false&gt;
+      :MX=2:SP=100:RT=0:TO=3:CA=0:KL=1:RK=0:SB=3
+      :OBJ=SETONTHIS/running/false  :MX=2:SP=100:RT=0:TO=3:CA=0:KL=1:RK=0:SB=3
+
+
+
+
+
+      :OBJ=terathanmatriarch/bodyvalue/605
+      /name/Priestess of Llolth/race/drow/hue/1908/hairitemid/12239/hairhue/1150/kills/99/SKILL,magicresist/100
+	  /SKILL,magicresist/100/SKILL,magery/100/SKILL,evalint/100/SKILL,wrestling/100/SKILL,meditation/100
+	  /SKILL,tasteid/100/SKILL,poisoning/100
+      /bodyvalue/606/body/401/female/true
+      /hitsmaxseed/500/hits/500
+      /EQUIP/spellbook/movable/false
+      /EQUIP/&lt;robe/itemid/12218/hue/RNDLIST,212,213,214,216,217,218,219,220,221/movable/false&gt;
+      /ADD/gold,800
+      :MX=1:SP=100:RT=0:TO=6:CA=0:KL=1:RK=0:SB=4
+
+      :OBJ=terathanavenger/hue/RND,1903,1908
+      /name/Drider Guard/race/drow/hitsmaxseed/500/hits/500
+      /damagemin/25/damagemax/30
+      /SKILL,wrestling/100/SKILL,magery/100/SKILL,evalint/100/SKILL,magicresist/100
+      :MX=1:SP=100:RT=0:TO=5:CA=0:KL=1:RK=0:SB=4
+
+      :OBJ=dreadspider/hue/RNDLIST,1908,1903,1900,0
+      :MX=2:SP=100:RT=0:TO=6:CA=0:KL=1:RK=0:SB=4
+      :OBJ=SETONTHIS/running/false   :MX=1:SP=100:RT=0:TO=4:CA=0:KL=1:RK=0:SB=4
+
+
+      :OBJ=daemon:MX=3:SP=100:RT=0:TO=6:CA=0:KL=1:RK=0:SB=5
+
+      :OBJ=terathanmatriarch/bodyvalue/605/SKILL,magicresist/200
+      /name/Matron Mother/race/drow/hue/1908/hairitemid/12239/hairhue/1150/kills/99
+      /bodyvalue/606/body/401/female/true
+	  /SKILL,magicresist/100/SKILL,magery/100/SKILL,evalint/100/SKILL,wrestling/100/SKILL,meditation/100
+	  /SKILL,tasteid/100/SKILL,poisoning/100
+      /hitsmaxseed/2000/hits/2000/hue/1908
+      /fame/9000
+      /EQUIP/&lt;spellbook/hue/233/movable/false&gt;
+      /EQUIP/&lt;robe/itemid/12218/hue/233/movable/false&gt;
+      /ADD/gold,2000
+      :MX=1:SP=100:RT=0:TO=6:CA=0:KL=1:RK=0:SB=5
+      :OBJ=SETONTHIS/running/false    :MX=1:SP=100:RT=0:TO=7:CA=0:KL=1:RK=0:SB=5
+
+      <!-- Object Parameters
+          :MX=ActualMaxCount
+          :SB=SubGroup
+          :RT=SequentialResetTime (time they have to advance to the next spawn)
+          :TO=SequentialResetTo (spawngroup to jump to if it resets)
+          :KL=KillsNeeded (to advance)
+          :RK=RestrictKillsToSubgroup (isn't working atm)
+          :CA=ClearOnAdvance (clear current subgroup on advance)
+          :DN=MinDelay
+          :DX=MaxDelay
+          :SP=SpawnsPerTick
+          :PR=PackRange (mobs in a spawn entry all spawn together with this range)
+      -->
+  </Objects2>
+  </Points>
+</Spawns>

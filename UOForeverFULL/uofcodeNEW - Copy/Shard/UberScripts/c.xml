@@ -1,0 +1,13 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"Yancey-Hausman will pay!"</Label>
+		<HTML hasbackground="true" width="400" height="230">
+			<p>It is time to fulfill the prophecy from Ultima 7: The Black Gate, namely, that Yancey-Hausman will pay!
+
+You have been given a rock in your backpack. Double clicking it gives you a target, after which you can target something.  The rock is where it appears-that means you must LEAD your target in order to hit them (direct targeting will not be effective unless they are standing still)!  Don't hit Lord British or you will pay the price!
+
+The player who gets the most hits on Yancey-Hausman will win a special prize!
+</p>
+		</HTML>
+	</VBox>
+</Gump>

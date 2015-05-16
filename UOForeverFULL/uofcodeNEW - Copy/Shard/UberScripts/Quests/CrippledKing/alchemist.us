@@ -1,0 +1,23 @@
+onUse
+{
+	if (GETAMOUNTINCONTAINER(TRIGMOB().backpack, StoneClaw) >= 1 && GETAMOUNTINCONTAINER(TRIGMOB().backpack, StoneFeather) >= 1 && GETAMOUNTINCONTAINER(TRIGMOB().backpack, StoneEye) >= 1 && GETAMOUNTINCONTAINER(TRIGMOB().backpack, StoneScale) >= 1 && GETAMOUNTINCONTAINER(TRIGMOB().backpack, GoldenNeedle) >= 1)
+	{
+		DELETEFROMCONTAINER(TRIGMOB().backpack, StoneClaw, 1)
+		DELETEFROMCONTAINER(TRIGMOB().backpack, StoneFeather, 1)
+		DELETEFROMCONTAINER(TRIGMOB().backpack, StoneEye, 1)
+		DELETEFROMCONTAINER(TRIGMOB().backpack, StoneScale, 1)
+		DELETEFROMCONTAINER(TRIGMOB().backpack, GoldenNeedle, 1)
+		objs.potion = item, 6186
+		{
+			name = "a petrification immunity potion"
+			hue = 2407
+		}
+        	ADDSCRIPT(objs.potion, "Quests\\CrippledKing\\potion.us", "stonepotion")
+		ADDTOCONTAINER(TRIGMOB().backpack, objs.potion)
+		SAYTO(THIS(), TRIGMOB(), "Here is your petrification immunity potion. Careful when you drink it!!! The process behind making one immune to petrification is complex and dangerous.  I would hesitate to consume it unless I was feeling exceptionally strong and healthy.")
+	}
+	else
+	{
+		SENDGUMP(TRIGMOB(), "Quests\\CrippledKing\\alchemist.xml", true)
+	}
+}

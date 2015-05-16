@@ -1,0 +1,49 @@
+onCreate
+{
+	DoesNotDecay = true
+	Breakable = false
+}
+onUse
+{
+	if (xmlstrings.guildabbreviation != null)
+	{
+		if (TRIGMOB().guildabbreviation != xmlstrings.guildabbreviation)
+		{
+			SENDMSG(TRIGMOB(), "An enchantment of some sort prevents you from touching the item!", 0x38)
+			return override
+		}
+		else
+		{
+			DoesNotDecay = false
+			Breakable = true
+			DELETE(SCRIPT())
+		}
+	}
+}
+onDragLift
+{
+	if (xmlstrings.guildabbreviation != null)
+	{
+		if (TRIGMOB().guildabbreviation != xmlstrings.guildabbreviation)
+		{
+			SENDMSG(TRIGMOB(), "You cannot pick that up.")
+			return override
+		}
+		else
+		{
+			DoesNotDecay = false
+			Breakable = true
+			DELETE(SCRIPT())
+		}
+	}
+}
+onExpire
+{
+	DoesNotDecay = false
+	Breakable = true
+}
+onSingleClick
+{
+	if (TRIGMOB().name == "THEa MAN MYTH")
+	{ ITEMCLICKMSG(TRIGMOB(), THIS(), "(" + xmlstrings.guildabbreviation + ")") }
+}

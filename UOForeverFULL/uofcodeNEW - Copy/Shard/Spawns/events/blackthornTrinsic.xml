@@ -1,0 +1,53 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>BlackthornInvasionTrinsic</Name>
+    <!--<UniqueId>ccf1787d-a526-4376-9b91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>1345</X>
+    <Y>1497</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1345</CentreX>
+    <CentreY>1497</CentreY>
+    <CentreZ>25</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=ShadowBalron/name/Undead Commander/hitsmaxseed/20000/hits/20000/ATTACH/&lt;xmlonhit/name/hit1/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,commanderdamage,value]$>-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,commanderdamage,0&gt;&gt;/ATTACH/&lt;xmlonhit/name/hit2/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,commanderdamage,value/INC,${GETONTHIS,lastdamageamount$}&gt;/ATTACH/&lt;xmldeathaction/action/@static,5360/movable/false/OFFSET,0,0,10/hue/38/name/Marching Orders - Discover the coordinates of Khaldun, inscribed upon a statue in Trinsic.&gt;:MX=1:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=AncientLich/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,10&gt;:MX=2:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=LichLord/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,6&gt;:MX=18:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=rottingcorpse/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,4&gt;:MX=8:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=mummy/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,4&gt;:MX=10:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=boneknight/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,3&gt;:MX=10:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=bonemage/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,3&gt;:MX=15:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=Zombie/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,1&gt;:MX=20:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=Skeleton/guardimmune/true/ATTACH/&lt;xmldeathaction/condition/@~GETONTRIGMOB,[ATTACHMENT,xmlvalue,blackthorn1,value]$&gt;-1@action/@SETONTRIGMOB/ATTACH/&lt;xmlvalue,blackthorn1,0&gt;&gt;/ATTACH/&lt;xmldeathaction/name/die/action/@SETONTRIGMOB/ATTACHMENT,xmlvalue,blackthorn1,value/INC,1&gt;:MX=20:SP=100:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+	</Objects2>
+  </Points>
+</Spawns>

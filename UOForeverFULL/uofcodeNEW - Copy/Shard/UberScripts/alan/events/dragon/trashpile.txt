@@ -1,0 +1,47 @@
+onCreate
+{
+	itemid = 4962 + RANDOM(12)
+	xmlints.hitsLeft = RANDOM(5) + 1
+}
+onTargeted
+{
+	if (IS(TRIGITEM(), shovel) || IS(TRIGITEM(), pickaxe))
+	{
+		if (TRIGMOB().xmlints.dug != null)
+		{
+			SENDMSG(TRIGMOB(), "You cannot dig again so soon, you must wait a few seconds!")
+			return override
+		}
+		TRIGMOB().xmlints.dug = 1
+		TRIGMOB().xmlints.dug.expiration = 0:0:3
+		
+		doubles.mining = GETSKILL(TRIGMOB(), mining)
+		doubles.roll = 150.0 * RANDOMDOUBLE()
+		ANIMATE(TRIGMOB(), 11, 5, 1, true, false, 0)
+		SOUND(TRIGMOB(), 293)
+		
+		if (doubles.mining > doubles.roll)
+		{
+			xmlints.hitsLeft -= 1
+			if (xmlints.hitsLeft <= 0)
+			{
+				SENDMSG(TRIGMOB(), "You successfully clear the rock before wearing out your tool! (+2 points)", 0x38)
+				if (TRIGMOB().xmlints.rockClearing == null) { TRIGMOB().xmlints.rockClearing = 2 }
+				else { TRIGMOB().xmlints.rockClearing += 2 }
+				DELETE(THIS())
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You successfully make progress on the rock before wearing out your tool! (+1 point)", 0x38)
+				if (TRIGMOB().xmlints.rockClearing == null) { TRIGMOB().xmlints.rockClearing = 1 }
+				else { TRIGMOB().xmlints.rockClearing += 1 }
+			}
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "You dig and dig, but fail to make much progress before wearing out your tool! Having mining skill will GREATLY increase your success rate!", 38)
+		}
+		DELETE(TRIGITEM())
+		return override
+	}
+}

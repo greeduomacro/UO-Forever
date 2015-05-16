@@ -1,0 +1,7 @@
+onCreate
+{
+	objs.spawnLocations = [RECTANGLE2D(POINT2D(1752,40), POINT2D(1822,94))]
+	MOVETOSPAWNLOCATION(THIS(), MAP(Ilshenar), objs.spawnLocations)
+	
+	ADDSCRIPT(THIS(), "portals\\runeLoot.us", "runeLoot")
+}

@@ -1,0 +1,10 @@
+onUse
+{
+	if (THIS().rootparententity == TRIGMOB())
+	{
+	objs.ancient = ancientwyrm
+	objs.script = NEWATTACHMENT(xmlscript,"ancient")
+	objs.script.ScriptFile = "alan\\events\\dragon\\dragon.txt"
+	ATTACH(objs.ancient, objs.script)
+	}
+}

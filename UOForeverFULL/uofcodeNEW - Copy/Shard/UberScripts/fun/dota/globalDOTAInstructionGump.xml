@@ -1,0 +1,18 @@
+<Gump closable="false" disposable="true" dragable="false" resizable="true">
+	<VBox  x="10" y="10" padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"DOTA event beginning"</Label>
+		<Label hue="1153">"In 5 minutes. HERE IS"</Label>
+		<Label hue="1153">"YOUR CHANCE TO READ"</Label>
+		<Label hue="1153">"THE INSTRUCTIONS"</Label>
+		<Label hue="1153">"BEFORE it begins!"</Label>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="instructionsOnly"/>
+			<Label hue ="1553">"Read Instructions"</Label>
+		</HBox>
+		<Spacer height="5"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="nothanks"/>
+			<Label hue ="1553">"No thanks"</Label>
+		</HBox>
+	</VBox>
+</Gump>

@@ -1,0 +1,67 @@
+using System;
+using Server.Mobiles;
+
+namespace Server.Mobiles
+{
+	[CorpseName( "an ostard corpse" )]
+	public class ForestOstard : BaseMount
+	{
+		public override string DefaultName{ get{ return "a forest ostard"; } }
+
+        public override int InternalItemItemID { get { return 0x3EA5; } }
+
+		[Constructable]
+		public ForestOstard() : base( 0xDB, AIType.AI_Animal, FightMode.Aggressor, 10, 1, 0.2, 0.4 )
+		{
+			Hue = Utility.RandomSlimeHue() | 0x8000;
+
+			BaseSoundID = 0x270;
+
+			SetStr( 94, 170 );
+			SetDex( 56, 75 );
+			SetInt( 6, 10 );
+
+			SetHits( 71, 88 );
+			SetMana( 0 );
+
+			SetDamage( 8, 14 );
+
+			
+
+			
+
+			SetSkill( SkillName.MagicResist, 27.1, 32.0 );
+			SetSkill( SkillName.Tactics, 29.3, 44.0 );
+			SetSkill( SkillName.Wrestling, 29.3, 44.0 );
+
+			Fame = 450;
+			Karma = 0;
+
+			Tamable = true;
+			ControlSlots = 1;
+			MinTameSkill = 29.1;
+		}
+
+		public override int Meat{ get{ return 3; } }
+		public override FoodType FavoriteFood{ get{ return FoodType.FruitsAndVeggies | FoodType.GrainsAndHay; } }
+		public override PackInstinct PackInstinct{ get{ return PackInstinct.Ostard; } }
+
+		public ForestOstard( Serial serial ) : base( serial )
+		{
+		}
+
+		public override void Serialize( GenericWriter writer )
+		{
+			base.Serialize( writer );
+
+			writer.Write( (int) 0 ); // version
+		}
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
+
+			int version = reader.ReadInt();
+		}
+	}
+}

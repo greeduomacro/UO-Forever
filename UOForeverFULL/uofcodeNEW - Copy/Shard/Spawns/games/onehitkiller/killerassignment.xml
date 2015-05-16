@@ -1,0 +1,52 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>KillTheKingControl</Name>
+    <UniqueId>11f1787d-a526-4376-9b91-29b523a10523</UniqueId>
+    <Map>Felucca</Map>
+    <X>5699</X>
+    <Y>391</Y>
+    <Width>11</Width>
+    <Height>11</Height>
+    <CentreX>1403</CentreX>
+    <CentreY>1803</CentreY>
+    <CentreZ>-26</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>SETVAR,hack/{GET:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=WAITUNTIL/GETONTHIS,mobtriggername!(-null-):MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SET,KillTheKingStone,xmlspawner/doreset/true:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=2
+		:OBJ=SETONMOB,{GETONTHIS,mobtriggername},playermobile/bodyvalue/60/teamflags/2/ATTACH/&lt;xmldeathaction/action/@SET,KillTheKingControl,xmlspawner/mobtriggername/{GETONTHIS,[ATTACHMENT,xmllocalvariable,hack,data]}ONTRIGMOB,name} ; SETONTHIS/ATTACHMENT,xmldeathaction,,dodelete/true/ATTACHMENT,xmlfire,fire,dodelete/true/teamflags/1 ; SET,KillTheKingStone,xmlspawner/running/true&gt;/ATTACH/&lt;xmlfire,1000/name/fire&gt;/ATTACHMENT,xmldeathaction,,condition/@"{GETONTHIS,[ATTACHMENT,xmllocalvariable,hack,data]}ONTRIGMOB,name}"!"{GETONTHIS,[ATTACHMENT,xmllocalvariable,hack,data]}ONTHIS,name}":MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=3
+		:OBJ=SETONTHIS/mobtriggername/(-null-):MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=4
+		:OBJ=:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=:MX=1:SP=0:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

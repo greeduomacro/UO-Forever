@@ -1,0 +1,66 @@
+onCreate
+{
+	PoisonCustomImmune = Lethal
+	InnocentDefault = true
+	FightMode = Evil
+	Pseu_CanAttackInnocents = false
+	Name = "Britannian Building Support"
+	HitsMaxSeed = 1500
+	Hits = 1500
+}
+onTakenHit
+{
+	if (IS(TRIGMOB(), BloodRockOrc) == false)
+	{
+		return override
+	}
+	if (TRIGMOB().xmlints.buildingDamage == null)
+	{
+		TRIGMOB().xmlints.buildingDamage = 0
+	}
+	TRIGMOB().xmlints.buildingDamage += DAMAGE()
+	if (THIS().Hits > THIS().HitsMaxSeed / 2 && (THIS().Hits - DAMAGE()) < THIS().HitsMaxSeed / 2)
+	{
+		objs.region = GETREGION(THIS(), "townregion", true)
+		if (objs.region == null) { objs.region = GETREGION(THIS()) }
+		
+		objs.list = XMLOBJS(xmlobjs.owner, objs.region.Name)
+		if (objs.list != null)
+		{
+			REMOVEFROMLIST(objs.list, THIS())
+			strings.bcast = "A building is HALF WAY to being ransacked in " + objs.region.Name + "."
+		}
+		else
+		{
+			strings.bcast = "A building is HALF WAY to being ransacked in " + objs.region.Name + "."
+		}
+		BCAST(strings.bcast)
+	}
+}
+onBeforeDeath
+{
+	
+	objs.region = GETREGION(THIS(), "townregion", true)
+	if (objs.region == null) { objs.region = GETREGION(THIS()) }
+	LOG("invasiontrees", THIS().Location + " tree destroyed in " + objs.region)
+	objs.list = XMLOBJS(xmlobjs.owner, objs.region.Name)
+	if (objs.list != null)
+	{
+		REMOVEFROMLIST(objs.list, THIS())
+		
+		if (objs.list.Count == 0)
+		{
+			strings.bcast = "The entire city of " + objs.region.Name + " has been ransacked! No reason to defend it any longer!"
+			OVERHEADBCAST(strings.bcast, 0x38)
+		}
+		else
+		{
+			strings.bcast = "A building has been ransacked in " + objs.region.Name + ". " + objs.list.Count + " buildings left before the town is sacked!"
+		}
+	}
+	else
+	{
+		strings.bcast = "A building has been ransacked in " + objs.region.Name + "."
+	}
+	BCAST(strings.bcast, 0x38)
+}

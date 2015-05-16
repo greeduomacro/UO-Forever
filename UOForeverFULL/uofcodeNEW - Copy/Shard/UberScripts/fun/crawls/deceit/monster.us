@@ -1,0 +1,4 @@
+onDeath
+{
+	XMLINTS(xmlobjs.owner, SCRIPT().name + "_MonstersLeft", (XMLINTS(xmlobjs.owner, SCRIPT().name + "_MonstersLeft") - 1)) // kind of hacky, but meh...  This is just "monstersleft += 1", but have to use XMLINTS to access and set it b/c we don't know the name of the variable (it's based on the team captain's name)
+}

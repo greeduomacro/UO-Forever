@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DotaOrcMobs</Name>
+    <UniqueId>cdf2787d-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1402</X>
+    <Y>1522</Y>
+    <Width>10</Width>
+    <Height>10</Height>
+    <CentreX>1407</CentreX>
+    <CentreY>1522</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>120</MinDelay>
+    <MaxDelay>120</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>1</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>orc/currentwaypoint/0x400E0524/teamflags/4/speaks/false/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=9:SP=2:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=orcishlord/currentwaypoint/0x400E0524/teamflags/4/speaks/false/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=3:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+:OBJ=orcishmage/currentwaypoint/0x400E0524/teamflags/4/speaks/false/ATTACH/&lt;xmlcorpseaction/action/@SETONTHIS/DELETE&gt;:MX=6:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>

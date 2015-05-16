@@ -1,0 +1,589 @@
+using System;
+using System.IO;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Threading;
+using System.Diagnostics;
+using System.Net;
+using Server;
+using Server.Mobiles;
+using Server.Accounting;
+using Server.Network;
+using Server.Guilds;
+
+namespace Server
+{
+	public class ImportSpawners
+	{
+		public static void Initialize()
+		{
+			//ImportSpawners.ImportSpawns();
+		}
+
+		public readonly static string ItemIndexPath = Path.Combine( "Import/Items/", "Items.idx" );
+		public readonly static string ItemTypesPath = Path.Combine( "Import/Items/", "Items.tdb" );
+		public readonly static string ItemDataPath = Path.Combine( "Import/Items/", "Items.bin" );
+
+		private static string m_LoadingType;
+
+		public static string LoadingType {
+			get { return m_LoadingType; }
+		}
+
+		public static void ImportSpawns()
+		{
+			m_LoadingType = null;
+			int index = 0;
+
+			Console.Write( "Import: Loading Spawners..." );
+
+			int itemCount = 0;
+
+			Type[] ctorTypes = new Type[1] { typeof( Serial ) };
+
+			List<ItemEntry> items = new List<ItemEntry>();
+
+			if ( File.Exists( ItemIndexPath ) && File.Exists( ItemTypesPath ) ) {
+				using ( FileStream idx = new FileStream( ItemIndexPath, FileMode.Open, FileAccess.Read, FileShare.Read ) ) {
+					BinaryReader idxReader = new BinaryReader( idx );
+
+					using ( FileStream tdb = new FileStream( ItemTypesPath, FileMode.Open, FileAccess.Read, FileShare.Read ) ) {
+						BinaryReader tdbReader = new BinaryReader( tdb );
+
+						int count = tdbReader.ReadInt32();
+
+						ArrayList types = new ArrayList( count );
+
+						for ( int i = 0; i < count; ++i ) {
+							string typeName = tdbReader.ReadString();
+
+							Type t = ScriptCompiler.FindTypeByFullName( typeName );
+							
+							if ( t == typeof( Spawner ) )
+							{
+								ConstructorInfo ctor = t.GetConstructor( ctorTypes );
+
+								if ( ctor != null ) {
+									types.Add( new object[] { ctor, typeName } );
+								} else {
+									throw new Exception( String.Format( "Type '{0}' does not have a serialization constructor", t ) );
+								}
+							}
+							else
+								types.Add( null );
+						}
+
+						itemCount = idxReader.ReadInt32();
+
+						for ( int i = 0; i < itemCount; ++i )
+						{
+							int typeID = idxReader.ReadInt32();
+							int serial = idxReader.ReadInt32();
+							long pos = idxReader.ReadInt64();
+							int length = idxReader.ReadInt32();
+
+							object[] objs = ( object[] ) types[typeID];
+
+							if ( objs == null )
+								continue;
+
+							Item item = null;
+							ConstructorInfo ctor = ( ConstructorInfo ) objs[0];
+							string typeName = ( string ) objs[1];
+
+							//if ( Type.GetType( typeName) == typeof( Spawner ) )
+							//{
+								try {
+									item = ( Item ) ( ctor.Invoke( new object[]{ Serial.NewItem } ) );
+								} catch {
+								}
+
+								if ( item != null ) {
+									items.Add( new ItemEntry( item, typeID, typeName, pos, length ) );
+									World.AddItem( item );
+								}
+							//}
+						}
+
+						tdbReader.Close();
+					}
+
+					idxReader.Close();
+				}
+			}
+
+			//bool failedItems = false;
+			Type failedType = null;
+			Serial failedSerial = Serial.Zero;
+			Exception failed = null;
+			int failedTypeID = 0;
+
+			if ( File.Exists( ItemDataPath ) ) {
+				using ( FileStream bin = new FileStream( ItemDataPath, FileMode.Open, FileAccess.Read, FileShare.Read ) ) {
+					BinaryFileReader reader = new BinaryFileReader( new BinaryReader( bin ) );
+
+					for ( int i = 0; i < items.Count; ++i ) {
+						ItemEntry entry = items[i];
+						Item item = entry.Item;
+
+						if ( item != null ) {
+							reader.Seek( entry.Position, SeekOrigin.Begin );
+
+							try {
+								m_LoadingType = entry.TypeName;
+								if ( item is Spawner )
+									((Spawner)item).Deserialize( reader, false );
+
+								if ( item.Parent != null )
+									item.Delete();
+								else
+									index++;
+
+								//Region region = Region.Find( item.Location, item.Map );
+
+								//if ( region == null || !region.IsPartOf( "Doom" ) )
+								//	item.Delete();
+								//else
+								//	index++;
+
+								if ( reader.Position != ( entry.Position + entry.Length ) )
+									throw new Exception( String.Format( "***** Bad deserialize on {0} *****", item.GetType() ) );
+							} catch ( Exception e ) {
+								items.RemoveAt( i );
+
+								failed = e;
+								//failedItems = true;
+								failedType = item.GetType();
+								failedTypeID = entry.TypeID;
+								failedSerial = item.Serial;
+
+								break;
+							}
+						}
+					}
+
+					reader.Close();
+				}
+			}
+			Console.WriteLine( "done ({0})", index );
+		}
+
+		private interface IEntityEntry {
+			Serial Serial { get; }
+			int TypeID { get; }
+			long Position { get; }
+			int Length { get; }
+		}
+
+		private sealed class ItemEntry : IEntityEntry {
+			private Item m_Item;
+			private int m_TypeID;
+			private string m_TypeName;
+			private long m_Position;
+			private int m_Length;
+
+			public Item Item {
+				get {
+					return m_Item;
+				}
+			}
+
+			public Serial Serial {
+				get {
+					return m_Item == null ? Serial.MinusOne : m_Item.Serial;
+				}
+			}
+
+			public int TypeID {
+				get {
+					return m_TypeID;
+				}
+			}
+
+			public string TypeName {
+				get {
+					return m_TypeName;
+				}
+			}
+
+			public long Position {
+				get {
+					return m_Position;
+				}
+			}
+
+			public int Length {
+				get {
+					return m_Length;
+				}
+			}
+
+			public ItemEntry( Item item, int typeID, string typeName, long pos, int length ) {
+				m_Item = item;
+				m_TypeID = typeID;
+				m_TypeName = typeName;
+				m_Position = pos;
+				m_Length = length;
+			}
+		}
+	}
+
+	public sealed class DefaultBinaryFileReader : GenericReader
+	{
+		private BinaryReader m_File;
+
+		public DefaultBinaryFileReader( BinaryReader br ) { m_File = br; }
+
+		public void Close()
+		{
+			m_File.Close();
+		}
+
+		public long Position
+		{
+			get
+			{
+				return m_File.BaseStream.Position;
+			}
+		}
+
+		public long Seek( long offset, SeekOrigin origin )
+		{
+			return m_File.BaseStream.Seek( offset, origin );
+		}
+
+		public override string ReadString()
+		{
+			if( ReadByte() != 0 )
+				return m_File.ReadString();
+			else
+				return null;
+		}
+
+		public override DateTime ReadDeltaTime()
+		{
+			long ticks = m_File.ReadInt64();
+			long now = DateTime.UtcNow.Ticks;
+
+			if( ticks > 0 && (ticks+now) < 0 )
+				return DateTime.MaxValue;
+			else if( ticks < 0 && (ticks+now) < 0 )
+				return DateTime.MinValue;
+
+			try { return new DateTime( now+ticks ); }
+			catch { if( ticks > 0 ) return DateTime.MaxValue; else return DateTime.MinValue; }
+		}
+
+		public override IPAddress ReadIPAddress()
+		{
+			return new IPAddress( m_File.ReadInt64() );
+		}
+
+		public override int ReadEncodedInt()
+		{
+			int v = 0, shift = 0;
+			byte b;
+
+			do
+			{
+				b = m_File.ReadByte();
+				v |= (b & 0x7F) << shift;
+				shift += 7;
+			} while( b >= 0x80 );
+
+			return v;
+		}
+
+		public override DateTime ReadDateTime()
+		{
+			return new DateTime( m_File.ReadInt64() );
+		}
+
+		public override TimeSpan ReadTimeSpan()
+		{
+			return new TimeSpan( m_File.ReadInt64() );
+		}
+
+		public override decimal ReadDecimal()
+		{
+			return m_File.ReadDecimal();
+		}
+
+		public override long ReadLong()
+		{
+			return m_File.ReadInt64();
+		}
+
+		public override ulong ReadULong()
+		{
+			return m_File.ReadUInt64();
+		}
+
+		public override int ReadInt()
+		{
+			return m_File.ReadInt32();
+		}
+
+		public override uint ReadUInt()
+		{
+			return m_File.ReadUInt32();
+		}
+
+		public override short ReadShort()
+		{
+			return m_File.ReadInt16();
+		}
+
+		public override ushort ReadUShort()
+		{
+			return m_File.ReadUInt16();
+		}
+
+		public override double ReadDouble()
+		{
+			return m_File.ReadDouble();
+		}
+
+		public override float ReadFloat()
+		{
+			return m_File.ReadSingle();
+		}
+
+		public override char ReadChar()
+		{
+			return m_File.ReadChar();
+		}
+
+		public override byte ReadByte()
+		{
+			return m_File.ReadByte();
+		}
+
+		public override sbyte ReadSByte()
+		{
+			return m_File.ReadSByte();
+		}
+
+		public override bool ReadBool()
+		{
+			return m_File.ReadBoolean();
+		}
+
+		public override Point3D ReadPoint3D()
+		{
+			return new Point3D( ReadInt(), ReadInt(), ReadInt() );
+		}
+
+		public override Point2D ReadPoint2D()
+		{
+			return new Point2D( ReadInt(), ReadInt() );
+		}
+
+		public override Rectangle2D ReadRect2D()
+		{
+			return new Rectangle2D( ReadPoint2D(), ReadPoint2D() );
+		}
+
+		public override Rectangle3D ReadRect3D()
+		{
+			return new Rectangle3D( ReadPoint3D(), ReadPoint3D() );
+		}
+
+		public override Map ReadMap()
+		{
+			return Map.Maps[ReadByte()];
+		}
+
+		public override IEntity ReadEntity()
+		{
+			Serial serial = ReadInt();
+			IEntity entity = World.FindEntity( serial );
+			if ( entity == null )
+				return new Entity( serial, new Point3D( 0, 0, 0 ), Map.Internal );
+			else
+				return entity;
+		}
+
+		public override Item ReadItem()
+		{
+			return World.FindItem( ReadInt() );
+		}
+
+		public override Mobile ReadMobile()
+		{
+			return World.FindMobile( ReadInt() );
+		}
+
+		public override BaseGuild ReadGuild()
+		{
+			return BaseGuild.Find( ReadInt() );
+		}
+
+		public override T ReadItem<T>()
+		{
+			return ReadItem() as T;
+		}
+
+		public override T ReadMobile<T>()
+		{
+			return ReadMobile() as T;
+		}
+
+		public override T ReadGuild<T>()
+		{
+			return ReadGuild() as T;
+		}
+
+		public override ArrayList ReadItemList()
+		{
+			int count = ReadInt();
+
+			if ( count > 0 ) {
+				ArrayList list = new ArrayList( count );
+
+				for ( int i = 0; i < count; ++i ) {
+					Item item = ReadItem();
+
+					if ( item != null ) {
+						list.Add( item );
+					}
+				}
+
+				return list;
+			} else {
+				return new ArrayList();
+			}
+		}
+
+		public override ArrayList ReadMobileList()
+		{
+			int count = ReadInt();
+
+			if ( count > 0 ) {
+				ArrayList list = new ArrayList( count );
+
+				for ( int i = 0; i < count; ++i ) {
+					Mobile m = ReadMobile();
+
+					if ( m != null ) {
+						list.Add( m );
+					}
+				}
+
+				return list;
+			} else {
+				return new ArrayList();
+			}
+		}
+
+		public override ArrayList ReadGuildList()
+		{
+			int count = ReadInt();
+
+			if ( count > 0 ) {
+				ArrayList list = new ArrayList( count );
+
+				for ( int i = 0; i < count; ++i ) {
+					BaseGuild g = ReadGuild();
+
+					if ( g != null ) {
+						list.Add( g );
+					}
+				}
+
+				return list;
+			} else {
+				return new ArrayList();
+			}
+		}
+
+		public override List<Item> ReadStrongItemList()
+		{
+			return ReadStrongItemList<Item>();
+		}
+
+		public override List<T> ReadStrongItemList<T>()
+		{
+			int count = ReadInt();
+
+			if ( count > 0 ) {
+				List<T> list = new List<T>( count );
+
+				for ( int i = 0; i < count; ++i ) {
+					T item = ReadItem() as T;
+
+					if ( item != null ) {
+						list.Add( item );
+					}
+				}
+
+				return list;
+			} else {
+				return new List<T>();
+			}
+		}
+
+		public override List<Mobile> ReadStrongMobileList()
+		{
+			return ReadStrongMobileList<Mobile>();
+		}
+
+		public override List<T> ReadStrongMobileList<T>()
+		{
+			int count = ReadInt();
+
+			if ( count > 0 ) {
+				List<T> list = new List<T>( count );
+
+				for ( int i = 0; i < count; ++i ) {
+					T m = ReadMobile() as T;
+
+					if ( m != null ) {
+						list.Add( m );
+					}
+				}
+
+				return list;
+			} else {
+				return new List<T>();
+			}
+		}
+
+		public override List<BaseGuild> ReadStrongGuildList()
+		{
+			return ReadStrongGuildList<BaseGuild>();
+		}
+
+		public override List<T> ReadStrongGuildList<T>()
+		{
+			int count = ReadInt();
+
+			if ( count > 0 ) {
+				List<T> list = new List<T>( count );
+
+				for ( int i = 0; i < count; ++i ) {
+					T g = ReadGuild() as T;
+
+					if ( g != null ) {
+						list.Add( g );
+					}
+				}
+
+				return list;
+			} else {
+				return new List<T>();
+			}
+		}
+
+		public override bool End()
+		{
+			return m_File.PeekChar() == -1;
+		}
+
+		public override Race ReadRace()
+		{
+			return Race.Races[ReadByte()];
+		}
+	}
+}

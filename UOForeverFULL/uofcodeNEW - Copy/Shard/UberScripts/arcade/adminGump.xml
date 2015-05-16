@@ -1,0 +1,34 @@
+<Gump dragable="false">
+  <VBox padding="10" backgroundID="9250">
+    <HBox>
+		<Button normalID="5540" pressedID="5542" name="resetEvent"/>
+		<Label hue ="1553">"Reset Event"</Label>
+	</HBox>
+	<Label hue ="1553">"Resetting the event removes all player characters, spawned"</Label>
+	<Label hue ="1553">"mobs, and spawned items from the Trammel T2A area."</Label>
+	<Spacer height="10"/>
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="startEvent"/>
+		<Label hue ="1553">"Start Event"</Label>
+	</HBox>
+	<Label hue ="1553">"Starting the event will allow players to sign up"</Label>
+	<Label hue ="1553">"It will also begin spawning all the zombies. Beware"</Label>
+	<Label hue ="1553">"That this initial setup causes a short freeze, so be sure"</Label>
+	<Label hue ="1553">"to let the players know in advance."</Label>
+	<Spacer height="10"/>
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="stopEvent"/>
+		<Label hue ="1553">"Stop Event"</Label>
+	</HBox>
+	<Label hue ="1553">"Stopping the event will freeze and boot all currently playing"</Label>
+	<Label hue ="1553">"characters and won't allow players to rejoin the event."</Label>
+	<Label hue ="1553">"If you don't do a reset, then you can 'Start Event' again"</Label>
+	<Label hue ="1553">"and players will be able to rejoin where they left off."</Label>
+	<Spacer height="10"/>
+	<HBox>
+		<Button normalID="5540" pressedID="5542" name="tabulateScores"/>
+		<Label hue ="1553">"Tabulate Scores"</Label>
+	</HBox>
+	
+  </VBox>
+</Gump>

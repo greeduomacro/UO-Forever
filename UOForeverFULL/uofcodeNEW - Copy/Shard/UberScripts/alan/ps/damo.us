@@ -1,0 +1,23 @@
+onSay
+{
+	if (SAID("i hereby dub thee companion")) { SENDTARGET(TRIGMOB()) }
+}
+onTarget
+{
+	if (IS(TARGETED(),PlayerMobile))
+	{
+		if (TARGETED().companion == false)
+		{
+			ADDSCRIPT(TARGETED(), "alan\\ps\\tempCompanion.us", "tempCompanion")
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "They are already a companion!")
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must target a player!")
+	}
+
+}

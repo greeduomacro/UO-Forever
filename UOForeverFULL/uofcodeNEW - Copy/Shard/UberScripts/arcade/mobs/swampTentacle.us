@@ -1,0 +1,43 @@
+onCreate
+{
+	name = "horrifying tentacles"
+	xmlobjs.owner.xmlints.swampTentacleCount += 1
+	BodyValue = 66
+	BaseSoundID = 0x18e
+	objs.possiblePoints = [POINT3D(5780,2865,0), POINT3D(5689,2934,0), POINT3D(5723,3014,0), POINT3D(5797,2971,0), POINT3D(5704,3124,-15), POINT3D(5645,3157,-15), POINT3D(5667,3266,-15), POINT3D(5657,3312,-15), POINT3D(5771,3303,-15), POINT3D(5930,3367,0)]
+	objs.possible = [RECTANGLE2D(POINT2D(5912, 3271), POINT2D(6078, 3546))]
+	if (RANDOMDOUBLE() > 0.3)
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		// try up to 4 times
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+				if (objs.spawnLoc == POINT3D(0,0,0))
+				{
+					objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+				}
+			}
+		}
+	}
+	else
+	{
+		objs.spawnLoc = RANDOMFROMLIST(objs.possiblePoints)
+	}
+	MOVETOWORLD(THIS(), objs.spawnLoc, MAP(Trammel))
+}
+onBeforeDeath
+{
+	xmlobjs.owner.xmlints.swampTentacleCount -= 1
+	
+	if (RANDOMDOUBLE() < 0.1)
+	{
+		objs.item = UberScriptItem, 22311
+		objs.item.name = "Vile Tentacles"
+		ADDSCRIPT(objs.item, "arcade\\regs\\vileTentacles.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+}

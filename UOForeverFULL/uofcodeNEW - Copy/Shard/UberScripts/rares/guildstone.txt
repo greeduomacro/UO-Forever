@@ -1,0 +1,18 @@
+onUse
+{ 
+ if (TRIGMOB() != THIS().rootparententity)
+ {
+  SENDMSG(TRIGMOB(), "That must be in your backpack to inscribe it!")
+  return
+ }
+ 
+ if (IS(TRIGMOB(), playermobile) && TRIGMOB().guildname != null)
+ { 
+  SENDMSG(TRIGMOB(), "You have inscribed your guild name on the guild stone.")
+  THIS().name = "Guildstone for " + TRIGMOB().guildname
+ }
+ else
+ {
+  SENDMSG(TRIGMOB(),"You have to be in a guild to inscribe the guildstone!")
+ }
+}

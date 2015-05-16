@@ -1,0 +1,45 @@
+// POINT3D(5780,2865,0)
+// POINT3D(5689,2934,0)
+// POINT3D(5723,3014,0)
+// POINT3D(5797,2971,0)
+// POINT3D(5704,3124,-15)
+// POINT3D(5645,3157,-15)
+// POINT3D(5667,3266,-15)
+// POINT3D(5657,3312,-15)
+// POINT3D(5771,3303,-15)
+// POINT3D(5930,3367,0)
+// RECTANGLE2D(POINT2D(5912, 3271, -15), POINT2D(6078, 3546))
+
+onCreate
+{
+	name = "a fey creature"
+	fightmode = closest
+	xmlobjs.owner.xmlints.feyCount += 1
+	objs.possible = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+	// try up to 4 times
+	if (objs.spawnLoc == POINT3D(0,0,0))
+	{
+		objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+		if (objs.spawnLoc == POINT3D(0,0,0))
+		{
+			objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			if (objs.spawnLoc == POINT3D(0,0,0))
+			{
+				objs.spawnLoc = GETVALIDSPAWNLOCATION(objs.possible)
+			}
+		}
+	}
+	MOVETOWORLD(THIS(), objs.spawnLoc, MAP(Trammel))
+}
+onBeforeDeath
+{
+	xmlobjs.owner.xmlints.feyCount -= 1
+	if (RANDOMDOUBLE() < 0.25)
+	{
+		objs.item = UberScriptItem, 22310
+		objs.item.name = "Fey Wings"
+		ADDSCRIPT(objs.item, "arcade\\regs\\feyWings.us")
+		ADDTOPACK(THIS(), objs.item)
+	}
+}

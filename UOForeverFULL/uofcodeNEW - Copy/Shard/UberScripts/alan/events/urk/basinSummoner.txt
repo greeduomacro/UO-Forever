@@ -1,0 +1,21 @@
+onSpeech
+{
+	if (SAID("basin") && DISTANCE(THIS(),TRIGMOB()) < 5)
+	{
+		if ( GETITEMFROM(TRIGMOB(),TYPE(basin)) == null && TRIGMOB().xmlints.gotBasin == null)
+		{
+			TRIGMOB().xmlints.gotBasin = 1
+			TRIGMOB().xmlints.gotBasin.expiration = 0:0:30
+			LOCALMSG(TRIGMOB(), "You have been given a basin. Use on an orc corpse to gather orc blood!")
+			objs.basin = basin
+			ADDTOPACK(TRIGMOB(), objs.basin)
+			objs.script = NEWATTACHMENT(xmlscript)
+			objs.script.ScriptFile = "alan\\events\\urk\\basin.txt"
+			ATTACH(objs.basin, objs.script)
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "You already have a basin or recently got one!")
+		}
+	}
+}

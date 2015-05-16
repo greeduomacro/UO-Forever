@@ -1,0 +1,26 @@
+onSay
+{
+	if (SAID("mortals, I've tolerated you for far too long") == false) { return }
+	if (xmlints.specialMoveDelay == null)
+	{
+		xmlints.specialMoveDelay = 1
+		xmlints.specialMoveDelay.Expiration = 0:0:5
+		ANIMATE(TRIGMOB(), 6, 0, 1, true, false, 0); pause 500
+		ANIMATE(TRIGMOB(), 6, 0, 1, true, false, 0); pause 500
+		ANIMATE(TRIGMOB(), 6, 0, 1, true, false, 0); pause 500
+		
+		DODAMAGE(THIS(), THIS(), RANDOMMINMAX(60,90), 0) // only hurts players standing on her
+		SOUND(THIS(),0x160)
+		for (ints.i = 0; ints.i < 4; ints.i += 1)
+		{
+			ints.xTarget = THIS().x + RANDOMMINMAX(-35, 35)
+			ints.yTarget = THIS().y + RANDOMMINMAX(-35, 35)
+			LINEEFFECT(THIS(), POINT3D(ints.xTarget, ints.yTarget, THIS().z), "specialmoves\\riftfire.txt", 200)
+		}
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You aren't ready to use another special move!", 38)
+		return override
+	}
+}

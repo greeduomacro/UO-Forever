@@ -1,0 +1,143 @@
+function spawnLootlessDrakes()
+{
+	objs.waypointLocations = NEWLIST()
+	ADDTOLIST(objs.waypointLocations, POINT3D(1202,2696,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1246,2734,5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1292,2711,5))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1319,2739,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1389,2826,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1355,2888,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1503,3073,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1627,2945,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1604,2910,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1750,2789,1))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1801,2784,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1830,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1847,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1870,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1876,2779,10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1883,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1901,2780,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1924,2779,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1933,2780,0))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1960,2779,10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1968,2779,20))
+	ADDTOLIST(objs.waypointLocations, POINT3D(1977,2779,10))
+	ADDTOLIST(objs.waypointLocations, POINT3D(2003,2779,20))
+	ADDTOLIST(objs.waypointLocations, POINT3D(2003,2753,30))
+	foreach(objs.waypoint ; objs.waypointLocations)
+	{
+		objs.script = NEWATTACHMENT(xmlscript,"lootlessDrake")
+		objs.script.ScriptFile = "alan\\events\\dragon\\lootlessdrake.txt"
+		objs.drake = drake
+		objs.drake.location = objs.waypoint
+		objs.drake.home = objs.waypoint
+		ATTACH(objs.drake, objs.script)
+	}
+}
+onCreate
+{
+	// remove all the loot	
+	if (THIS().backpack != null)
+	{
+		objs.loot = GETITEMSINCONTAINER(THIS().backpack)
+		foreach (objs.item ; objs.loot)
+		{
+			DELETE(objs.item)
+		}
+	}
+	objs.gold = gold, 200
+	ADDTOPACK(THIS(), objs.gold)
+	
+	Pseu_CanBeHealed = false
+	Tamable = false
+	IgnoreMobiles = true
+	GuardImmune = true
+	BardImmuneCustom = True
+	IsScaryToPetsCustom = true
+	AutoDispelCustom = true
+	SUBSCRIBETIMER(FiveSeconds)
+	Passivespeed = 0.25
+	Activespeed = 0.25
+	CurrentSpeed = 0.25
+	// BreathDamageCustom
+	xmlints.count = 0
+	if (THIS().spawner.xmlints.spawnedCount != null)
+	{
+		THIS().spawner.xmlints.spawnedCount += 1
+	}
+	else
+	{
+		THIS().spawner.xmlints.spawnedCount = 0
+	}
+	if (RANDOMDOUBLE() > 0.8)
+	{
+		xmlints.aggressive = 1
+		ForceWaypoint = false
+	}
+}
+onFiveSeconds
+{
+	// every 10 seconds
+	xmlints.count = (xmlints.count + 1) % 2
+	if (xmlints.count == 0)
+	{
+		if (THIS().x > 1849 && THIS().x < 2000)
+		{
+			THIS().blessed = true
+			spawnLootlessDrakes()
+			UNSUBSCRIBETIMER(FiveSeconds)
+			BCAST("A dragon has made it into Trinsic! Lootless drakes have spawned!", 38)
+		}
+		if (xmlints.aggressive == null)
+		{
+			if (RANDOMDOUBLE() > 0.2)
+			{
+				ForceWaypoint = true
+			}
+			else
+			{
+				ForceWaypoint = false
+			}
+		}
+	}
+	// TODO: if in trinsic, spawn the lootless high-hit-point drakes that keep going home regularly
+}
+onTakenHit
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		if (IS(SPELL(),earthquakespell)) { return }
+		if (TRIGMOB().xmlints.hitsScore == null)
+		{
+			TRIGMOB().xmlints.hitsScore = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.hitsScore += DAMAGE()
+		}
+	}
+}
+onDeath
+{
+	if (IS(TRIGMOB(),playermobile))
+	{
+		ints.Points = ROUND(THIS().hitsmaxseed / 75)
+		if (ints.Points > 10)
+		{
+			ints.Points = 10
+		}
+		else if (ints.Points < 1)
+		{
+			ints.Points = 1
+		}
+		if (TRIGMOB().xmlints.killScore == null)
+		{
+			TRIGMOB().xmlints.killScore = ints.Points
+		}
+		else
+		{
+			TRIGMOB().xmlints.killScore += ints.Points
+		}
+	}
+}

@@ -1,0 +1,68 @@
+onCreate
+{
+	movable = false
+}
+onMoveOver
+{
+	LOCALMSG(TRIGMOB(), "You sense a magical force at this location.", 0x38)
+}
+onSpeech
+{
+	if (xmlobjs.target == null) { return }
+	
+	ints.correct = 0
+	ints.possible = 0
+	if (TRIGMOB().x == THIS().x && TRIGMOB().y == THIS().y)
+	{
+		if (xmlstrings.powerword1 != null)
+		{
+			ints.possible += 1
+			if (SAID(xmlstrings.powerword1)) { ints.correct += 1 }
+		}
+		if (xmlstrings.powerword2 != null)
+		{
+			ints.possible += 1
+			if (SAID(xmlstrings.powerword2)) { ints.correct += 1 }
+		}
+		if (xmlstrings.powerword3 != null)
+		{
+			ints.possible += 1
+			if (SAID(xmlstrings.powerword3)) { ints.correct += 1 }
+		}
+		if (xmlstrings.powerword4 != null)
+		{
+			ints.possible += 1
+			if (SAID(xmlstrings.powerword4)) { ints.correct += 1 }
+		}
+		if (xmlstrings.powerword5 != null)
+		{
+			ints.possible += 1
+			if (SAID(xmlstrings.powerword5)) { ints.correct += 1 }
+		}
+		if (xmlstrings.powerword6 != null)
+		{
+			ints.possible += 1
+			if (SAID(xmlstrings.powerword6)) { ints.correct += 1 }
+		}
+		
+		if (ints.possible == ints.correct)
+		{
+			INDIVIDUALFLASHEFFECT(TRIGMOB(), 3)
+			pause 3000
+			TRIGMOB().location = xmlobjs.target
+		}
+		elif (ints.possible == ints.correct + 1)
+		{
+			LOCALMSG(TRIGMOB(), "You almost feel yourself being carried away.")
+		}
+		elif (ints.possible == ints.correct + 2)
+		{
+			LOCALMSG(TRIGMOB(), "You feel a small tug on your body and soul.")
+		}
+		else
+		{
+			LOCALMSG(TRIGMOB(), "You feel a slight buzz of magic as you speak, but no lasting effect.")
+		}
+	}
+	
+}

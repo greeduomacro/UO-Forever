@@ -1,0 +1,12 @@
+onCreate
+{
+	SCRIPT().Name = "dotaCharSpellRestrictions"
+}
+onBeginCast
+{
+	if (IS(SPELL(),EnergyVortexSpell) || IS(SPELL(),SummonDaemonSpell) || IS(SPELL(),WaterElementalSpell) || IS(SPELL(),AirElementalSpell) || IS(SPELL(),FireElementalSpell) || IS(SPELL(),EarthElementalSpell) || IS(SPELL(),PolymorphSpell) || IS(SPELL(),SummonCreatureSpell) || IS(SPELL(),BladeSpiritsSpell) || IS(SPELL(),PoisonFieldSpell))
+	{
+		SENDMSG(TRIGMOB(), "It appears some dark energy is preventing you from casting that here!")
+		return override
+	}
+}

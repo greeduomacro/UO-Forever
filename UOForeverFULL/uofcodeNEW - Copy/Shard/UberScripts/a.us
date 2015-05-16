@@ -1,0 +1,22 @@
+onCreate
+{
+	LootType = Blessed
+	ItemID = 4967
+}
+onUse
+{
+	SENDMSG(TRIGMOB(), "Where do you want to throw it?")
+	SENDTARGET(TRIGMOB())
+}
+onTarget
+{
+	if (DISTANCE(TRIGMOB(), TARGETED()) > 13) 
+	{ 
+		SENDMSG(TRIGMOB(), "That is too far away!") 
+		return
+	}
+	
+	SWINGANIMATION(TRIGMOB())
+	MEFFECT(RANDOMMINMAX(4964, 4972), 2, TRIGMOB(), TARGETED())
+	LINESCRIPT(TRIGMOB(), TARGETED(), b.us, TIMESPANSECONDS(0.1))
+}

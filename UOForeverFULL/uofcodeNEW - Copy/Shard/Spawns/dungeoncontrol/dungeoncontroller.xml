@@ -1,0 +1,141 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>DungeonController</Name>
+    <UniqueId>ccfedcba-a526-4376-9b91-29b523a10521</UniqueId>
+    <Map>Felucca</Map>
+    <X>1501</X>
+    <Y>1500</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>1501</CentreX>
+    <CentreY>1500</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\pulmablock.txt/location/(1098,1509,23):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=SETONSPAWN,40/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Lockmoor, Lapisan Ruins, and Serosan&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Pulma&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Serosan&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Lockmoor&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=BCAST,130/The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=10
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_lockmoor.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=11
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=12
+
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\lockmoorblock.txt/location/(1484,1508,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONSPAWN,50/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Lapisan Ruins, Serosan, and Castra&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Lockmoor&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Castra&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Lapisan Ruins&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=BCAST,130 /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt; :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=20
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_lapisan.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=21
+		:OBJ=SETONTHIS/running/false :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=22
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\lapisanblock.txt/location/(1021,1326,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=SETONSPAWN,60/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Serosan, Castra, and Demergo&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Lapisan Ruins&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Demergo&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Serosan&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=BCAST,130  /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;  :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=30
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_serosan.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=31
+		:OBJ=SETONTHIS/running/false  :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=32
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\serosanblock.txt/location/(689,1315,1):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=SETONSPAWN,70/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Castra, Demergo, and Endium&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Serosan&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Endium&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Castra&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=BCAST,130   /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;   :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=40
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_castra.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=41
+		:OBJ=SETONTHIS/running/false   :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=42
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\castrablock.txt/location/(1446,1286,5):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=SETONSPAWN,80/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Demergo, Endium, and Edgewich&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Castra&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Edgewich&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Demergo&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=BCAST,130    /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;    :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=50
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_demergo.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=51
+		:OBJ=SETONTHIS/running/false    :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=52
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\demergoblock.txt/location/(803,1215,2):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=SETONSPAWN,90/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Endium, Edgewich, Khalmer&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Demergo&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Khalmer&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Endium&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=BCAST,130     /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;     :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=60
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_endium.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=61
+		:OBJ=SETONTHIS/running/false     :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=62
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\endiumblock.txt/location/(1672,1478,0):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=SETONSPAWN,10/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Edgewich, Khalmer, and Pulma&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Endium&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Pulma&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Edgewich&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=BCAST,130      /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;      :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=70
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_edgewich.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=71
+		:OBJ=SETONTHIS/running/false      :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=72
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\edgewichblock.txt/location/(798,1033,1):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=SETONSPAWN,20/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Khalmer, Pulma, and Lockmoor&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Edgewich&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Lockmoor&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Khalmer&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=BCAST,130       /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;       :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=80
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_khalmer.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=81
+		:OBJ=SETONTHIS/running/false       :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=82
+		
+		:OBJ=MULTIADDON,Spawns\dungeoncontrol\khalmerblock.txt/location/(995,1763,1):MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=SETONSPAWN,30/DELETE:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,opendungeons/data/Pulma, Lockmoor, and Lapisan Ruins&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justclosed,Khalmer&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,justopened,Lapisan Ruins&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=SETONTHIS/ATTACH/&lt;xmllocalvariable,toexterminate,Pulma&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=BCAST,130        /The Galven authorities have successfully closed down {GETVAR,justclosed} with the aid of Atria's citizens... However {GETVAR,justopened} has been reopened due to signs of increased activity inside of it!  Furthermore, the Galven guard asks all citizens to focus now on exterminating all ceratures within {GETVAR,toexterminate} so that it can be closed up!:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\towncrierupdater.xml/loadconfig/true/running/true/ATTACH/&lt;XmlLocalVariable,newMessage/data/{GETVAR,opendungeons} are open! Galven authorities have asked all citizens to exterminate all the creatures in {GETVAR,toexterminate} so that they can close it up!&gt;        :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=90
+		:OBJ=xmlspawner/configfile/Spawns\dungeoncontrol\wipe_pulma.xml/loadconfig/true/running/true:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=91
+		:OBJ=SETONTHIS/running/false        :MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=92
+	</Objects2>
+  </Points>
+</Spawns>

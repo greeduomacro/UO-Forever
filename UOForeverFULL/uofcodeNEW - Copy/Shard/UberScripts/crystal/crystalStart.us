@@ -1,0 +1,45 @@
+onCreate
+{
+	Hue = 2963
+	ItemID = 3710
+	Movable = true
+	Name = "the beginnings of a crystal workbench"
+	xmlobjs.AddedHues = NEWLIST()
+}
+onSingleClick
+{
+	if (xmlobjs.AddedHues.Count > 0)
+	{
+		strings.message = "";
+		ints.first = 0
+		foreach (objs.hue ; xmlobjs.AddedHues)
+		{
+			if (ints.first == 0)
+			{
+				ints.first = 1
+				if (objs.hue == 0) { strings.message += "Clear" }
+				if (objs.hue == 1329) { strings.message += "Blue"}
+				if (objs.hue == 14) { strings.message += "Purple" }
+				if (objs.hue == 1277) { strings.message += "Pink" }
+				if (objs.hue == 449) { strings.message += "Orange" }
+				if (objs.hue == 1196) { strings.message += "Yellow" }
+				if (objs.hue == 1272) { strings.message += "Light Green" }
+				if (objs.hue == 78) { strings.message += "Turqouise" }
+				if (objs.hue == 1173) { strings.message += "Aqua" }
+			}
+			else
+			{
+				if (objs.hue == 0) { strings.message += " / Clear" }
+				if (objs.hue == 1329) { strings.message += " / Blue"}
+				if (objs.hue == 14) { strings.message += " / Purple" }
+				if (objs.hue == 1277) { strings.message += " / Pink" }
+				if (objs.hue == 449) { strings.message += " / Orange" }
+				if (objs.hue == 1196) { strings.message += " / Yellow" }
+				if (objs.hue == 1272) { strings.message += " / Light Green" }
+				if (objs.hue == 78) { strings.message += " / Turqouise" }
+				if (objs.hue == 1173) { strings.message += " / Aqua" }
+			}
+		}
+		ITEMCLICKMSG(TRIGMOB(), THIS(), strings.message)
+	}
+}

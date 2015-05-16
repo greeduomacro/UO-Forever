@@ -1,0 +1,10 @@
+Marshmallow = 3888
+Chocolate Brownie = 5155
+Hard Boiled Sweet = 3975
+Chocolate Bunny = 8485
+4 Wine Gums = 9451
+Lollypop = 10244
+Red Candy Cane = 11230
+Green Candy Cane = 11231
+Gingerbread Man = 11234
+Chocolate Bar = 3978

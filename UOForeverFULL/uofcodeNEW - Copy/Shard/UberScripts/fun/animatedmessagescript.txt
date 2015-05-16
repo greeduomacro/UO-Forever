@@ -1,0 +1,17 @@
+onCreate
+{
+	xmlints.gumpcount = 0
+	xmlints.gumpstop = 40 // 2 seconds
+	SUBSCRIBETIMER(FiftyMS)
+}
+onFiftyMS
+{
+	xmlints.gumpcount += 1
+	SENDGUMP(THIS(), SCRIPT().name)	
+	if (xmlints.gumpcount >= xmlints.gumpstop)
+	{
+		UNSUBSCRIBETIMER(FiftyMS)
+		xmlints.gumpstop.dodelete = true
+		xmlints.gumpcount.dodelete = true
+	}
+}

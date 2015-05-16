@@ -1,0 +1,17 @@
+<Gump>
+  <VBox padding="10" backgroundID="9250">
+    <HBox fitToContents="true" x="0" y="0" width="44" height="44" backgroundID="3500" horizontalGap="0" padding="20">
+      <Label x="0" y="0" hue="0">"Duration (minutes):"</Label>
+      <HBox fitToContents="true" x="0" y="0" width="44" height="44" backgroundID="9300" horizontalGap="0" padding="2">
+        <TextEntry x="0" y="0" name="duration" size="3" width="400" height="22" default="" />
+      </HBox>
+    </HBox>
+	
+	<Spacer/>
+	<Label x="0" y="0" hue="1153">"Begin Event:"</Label>
+    <HBox fitToContents="true" x="0" y="0" width="44" height="44" backgroundID="3500" horizontalGap="0" padding="20">
+      <Label x="0" y="0" hue="0">"SUBMIT ONLY AFTER FILLING EVERYTHING OUT!"</Label>
+      <Button x="0" y="0" name="submit" normalID="2074" pressedID="2075" />
+    </HBox>
+  </VBox>
+</Gump>

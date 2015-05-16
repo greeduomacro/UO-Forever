@@ -1,0 +1,5 @@
+onUse
+{
+	USE(TRIGMOB(), xmlobjs.owner)
+	return override
+}

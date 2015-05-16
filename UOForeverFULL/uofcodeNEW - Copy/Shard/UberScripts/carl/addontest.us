@@ -1,0 +1,4 @@
+onUse
+{
+ ADDTOPACK(TRIGMOB(), RARE("pirateflag.txt"))
+}

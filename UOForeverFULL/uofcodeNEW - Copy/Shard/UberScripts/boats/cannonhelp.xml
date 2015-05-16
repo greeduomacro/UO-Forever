@@ -1,0 +1,30 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+ <VBox padding="15" backgroundID="9250" fitToContents="true" >
+	<Label hue="1153">"=== Cannon Loading Help ==="</Label>
+	<HTML hasBackground="true" scrollBar="true">
+		<p>To load the cannon, click on the powder from the barrel. Different loading amounts are assigned to the different powder colors (see below). If you have more than 25 loading points when you fire, the cannon will misfire. The damage your cannon does is much greater the closer you are to 25 loading points.</p>
+		<p>IF there are two powder types STACKED ON TOP of each other, the powder that is ON THE BOTTOM LAYER of your click location is the one that is actually selected (so you must be careful, you might click a misfire on accident!)</p>
+	</HTML>
+	<Spacer/>
+	<HBox>
+		<Item itemID="16954" hue="2213" />
+		<Label hue="1153">"5 points"</Label>
+	</HBox>
+	<HBox>
+		<Item itemID="16954" hue="1891" />
+		<Label hue="1153">"3 points"</Label>
+	</HBox>
+	<HBox>
+		<Item itemID="16954" hue="2418" />
+		<Label hue="1153">"1 point"</Label>
+	</HBox>
+	<HBox>
+		<Item itemID="16954" hue="1" />
+		<Label hue="1153">"Misfire!"</Label>
+	</HBox>
+	<HBox>
+		<Image x="15" gumpID="22150"/>
+		<Label x="28" hue="1153">"Empty the Cannon"</Label>
+	</HBox>
+ </VBox>
+</Gump>

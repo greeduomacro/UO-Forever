@@ -1,0 +1,425 @@
+function goToNextLocation()
+{
+	xmlints.HitsForNextMove = THIS().Hits - 8001
+	THIS().Combatant = null
+	THIS().Blessed = true
+	THIS().Cantwalk = true
+	SAY(THIS(), "On Dasher, and Dancer, and Prancer, and Vixen... Comet, and Cupid, and Donner, and Blitzen!")
+	RUNSCRIPT(THIS(), "mobs\\christmas\\sleigh.us")
+	BCAST("Santa appears to be boarding his sleigh to make his way to another dungeon location!", 38)
+	xmlobjs.NextTeleport = NOW() + TIMESPANMINUTES(20.0)
+}
+
+// THIS SHOULD BE ATTACHED TO A CustomMob
+onCreate
+{
+	SCRIPT().Name = "Santa" // name this something easily identified in searches, all one word, probably indicating the mob type
+	RawName = "a drunken Santa Claus" // default is "a human"
+	
+	Hue = 33770  // default is 0... a good skin hue is 33823 for humans
+	BodyValue = 400  // use the uberscript _body helper functions to identify the right body
+	BaseSoundID = 0  // use the uberscript _sound helper functions to identify the correct sound
+	HairItemID = 8251
+	HairHue = 1153
+	FacialHairItemID = 8268
+	FacialHairHue = 1153
+	FreelyLootable = true
+	// DO NOT SET THE MOB'S STR! CUSTOMMobs are set to
+	// CUSTOMMOBS take NORMAL DAMAGE (like players do), SO SET HITS ACCORDINGLY--probably should be
+	// about half to 2/3 the hits of a corresponding mob (e.g. Balron.cs has 800-1200 hit points (SetHits is a STUPID function), 
+	// so you should probably set a mob who is as strong as a balron to have 500-700 hit points instead
+	SETHITSSTAMMANA(THIS(), 64000, 100, 100) // order is hits, stamina, mana (this is completely disconnected from STR, INT, and DEX, which you SHOULD LEAVE ALONE generally!
+	
+	
+//============= CUSTOM MOB DAMAGE ==============================================================================
+	// NOTE: with 100 Str, 100 Tactics, DamageMin and DamageMax are THE ACTUAL damage that will be done 
+	// to an unarmored person.  Full GM dexxer suit takes somewhere between 5-15 damage off of that.
+	//  not sure how a full invulnerability suit would do
+	DamageMin = 20 // default 20
+	DamageMax = 50 // default 30
+	
+//============= CUSTOM MOB ARMOR ==============================================================================	
+	VirtualArmor = 0; // default 0 (just like an unarmored player)
+	// SETSKILL(THIS(), "MagicResist", 100.0)  // default is 50.0... can increase to make them take less magic DAMAGE
+	
+	ActiveSpeed = 0.1 // 0.004 is as fast as horse, 0.01 is VERY slightly slower than horse, 0.16 is a bit slower than running, 0.12 is VERY slightly slower than running, 0.1 is exactly running speed
+	AI = AI_Arcade
+	AutoDispelCustom = true // default false, true means dispel EVs
+	BardImmuneCustom = true
+	IsScaryToPetsCustom = true // default false
+	PoisonCustomImmune = Lethal
+	TakesNormalDamage = true // default true
+	RangePerception = 18 // default 18 (normal mobs are 12, players see 16)
+	GuardImmune = true
+	AlwaysMurdererCustom = true
+	WeaponDamage = false
+
+	ReduceSpeedWithDamageCustom = false // default is false for CustomMobs (when the mob is damaged, they don't go slower), unlike ALL other BaseCreatures in the gameCANBEHARFMUL(
+	// ======= Options that might be important for pseudoseered mobs =================
+	//Pseu_SpellBookRequired = false // default false, if true, they need a spellbook to cast spells
+	//Pseu_AllowFizzle = true // default true, if true, mob can fizzle, otherwise they never fizzle
+	//Pseu_AllowInterrupts = false // default false, if true, mob can have spells interrupted
+	//Pseu_SpellDelay = TIMESPANSECONDS(0.0) // default TIMESPANSECONDS(0.0), affects the time between spell casting
+	HitsRegenPerTick = 0
+	Pseu_CanBeHealed = false // default true, if false, cannot be healed by any means (they will regenerate though)
+	//Pseu_CanUseGates = true // default true, only affects pseudoseer controlled mobs
+	//Pseu_CanUseRecall = true // default true, only affects pseudoseer controlled mobs
+	//Pseu_CanAttackInnocents = true // default true
+	//Pseu_ConsumeReagents = false // default false, if true, reagents and arrows are required for spellcasting / using archery
+	//PowerWords = false // default false, if true, they will speak powerwords on cast
+	//ClearHandsOnCast = false // default false
+	//ReduceSpeedWithDamageCustom = true // default true, if false, mob will not slow down when damaged
+	//InnocentDefault = false // default false, if true, mob will be innocent (will go criminal if attacking non-innocents)
+	
+	// CustomMob default skills are
+	// 100 tactics
+	// 50 magicresist
+	// 80 wrestling
+	// 100 anatomy
+	// can customize from there:
+	
+	// examples:
+	SETSKILL(THIS(), "Macing", 105.0)
+	SETSKILL(THIS(), "Wrestling", 105.0)
+	//SETSKILL(THIS(), "Fencing", 120.0)
+	//SETSKILL(THIS(), "Tactics", 100.0)
+	//SETSKILL(THIS(), "Anatomy", 100.0)
+	//SETSKILL(THIS(), "Healing", 100.0)
+	//SETSKILL(THIS(), "Magery", 100.0)
+	//
+	
+	// Set the spawn locations and 
+	// there are 4 ways to set up spawn locations:  
+	// #1: The simplest is simply by a list of rectangles. A rectangle will be chosen randomly WEIGHTED BY THE AREA OF EACH RECTANGLE.  So if objs.spawnLocations had 2 rectangles, one with 100 tiles encompassed in it and one with 1000 tiles encompassed in it, then the 1000 tile rectangle would be chosen 1000/1100 (about 9%) of the time.
+	// example: (several spawn locations in T2A)
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations)
+	
+	// #2: You can set it up with weighted probabilities by using a second list containing INTEGERS. The weighted probability list MUST have the same number of elements as the rectangle LISTCONTAINS
+	// example:
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//objs.weightings = [1, 2, 100, 4]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings)
+	// the 3rd rectangle would be chosen 100 out of 107 times. Note that you can 
+	
+	// #3: You can set it with a particular z level AND whether it requiresSurface (mobs generally should always requireSurface)
+	// example
+	// example:
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//objs.weightings = [1, 2, 100, 4]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings, 10, true)
+	// it will try to find a spawn location at the z level of 10 before using the GetDefaultZ function
+	// which often returns something wrong if there is more than 1 level or a foundation in a building
+	
+	// #4: You can set it with a particular z level SPECIFRIC TO EACH RECTANGLE AND whether it requiresSurface (mobs generally should always requireSurface)
+	// example
+	// example:
+	//objs.spawnLocations = [RECTANGLE2D(POINT2D(5153,3130), POINT2D(5820,4061)), RECTANGLE2D(POINT2D(5820,3255), POINT2D(6118, 4086)), RECTANGLE2D(POINT2D(5400,2617), POINT2D(5802, 3130)), RECTANGLE2D(POINT2D(5286,2480), POINT2D(5824, 2616))]
+	//objs.weightings = [1, 2, 100, 4]
+	//objs.zLevels = [10, 4, 3, 2]
+	//MOVETOSPAWNLOCATION(THIS(), MAP(Felucca), objs.spawnLocations, objs.weightings, 10, true)
+	// since each rectangle has a different z level it should try to spawn in, you can control the z levels
+	// to be rectangle specific this way
+	
+	// if this mob is in human form and you want to add armor (movable or not) and stuff
+	// EXAMPLE:
+	objs.armor = FeatheredHat { Hue = 37; Name = "Santa's Hat" } EQUIP(THIS(), objs.armor)
+	objs.armor = Tunic { Hue = 37; Name = "Santa's Tunic"; Layer = InnerTorso } EQUIP(THIS(), objs.armor)
+	objs.armor = LongPants { Hue = 38; Name = "Santa's Pants" } EQUIP(THIS(), objs.armor)
+	objs.armor = Boots { Hue = 1; Name = "Santa's Boots" } EQUIP(THIS(), objs.armor)
+	objs.armor = LeatherNinjaBelt { Identified = true; Name = "Santa's Belt" } EQUIP(THIS(), objs.armor)
+	objs.armor = LeatherGloves { Identified = true; Hue = 1153; Name = "Santa's Gloves" } EQUIP(THIS(), objs.armor)
+	objs.weapon = Club { Identified = true; Hue = 38; Name = "Santa's Bag"; DamageLevel = Vanq } EQUIP(THIS(), objs.weapon)
+	//objs.armor = tunic { hue = 1626 } EQUIP(THIS(), objs.armor)
+	// set movable to false to make it not drop:
+	//objs.armor = studdedgorget { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+	//objs.armor = ringmailchest { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+	//objs.armor = ringmaillegs { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+	//objs.armor = ringmailarms { quality = exceptional ; movable = false} EQUIP(THIS(), objs.armor)
+	//objs.armor = ringmailgloves { quality = exceptional; movable = false } EQUIP(THIS(), objs.armor)
+	//objs.weapon = arrow { amount = 20 } ADDTOPACK(THIS(), objs.weapon)
+	//objs.weapon = bow { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	//objs.weapon = spear { quality = exceptional } ADDTOPACK(THIS(), objs.weapon)
+	//objs.bandage = bandage, 300 { movable = false } ADDTOPACK(THIS(), objs.bandage)
+	// spellbook doesn't drop b/c movable is false (helpful if they are going to be pseudoseered
+	//objs.fullspellbook = fullspellbook { movable = false }; ADDTOPACK(THIS(), objs.fullspellbook)
+	//objs.thighboots = thighboots; EQUIP(THIS(), objs.thighboots)
+	
+	
+	// if you want to add loot that thieves can steal EXAMPLE:
+	// objs.gold = gold { amount = RANDOMMINMAX(500,600) }
+	// ADDTOPACK(THIS(), objs.gold)
+	xmlints.HitsForNextMove = THIS().Hits - 8000
+	xmlobjs.NextTeleport = NOW()
+	xmlobjs.RandomPhrases = ["'Twas the night before Chrisshhmashh and all through da housshhh...", "Ho ho ho! Merry Chrisshhmasshh!", "Naughty or Nice?!", "Ho ho!", "Here ishh shhum coal fer you!", "Hey kid, want some candy?", "I shee you when your shhleeping..."]
+	xmlobjs.LowEnd = ["plate", "fork", "knife", "globe", "clock", "axle", "gears", "drums", "lute", "lapharp", "broadsword", "ironingot", "hammer", "arrow", "bow", "scales", "shirt", "tunic", "longpants", "shortpants"]
+	xmlobjs.HighEnd = ["bbqeastaddondeed", "bbqsouthaddon2deed", "ag_bathtubsouthaddondeed", "ag_bathtubsouthaddondeed", "swimmingpooladdondeed", "giftboxangel"]
+	SUBSCRIBETIMER(OneSecond)
+}
+onGivenHit
+{
+	if (IS(TRIGMOB(), BaseCreature) && TRIGMOB().Controlled && TRIGMOB().ControlMaster != null)
+	{
+		KILL(TRIGMOB())
+	}
+}
+onTakenHit
+{
+	if (THIS().Hits - DAMAGE() > 0 &&  THIS().Hits < xmlints.HitsForNextMove)
+	{
+		goToNextLocation()
+		return
+	}
+	doubles.itemDropChance = DOUBLE(DAMAGE()) / 40.0
+	if (RANDOMDOUBLE() < doubles.itemDropChance)
+	{
+		// drop an item
+		doubles.itemRoll = RANDOMDOUBLE()
+		if (doubles.itemRoll < 0.01)
+		{
+			// SUPER RARE
+			//strings.toSpawn = "plate"
+			strings.toSpawn = RANDOMFROMLIST(xmlobjs.HighEnd)
+		}
+		else if (doubles.itemRoll < 0.07)
+		{
+			// RARE
+			objs.list = [4646, 5018, 5020, 3705]
+			strings.toSpawn = "static," + RANDOMFROMLIST(objs.list)
+		}
+		else if (doubles.itemRoll < 0.27)
+		{
+			strings.toSpawn = "platinum"
+		}
+		else
+		{	
+			strings.toSpawn = RANDOMFROMLIST(xmlobjs.LowEnd)
+		}
+		objs.droppedItem = SPAWN(strings.toSpawn)
+		if (IS(objs.droppedItem, Platinum))
+		{
+			objs.droppedItem.Amount = 20
+		}
+		else if (IS(objs.droppedItem, Static))
+		{
+			if (RANDOMDOUBLE() < 0.1)
+			{
+				DELETE(objs.droppedItem)
+				objs.droppedItem = clothingblessdeed
+			}
+			else
+			{
+				if (objs.droppedItem.itemID == 4646) { objs.droppedItem.Name = "Nativity Scene Angel" }
+				if (objs.droppedItem.itemID == 5108) { objs.droppedItem.Name = "Nativity Scene Mary" }
+				if (objs.droppedItem.itemID == 5020) { objs.droppedItem.Name = "Nativity Scene Joseph" }
+				if (objs.droppedItem.itemID == 3705) 
+				{ 
+					objs.droppedItem.Name = "Nativity Scene Manger and Baby" 
+					objs.droppedItem.hue  = 1892
+				}
+				objs.droppedItem.movable = true
+			}
+		}
+		
+		MOVETOWORLD(objs.droppedItem, POINT3D(0, 0, -100), THIS().Map) // spawn it out nowhere first (so it doesn't sit by his feet)
+		objs.location = GETVALIDSPAWNLOCATION(THIS(), 10, true)
+		if (objs.location == POINT3D(0,0,0))
+		{
+			objs.location = THIS().Location
+		}
+		MEFFECT(objs.droppedItem.ItemID, 10, THIS(), objs.location) // "throw" the item
+		pause 500
+		MOVETOWORLD(objs.droppedItem, objs.location, THIS().Map)
+	}
+}
+onDeath
+{	
+	// distribute the rewards
+	//objs.types = []
+	objs.onlineMobs = ONLINEMOBS()
+	foreach (objs.mob ; objs.onlineMobs)
+	{
+		LOG("ChristmasReward", objs.mob.RawName + "  " + objs.mob.Account + " ONLINE")
+	}
+	objs.onlineMobs = ONLINEMOBS()
+	foreach (objs.mob ; objs.onlineMobs)
+	{
+		//objs.present = SPAWN(RANDOMFROMLIST(objs.types))
+		objs.bag = bag
+		{
+			Hue = 1153
+			Name = "UO Forever 2013 Christmas"
+		}
+		ADDTOCONTAINER(objs.mob.BankBox, objs.bag)
+		// now add contents to bag
+		objs.present = xmasdeed, 2013; ADDTOCONTAINER(objs.bag, objs.present)
+		objs.present = holidaytreedeed; ADDTOCONTAINER(objs.bag, objs.present)
+		objs.present = pileofsnow; ADDTOCONTAINER(objs.bag, objs.present)
+		objs.present = holidaytimepiece; ADDTOCONTAINER(objs.bag, objs.present)
+		
+		LOCALMSG(objs.mob, "You have received a Christmas present in your bank!", 0x38)
+		LOG("ChristmasReward", objs.mob.RawName + "  " + objs.mob.Account + "  Received Gift")
+	}
+}
+onOneSecond
+{
+	if (xmlints.pause != null || THIS().blessed) { return }
+	// on Dasher, and Dancer, and Prancer, and Vixen... Comet, and Cupid, and Donner, and Blitzen!
+	
+	if (xmlobjs.NextTeleport < NOW())
+	{
+		goToNextLocation()
+	}
+	
+	objs.type = TYPE(playermobile)
+	if (THIS().frozen) { return }
+	doubles.roll = RANDOMDOUBLE()
+	if (doubles.roll < 0.07)
+	{
+		// barracoon teleport
+		xmlints.pause = 1
+		xmlints.pause.expiration = TIMESPANSECONDS(5.0)
+		if (THIS().combatant != null && IS(THIS().combatant, objs.type) && DISTANCE(THIS(), THIS().combatant) < 13 && THIS().combatant.alive)
+		{
+			EFFECT(0x3728,13, THIS())
+			EFFECT(0x3728,13, THIS().combatant)
+			SOUND(THIS(),0x1FE)
+			THIS().location = THIS().combatant.location
+		}
+		else
+		{
+			// get the nearest playermobile
+			ints.MinDistance = 100
+			objs.nearbyMobs = GETNEARBYMOBS(THIS(), 13)
+			foreach (objs.mob ; objs.nearbyMobs)
+			{
+				if (IS(objs.mob, objs.type) && CANSEE(THIS(), objs.mob) && INLOS(THIS(), objs.mob) && CANBEHARMFUL(THIS(), objs.mob) && objs.mob.alive)
+				{
+					ints.distance = DISTANCE(THIS(), objs.mob)
+					if (ints.distance < ints.MinDistance)
+					{
+						objs.target = objs.mob
+						ints.MinDistance = ints.distance
+					}
+				}
+			}
+			if (objs.target != null)
+			{
+				EFFECT(0x3728,13, THIS())
+				EFFECT(0x3728,13, objs.target)
+				THIS().location = objs.target.location
+				THIS().combatant = objs.target
+				SOUND(THIS(),0x1FE)
+			}
+		}
+	}
+	else if (doubles.roll < 0.14)
+	{
+		xmlints.pause = 1
+		xmlints.pause.expiration = TIMESPANSECONDS(10.0)
+		SAY(THIS(), "Have shhum drinksh on me! Ho Ho Ho!")
+		THIS().CantWalk = true
+		objs.targets = NEWLIST()
+		
+		objs.target = POINT3D(THIS().X + RANDOMMINMAX(-10, 10), THIS().Y + RANDOMMINMAX(-10, 10), 100);   ADDTOLIST(objs.targets, objs.target)
+		ANIMATE(THIS(), 17, 10, 1, true, false, 0); pause 200; MEFFECT(RANDOMMINMAX(2459, 2466), 10, THIS(), objs.target); pause 800
+		
+		objs.target = POINT3D(THIS().X + RANDOMMINMAX(-10, 10), THIS().Y + RANDOMMINMAX(-10, 10), 100);   ADDTOLIST(objs.targets, objs.target)
+		ANIMATE(THIS(), 17, 10, 1, true, false, 0); pause 200; MEFFECT(RANDOMMINMAX(2459, 2466), 10, THIS(), objs.target); pause 800
+		
+		objs.target = POINT3D(THIS().X + RANDOMMINMAX(-10, 10), THIS().Y + RANDOMMINMAX(-10, 10), 100);   ADDTOLIST(objs.targets, objs.target)
+		ANIMATE(THIS(), 17, 10, 1, true, false, 0); pause 200; MEFFECT(RANDOMMINMAX(2459, 2466), 10, THIS(), objs.target); pause 800
+		
+		objs.target = POINT3D(THIS().X + RANDOMMINMAX(-10, 10), THIS().Y + RANDOMMINMAX(-10, 10), 100);   ADDTOLIST(objs.targets, objs.target)
+		ANIMATE(THIS(), 17, 10, 1, true, false, 0); pause 200; MEFFECT(RANDOMMINMAX(2459, 2466), 10, THIS(), objs.target); pause 800
+		
+		objs.target = POINT3D(THIS().X + RANDOMMINMAX(-10, 10), THIS().Y + RANDOMMINMAX(-10, 10), 100);   ADDTOLIST(objs.targets, objs.target)
+		ANIMATE(THIS(), 17, 10, 1, true, false, 0); pause 200; MEFFECT(RANDOMMINMAX(2459, 2466), 10, THIS(), objs.target); pause 800
+		
+		objs.target = POINT3D(THIS().X + RANDOMMINMAX(-10, 10), THIS().Y + RANDOMMINMAX(-10, 10), 100);   ADDTOLIST(objs.targets, objs.target)
+		ANIMATE(THIS(), 17, 10, 1, true, false, 0); pause 200; MEFFECT(RANDOMMINMAX(2459, 2466), 10, THIS(), objs.target); pause 800
+		
+		foreach (objs.target; objs.targets)
+		{
+			objs.groundTarget = POINT3D(objs.target.X, objs.target.Y, GETAVERAGEZ(objs.target))
+			RUNSCRIPT(objs.groundTarget, "specialmoves\\fallingbooze.us")
+		}
+		
+		THIS().CantWalk = false
+	}
+	else if (doubles.roll < 0.4)
+	{
+		// throw booze directly at enemy player
+		
+		xmlints.pause = 1
+		xmlints.pause.expiration = TIMESPANSECONDS(5.0)
+		if (THIS().combatant != null && IS(THIS().combatant, objs.type) && DISTANCE(THIS(), THIS().combatant) < 13 && THIS().combatant.alive)
+		{
+			objs.loc = THIS().Combatant.Location
+		}
+		else
+		{
+			// get the nearest playermobile
+			ints.MinDistance = 100
+			objs.nearbyMobs = GETNEARBYMOBS(THIS(), 13)
+			foreach (objs.mob ; objs.nearbyMobs)
+			{
+				if (IS(objs.mob, objs.type) && CANSEE(THIS(), objs.mob) && INLOS(THIS(), objs.mob) && CANBEHARMFUL(THIS(), objs.mob) && objs.mob.alive)
+				{
+					ints.distance = DISTANCE(THIS(), objs.mob)
+					if (ints.distance < ints.MinDistance)
+					{
+						objs.target = objs.mob
+						ints.MinDistance = ints.distance
+					}
+				}
+			}
+			if (objs.target != null)
+			{
+				objs.loc = objs.target.Location
+			}
+		}
+		if (objs.loc != null)
+		{
+			SAY(THIS(), "You look thirshhty! Have a drink!")
+			THIS().CantWalk = true
+			SWINGANIMATION(THIS())
+			pause 250
+			MEFFECT(RANDOMMINMAX(2459, 2466),3, THIS(), objs.loc)
+			pause 500
+			THIS().CantWalk = false
+			SOUND(objs.loc, 0x207)
+			SOUND(objs.loc, 0x11b)
+			SOUND(objs.loc, 0x11c)
+			SOUND(objs.loc, 0x11d)
+			SOUND(objs.loc, 0x11e)
+			objs.target = objs.loc; EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(10,20), 1)
+			objs.target = POINT3D(objs.loc.x, objs.loc.y, objs.loc.z + 4); EFFECT(14000,25,objs.target);
+			objs.target = POINT3D(objs.loc.x, objs.loc.y, objs.loc.z + 4); EFFECT(14089,30,objs.target);
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-1,1), objs.loc.y + RANDOMMINMAX(-1,1), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			pause 250
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			pause 250
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+			objs.target = POINT3D(objs.loc.x + RANDOMMINMAX(-3,3), objs.loc.y + RANDOMMINMAX(-3,3), objs.loc.z); EFFECT(14000,25,objs.target); DODAMAGE(objs.target, RANDOMMINMAX(2,15), 1)
+		}
+	}
+	else if (doubles.roll < 0.5)
+	{
+		SAY(THIS(), RANDOMFROMLIST(xmlobjs.RandomPhrases))
+		xmlints.pause = 1
+		xmlints.pause.expiration = TIMESPANSECONDS(2.0)
+	}
+}

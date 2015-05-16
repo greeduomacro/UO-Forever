@@ -1,0 +1,43 @@
+<Spawns>
+  <Points>
+    <Name>werewolf</Name>
+    <UniqueId>f63609c8-46ef-45dd-b0f8-76c35e756223</UniqueId>
+    <Map>Felucca</Map>
+    <X>2706</X>
+    <Y>604</Y>
+    <Width>400</Width>
+    <Height>400</Height>
+    <CentreX>2906</CentreX>
+    <CentreY>804</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>250</MaxCount>
+    <MinDelay>59940</MinDelay>
+    <MaxDelay>59940</MaxDelay>
+    <DelayInSec>False</DelayInSec>
+    <Duration>0</Duration>
+    <DespawnTime>0</DespawnTime>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>500</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <KillReset>1</KillReset>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>-1</SequentialSpawning>
+    <AllowGhostTriggering>False</AllowGhostTriggering>
+    <AllowNPCTriggering>False</AllowNPCTriggering>
+    <SpawnOnTrigger>False</SpawnOnTrigger>
+    <SmartSpawning>False</SmartSpawning>
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>False</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>tsukiwolf/name/a werewolf/alwaysmurderercustom/true/rawstr/815/rawdex/215/SKILL,wrestling/155/SKILL,Anatomy/155/SKILL,magicresist/155/poisoncustomhit/lethal/poisoncustomimmune/Lethal/AutoDispelCustom/true/:MX=250:SB=0:RT=0:TO=0:KL=0:RK=0:CA=1:DN=-1:DX=-1:SP=1:PR=-1</Objects2>
+  </Points>
+</Spawns>

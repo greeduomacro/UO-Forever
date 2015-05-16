@@ -1,0 +1,16 @@
+onUse
+{
+	if (THIS().rootparententity == TRIGMOB())
+	{
+		SENDTARGET(TRIGMOB())
+	}
+}
+onTarget
+{
+	LINEEFFECT(1,TRIGMOB(),TARGETED(), "specialmoves\\firebreath.txt", 100)
+	SOUND(TRIGMOB(),0x16A)
+}
+EFFECT(14000,30,THIS())
+DODAMAGE(THIS(),null, 12, 0, true, false)
+SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+DELETE(THIS())

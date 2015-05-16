@@ -1,0 +1,32 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+ <VBox padding="15" backgroundID="9250" fitToContents="true" >
+	<Label hue="1153">"=== Cannon Loading Help ==="</Label>
+	<HTML hasBackground="true" scrollBar="true">
+		<p>To repair the ship, first click on the broken wood pieces to accrue repair points. Different repair points are assigned to the different wood pieces (see below). If you have more than 25 repair points when you press the REPAIR button, no repairs are applied and you must wait 5 seconds before using those tools again. The damage your cannon does is much greater the closer you are to 25 loading points.</p>
+		<p>IF there are two wood pieces STACKED ON TOP of each other, the wood that is ON THE BOTTOM LAYER of your click location is the one that is actually selected (so you must be careful because it is tricky! You might click the wrong one on accident!)</p>
+		<p>If you know you exceeded 25 points, you can press the X button to start the repair over.</p>
+		<p>Pressing the repair button or making a mistake takes 1 durability off of your ship repair tools.</p>
+	</HTML>
+	<Spacer/>
+	<HBox>
+		<Item itemID="3553" hue="2213" />
+		<Label hue="1153">"5 points"</Label>
+	</HBox>
+	<HBox>
+		<Item itemID="3553" hue="1891" />
+		<Label hue="1153">"3 points"</Label>
+	</HBox>
+	<HBox>
+		<Item itemID="3553" hue="2418" />
+		<Label hue="1153">"1 point"</Label>
+	</HBox>
+	<HBox>
+		<Item itemID="3553" hue="1" />
+		<Label hue="1153">"Repair Mistake (Have to start over)"</Label>
+	</HBox>
+	<HBox>
+		<Image x="15" gumpID="22150"/>
+		<Label x="28" hue="1153">"Start the repair over."</Label>
+	</HBox>
+ </VBox>
+</Gump>

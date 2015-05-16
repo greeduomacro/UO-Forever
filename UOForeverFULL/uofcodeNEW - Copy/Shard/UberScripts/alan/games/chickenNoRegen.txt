@@ -1,0 +1,8 @@
+onCreate
+{
+	THIS().HitsRegenPerTick = 0
+}
+onExpire
+{
+	THIS().HitsRegenPerTick = 1
+}

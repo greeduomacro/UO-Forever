@@ -1,0 +1,50 @@
+onCreate
+{
+	// - 1 due to stupid gump hue offset
+	xmlints.gumphue = 1346 - 1
+	xmlobjs.nextTime = NOW()
+}
+onUse
+{
+	if (xmlobjs.nextTime == null) { xmlobjs.nextTime = NOW() }
+	
+	if (THIS().rootparententity != TRIGMOB())
+	{
+		return
+	}
+	if (NOW() > xmlobjs.nextTime)
+	{
+		SENDGUMP(TRIGMOB(), "rares\\foreverrobe\\robegump.xml")
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must wait a day after changing the robe's color to change it again.")
+	}
+}
+onGumpResponse
+{
+	if (NOW() > xmlobjs.nextTime)
+	{
+		if (strings.buttonPressed == "charcoal")
+		{
+			// have to do -1 because of stupid gump hue offset
+			xmlints.gumphue = 2051 - 1
+			SENDGUMP(TRIGMOB(), "rares\\foreverrobe\\robegump.xml")
+		}
+		elif (strings.buttonPressed == "brown")
+		{
+			xmlints.gumphue = 1551 - 1
+			SENDGUMP(TRIGMOB(), "rares\\foreverrobe\\robegump.xml")
+		}
+		elif (strings.buttonPressed == "blue")
+		{
+			xmlints.gumphue = 1346 - 1
+			SENDGUMP(TRIGMOB(), "rares\\foreverrobe\\robegump.xml")
+		}
+		elif (strings.buttonPressed == "accept")
+		{
+			THIS().hue = xmlints.gumphue + 1
+			xmlobjs.nextTime = NOW() + TIMESPANHOURS(24.0)
+		}
+	}
+}

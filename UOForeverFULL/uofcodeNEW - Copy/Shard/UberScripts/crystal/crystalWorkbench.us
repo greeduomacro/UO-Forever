@@ -1,0 +1,237 @@
+function effect()
+{
+	if (TRIGMOB().Alive == false || DISTANCE(TRIGMOB(), THIS()) > 1) 
+	{
+		objs.toDelete = GETATTACHMENT(THIS(), XmlScript, "ImbueEffect")
+		DELETE(objs.toDelete)
+		xmlints.working = null
+		THIS().xmlints.working = null
+		return
+	}
+	TRIGMOB().Direction = GETDIRECTIONTO(TRIGMOB(), THIS())
+	ANIMATE(TRIGMOB(), 9, 10, 1, true, false, 0)
+	//SOUND(TRIGMOB(), 0x5D1)
+}
+
+
+onCreate
+{
+	Hue = 2963
+	GumpID = 1156
+	Name = "a crystal workbench"
+}
+onDropIntoContainer
+{
+	if (IS(TRIGITEM(), GargoyleRune))
+	{
+		// let it go
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "Only gargish runes will stay upon the crystal workbench.")
+		return override
+	}
+}
+onUse
+{
+	if (CHECKUSERANGE(TRIGMOB(), THIS()) == false) { return }
+	SENDGUMP(TRIGMOB(), "crystal\\crystalWorkbench.xml")
+}
+onGumpResponse
+{
+	if (ints.imbue == 1)
+	{
+		xmlstrings.targetType = null
+		if (xmlints.working == 1)
+		{
+			SENDMSG(TRIGMOB(), "You are in the middle of working!")
+			return
+		}
+		if (CHECKUSERANGE(TRIGMOB(), THIS()) == false) { SENDMSG(TRIGMOB(), "The bench is too far away!") }
+		if (THIS().Items.Count == 0)
+		{
+			SENDMSG(TRIGMOB(), "This workbench has no gargish runes on it!")
+			return
+		}
+		
+		SENDTARGET(TRIGMOB(), false)
+		SENDMSG(TRIGMOB(), "Target the item you would like to imbue the runes upon. BEWARE! An invalid runic combination is deadly (and makes you lose the runes!)")
+		xmlstrings.targetType = "bench"
+		xmlstrings.targetType.Expiration = TIMESPANMINUTES(1.0)
+	}
+}
+onTarget
+{
+	if (xmlints.working != null) { SENDMSG(TRIGMOB(), "That bench is already being used."); return }
+	if (xmlstrings.targetType == null) { return }
+	if (CHECKUSERANGE(TRIGMOB(), THIS()) == false) { SENDMSG(TRIGMOB(), "The bench is too far away!"); return}
+	if (THIS().Movable == true) { SENDMSG(TRIGMOB(), "The workbench must be locked down to use it!"); return }
+	
+		// SOUND(TRIGMOB(), 0x5D1)
+	if (IS(TARGETED(), BaseArmor))
+	{
+		if (TARGETED().LootType == Blessed) { SENDMSG(TRIGMOB(), "The runes don't appear to work with blessed items!"); return }
+		if (STRING(TARGETED().Slayer2) != None) { SENDMSG(TRIGMOB(), "That armor has no room for more runes!"); return }
+		if (TARGETED().RootParentEntity != TRIGMOB()) { SENDMSG(TRIGMOB(), "That must be in your backpack to imbue it!"); return }
+		if (DISTANCE(TRIGMOB(), THIS()) > 1) { SENDMSG(TRIGMOB(), "You must be next to the workbench to continue!"); return }
+		if (THIS().xmlints.working != null) { SENDMSG(TRIGMOB(), "Somebody else is working with that right now.") }
+		
+		
+		THIS().xmlobjs.runeSpinStart = THIS().Location
+		xmlints.working = 1
+		xmlints.working.Expiration = TIMESPANMINUTES(1.0)
+		THIS().xmlints.working = 1
+		THIS().xmlints.working.Expiration = TIMESPANMINUTES(1.0)
+		xmlstrings.targetType = null
+		objs.script = ADDSCRIPT(THIS(), "crystal\\crystalImbue.us", "ImbueEffect")
+		objs.script.Expiration = TIMESPANMINUTES(1.0)
+		
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		effect(); pause 925; SOUND(TRIGMOB(), 0x2a)
+		
+		xmlints.working = null
+		if (THIS().Movable == true) { SENDMSG(TRIGMOB(), "The workbench must be locked down to use it!"); return }
+		// grab the runes and apply it
+		// first need to sort the runes by their x value
+		objs.sortedRunes = NEWLIST()
+		foreach (objs.rune ; THIS().Items)
+		{
+			if (objs.sortedRunes.Count == 0) { ADDTOLIST(objs.sortedRunes, objs.rune); continue }
+			
+			ints.added = 0
+			for (ints.i = 0; ints.i < objs.sortedRunes.Count; ints.i += 1)
+			{
+				if (objs.sortedRunes[ints.i].X > objs.rune.X)
+				{
+					ADDTOLISTAT(objs.sortedRunes, objs.rune, ints.i)
+					ints.added = 1
+					break
+				}
+			}
+			if (ints.added == 0)
+			{
+				ADDTOLIST(objs.sortedRunes, objs.rune)
+			}
+		}
+		
+		// for (ints.i = 0; ints.i < objs.sortedRunes.Count; ints.i += 1)
+		// {
+			// SENDMSG(TRIGMOB(), objs.sortedRunes[ints.i].X + "   " + objs.sortedRunes[ints.i].ItemID)
+		// }
+// ========================= BEGIN RUNE APPLICATIONS ==============================
+		strings.incantation = EMPTYSTRING()
+		foreach (objs.rune ; objs.sortedRunes)
+		{
+			if (objs.rune.ItemID == 0x483B) { strings.incantation += a }
+			else if (objs.rune.ItemID == 0x483E) { strings.incantation += b }
+			else if (objs.rune.ItemID == 0x4841) { strings.incantation += ch }
+			else if (objs.rune.ItemID == 0x4844) { strings.incantation += d }
+			else if (objs.rune.ItemID == 0x4847) { strings.incantation += e }
+			else if (objs.rune.ItemID == 0x484A) { strings.incantation += f }
+			else if (objs.rune.ItemID == 0x484D) { strings.incantation += g }
+			else if (objs.rune.ItemID == 0x4850) { strings.incantation += h }
+			else if (objs.rune.ItemID == 0x4853) { strings.incantation += i }
+			else if (objs.rune.ItemID == 0x4856) { strings.incantation += j }
+			else if (objs.rune.ItemID == 0x4859) { strings.incantation += gl }
+			else if (objs.rune.ItemID == 0x485C) { strings.incantation += k }
+			else if (objs.rune.ItemID == 0x485F) { strings.incantation += l }
+			else if (objs.rune.ItemID == 0x4862) { strings.incantation += m }
+			else if (objs.rune.ItemID == 0x4865) { strings.incantation += ng }
+			else if (objs.rune.ItemID == 0x4868) { strings.incantation += n }
+			else if (objs.rune.ItemID == 0x486B) { strings.incantation += p }
+			else if (objs.rune.ItemID == 0x486E) { strings.incantation += r }
+			else if (objs.rune.ItemID == 0x4871) { strings.incantation += sh }
+			else if (objs.rune.ItemID == 0x4874) { strings.incantation += s }
+			else if (objs.rune.ItemID == 0x4877) { strings.incantation += t }
+			else if (objs.rune.ItemID == 0x487A) { strings.incantation += u }
+			else if (objs.rune.ItemID == 0x487D) { strings.incantation += v }
+			else if (objs.rune.ItemID == 0x4880) { strings.incantation += zh }
+			else if (objs.rune.ItemID == 0x4883) { strings.incantation += z }
+			DELETE(objs.rune)
+		}
+		INDIVIDUALFLASHEFFECT(TRIGMOB())
+		pause 200
+
+// ordered by how awesome they are:
+// ReptilianDeath,
+// Exorcism,
+// Silver,
+// ElementalBan, // Bane?
+// ArachnidDoom,
+// Repond,
+// Terathan,
+// DragonSlaying,
+// DaemonDismissal,
+// OrcSlaying,
+// Ophidian,
+// BalronDamnation,
+// GargoylesFoe,
+// OgreTrashing,
+// TrollSlaughter,
+// Fey,
+// SpidersDeath,
+// ScorpionsBane,
+// FlameDousing,
+// WaterDissipation,
+// Vacuum,
+// ElementalHealth,
+// EarthShatter,
+// BloodDrinking,
+// SummerWind,
+// SnakesBane,
+// LizardmanSlaughter,
+
+		if (strings.incantation == "alan")
+		{
+			if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = LizardmanSlaughter }
+			else { TARGETED().Slayer2 = LizardmanSlaughter }
+		}
+		else if (strings.incantation == "punt") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = ReptilianDeath } else { TARGETED().Slayer2 = ReptilianDeath}  }
+		else if (strings.incantation == "bakr") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Exorcism } else { TARGETED().Slayer2 = Exorcism}  }
+		else if (strings.incantation == "nechra") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Silver } else { TARGETED().Slayer2 = Silver}  }
+		else if (strings.incantation == "gash") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = ElementalBan } else { TARGETED().Slayer2 = ElementalBan}  }
+		else if (strings.incantation == "fihla") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = ArachnidDoom } else { TARGETED().Slayer2 = ArachnidDoom}  }
+		else if (strings.incantation == "kligle") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Repond } else { TARGETED().Slayer2 = Repond}  }
+		else if (strings.incantation == "muta") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Terathan } else { TARGETED().Slayer2 = Terathan}  }
+		else if (strings.incantation == "nganl") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = DragonSlaying } else { TARGETED().Slayer2 = DragonSlaying}  }
+		else if (strings.incantation == "zhajd") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = DaemonDismissal } else { TARGETED().Slayer2 = DaemonDismissal}  }
+		else if (strings.incantation == "ves") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = OrcSlaying } else { TARGETED().Slayer2 = OrcSlaying}  }
+		else if (strings.incantation == "kihl") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Ophidian } else { TARGETED().Slayer2 = Ophidian}  }
+		else if (strings.incantation == "vang") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = BalronDamnation } else { TARGETED().Slayer2 = BalronDamnation}  }
+		else if (strings.incantation == "chez") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = GargoylesFoe } else { TARGETED().Slayer2 = GargoylesFoe}  }
+		else if (strings.incantation == "klech") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = OgreTrashing } else { TARGETED().Slayer2 = OgreTrashing}  }
+		else if (strings.incantation == "dir") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = TrollSlaughter } else { TARGETED().Slayer2 = TrollSlaughter}  }
+		else if (strings.incantation == "mar") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Fey } else { TARGETED().Slayer2 = Fey}  }
+		else if (strings.incantation == "nge") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = SpidersDeath } else { TARGETED().Slayer2 = SpidersDeath}  }
+		else if (strings.incantation == "gle") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = ScorpionsBane } else { TARGETED().Slayer2 = ScorpionsBane}  }
+		else if (strings.incantation == "ba") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = FlameDousing } else { TARGETED().Slayer2 = FlameDousing}  }
+		else if (strings.incantation == "ti") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = WaterDissipation } else { TARGETED().Slayer2 = WaterDissipation}  }
+		else if (strings.incantation == "fa") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = Vacuum } else { TARGETED().Slayer2 = Vacuum}  }
+		else if (strings.incantation == "pnl") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = ElementalHealth } else { TARGETED().Slayer2 = ElementalHealth}  }
+		else if (strings.incantation == "zhu") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = EarthShatter } else { TARGETED().Slayer2 = EarthShatter}  }
+		else if (strings.incantation == "shu") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = BloodDrinking } else { TARGETED().Slayer2 = BloodDrinking}  }
+		else if (strings.incantation == "mi") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = SummerWind } else { TARGETED().Slayer2 = SummerWind}  }
+		else if (strings.incantation == "nra") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = SnakesBane } else { TARGETED().Slayer2 = SnakesBane}  }
+		else if (strings.incantation == "nga") { if (STRING(TARGETED().Slayer) == None) { TARGETED().Slayer = LizardmanSlaughter } else { TARGETED().Slayer2 = LizardmanSlaughter}  }
+		else
+		{
+			DELETE(TARGETED())
+			KILL(TRIGMOB())
+			return
+		}
+		LOCALMSG(TRIGMOB(), "You have successfully imbued the runes into the object.", 0x38)
+		//SENDMSG(TRIGMOB(), strings.incantation)
+// ========================= END RUNE INCANTATION =================================
+	}
+	else // maybe allow them to target wood in order to create addons?
+	{
+		SENDMSG(TRIGMOB(), "You must select a piece of armor!")
+	}
+}

@@ -1,0 +1,16 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"Last chance to tell the truth..."</Label>
+		
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="joinEventFinal"/>
+			<Label hue ="1553">"Yes I carefully read the instructions. Let me join!"</Label>
+		</HBox>
+		<Spacer height="20"/>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="instructions"/>
+			<Label hue ="1553">"Sorry I lied... please give me the instructions again."</Label>
+		</HBox>
+		
+	</VBox>
+</Gump>

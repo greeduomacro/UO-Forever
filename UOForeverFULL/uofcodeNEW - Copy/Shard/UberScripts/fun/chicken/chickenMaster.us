@@ -1,0 +1,152 @@
+onSay
+{
+	if ((THIS().X > 1952 && THIS().X < 1970 && THIS().Y > 760 && THIS().Y < 778) == false)
+	{
+		return
+	}
+	if (SAID("add participating chicken"))
+	{
+		xmlstrings.chickenCommand = "add"
+		xmlstrings.chickenCommand.Expiration = TIMESPANMINUTES(1.0)
+		SENDTARGET(THIS(), false)
+		SENDMSG(TRIGMOB(), "Select a chicken to add to the arena.")
+		return override
+	}
+	else if (SAID("add region"))
+	{
+		if (xmlobjs.regionControl.Active == false)
+		{
+			xmlobjs.regionControl.Active = true
+			LOCALMSG(TRIGMOB(), "You have enabled the region control.")
+			LOG("ChickenEvent", NOW() + " started.")
+			if (xmlints.count == null)
+			{
+				xmlints.count = 0
+			}
+			SUBSCRIBETIMER(OneMinute)
+			return override
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "The region is already active.")
+		}
+	}
+	else if (SAID("remove region"))
+	{
+		if (xmlobjs.regionControl.Active)
+		{
+			LOG("ChickenEvent", NOW() + " stopped.")
+			xmlobjs.regionControl.Active = false
+			LOCALMSG(TRIGMOB(), "The region control has been deactivated.")
+			return override
+		}
+		else
+		{
+			SENDMSG(TRIGMOB(), "The region is not active.")
+		}
+	}
+	else if (SAID("time to fight"))
+	{
+		if (xmlobjs.chicken1 == null || xmlobjs.chicken2 == null)
+		{
+			SENDMSG(TRIGMOB(), "You must have selected 2 chickens to fight using the 'add chicken' command.")
+			return
+		}
+		xmlobjs.chicken1.ControlTarget = xmlobjs.chicken2
+		xmlobjs.chicken1.ControlOrder = Attack
+		xmlobjs.chicken2.ControlTarget = xmlobjs.chicken1
+		xmlobjs.chicken2.ControlOrder = Attack
+	}
+	else if (SAID("remove participating chicken"))
+	{
+		MOVETOWORLD(xmlobjs.chicken1, POINT3D(1961, 763, 7), MAP(Felucca))
+		MOVETOWORLD(xmlobjs.chicken2, POINT3D(1961, 763, 7), MAP(Felucca))
+		xmlobjs.chicken1.Blessed = false
+		xmlobjs.chicken2.Blessed = false
+		xmlobjs.chicken1.Hits = 100
+		xmlobjs.chicken2.Hits = 100
+		xmlobjs.chicken1 = null
+		xmlobjs.chicken2 = null
+		return override
+	}
+	else if (SAID("!!"))
+	{
+		
+		objs.mobs = GETNEARBYMOBS(THIS(), 15)
+		foreach (objs.mob ; objs.mobs)
+		{
+			LOCALMSG(objs.mob, SPEECH() + " !!", 100)
+		}
+	}
+}
+onTarget
+{
+	if (IS(TARGETED(), chicken) && TARGETED().controlled)
+	{
+		if (xmlstrings.chickenCommand == null)
+		{
+			SENDMSG(TRIGMOB(), "Your command has expired, try again.")
+			return
+		}
+		
+		if (xmlstrings.chickenCommand == "add")
+		{
+			if (xmlobjs.chicken1 == null)
+			{
+				xmlobjs.chicken1 = TARGETED()
+				MOVETOWORLD(TARGETED(), POINT3D(1960,767,7), MAP(Felucca))
+			}
+			else if (xmlobjs.chicken2 == null)
+			{
+				xmlobjs.chicken2 = TARGETED()
+				MOVETOWORLD(TARGETED(), POINT3D(1962,767,7), MAP(Felucca))
+			}
+			else
+			{
+				SENDMSG(TRIGMOB(), "You already have 2 participants, say 'remove participating chicken'")
+			}
+			SENDMSG(TRIGMOB(), "You have added them as a participant.")
+		}
+		else if (xmlstrings.chickenCommand == "remove")
+		{
+			objs.scripts = GETATTACHMENTS(TARGETED(), xmlscript)
+			if (objs.scripts != null)
+			{
+				foreach (objs.script ; objs.scripts)
+				{
+					if (objs.script.Name == "chickenFight")
+					{
+						SENDMSG(TRIGMOB(), "You have removed that chicken as a participant.")
+						DELETE(objs.script)
+						TARGETED().Blessed = false
+						TARGETED().HitsRegenPerTick = 1
+						TARGETED().Hits = 100
+						xmlstrings.chickenCommand = null
+						return
+					}
+				}
+			}
+			SENDMSG(TRIGMOB(), "That chicken was not a participant!")
+		}
+		xmlstrings.chickenCommand = null
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must select a tamed chicken!")
+	}
+}
+onOneMinute
+{
+	if (xmlints.count == null)
+	{
+		xmlints.count = 0
+	}
+	xmlints.count += 1
+	if (xmlints.count >= 300)
+	{
+		UNSUBSCRIBETIMER(OneMinute)
+		xmlints.count = 0
+		LOG("ChickenEvent", NOW() + " stopped.")
+		xmlobjs.regionControl.Active = false
+	}
+}

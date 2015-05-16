@@ -1,0 +1,45 @@
+onCreate
+{	
+	SCRIPT().name = "hallBase2"
+	SUBSCRIBETIMER(OneSecond)
+	AI = AI_Arcade
+	FreelyLootable = true
+	xmlints.count = 0
+}
+onOneSecond
+{
+	THIS().z += 1
+	xmlints.count += 1
+	if (xmlints.count == 11)
+	{
+		UNSUBSCRIBETIMER(OneSecond)
+		xmlints.count = null
+	}
+}
+onBeforeDeath
+{
+	if (xmlobjs.owner != null)
+	{
+		if (xmlints.area == 1)
+		{
+			xmlobjs.owner.xmlints.area1Zombies -= 1
+		}
+		else if (xmlints.area == 2)
+		{
+			xmlobjs.owner.xmlints.area2Zombies -= 1
+		}
+		else if (xmlints.area == 3)
+		{
+			xmlobjs.owner.xmlints.area3Zombies -= 1
+		}
+		else if (xmlints.area == 4)
+		{
+			xmlobjs.owner.xmlints.area4Zombies -= 1
+		}
+		
+	}
+	if (TRIGMOB().xmlints.zombieKills != null)
+	{
+		TRIGMOB().xmlints.zombieKills += 1
+	}
+}

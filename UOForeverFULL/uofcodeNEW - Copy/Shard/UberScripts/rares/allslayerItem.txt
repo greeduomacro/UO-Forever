@@ -1,0 +1,24 @@
+onEquip
+{
+	objs.attachment = NEWATTACHMENT(xmlslayer, allSlayer)
+	objs.attachment.slayer = all
+	ATTACH(TRIGMOB(), objs.attachment)
+	xmlobjs.equippedMob = TRIGMOB()
+}
+onUnequip
+{
+	xmlobjs.equippedMob = null
+	objs.attachment = GETATTACHMENT(TRIGMOB(), xmlslayer)
+	DELETE(objs.attachment)
+}
+onDelete
+{
+	if (TRIGMOB() != null)
+	{
+		objs.attachment = GETATTACHMENT(TRIGMOB(), xmlslayer)
+		if (objs.attachment != null)
+		{
+			DELETE(objs.attachment)
+		}
+	}
+}

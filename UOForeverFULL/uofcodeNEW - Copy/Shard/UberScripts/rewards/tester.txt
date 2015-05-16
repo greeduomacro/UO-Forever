@@ -1,0 +1,9 @@
+onUse
+{
+	//TRIGMOB().xmlints.standardKillScore = 77
+	//TRIGMOB().xmlints.standardHitsScore = 5549
+	//TRIGMOB().xmlints.playerHitsScore = 1094
+	//TRIGMOB().xmlints.playerKillsScore = 5
+	//TRIGMOB().xmlints.bossHitsScore = 325
+	TRIGMOB().xmlints.gameTeam = 1
+}

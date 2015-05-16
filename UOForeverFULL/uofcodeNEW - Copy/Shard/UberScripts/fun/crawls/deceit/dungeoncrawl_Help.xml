@@ -1,0 +1,25 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="true">
+	<VBox padding="16" backgroundID="3600" FitToContents="true">
+		<Label hue="1153">"Dungeon Crawl Event Instructions"</Label>
+		<Label hue="1153">"YOU ARE RESPONSIBLE FOR THIS INFO!"</Label>
+		<Label hue="1153">"BE SURE TO SCROLL DOWN TO READ IT ALL!"</Label>
+		<Label hue="1153">"If you page about something that is clearly"</Label>
+		<Label hue="1153">"answered here, we will not be happy!"</Label>
+		<HTML hasbackground="true" scrollbar="true" width="400" height="290">
+			<basefont color="#000000">
+			<p>This is a timed dungeon crawl team competition. Each team can have up to 5 players. Please read the instructions carefully.</p>
+			<p>A player becomes a Team Captain by paying the registration fee. The Captain will be able to invite other people to his team (he is automatically added to the team) as well as remove players from the group up until he begins the dungeon crawl.</p>
+			<p>You can ONLY be on one team PER ACCOUNT! You can quit your team (if you do so as the team leader then the team is disbanded and the registration fee is lost), but ONLY up until the dungeon crawl has begun. After that, there is no swapping teams or quitting teams until the staff allows for more teams to be made.  Furthermore, for the duration of this event (staff's discretion), you will only be able to participate ONCE per team, so <u>make it count</u>! After that, we <u>MAY</u> open it up to more frequent participation.</p>
+			<p>During the actual dungeon crawl, you will NOT actually be playing your own character. You will be given the option of choosing a character template. Reagents are not required to cast spells and basic supplies (exceptional armor, weapons, lesser cure and refresh potions) are provided to you. If you die, you will be given the option to rejoin the event as another character template (There is no penalty, BUT the number of "lives" you use is tracked and may be reported even though it will not affect your score for the purposes of the competition). Dexxers will have SILVER WEAPONS. Note that Mages have alchemy and poisoning which may definitely be used to your advantage (press the "Show me..." button below to see all templates) HOWEVER during this event, Energy Vortex, Meteor Swarm, Chain lightning, and Summoning spells are disabled!</p>
+			<p><basefont color="#ff0000">THE GOAL</basefont> is to KILL EVERY MONSTER in the dungeon as fast as you possibly can. The winning team is the team that achieves the shortest time. Once starting, you have 3 hours to finish all monsters (in testing, we did it in a bit over an hour), so make sure you and your group all have enough time to participate (unless you aren't aiming to compete for the fastest time)! Also BE VERY CAREFUL not to miss an enemy as you progress into the dungeon (sometimes they might run away into a corner while you aren't paying attention), as this will waste precious time!</p>
+			<p>You will DEFINITELY want at least 4 players to participate. There are bright white "save point" stones along the way that update your spawn position. In order to activate them, 4 participants must use the stone. If you participate with only 3 players, then you will not be able to activate these save point stones, which will make the crawl an extreme challenge. For the competition purposes, there are no bonus points for doing it with a smaller team (though we might do another competition with smaller teams in the future)! Also BE AWARE that for the purposes of this event, the monsters have been made easier to kill BUT they are also more dangerous (doing higher damage). We tried to make this dungeon crawl a challenge.</p>
+			<p><u>REGARDING YOUR CLIENT VERSION</u></p>
+			<p>IF you are not using client version 7.0.15.1 (the one supported by UO Forever), there is a possibility that you will run into problems with this event (it has not been tested). It is highly recommended that you download the FULL CLIENT installer from uoforever.com. NOTE that you CAN have more than 1 client installed on your computer at once and can simply switch between them by changing the client location in the Razor startup screen.</p>
+			</basefont>
+		</HTML>
+		<HBox>
+			<Button normalID="5540" pressedID="5542" name="templateShowScreen"/>
+			<Label hue ="1553">"Show me the available templates."</Label>
+		</HBox>
+	</VBox>
+</Gump>

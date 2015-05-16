@@ -1,0 +1,49 @@
+onUse
+{
+	if (xmlints.used == null)
+	{
+		SENDTARGET(TRIGMOB())
+		xmlints.used = 1
+		xmlints.expiration = 0:0:3
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You must wait a moment to throw another!")
+	}
+	
+}
+onTarget
+{
+	LINEEFFECT(TRIGMOB(), TARGETED(), "alan\\games\\dodgeball.txt", 500)
+}
+
+THIS().xmlints.thrower = INT(TRIGMOB().serial)
+THIS().itemid = RANDOMMINMAX(1,10000)
+THIS().visible = true
+THIS().movable = true
+SUBSCRIBETIMER(TwoFiftyMS)
+
+objs.nearby = GETNEARBYMOBS(THIS(),0)
+foreach (objs.mob ; objs.nearby)
+{
+	KILL(objs.mob)
+}
+
+onTwoFiftyMS
+{
+	if (THIS().xmlints.count == null)
+	{
+		THIS().xmlints.count = 0
+	}
+	THIS().xmlints.count += 1
+	if (THIS().xmlints.count > 1)
+	{
+		if (THIS().rootParentEntity != null || THIS().heldby != null)
+		{
+			objs.thrower = GETMOB(THIS().xmlints.thrower)
+			KILL(objs.thrower)
+		}
+		UNSUBSCRIBETIMER(TwoFiftyMS)
+		DELETE(THIS())
+	}
+}

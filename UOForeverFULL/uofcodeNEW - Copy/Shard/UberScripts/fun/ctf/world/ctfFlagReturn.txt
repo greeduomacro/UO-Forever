@@ -1,0 +1,56 @@
+onCreate
+{
+	itemid = 0x1627
+	movable = false
+}
+onNearbyMove
+{
+	// SCRIPT().name will hold the name of the owner team
+	if (DISTANCE(THIS(),TRIGMOB()) < 1)
+	{
+		// check if they are on this team
+		objs.team = GETATTACHMENT(TRIGMOB(), XmlTeam)
+		if (objs.team == null)
+		{
+			return
+		}
+		
+		if (objs.team.name != SCRIPT().name) // on enemy team
+		{
+			if (TRIGMOB().xmlstrings.hasFlag == null) // doesn't have any flag already (in case there are more than 2 teams)
+			{
+				// pick up the flag again
+				TRIGMOB().xmlstrings.hasFlag = SCRIPT().name
+				TRIGMOB().SolidHueOverride = THIS().hue
+				TRIGMOB().xmlobjs.flagReturnLoc = THIS().xmlobjs.flagReturnLoc
+				// keep track of everybody who had pulled the flag
+				
+				TRIGMOB().xmlobjs.assists = NEWLIST()
+				if (THIS().xmlobjs.assists != null)
+				{
+					foreach (objs.assistant ; THIS().xmlobjs.assists)
+					{
+						ADDTOLIST(TRIGMOB().xmlobjs.assists, objs.assistant)
+					}
+				}
+				DELETE(THIS())
+			}
+		}
+		else
+		{
+			// return the flag
+			objs.flag = UberScriptItem, 0x1627
+			// add flag to spawnedItems so it is cleaned up at the end
+			if (TRIGMOB().xmlobjs.owner != null && TRIGMOB().xmlobjs.owner.xmlobjs.spawnedItems != null)
+			{
+				ADDTOLIST(TRIGMOB().xmlobjs.owner.xmlobjs.spawnedItems, objs.flag)
+			}
+			
+			objs.flag.hue = THIS().hue
+			ADDSCRIPT(objs.flag, "fun\\ctf\\world\\ctfFlag.txt", SCRIPT().name)
+			objs.flag.location = xmlobjs.flagReturnLoc
+			EVENTMESSAGE(TRIGMOB().xmlobjs.owner, TRIGMOB().xmlobjs.owner.xmlstrings.eventName, objs.team.name + "'s flag has been returned!", THIS().hue)
+			DELETE(THIS())
+		}
+	}
+}

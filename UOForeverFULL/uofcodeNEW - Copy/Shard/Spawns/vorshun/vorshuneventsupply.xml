@@ -1,0 +1,45 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>VorshunEventSupply</Name>
+    <!--<UniqueId>ccf5887d-a526-4486-9b91-29b523a10521</UniqueId>-->
+    <Map>Felucca</Map>
+    <X>0</X>
+    <Y>0</Y>
+    <Width>0</Width>
+    <Height>0</Height>
+    <CentreX>0</CentreX>
+    <CentreY>0</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>	
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>
+		:OBJ=*static,3804/hue/38/ATTACH/&lt;xmluse/condition/@~GETONCARRIED,eventsupply,item,,visible=true@failureaction/@SETONTRIGMOB/SENDMSG/You already have supplies!@successaction/@#CONDITION,GETONTRIGMOB,rawdex$&gt;64$;SETONTRIGMOB/SENDMSG/As a dexxer, you have been granted extra cure potions./ADD/&lt;greatercurepotion/amount/6/name/eventsupply&gt;;SETONTRIGMOB/ADD/&lt;bag/hue/100/name/eventsupply/ADD/&lt;blackpearl,100/name/eventsupply&gt;/ADD/&lt;garlic,100/name/eventsupply&gt;/ADD/&lt;ginseng,80/name/eventsupply&gt;/ADD/&lt;bloodmoss,80/name/eventsupply&gt;/ADD/&lt;sulfurousash,80/name/eventsupply&gt;/ADD/&lt;spiderssilk,80/name/eventsupply&gt;/ADD/&lt;mandrakeroot,80/name/eventsupply&gt;/ADD/&lt;nightshade,80/name/eventsupply&gt;/ADD/&lt;bolt/amount/100/name/eventsupply&gt;/ADD/&lt;arrow/amount/100/name/eventsupply&gt;&gt;/ADD/&lt;bag/hue/38/name/eventsupply/ADD/&lt;katana/quality/exceptional/name/eventsupply&gt;/ADD/&lt;bow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;crossbow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;halberd/quality/exceptional/name/eventsupply&gt;/ADD/&lt;spear/quality/exceptional/name/eventsupply&gt;/ADD/&lt;kryss/quality/exceptional/name/eventsupply&gt;/ADD/&lt;quarterstaff/quality/exceptional/name/eventsupply&gt;/ADD/&lt;woodenshield/quality/exceptional/name/eventsupply&gt;/ADD/&lt;woodenshield/quality/exceptional/name/eventsupply&gt;/ADD/&lt;warhammer/quality/exceptional/name/eventsupply&gt;/ADD/&lt;heavycrossbow/quality/exceptional/name/eventsupply&gt;/ADD/&lt;waraxe/quality/exceptional/name/eventsupply&gt;&gt;/ADD/&lt;bandage/amount/100/name/eventsupply&gt;/ADD/&lt;refreshpotion/amount/6/name/eventsupply&gt;/ADD/&lt;greaterhealpotion/amount/2/name/eventsupply&gt;/ADD/&lt;greaterstrengthpotion/amount/1/name/eventsupply&gt;/ADD/&lt;greateragilitypotion/amount/1/name/eventsupply&gt;/ADD/&lt;greatercurepotion/amount/3/name/eventsupply&gt;/ADD/&lt;flashpowder/amount/5/name/eventsupply&gt;/ADD/&lt;deadlypoisonpotion/amount/3/name/eventsupply&gt;/hits/100/mana/100/stam/100&gt;/name/Vorshun Supply Stone:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=SETONTHIS/running/false:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=99
+	</Objects2>
+  </Points>
+</Spawns>

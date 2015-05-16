@@ -1,0 +1,84 @@
+onCreate
+{
+	objs.attachments = GLOBALGETATTACHMENTS(XmlValue, "zombieKills")
+	objs.regionmobs = NEWLIST()
+	foreach (objs.attachment ; objs.attachments)
+	{
+		ADDTOLIST(objs.regionmobs, objs.attachment.AttachedTo)
+	}
+	SAY(THIS(), objs.regionmobs.count)
+	LOG("survival",  "Name\tFoundCure\tFoundCureTime\tBoss Damage\tBoss Kills\tZombieKills\tUniquePlayerKills\tBlacksmithing\tCarpentry\tTinkering\tFletching\tTactics\tFencing\tSwords\tMacing\tArchery\tWrestling\tMagery\tResist\tAnatomy\tArmsLore\tHiding\tStealth\tMining\tLumberjacking\tStealing\tSnooping\tPlayersKilled")	
+	foreach (objs.mob ; objs.regionmobs)
+	{
+		if (IS(objs.mob, humanmob))
+		{
+			strings.toLog = objs.mob.RawName
+			if (objs.mob.xmlints.foundCure == 1)
+			{
+				strings.toLog += "\t" + objs.mob.xmlints.foundCure
+				strings.toLog += "\t" + objs.mob.xmlobjs.foundCureTime
+			}
+			else
+			{
+				strings.toLog += "\t\t"
+			}
+			
+			if (objs.mob.xmlints.zombieBossHits != null)
+			{
+				strings.toLog += "\t" + objs.mob.xmlints.zombieBossHits
+			}
+			else
+			{
+				strings.toLog += "\t0"
+			}
+			
+			if (objs.mob.xmlints.zombieBossKills != null)
+			{
+				strings.toLog += "\t" + objs.mob.xmlints.zombieBossKills
+			}
+			else
+			{
+				strings.toLog += "\t0"
+			}
+			
+			strings.toLog += "\t" + objs.mob.xmlints.zombieKills
+			if (objs.mob.xmlobjs.killList != null)
+			{
+				strings.toLog += "\t" + objs.mob.xmlobjs.killList.count
+			}
+			else
+			{
+				strings.toLog += "\t0"
+			}
+			strings.toLog += "\t" + GETSKILL(objs.mob, Blacksmith)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Carpentry)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Tinkering)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Fletching)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Tactics)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Fencing)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Swords)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Macing)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Archery)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Wrestling)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Magery)
+			strings.toLog += "\t" + GETSKILL(objs.mob, MagicResist)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Anatomy)
+			strings.toLog += "\t" + GETSKILL(objs.mob, ArmsLore)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Hiding)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Stealth)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Mining)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Lumberjacking)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Stealing)
+			strings.toLog += "\t" + GETSKILL(objs.mob, Snooping) + "\t"
+			if (objs.mob.xmlobjs.killList != null)
+			{
+				foreach (objs.killed; objs.mob.xmlobjs.killList)
+				{
+					strings.toLog += objs.killed.rawname + ", "
+				}
+			}
+			
+			LOG("survival", strings.toLog)
+		}
+	}
+}

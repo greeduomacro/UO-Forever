@@ -1,0 +1,4 @@
+onUse
+{
+	SENDMSG(TRIGMOB(), "Soon...")
+}

@@ -1,0 +1,138 @@
+onCreate
+{
+	if (xmlobjs.crystal == null ) { DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }	
+	//if (IS(FINDITEMONLAYER(THIS(), FirstValid), GargoylesPickaxe) == false) { SENDMSG(THIS(), "You must have the pickaxe equipped to harvest with it!"); DELETE(SCRIPT()) }
+	if (DISTANCE(xmlobjs.crystal, THIS()) > 1) { SENDMSG(THIS(), "You are too far away to continue harvesting."); DELETE(SCRIPT()) }
+	SWINGANIMATION(THIS()); pause 900; SOUND(THIS(), 0x5AB)
+	if (THIS().Hidden) { THIS().Hidden = false; LOCALMSG(THIS(), "The crystal flashes as you strike, giving away your position!", 38) }
+	
+	ints.crystalColor = (xmlobjs.crystal.ItemID - 8710) % 10
+	objs.mined = UberScriptItem { Movable = true }
+	ADDSCRIPT(objs.mined, "crystal\\crystalShards.us")
+	
+	if (ints.crystalColor == 0) // green
+	{
+		// objs.mined.Hue = 0 // no change
+	}
+	else if (ints.crystalColor == 1) //  blue
+	{
+		objs.mined.Hue = 1329
+	}
+	else if (ints.crystalColor == 2) // purple
+	{
+		objs.mined.Hue = 14
+	}
+	else if (ints.crystalColor == 3) //  pink
+	{
+		objs.mined.Hue = 1277
+	}
+	else if (ints.crystalColor == 4) // orange
+	{
+		objs.mined.Hue = 449
+	}
+	else if (ints.crystalColor == 5) // yellow
+	{
+		objs.mined.Hue = 1196
+	}
+	else if (ints.crystalColor == 6) // light green
+	{
+		objs.mined.Hue = 1272
+	}
+	else if (ints.crystalColor == 7) // turqouise
+	{
+		objs.mined.Hue = 78
+	}
+	else if (ints.crystalColor == 8) // light blue
+	{
+		objs.mined.Hue = 1173
+	}
+	
+	ADDTOPACK(THIS(), objs.mined)
+	SENDMSG(THIS(), "You successfully mine the core out of the crystal.")
+	
+	DELETE(xmlobjs.crystal)
+	xmlobjs.crystal	= null
+	DELETE(SCRIPT())
+}

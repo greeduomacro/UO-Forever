@@ -1,0 +1,17 @@
+onUse
+{
+	if (TRIGMOB() != THIS().RootParentEntity)
+	{
+		if (TRIGMOB().hits <=5)
+		{
+			KILL(TRIGMOB())
+			LOCALSOUND(TRIGMOB(), 0xf6)
+		}
+		else
+		{
+			TRIGMOB().hits = 5
+			LOCALMSG(TRIGMOB(), "You feel your life draining out of you as you touch the backpack.")
+			LOCALSOUND(TRIGMOB(), 0xf6)
+		}
+	}
+}

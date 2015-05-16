@@ -1,0 +1,7 @@
+<Gump closable="true" disposable="true" dragable="false" resizable="false">
+	<VBox x="10" y="10" padding="30" backgroundID="5170" width="240" height="THIS().xmlints.gumpcount*4+75" FitToContents="false">
+	</VBox>
+	<VBox condition="THIS().xmlints.gumpcount == THIS().xmlints.gumpstop" x="10" y="10" padding="30" backgroundID="5170" width="240" height="THIS().xmlints.gumpcount*4+75" FitToContents="false">
+		<HTML width="180" height="THIS().xmlints.gumpcount*4+15" condition="THIS().xmlstrings.messageTitle!=null">xmlstrings.messageTitle</HTML>
+	</VBox>
+</Gump>

@@ -1,0 +1,328 @@
+function addScoresFromAttachmentList()
+{
+	foreach (objs.scoreAttachment ; objs.scoreAttachments)
+	{
+		if (objs.scoreAttachment.AttachedTo.xmldoubles.RewardResult == null)
+		{
+			objs.scoreAttachment.AttachedTo.xmldoubles.RewardResult = objs.scoreAttachment.Value / doubles.maxScore
+		}
+		else
+		{
+			objs.scoreAttachment.AttachedTo.xmldoubles.RewardResult += objs.scoreAttachment.Value / doubles.maxScore
+		}
+	}
+}
+
+function distributeRewards()
+{
+	// **** CHANGE THE NAME OF THE EVENT ****
+	strings.eventName = "Glaurung dragon event"
+	
+	objs.now = NOW()
+	LOG("LOG_Rewards.txt", "====== Event Rewards " + STRING(objs.now) + " " + strings.eventName + " ======")
+	
+	//====================================================== FIGHTING REWARDS =============================================================
+	LOG("LOG_EventScores.txt", "====== Event Scores " + STRING(objs.now) + " " + strings.eventName  + " ======")
+	// first go through all the hitsScores and add a number between 0.0 and 1.0 (from lowest to top scorer)
+	// **** CHANGE ATTACHMENT NAME ****
+	strings.attachmentName = "hitsScore"
+	
+	objs.scoreAttachments = GLOBALGETATTACHMENTS("xmlvalue", strings.attachmentName, true)
+	doubles.maxScore = DOUBLE(GETATTACHMENTINTMAX(strings.attachmentName, true))
+	
+	addScoresFromAttachmentList()
+	
+	// now go through all the killScores and add a number between 0.0 and 1.0 (from lowest to top scorer)
+	// i.e. if a player was top scorer for both hits and kills they would have 1.0 + 1.0 = 2.0
+	
+	// **** CHANGE ATTACHMENT NAME ****
+	strings.attachmentName2 = "killScore"
+	
+	objs.scoreAttachments = GLOBALGETATTACHMENTS("xmlvalue", strings.attachmentName2, true)
+	doubles.maxScore = DOUBLE(GETATTACHMENTINTMAX(strings.attachmentName2, true))
+	
+	addScoresFromAttachmentList()
+	
+	// now go through all the RewardResults (just created, containing the sum of the 0.0-1.0 numbers) and award them
+	// (they are in sorted order when GLOBALGETATTACHMENTS returns them)
+	objs.RewardResultAttachments = SORTDOUBLESLIST(GLOBALGETATTACHMENTS("xmldouble", "RewardResult", true), true)
+	ints.totalCount = objs.RewardResultAttachments.Count
+	ints.count = 0
+	
+	doubles.scoreSum = GETATTACHMENTDOUBLESUM("RewardResult", true)
+	// **** NEED TO UNCOMMENT THIS OUT AFTER SERVER RESTART ****
+	//doubles.scoreMax = GETATTACHMENTDOUBLEMAX("RewardResult", true)
+	
+	// **** CHANGE THE AMOUNT OF PLATINUM TO DISTRIBUTE ****
+	ints.platinumToDistribute = 30000
+	
+	LOG("LOG_Rewards.txt", "Total Score Sum: " + doubles.scoreSum + ", platinum to distribute: " + ints.platinumToDistribute)
+	
+	foreach (objs.RewardResultAttachment ; objs.RewardResultAttachments)
+	{
+		ints.count += 1
+		if (ints.count == 1)
+		{
+			objs.award = static, 17062 // TODO
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + " the Dragon Slayer: Glaurung Invasion 1st Place" // TODO
+				loottype = blessed
+				hue = 2213
+				movable = true
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " 1st PLACE")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count == 2)
+		{
+			objs.award = static, 17062 // TODO
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + " the Dragon Slayer: Glaurung Invasion 2nd Place"
+				loottype = blessed
+				movable = true
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " 2nd PLACE")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count == 3)
+		{
+			objs.award = static, 17062 // TODO
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + " the Dragon Slayer: Glaurung Invasion 3rd Place"
+				loottype = blessed
+				hue = 2206
+				movable = true
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " 3rd PLACE")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		// top 3 ALSO get the top 20% prize (i.e. it's not elif here)
+		if (ints.count / DOUBLE(ints.totalCount) < 0.2)
+		{
+			objs.award = candle // TODO
+			{
+				name = "dragonfire candle of Glaurung the Ancient One" // TODO
+				loottype = blessed
+				hue = 38
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " top 20%")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count / DOUBLE(ints.totalCount) < 0.5)
+		{
+			objs.award = candle // TODO
+			{
+				name = "dragonfire candle" // TODO
+				loottype = blessed
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " top 50%")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count / DOUBLE(ints.totalCount) >= 0.5)
+		{
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " LOSER")
+		}
+		// add redbook giving them the score
+		objs.award = redbook
+		{
+			title = objs.RewardResultAttachment.AttachedTo.Name + ": Placing " + ints.count + " out of " + ints.totalCount + " in the " + strings.eventName
+			author = "the Event Master"
+			writable = false
+			loottype = newbied
+		}
+		ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		
+		// ========== AWARD PLATINUM ============
+		objs.award = platinum
+		{
+			amount = ROUND(ints.platinumToDistribute * objs.RewardResultAttachment.Value / doubles.scoreSum)
+		}
+		if (objs.award.amount == 0)
+		{
+			objs.award.amount = 1
+		}
+		ADDTOCONTAINER(objs.RewardResultAttachment.AttachedTo.BankBox, objs.award)
+		
+		// **** NEED TO UNCOMMENT THIS AFTER SERVER RESTART ****
+		//LOG("LOG_EventScores.txt", objs.RewardResultAttachment.AttachedTo + " " + (ROUND(10000 * objs.RewardResultAttachment.Value / doubles.scoreMax) / 10.0))
+		LOG("LOG_EventScores.txt", objs.RewardResultAttachment.AttachedTo + " " + (ROUND(10000 * objs.RewardResultAttachment.Value / doubles.scoreSum) / 10.0))
+	}
+	
+	// **** DELETE ALL POINT CATEGORIES ASSOCIATED WITH THIS PRIZE **** 
+	GLOBALDELATTACHMENTS("xmlvalue", strings.attachmentName, true)
+	GLOBALDELATTACHMENTS("xmlvalue", strings.attachmentName2, true)
+	GLOBALDELATTACHMENTS("xmldouble", "RewardResult", true)
+	
+	//====================================================== MINING REWARDS =============================================================
+	LOG("LOG_EventScores.txt", "====== Event Scores " + STRING(objs.now) + " " + strings.eventName  + " ======")
+	
+	// first go through all the hitsScores and add a number between 0.0 and 1.0 (from lowest to top scorer)
+	// **** CHANGE ATTACHMENT NAME ****
+	strings.attachmentName = "rockClearing"
+	
+	objs.scoreAttachments = GLOBALGETATTACHMENTS("xmlvalue", strings.attachmentName, true)
+	doubles.maxScore = DOUBLE(GETATTACHMENTINTMAX(strings.attachmentName, true))
+	
+	addScoresFromAttachmentList()
+	
+	// now go through all the RewardResults (just created, containing the sum of the 0.0-1.0 numbers) and award them
+	// (they are in sorted order when GLOBALGETATTACHMENTS returns them)
+	objs.RewardResultAttachments = SORTDOUBLESLIST(GLOBALGETATTACHMENTS("xmldouble", "RewardResult", true), true)
+	ints.totalCount = objs.RewardResultAttachments.Count
+	ints.count = 0
+	
+	doubles.scoreSum = GETATTACHMENTDOUBLESUM("RewardResult", true)
+	doubles.scoreMax = GETATTACHMENTDOUBLEMAX("RewardResult", true)
+	
+	// **** CHANGE THE AMOUNT OF PLATINUM TO DISTRIBUTE ****
+	ints.platinumToDistribute = 5000
+	
+	LOG("LOG_Rewards.txt", "Total Score Sum: " + doubles.scoreSum + ", platinum to distribute: " + ints.platinumToDistribute)
+	
+	foreach (objs.RewardResultAttachment ; objs.RewardResultAttachments)
+	{
+		ints.count += 1
+		if (ints.count == 1)
+		{
+			objs.award = static, 4647 // TODO
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + " the Miner: Glaurung Invasion 1st Place" // TODO
+				loottype = blessed
+				hue = 2213
+				movable = true
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " 1st PLACE")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+			
+			objs.award = DecoOreMiningCartDeed
+			{
+				loottype = blessed
+			}
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+			
+			objs.award = FullSpellbook
+			{
+				hue = 38
+				slayer = DragonSlaying
+				loottype = blessed
+				name = "Dragon Bane"
+			}
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count == 2)
+		{
+			objs.award = static, 4647 // TODO
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + " the Miner: Glaurung Invasion 2nd Place" // TODO
+				loottype = blessed
+				hue = 1891
+				movable = true
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " 2nd PLACE")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+			
+			objs.award = DecoOreMiningCartDeed
+			{
+				loottype = blessed
+			}
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count == 3)
+		{
+			objs.award = static, 4647 // TODO
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + " the Miner: Glaurung Invasion 3rd Place" // TODO
+				loottype = blessed
+				hue = 2418
+				movable = true
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " 3rd PLACE")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+			
+			objs.award = DecoOreMiningCartDeed
+			{
+				loottype = blessed
+			}
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		// top 3 ALSO get the top 20% prize (i.e. it's not elif here)
+		if (ints.count / DOUBLE(ints.totalCount) < 0.2)
+		{
+			objs.award = candle // TODO
+			{
+				name = "dragonfire candle of Glaurung the Ancient One" // TODO
+				loottype = blessed
+				hue = 38
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " top 20%")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+			
+			objs.award = pickaxe
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + ": Bravely clearing the way to destroy Glaurung the Ancient One"
+				hue = 1779
+				identified = true
+			}
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		elif (ints.count / DOUBLE(ints.totalCount) < 0.5)
+		{
+			objs.award = candle // TODO
+			{
+				name = "dragonfire candle" // TODO
+				loottype = blessed
+			}
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " top 50%")
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+			
+			objs.award = pickaxe
+			{
+				name = objs.RewardResultAttachment.AttachedTo.Name + ": Bravely clearing the way to destroy Glaurung the Ancient One"
+				identified = true
+			}
+			ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		}
+		if (ints.count / DOUBLE(ints.totalCount) >= 0.5)
+		{
+			LOG("LOG_Rewards.txt", objs.RewardResultAttachment.AttachedTo + " LOSER")
+		}
+		// add redbook giving them the score
+		objs.award = redbook
+		{
+			title = objs.RewardResultAttachment.AttachedTo.Name + ": Placing " + ints.count + " out of " + ints.totalCount + " in the " + strings.eventName + " (mining)"
+			author = "the Event Master"
+			writable = false
+			loottype = newbied
+		}
+		ADDTOPACK(objs.RewardResultAttachment.AttachedTo, objs.award)
+		
+		// ========== AWARD PLATINUM ============
+		objs.award = platinum
+		{
+			amount = ROUND(ints.platinumToDistribute * objs.RewardResultAttachment.Value / doubles.scoreSum)
+		}
+		if (objs.award.amount == 0)
+		{
+			objs.award.amount = 1
+		}
+		ADDTOCONTAINER(objs.RewardResultAttachment.AttachedTo.BankBox, objs.award)
+		
+		//LOG("LOG_EventScores.txt", objs.RewardResultAttachment.AttachedTo + " " + (ROUND(10000 * objs.RewardResultAttachment.Value / doubles.scoreMax) / 10.0))
+		LOG("LOG_EventScores.txt", objs.RewardResultAttachment.AttachedTo + " " + (ROUND(10000 * objs.RewardResultAttachment.Value / doubles.scoreSum) / 10.0))
+	}
+	
+	// **** DELETE ALL POINT CATEGORIES ASSOCIATED WITH THIS PRIZE **** 
+	GLOBALDELATTACHMENTS("xmlvalue", strings.attachmentName, true)
+	GLOBALDELATTACHMENTS("xmldouble", "RewardResult", true)
+	
+	// ====================================================================================================================================
+	BCAST("Rewards have been distributed for the " + strings.eventName + "!", 38)
+}
+
+onSay
+{
+	if (SAID("distribute rewards"))
+	{
+		distributeRewards()
+	}
+}

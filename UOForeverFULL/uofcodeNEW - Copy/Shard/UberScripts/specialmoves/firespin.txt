@@ -1,0 +1,114 @@
+function effect() // expecting objs.loc
+{
+	EFFECT(14089, 30, objs.loc)
+	DODAMAGE(objs.loc, TRIGMOB(), RANDOMMINMAX(40,80), 0)
+}
+
+onSay
+{
+	if (SAID("here is true power") == false) { return }
+	if (xmlints.specialMoveDelay == null)
+	{
+		xmlints.specialMoveDelay = 1
+		xmlints.specialMoveDelay.Expiration = 0:0:5
+		// spin the mob
+		objs.loc = POINT3D(0,0,0)
+		objs.center = TRIGMOB().location
+		TRIGMOB().direction = north; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = up; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = west; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = left; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = south; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = down; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = east; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = right; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = north; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = up; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = west; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = left; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = south; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = down; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = east; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		TRIGMOB().direction = right; ANIMATE(TRIGMOB(),2,0,1,true,false,100); pause 50
+		
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y + 9; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y + 8; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 5; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 6; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 7; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 6; objs.loc.Y = objs.center.Y -5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 5; objs.loc.Y = objs.center.Y -6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y -7; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y -5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -5; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(objs.loc,RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -6; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -5; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 6; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y + 5; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y + 4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y + 3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 4; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 3; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 2; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X + 1; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y -4; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -3; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y -2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y -1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -4; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -3; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -2; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X -1; objs.loc.Y = objs.center.Y + 2; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 1; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		objs.loc.X = objs.center.X + 0; objs.loc.Y = objs.center.Y + 0; objs.loc.Z = objs.center.Z + 0; effect(); pause 50
+		SOUND(THIS(),RANDOMMINMAX(0x345, 0x34a))
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You aren't ready to use another special move!", 38)
+		return override
+	}
+}

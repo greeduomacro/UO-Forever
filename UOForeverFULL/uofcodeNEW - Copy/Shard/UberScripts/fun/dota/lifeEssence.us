@@ -1,0 +1,68 @@
+onCreate
+{
+	BaseSoundID = 466
+	BodyValue = 261
+	BreathCustomDelay = 2.0
+	BreathDamageCustom = 20
+	CanBreathCustom = true
+	Pseu_CanBeHealed = false
+	RangePerception = 15
+	HitsMaxSeed = 5000
+	Hits = 5000
+	xmlints.count = 0
+	PoisonCustomImmune = Lethal
+	Name = "Life Essence"
+}
+
+onTakenHit
+{
+	if (IS(TRIGMOB(),HumanMob))
+	{
+		if (IS(SPELL(),earthquakespell)) { return }
+		if (TRIGMOB().xmlints.dotaLifeEssenceDamage == null)
+		{
+			TRIGMOB().xmlints.dotaLifeEssenceDamage = DAMAGE()
+		}
+		else
+		{
+			TRIGMOB().xmlints.dotaLifeEssenceDamage += DAMAGE()
+		}
+	}
+}
+onUse
+{
+	if (TAKEGOLDFROM(TRIGMOB(), 100))
+	{
+		objs.toGive = BagOfReagents
+		ADDTOPACK(TRIGMOB(), objs.toGive)
+		objs.toGive = Bottle, 20
+		ADDTOPACK(TRIGMOB(), objs.toGive)
+		LOCALMSG(TRIGMOB(), "You were given bottles and reagents.")
+	}
+	else
+	{
+		SENDMSG(TRIGMOB(), "You have to have 100 gold to buy a bag of reagents!")
+	}
+}
+onDeath
+{
+	xmlobjs.owner.xmlints.enabled = 0
+	objs.mobs = ONLINEMOBS()
+	foreach (objs.mob ; objs.mobs)
+	{
+		if (IS(objs.mob, HumanMob)) 
+		{ 
+			objs.mob.Blessed = true
+			objs.mob.CantWalk = true
+			objs.team = GETATTACHMENT(THIS(), XmlTeam)
+			if (STRING(objs.team.TeamVal) == Team1)
+			{
+				LOCALMSG(objs.mob, "Team Verite (green) has won the match! You can simply log out to return to your normal character.")
+			}
+			else
+			{
+				LOCALMSG(objs.mob, "Team Valorite (blue) has won the match! You can simply log out to return to your normal character.")
+			}
+		}
+	}
+}

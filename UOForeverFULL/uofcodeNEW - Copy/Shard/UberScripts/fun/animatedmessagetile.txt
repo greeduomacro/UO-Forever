@@ -1,0 +1,24 @@
+onCreate
+{
+	movable = false
+	visible = false
+	xmlobjs.repeatDelay = TIMESPANMINUTES(1.0)
+}
+onMoveOver
+{
+	if (xmlstrings.gumpPath == null || TRIGMOB().xmlstrings.seenMessage == xmlstrings.gumpPath) { return }
+	
+	ADDSCRIPT(TRIGMOB(), "fun\\animatedmessagescript.txt", xmlstrings.gumpPath)
+	if (xmlints.gumpstop != null)
+	{
+		TRIGMOB().xmlints.gumpstop = xmlints.gumpstop // 50 ms "counts"
+	}
+	TRIGMOB().xmlstrings.messageTitle = xmlstrings.title
+	TRIGMOB().xmlstrings.messageTitle.expiration = TIMESPANMINUTES(1.0)
+	
+	if (xmlobjs.repeatDelay != null)
+	{
+		TRIGMOB().xmlstrings.seenMessage = xmlstrings.gumpPath
+		TRIGMOB().xmlstrings.seenMessage.expiration = xmlobjs.repeatDelay
+	}
+}

@@ -1,0 +1,53 @@
+onCreate
+{
+	itemid = 4534
+	movable = false
+	SUBSCRIBETIMER(TwoFiftyMS)
+}
+onTwoFiftyMS
+{
+	if (xmlobjs.targetLoc != null)
+	{
+		// move toward targetLoc
+		if (THIS().x < xmlobjs.targetLoc.x)
+		{
+			THIS().x += 1
+		}
+		elif (THIS().x > xmlobjs.targetLoc.x)
+		{
+			THIS().x -= 1
+		}
+		if (THIS().y < xmlobjs.targetLoc.y)
+		{
+			THIS().y += 1
+		}
+		elif (THIS().y > xmlobjs.targetLoc.y)
+		{
+			THIS().y -= 1
+		}
+		objs.squashed = GETNEARBYMOBS(THIS(), 0)
+		foreach (objs.mob ; objs.squashed)
+		{
+			if (xmlobjs.killType != null)
+			{
+				if (IS(objs.mob, xmlobjs.killType)) // can target specific mob types
+				{
+					KILL(objs.mob)
+				}
+			}
+			else
+			{
+				KILL(objs.mob)
+			}
+		}
+		
+		// if reached target location send back to the beginning
+		if (THIS().x == xmlobjs.targetLoc.x && THIS().y == xmlobjs.targetLoc.y)
+		{
+			if (xmlobjs.startingLoc != null)
+			{
+				THIS().location = xmlobjs.startingLoc
+			}
+		}
+	}
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" standalone="yes"?>
+<Spawns>
+  <Points>
+    <Name>Test</Name>
+    <UniqueId>ccf1787d-a526-4376-9b91-29c523a20529</UniqueId>
+    <Map>Felucca</Map>
+    <X>1498</X>
+    <Y>1499</Y>
+    <Width>3</Width>
+    <Height>3</Height>
+    <CentreX>1499</CentreX>
+    <CentreY>1500</CentreY>
+    <CentreZ>0</CentreZ>
+    <Range>5</Range>
+    <MaxCount>100</MaxCount>
+    <MinDelay>0</MinDelay>
+    <MaxDelay>0</MaxDelay>
+    <DelayInSec>True</DelayInSec>
+    <Duration>0</Duration>
+    <ProximityRange>-1</ProximityRange>
+    <ProximityTriggerSound>0</ProximityTriggerSound>
+    <TriggerProbability>1</TriggerProbability>
+    <InContainer>False</InContainer>
+    <ContainerX>0</ContainerX>
+    <ContainerY>0</ContainerY>
+    <ContainerZ>0</ContainerZ>
+    <MinRefractory>0</MinRefractory>
+    <MaxRefractory>0</MaxRefractory>
+    <TODStart>0</TODStart>
+    <TODEnd>0</TODEnd>
+    <TODMode>0</TODMode>
+    <ExternalTriggering>False</ExternalTriggering>
+    <SequentialSpawning>0</SequentialSpawning>
+    <RegionName />
+    <Team>0</Team>
+    <Amount>1</Amount>
+    <IsGroup>False</IsGroup>
+    <IsRunning>True</IsRunning>
+    <IsHomeRangeRelative>True</IsHomeRangeRelative>
+    <Objects2>plate/name/a freeze bomb/hue/1152/ATTACH/&lt;xmluse/maxuses/1/targetingenabled/true/maxusesaction/@SETONTRIGMOB/SENDMSG/That's already been used! ; SETONTHIS/DELETE@successaction/@xmlspawner/configfile/spawns\common\freezebomb.xml/loadconfig/true/x/${GETONTHIS,x$}/y/${GETONTHIS,y$}/z/${GETONTHIS,z$}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=heavycrossbow/name/a gatling gun/hue/2019/ATTACH/&lt;xmluse/maxuses/1/successaction/@xmlspawner/configfile/spawns\common\gatling.xml/loadconfig/true/x/${GETONTRIGMOB,x$}/y/${GETONTRIGMOB,y$}/z/${GETONTRIGMOB,z$}&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=plate/ATTACH/lt;xmluse/targetingenabled/true/maxrange/0/maxtargetrange/3/maxuses/20/requirelos/true/targetingaction/@SETONTRIGMOB/SENDMSG/Select a target to control!@targetcondition/@GETONTHIS,player=false@targetfailureaction/@SETONTRIGMOB/SENDMSG/That can't be controlled!@successaction/@SETONTHIS/controlled/true/controlmaster/${GETONTRIGMOB,serial$}/MSG/*stares blankly at ${GETONTRIGMOB,name$}&gt;
+		:OBJ=greenbottle/name/ritalin/ATTACH/&lt;xmluse/maxuses/1/requirelos/true/maxrange/0/successaction/@SETONTRIGMOB/ATTACH/&lt;xmlint,400,30&gt;/mana/500&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=redbottle/name/steroids/ATTACH/&lt;xmluse/maxuses/1/requirelos/true/maxrange/0/successaction/@SETONTRIGMOB/ATTACH/&lt;xmlstr,400,30&gt;/hits/500&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=static,9923/movable/true/name/repeater: double click to use!/ATTACH/&lt;xmluse/targetingenabled/true/maxrange/0/maxtargetrange/8/maxuses/20/requirelos/true/targetingaction/@SETONTRIGMOB/SENDMSG/Select a target to shoot!@targetcondition/@GETONTHIS,player=false@targetfailureaction/@SETONTRIGMOB/SENDMSG/Can't be targetted!@successaction/@SETONTHIS/DAMAGE,10,20&gt;:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+		:OBJ=:MX=1:SP=1:RT=0:TO=0:CA=0:KL=0:SB=1
+	</Objects2>
+  </Points>
+</Spawns>
